@@ -1,0 +1,36 @@
+Package: jug
+Type: Package
+Title: A Simple Web Framework for R
+Version: 0.1.0
+Authors@R: c(
+    person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut","cre")),
+    person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut"))
+    )
+Author: Hans Martin [aut, cre],
+    Jonathan Callahan [aut]
+Maintainer: Hans Martin <hans@mazamascience.com>
+Description: A web framework mimicking the functionality found in python Flask
+    including basic functionality for handling web GET and PUT requests. This
+    package is a ground-up rewrite of the original "jug" package by Bart Smeets.
+License: GPL-3
+URL: https://github.com/MazamaScience/MazamaJug
+BugReports: https://github.com/MazamaScience/MazamaJug/issues
+LazyData: TRUE
+ByteCompile: TRUE
+Depends:
+    R (>= 3.1.0)
+Imports:
+    R6,
+    webutils,
+    httpuv,
+    mime,
+    infuser,
+    jsonlite,
+    base64enc
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown,
+    futile.logger
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
