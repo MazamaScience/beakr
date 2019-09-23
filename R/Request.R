@@ -1,6 +1,7 @@
-# Define Request object class
+#' Request Object Class
 Request <-
   R6::R6Class(
+    classname = "Request",
     public = list(
       parameters = list(),
       headers = list(),

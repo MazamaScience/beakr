@@ -1,4 +1,4 @@
-# Response class definition
+#' Response Object Class
 Response <-
   R6::R6Class(
     public = list(
@@ -54,7 +54,7 @@ Response <-
                          body    = self$body ),
           "websocket" = self$body
         )
-      }
+      },
 
       # Plotting functionality
       plot = function(plot_object, base64 = TRUE, ...) {
