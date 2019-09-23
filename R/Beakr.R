@@ -1,4 +1,4 @@
-#' The Jug class
+#' The Beakr class
 #'
 #' @importFrom magrittr %>%
 Beakr <-
@@ -28,7 +28,32 @@ Beakr <-
           }
         )
       },
-
+      # Method to add middelware using `RequestHandler.R`
+      addCollectedMiddleware = function(collector) {
+        self$requestHandler$addMiddleware(
+          collector$requestHandler$middleware
+        )
+      },
+      # Initialize the new requestHandler obj using `RequestHandler.R`
+      initialize = function() {
+        self$requestHandler <- RequestHandler$new()
+        # Set Early for testing purposes when serve_it isn't called - Optional?
+        options("beakr.verbose" = FALSE)
+      },
+      # Method for starting/creating http/websocket server
+      start = function(host, port) {
+        httpuv::startServer( host = host,
+                             port = port,
+                             app = self$appDefinition )
+      },
+      # Let the user know what middleware has been loaded in the beakr instance
+      print = function(...) {
+        cat( "A beakr instance with ",
+             length(sefl$requestHandler$middleware),
+             " middleware attached\n",
+             sep = "" )
+        invisible(self)
+      }
     )
   )
 
