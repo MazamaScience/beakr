@@ -31,25 +31,32 @@ TestRequest <-
         HTTP_TREADS = "5",
         HTTP_HOST = "127.0.0.1:8080"
         ),
+
       path = function(path) {
         self$request$PATH_INFO <- path
       },
+
       method = function(method) {
         self$request$REQUEST_METHOD <- method
       },
+
       query_string = function(qstring) {
         self$request$QUERY_STRING <- qstring
       },
+
       body = function(body) {
         self$request$rook.input$read_lines = function() { return(body) }
       },
+
       set_header = function(key, value, prefix = "HTTP_") {
         self$request[[paste0(prefix, toupper(key))]] <- value
       },
-      get_header=function(key, prefix = "HTTP_"){
+
+      get_header = function(key, prefix = "HTTP_"){
         self$request[[paste0(prefix, toupper(key))]]
       },
-      print=function(...){
+
+      print = function(...){
         cat("A TestRequest instance\n")
         invisible(self$request)
       }
@@ -62,6 +69,6 @@ TestRequest <-
 #' @param test_request the TestRequest instance
 #'
 #' @export
-processTestRequest<-function(beakr, test_request){
+processTestRequest <- function(beakr, test_request) {
   beakr$requestHandler$invoke(test_request)
 }
