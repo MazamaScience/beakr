@@ -48,9 +48,9 @@ RequestHandler <-
           request$addParameters(path$params)
 
           # Handle http protocol logic
-          httpLogic <- any( path$match && (mw$method == req$method),
+          httpLogic <- any( path$match && (mw$method == request$method),
                             path$match && is.null(mw$method),
-                            is.null(mw$path) && (mw$method == req$method),
+                            is.null(mw$path) && (mw$method == request$method),
                             is.null(mw$path) && is.null(mw$method) )
           # Handle websocket logic
           wsLogic <- any( path$match,

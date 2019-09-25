@@ -116,10 +116,10 @@ matchPath <- function(string, path, ...) {
   if ( !is.null(string) ) {
     if ( !(grepl(pattern = "^\\^", x = string) ||
            grepl(pattern = "\\$$", x = string)) ) {
-      pattern <- paste0("^", pattern, "$")
+      pattern <- paste0("^", string, "$")
     }
 
-    rex <- regexpr(pattern = pattern, text = path, perl = TRUE)
+    rex <- regexpr(pattern = pattern, text = path, perl = TRUE, ...)
 
     for ( n in attr(x = rex, which = "capture.name") ) {
       result$params[[n]] <- substr( x     = result$src,
@@ -129,6 +129,8 @@ matchPath <- function(string, path, ...) {
 
     }
     result$match <- ifelse(rex[[1]] > -1, TRUE, FALSE)
+  } else {
+    result$match <- TRUE
   }
 
   return(result)
