@@ -24,7 +24,6 @@ Imports:
     webutils,
     httpuv,
     mime,
-    infuser,
     jsonlite,
     base64enc
 Suggests:
