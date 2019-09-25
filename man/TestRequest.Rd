@@ -9,6 +9,6 @@
 TestRequest
 }
 \description{
-solely used for testing purposes
+Generate request for testing purposes
 }
 \keyword{datasets}
