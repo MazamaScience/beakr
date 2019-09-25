@@ -25,7 +25,7 @@ RequestHandler <-
         # Filter the listeners
         listeners <- Filter( f = function(l) { ls$event == event },
                              x = self$listeners )
-        # ??
+        # handle the listener defined function for the event
         out <- lapply(listeners, function(l) { l$FUN(event, ...) })
         return(out)
       },
@@ -60,7 +60,7 @@ RequestHandler <-
           desired <- any( (request$protocol == "http" && httpLogic),
                          (request$protocol == "websocket" && wsLogic) )
 
-          # ?
+          # Check websocket/http logic and return proper response
           if ( desired ) {
             result <-
               try({
@@ -93,6 +93,7 @@ RequestHandler <-
           }
         }
 
+        # if output is verbose return the options
         if ( getOption("beakr.verbose") ) {
           cat( toupper(request$protcol), "|",
                request$path, "-",
@@ -100,6 +101,7 @@ RequestHandler <-
                sep = " " )
         }
 
+        # Show failure
         if ( is.null(response$body) ) {
           msg <- "Request not handled: No body set by middleware"
           self$processEvent(event = "error", request, response, error, msg)

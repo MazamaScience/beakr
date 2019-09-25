@@ -1,7 +1,5 @@
 #' Generate request for testing purposes
 #'
-#' solely used for testing purposes
-#'
 #' @export
 
 TestRequest <-

@@ -5,10 +5,10 @@ magrittr::`%>%`
 
 #' Parse the parameters passed by the request
 #'
-#' @param request
-#' @param body
-#' @param query
-#' @param type
+#' @param request an HTTP request
+#' @param body a body text string
+#' @param query a url-encoded query string
+#' @param type a media type (a.k.a. Multipurpose Internet Mail Extensions or MIME type)
 #'
 #' @return parsed parameters list
 #' @export
@@ -39,7 +39,8 @@ parseParameters <- function(request, body, query, type) {
 }
 
 #' Start a new beakr instance
-#'
+#' @description Creates a new beakr instance that can be used to build on with
+#' other functions (middleware).
 #' @return a beakr class instance
 #' @export
 #'
@@ -47,6 +48,11 @@ beakr <- function() {
   Beakr$new()
 }
 
+#' Internal function to add listeners
+#'
+#' @param beakr
+#' @param FUN
+#' @param event
 addListener <- function(beakr, FUN, event) {
   mw <- Listener$new(FUN, event)
   beakr$requestHandler$addListener(mw)

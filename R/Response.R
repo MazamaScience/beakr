@@ -41,12 +41,13 @@ Response <-
         sel$contentType("application/json")
       },
 
+      # Convert to text
       text = function(text) {
         self$body <- as.character(text)
         self$contentType("text/html")
       },
 
-      # Eval ??
+      # Check the protocol
       structured = function(protocol) {
         switch(
           EXPR = protocol,
