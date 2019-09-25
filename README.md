@@ -1,4 +1,4 @@
-<a href="url"><img src=/docs/reference/beakr.png align="right" height="120" width="116" ></a>
+<a href="url"><img src=/docs/reference/beakr.png align="right" height="120" width="110" ></a>
 # beakr 
 
 ### A Simple Web Framework for R. 
