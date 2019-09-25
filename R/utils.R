@@ -179,12 +179,12 @@ httpMethod <- function(middleware_FUN, path, method) {
 get <- function(beakr, ...) {
   return(UseMethod("get"))
 }
-
+#' Default GET-binding
 #' @export
 get.default <- function(beakr, ...) {
   return(base::get(beakr, ...))
 }
-
+#' beakr GET-binding middleware
 #' @describeIn GET-binding middleware
 #' @export
 get.Beakr <- function(beakr, ...) {
@@ -195,7 +195,7 @@ get.Beakr <- function(beakr, ...) {
   lapply(
     X   = FUNS,
     FUN = function(middleware_FUN) {
-      beakr::addMiddleware( beakr  = beakr,
+      beakr:::addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "GET" )
@@ -216,7 +216,7 @@ post <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr::addMiddleware( beakr  = beakr,
+      beakr:::addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "POST" )
@@ -239,7 +239,7 @@ put <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr::addMiddleware( beakr  = beakr,
+      beakr:::addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "PUT" )
@@ -262,7 +262,7 @@ delete <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr::addMiddleware( beakr  = beakr,
+      beakr:::addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "DELETE" )
@@ -286,7 +286,7 @@ use <- function(beakr, path, method = NULL, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr::addMiddleware( beakr  = beakr,
+      beakr:::addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = method )
@@ -309,7 +309,7 @@ webSocket <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-     beakr::addMiddleware( beakr  = beakr,
+     beakr:::addMiddleware( beakr  = beakr,
                     FUN    = middleware_FUN,
                     path   = path,
                     method = NULL )
@@ -350,6 +350,16 @@ errorHandler <- function(beakr, path = NULL) {
   return(beakr)
 }
 
+#' Title
+#'
+#' @param beakr
+#' @param path
+#' @param root
+#'
+#' @return
+#' @export
+#'
+#' @examples
 static <- function(beakr, path = NULL, root = NULL) {
   root <- ifelse( test = is.null(root),
                   yes  = getwd(),
