@@ -210,7 +210,7 @@ get.Beakr <- function(beakr, ...) {
   return(beakr)
 }
 
-#' Title
+#' POST-binding middleware
 #'
 #' @param beakr
 #' @param path
@@ -231,7 +231,7 @@ post <- function(beakr, path, ...) {
   return(beakr)
 }
 
-#' Title
+#' PUT-binding middleware
 #'
 #' @param beakr
 #' @param path
@@ -254,7 +254,7 @@ put <- function(beakr, path, ...) {
   return(beakr)
 }
 
-#' Title
+#' DELETE-binding middleware
 #'
 #' @param beakr
 #' @param path
