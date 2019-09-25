@@ -1,6 +1,7 @@
 #' Response Object Class
 Response <-
   R6::R6Class(
+    classname = "Response",
     public = list(
       headers = list("Content-Type" = "text/html"),
       # Initialize status as 'OK'
@@ -12,7 +13,7 @@ Response <-
       },
 
       contentType = function(type) {
-        self$headers[["Content-Type"]] = type
+        self$headers[["Content-Type"]] <- type
       },
 
       setStatus = function(status) {
@@ -37,7 +38,7 @@ Response <-
       # Convert body to json
       json =  function(obj, auto_unbox = TRUE) {
         self$body <- jsonlite::toJSON(obj, auto_unbox = auto_unbox)
-        sel$contentType("applications/json")
+        sel$contentType("application/json")
       },
 
       text = function(text) {

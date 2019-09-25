@@ -23,12 +23,10 @@ RequestHandler <-
       # Process passed event
       processEvent = function(event, ...) {
         # Filter the listeners
-        listeners <- Filter(
-          f = function(ls) { ls$event == event },
-          x = self$listeners
-        )
+        listeners <- Filter( f = function(l) { ls$event == event },
+                             x = self$listeners )
         # ??
-        out <- lapply(listeners, function(ls) { ls$func(event, ...) })
+        out <- lapply(listeners, function(l) { l$FUN(event, ...) })
         return(out)
       },
 
@@ -39,14 +37,14 @@ RequestHandler <-
         # Define new request and response objects
         response <- Response$new()
         request <- Request$new(request)
-        error <- newError() # DNE-yet
+        error <- newError()
 
         body <- NULL
 
         self$processEvent(event = "start", request, response, error)
 
         for ( mw in self$middleware ) {
-          path <- matchPath(string = mw[["path"]], path = request[["path"]])
+          path <- matchPath(string = mw$path, path = request$path)
           request$addParameters(path$params)
 
           # Handle http protocol logic
@@ -54,7 +52,7 @@ RequestHandler <-
                             path$match && is.null(mw$method),
                             is.null(mw$path) && (mw$method == req$method),
                             is.null(mw$path) && is.null(mw$method) )
-          # Handle websocket logic1
+          # Handle websocket logic
           wsLogic <- any( path$match,
                           is.null(mw$path) )
 
@@ -66,11 +64,14 @@ RequestHandler <-
           if ( desired ) {
             result <-
               try({
-                body <- switch(
-                  EXPR = request$protocol,
+                body <- switch(request$protocol,
                   "http" = mw$FUN( request = request,
                                    response = response,
-                                   error = error )
+                                   error = error ),
+                  "websocket" = mw$FUN( binary = websocket_binary,
+                                        message = websocket_msg,
+                                        response = response,
+                                        error = error )
                 )}, silent = TRUE)
 
             if ( "try-error" %in% class(result) ) {

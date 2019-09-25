@@ -2,12 +2,9 @@
 % Please edit documentation in R/Middleware.R
 \name{get}
 \alias{get}
-\alias{get.Beakr}
 \title{GET-binding middleware}
 \usage{
 get(beakr, ...)
-
-\method{get}{Beakr}(object, ...)
 }
 \arguments{
 \item{...}{}
@@ -15,8 +12,3 @@ get(beakr, ...)
 \description{
 GET-binding middleware
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{Beakr}: Function to add GET-binding middleware
-}}
-

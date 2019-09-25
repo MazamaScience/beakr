@@ -13,16 +13,15 @@ Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(
-
       # Initialize server request handling
       requestHandler = NULL,
       # Initialize server object
       serverObject = NULL,
       # Initialize instance
-      appDefinition = function(self, request) {
+      appDefinition = function() {
         list(
           # Call a request invoke
-          call = function(req) {
+          call = function(request) {
             self$requestHandler$invoke(request)
           },
           onWebsocketOpen = function(websocket) {
@@ -50,9 +49,9 @@ Beakr <-
       },
       # Method for starting/creating http/websocket server
       start = function(host, port) {
-        httpuv::startServer( host = host,
-                             port = port,
-                             app = self$appDefinition )
+        httpuv::runServer( host = host,
+                           port = port,
+                           app  = self$appDefinition() )
       },
       # Let the user know what middleware has been loaded in the beakr instance
       print = function(...) {

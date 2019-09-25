@@ -42,9 +42,9 @@ Request <-
 
         # Parse the parameters passed, helper func in 'utils.R'
         self$parametes <- parseParameters( request = request,
-                                           body = self$body,
-                                           query = request$QUERY_STRING,
-                                           type = self$type )
+                                           body    = self$body,
+                                           query   = request$QUERY_STRING,
+                                           type    = self$type )
 
         header_keys <- Filter(
           f = function(x) { grepl("^HTTP", x) },

@@ -4,8 +4,8 @@ Middleware <-
   R6::R6Class(
     classname = "Middleware",
     public = list(
-      FUN = NULL,
       path = NULL,
+      FUN = NULL,
       method = NULL,
       protocol = NULL,
       # Initialize
@@ -13,7 +13,7 @@ Middleware <-
         self$FUN = FUN
         self$path = path
         self$method = method
-        self$protocol = ifelse(websocket, "websocket", "http")
+        self$protocol = if ( websocket ) {"websocket"} else {"http"}#ifelse(websocket, "websocket", "http")
       }
     )
   )

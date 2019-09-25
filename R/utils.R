@@ -48,6 +48,21 @@ beakr <- function() {
   Beakr$new()
 }
 
+addListener <- function(beakr, FUN, event) {
+  mw <- Listener$new(FUN, event)
+  beakr$requestHandler$addListener(mw)
+  return(beakr)
+}
+
+#' Title
+#'
+#' @return
+#' @export
+#'
+newError <- function() {
+  Error$new()
+}
+
 #' Title
 #'
 #' @param beakr
@@ -107,9 +122,9 @@ matchPath <- function(string, path, ...) {
     rex <- regexpr(pattern = pattern, text = path, perl = TRUE)
 
     for ( n in attr(x = rex, which = "capture.name") ) {
-      result$params[[n]] <- substr( x = result$src,
+      result$params[[n]] <- substr( x     = result$src,
                                     start = attr(rex, "capture.start")[,n],
-                                    stop = (attr(rex, "capture.start")[,n] +
+                                    stop  = (attr(rex, "capture.start")[,n] +
                                       attr(rex, "capture.length")[,n] - 1) )
 
     }
