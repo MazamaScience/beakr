@@ -7,7 +7,13 @@
 parseParameters(request, body, query, type)
 }
 \arguments{
-\item{type}{}
+\item{request}{an HTTP request}
+
+\item{body}{a body text string}
+
+\item{query}{a url-encoded query string}
+
+\item{type}{a media type (a.k.a. Multipurpose Internet Mail Extensions or MIME type)}
 }
 \value{
 parsed parameters list

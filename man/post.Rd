@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{post}
 \alias{post}
-\title{Title}
+\title{POST-binding middleware}
 \usage{
 post(beakr, path, ...)
 }
@@ -10,5 +10,5 @@ post(beakr, path, ...)
 \item{...}{}
 }
 \description{
-Title
+POST-binding middleware
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{delete}
 \alias{delete}
-\title{Title}
+\title{DELETE-binding middleware}
 \usage{
 delete(beakr, path, ...)
 }
@@ -10,5 +10,5 @@ delete(beakr, path, ...)
 \item{...}{}
 }
 \description{
-Title
+DELETE-binding middleware
 }

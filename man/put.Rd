@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{put}
 \alias{put}
-\title{Title}
+\title{PUT-binding middleware}
 \usage{
 put(beakr, path, ...)
 }
@@ -10,5 +10,5 @@ put(beakr, path, ...)
 \item{...}{}
 }
 \description{
-Title
+PUT-binding middleware
 }
