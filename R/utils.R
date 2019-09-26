@@ -400,3 +400,70 @@ static <- function(beakr, path = NULL, root = NULL) {
   beakr::get(beakr = beakr, path = NULL, filer)
   return(beakr)
 }
+
+#' Title
+#'
+#' @param beakr
+#' @param path
+#' @param with_methods
+#' @param with_origin
+#' @param with_headers
+#' @param with_credentials
+#' @param max_age
+#' @param expose_headers
+#'
+#' @return
+#' @export
+#'
+#' @examples
+cors <-
+  function(
+    beakr,
+    path = NULL,
+    with_methods = c("POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH"),
+    with_origin = "*",
+    with_headers = NULL,
+    with_credentials = NULL,
+    max_age = NULL,
+    expose_headers = NULL
+  ) {
+
+    if ( !is.null(with_headers) ) {
+      with_headers <- paste0(with_headers, collapse = ",")
+    }
+    if ( !is.null(with_methods) ) {
+      with_methods <- paste0(with_methods, collapse = ",")
+    }
+
+    headers <- list( `Access-Control-Allow-Origin`      = with_origin,
+                     `Access-Control-Expose-Headers`    = expose_headers,
+                     `Access-Control-Max-Age`           = max_age,
+                     `Access-Control-Allow-Credentials` = with_credentials,
+                     `Access-Control-Allow-Methods`     = with_methods,
+                     `Access-Control-Allow-Headers`     = with_headers )
+    headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
+
+    FUN <- function(request, response, error) {
+
+      if ( request$method == "OPTIONS" ) {
+        response$setHeader("Access-Control-Allow-Methods", with_methods)
+        response$setHeader("Access-Control-Allow-Origin", with_origin)
+        response$setHeader("Access-Control-Allow-Headers", with_headers)
+        # Return empty string stops process
+        return("")
+      }
+
+      lapply(
+        X = names(headers),
+        FUN = function(header_name) {
+          response$setHeader(header_name, headers[[header_name]])
+        }
+      )
+
+      return(NULL)
+    }
+
+    addMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
+
+    return(beakr)
+  }
