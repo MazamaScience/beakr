@@ -1,4 +1,4 @@
-Package: jug
+Package: beakr
 Type: Package
 Title: A Simple Web Framework for R
 Version: 0.1.0
@@ -13,8 +13,8 @@ Description: A web framework mimicking the functionality found in python Flask
     including basic functionality for handling web GET and PUT requests. This
     package is a ground-up rewrite of the original "jug" package by Bart Smeets.
 License: GPL-3
-URL: https://github.com/MazamaScience/MazamaJug
-BugReports: https://github.com/MazamaScience/MazamaJug/issues
+URL: https://github.com/MazamaScience/beakr
+BugReports: https://github.com/MazamaScience/beakr/issues
 LazyData: TRUE
 ByteCompile: TRUE
 Depends:
@@ -24,7 +24,6 @@ Imports:
     webutils,
     httpuv,
     mime,
-    infuser,
     jsonlite,
     base64enc
 Suggests:
@@ -33,4 +32,4 @@ Suggests:
     rmarkdown,
     futile.logger
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
