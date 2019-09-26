@@ -17,7 +17,7 @@ decorate <-
     decorated <- function(request, response, error) {
       response$contentType(type)
       #Inspect passed in parameters
-      params <- modifyList(request$parameters, request$headers)
+      params <- utils::modifyList(request$parameters, request$headers)
       params$request <- request
       params$response <- response
       params$error <- error

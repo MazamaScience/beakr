@@ -25,7 +25,8 @@ Imports:
     httpuv,
     mime,
     jsonlite,
-    base64enc
+    base64enc,
+    magrittr
 Suggests:
     testthat,
     knitr,

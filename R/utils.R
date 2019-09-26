@@ -1,8 +1,3 @@
-#' @importFrom magrittr %>%
-#' @export
-magrittr::`%>%`
-
-
 #' Parse the parameters passed by the request
 #'
 #' @param request an HTTP request
@@ -201,7 +196,7 @@ get.Beakr <- function(beakr, ...) {
   lapply(
     X   = FUNS,
     FUN = function(middleware_FUN) {
-      beakr:::addMiddleware( beakr  = beakr,
+      addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "GET" )
@@ -222,7 +217,7 @@ post <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr:::addMiddleware( beakr  = beakr,
+      addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "POST" )
@@ -245,7 +240,7 @@ put <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr:::addMiddleware( beakr  = beakr,
+      addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "PUT" )
@@ -268,7 +263,7 @@ delete <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr:::addMiddleware( beakr  = beakr,
+      addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = "DELETE" )
@@ -292,7 +287,7 @@ use <- function(beakr, path, method = NULL, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      beakr:::addMiddleware( beakr  = beakr,
+      addMiddleware( beakr  = beakr,
                      FUN    = middleware_FUN,
                      path   = path,
                      method = method )
@@ -315,7 +310,7 @@ webSocket <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-     beakr:::addMiddleware( beakr  = beakr,
+     addMiddleware( beakr  = beakr,
                     FUN    = middleware_FUN,
                     path   = path,
                     method = NULL )

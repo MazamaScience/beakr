@@ -8,7 +8,6 @@ NULL
 
 #' The Beakr class
 #'
-#' @importFrom magrittr %>%
 Beakr <-
   R6::R6Class(
     classname = "Beakr",
