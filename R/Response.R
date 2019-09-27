@@ -29,21 +29,21 @@ Response <-
       setBody = function(body) {
         # Hack to avoid numeric response failure
         if ( self$headers[["Content-Type"]] == "text/html" ) {
-          self$text(body)
+          self$txt(body)
         } else {
           self$body <- body
         }
       },
 
       # Convert body to json
-      json =  function(obj, auto_unbox = TRUE) {
-        self$body <- jsonlite::toJSON(obj, auto_unbox = auto_unbox)
-        sel$contentType("application/json")
+      json = function(body_str, auto_unbox = TRUE) {
+        self$body <- jsonlite::toJSON(body_str, auto_unbox = auto_unbox)
+        self$contentType("application/json")
       },
 
       # Convert to text
-      text = function(text) {
-        self$body <- as.character(text)
+      txt = function(txt) {
+        self$body <- as.character(txt)
         self$contentType("text/html")
       },
 
