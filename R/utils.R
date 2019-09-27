@@ -93,7 +93,8 @@ serve <-
 #' @examples
 kill <- function(beakr) {
   httpuv::stopServer(beakr$serverObject)
-  return(beakr)
+  cat("\nStopped ")
+  beakr$print()
 }
 
 #' Title
@@ -106,17 +107,17 @@ kill <- function(beakr) {
 #' @export
 #'
 #' @examples
-matchPath <- function(string, path, ...) {
+matchPath <- function(pattern, path, ...) {
   # Result init
   result <- list(match = FALSE, src = path, params = list())
 
-  if ( !is.null(string) ) {
-    if ( !(grepl(pattern = "^\\^", x = string) ||
-           grepl(pattern = "\\$$", x = string)) ) {
-      pattern <- paste0("^", string, "$")
+  if ( !is.null(pattern) ) {
+    if ( !(grepl("^\\^", pattern) ||
+           grepl("\\$$", pattern)) ) {
+      pattern <- paste0("^", pattern, "$")
     }
 
-    rex <- regexpr(pattern = pattern, text = path, perl = TRUE, ...)
+    rex <- regexpr(pattern, path, perl = TRUE, ...)
 
     for ( n in attr(x = rex, which = "capture.name") ) {
       result$params[[n]] <- substr( x     = result$src,
@@ -351,8 +352,7 @@ errorHandler <- function(beakr, path = NULL) {
     }
   }
 
-  beakr::use(beakr = beakr, path = path, jsoner)
-  return(beakr)
+  return(use(beakr = beakr, path = path, jsoner))
 
 }
 

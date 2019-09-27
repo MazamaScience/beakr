@@ -4,7 +4,7 @@
 \alias{use}
 \title{Title}
 \usage{
-use(beakr, path, method = NULL, ...)
+use(beakr, path, ..., method = NULL)
 }
 \arguments{
 \item{...}{}

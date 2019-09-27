@@ -9,8 +9,8 @@ RequestHandler <-
       listeners = c(),
 
       # Add passed in middleware
-      addMiddleware = function(middleware) {
-        self$middleware <- c(self$middleware, middleware)
+      addMiddleware = function(mw) {
+        self$middleware <- c(self$middleware, mw)
         return(self$middleware)
       },
 
@@ -23,11 +23,10 @@ RequestHandler <-
       # Process passed event
       processEvent = function(event, ...) {
         # Filter the listeners
-        listeners <- Filter( f = function(l) { ls$event == event },
+        listeners <- Filter( f = function(l) { l$event == event },
                              x = self$listeners )
         # handle the listener defined function for the event
-        out <- lapply(listeners, function(l) { l$FUN(event, ...) })
-        return(out)
+        lapply(listeners, function(l) { l$FUN(event, ...) })
       },
 
       # Invoke commands
@@ -44,7 +43,7 @@ RequestHandler <-
         self$processEvent(event = "start", request, response, error)
 
         for ( mw in self$middleware ) {
-          path <- matchPath(string = mw$path, path = request$path)
+          path <- matchPath(mw$path, request$path)
           request$addParameters(path$params)
 
           # Handle http protocol logic
@@ -87,10 +86,13 @@ RequestHandler <-
               response$setBody(body)
             }
 
-            if ( !is.null(response$body) ) {
-              break
-            }
+            # if ( !is.null(response$body) ) {
+            #   break
+            # }
           }
+          # if ( !is.null(response$body) ) {
+          #   break
+          # }
         }
 
         # if output is verbose return the options

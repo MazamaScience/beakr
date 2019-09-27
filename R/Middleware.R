@@ -12,7 +12,8 @@ Middleware <-
         self$FUN = FUN
         self$path = path
         self$method = method
-        self$protocol = ifelse(websocket, "websocket", "http")
+        self$protocol = if ( websocket ) "websocket" else "http"
+          #ifelse(websocket, "websocket", "http")
       }
     )
   )
