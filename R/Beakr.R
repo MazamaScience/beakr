@@ -54,7 +54,7 @@ Beakr <-
       },
       # Let the user know what middleware has been loaded in the beakr instance
       print = function(...) {
-        cat( "A beakr instance:\n",
+        cat( "Beakr instance:\n",
              length(self$requestHandler$middleware),
              " middleware attached\n",
              sep = "" )

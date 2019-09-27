@@ -29,20 +29,20 @@ Response <-
       setBody = function(body) {
         # Hack to avoid numeric response failure
         if ( self$headers[["Content-Type"]] == "text/html" ) {
-          self$txt(body)
+          self$text(body)
         } else {
           self$body <- body
         }
       },
 
       # Convert body to json
-      json = function(body_str, auto_unbox = TRUE) {
-        self$body <- jsonlite::toJSON(body_str, auto_unbox = auto_unbox)
+      json = function(txt, auto_unbox = TRUE) {
+        self$body <- jsonlite::toJSON(txt, auto_unbox = auto_unbox)
         self$contentType("application/json")
       },
 
       # Convert to text
-      txt = function(txt) {
+      text = function(txt) {
         self$body <- as.character(txt)
         self$contentType("text/html")
       },
