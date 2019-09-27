@@ -47,11 +47,18 @@ Beakr <-
         options("beakr.verbose" = FALSE)
       },
       # Method for starting/creating http/websocket server
-      start = function(host, port) {
+      start = function(host, port, daemonized) {
+        if ( daemonized ) {
         self$serverObject <-
           httpuv::startServer( host = host,
                                port = port,
                                app  = self$appDefinition() )
+        } else {
+          self$serverObject <-
+            httpuv::runServer( host = host,
+                               port = port,
+                               app  = self$appDefinition() )
+        }
 
       },
       # Let the user know what middleware has been loaded in the beakr instance
