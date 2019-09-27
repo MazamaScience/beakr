@@ -77,10 +77,7 @@ newError <- function() {
 serve <-
   function(beakr, host = "127.0.0.1", port = 8080, verbose = FALSE ) {
     options("beakr.verbose" = verbose)
-    message(paste0( "Serving the beakr at http://",
-                    host,
-                    ":",
-                    port ))
+    message(paste0("Serving beakr instance at http://", host, ":", port))
     beakr$start(host, port)
     return(beakr)
 }
@@ -94,7 +91,7 @@ serve <-
 #' @export
 #'
 #' @examples
-stopServer <- function(beakr) {
+kill <- function(beakr) {
   httpuv::stopServer(beakr$serverObject)
   return(beakr)
 }
