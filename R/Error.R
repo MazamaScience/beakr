@@ -1,6 +1,7 @@
 #' Error Response Class
 Error <-
   R6::R6Class(
+    classname = "Error",
     public = list(
       errors = c(),
       # Set the errors if occurs
