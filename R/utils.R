@@ -286,7 +286,7 @@ delete <- function(beakr, path, ...) {
 #' @export
 #'
 #' @examples
-use <- function(beakr, path, method = NULL, ...) {
+use <- function(beakr, path, ..., method = NULL) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
