@@ -352,7 +352,7 @@ errorHandler <- function(beakr, path = NULL) {
     }
   }
 
-  return(use(beakr = beakr, path = path, jsoner))
+  return(use(beakr = beakr, path = NULL, jsoner))
 
 }
 
