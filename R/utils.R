@@ -144,7 +144,13 @@ matchPath <- function(string, path, ...) {
 #' @return
 addMiddleware <- function( beakr, FUN, path = NULL,
                            method = NULL, websocket = FALSE ) {
-  method <- ifelse(!is.null(method), toupper(method), NULL)
+
+  if ( !is.null(method) ) {
+    method <- toupper(method)
+  } else {
+    method <- NULL
+  }
+
   # Create new middleware
   mw <- Middleware$new(FUN, path, method, websocket)
   # Add the middleware
@@ -329,23 +335,25 @@ errorHandler <- function(beakr, path = NULL) {
   jsoner <- function(request, response, error) {
     response$contentType("application/json")
     if ( error$occured ) {
-      response$status <- 500L
       error_str <- paste(error$errors, collapse = "\n")
+      response$status <- 500L
+      response$json(list( status = "error",
+                          status_code = 500L,
+                          error = error_str ))
       if ( getOption("beakr.verbose") ) {
         cat("ERROR:\n", error_str, "\n")
-        response$json(
-          list(status = "error", status_code = 500L, error = error_str)
-        )
       }
+
     } else {
       response$status = 404L
-      response$json(
-        list(status = "Page not found.", status_code = 404L)
-      )
+      response$json(list( status = "Page not found.",
+                          status_code = 404L ))
     }
   }
+
   beakr::use(beakr = beakr, path = path, jsoner)
   return(beakr)
+
 }
 
 #' Title
@@ -438,6 +446,7 @@ cors <-
                      `Access-Control-Allow-Credentials` = with_credentials,
                      `Access-Control-Allow-Methods`     = with_methods,
                      `Access-Control-Allow-Headers`     = with_headers )
+
     headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
 
     FUN <- function(request, response, error) {
