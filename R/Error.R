@@ -11,7 +11,7 @@ Error <-
     ),
     # Show the occured errors, if any
     active = list(
-      occured = function() {
+      occurred = function() {
         return(length(self$errors) > 0)
       }
     )

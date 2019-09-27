@@ -36,7 +36,7 @@ RequestHandler <-
         # Define new request and response objects
         response <- Response$new()
         request <- Request$new(request)
-        error <- newError()
+        error <- Error$new()
 
         body <- NULL
 
@@ -75,8 +75,9 @@ RequestHandler <-
 
             if ( "try-error" %in% class(result) ) {
               self$processEvent( event = "error",
-                                 request, response,
-                                 error = error,
+                                 request,
+                                 response,
+                                 error,
                                  as.character(body) )
               error$set(as.character(body))
               body <- NULL
@@ -86,13 +87,10 @@ RequestHandler <-
               response$setBody(body)
             }
 
-            # if ( !is.null(response$body) ) {
-            #   break
-            # }
+            if ( !is.null(response$body) ) {
+              break
+            }
           }
-          # if ( !is.null(response$body) ) {
-          #   break
-          # }
         }
 
         # if output is verbose return the options

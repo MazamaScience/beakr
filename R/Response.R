@@ -5,8 +5,8 @@ Response <-
     public = list(
       headers = list("Content-Type" = "text/html"),
       # Initialize status as 'OK'
-      status = 200L,
-      body = NULL,
+      # status = 200L,
+      # body = NULL,
 
       setHeader = function(key, value) {
         self$headers[[key]] <- value
@@ -15,6 +15,7 @@ Response <-
       contentType = function(type) {
         self$headers[["Content-Type"]] <- type
       },
+      status = 200L,
 
       setStatus = function(status) {
         self$status <- status
@@ -25,6 +26,7 @@ Response <-
         self$status <- 302L
         self$setHeader("Location", url)
       },
+      body = NULL,
 
       setBody = function(body) {
         # Hack to avoid numeric response failure

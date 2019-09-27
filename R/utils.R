@@ -335,12 +335,12 @@ webSocket <- function(beakr, path, ...) {
 errorHandler <- function(beakr, path = NULL) {
   jsoner <- function(request, response, error) {
     response$contentType("application/json")
-    if ( error$occured ) {
+    if ( error$occurred ) {
       error_str <- paste(error$errors, collapse = "\n")
       response$status <- 500L
       response$json(list( status = "error",
                           status_code = 500L,
-                          error = error_str ))
+                          errors = error_str ))
       if ( getOption("beakr.verbose") ) {
         cat("ERROR:\n", error_str, "\n")
       }
@@ -352,7 +352,7 @@ errorHandler <- function(beakr, path = NULL) {
     }
   }
 
-  return(use(beakr = beakr, path = NULL, jsoner))
+  return(use(beakr = beakr, path = path, method = NULL, jsoner))
 
 }
 
