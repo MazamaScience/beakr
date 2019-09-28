@@ -103,10 +103,29 @@ kill <- function(beakr) {
 #' @export
 #'
 #' @examples
-killAll <- function() {
+killall <- function() {
   httpuv::stopAllServers()
   cat("\nStopped All Instances")
 }
+
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples
+active <- function() {
+  lapply(
+    X = httpuv::listServers() ,
+    FUN = function(s) {
+      paste( paste0("Host: ", s$getHost()),
+             paste0("Port: ", s$getPort()),
+             paste0("Active: ", "TRUE"),
+             sep = " | " )
+    }
+  )
+}
+
 
 #' Title
 #'

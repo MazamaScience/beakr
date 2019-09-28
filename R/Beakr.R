@@ -48,11 +48,13 @@ Beakr <-
       },
       # Method for starting/creating http/websocket server
       start = function(host, port, daemonized) {
+        # Run in background
         if ( daemonized ) {
         self$serverObject <-
           httpuv::startServer( host = host,
                                port = port,
                                app  = self$appDefinition() )
+        # Run in foreground
         } else {
           self$serverObject <-
             httpuv::runServer( host = host,

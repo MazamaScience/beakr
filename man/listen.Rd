@@ -4,7 +4,8 @@
 \alias{listen}
 \title{Title}
 \usage{
-listen(beakr, host = "127.0.0.1", port = 8080, verbose = FALSE)
+listen(beakr, host = "127.0.0.1", port = 8080, daemonized = FALSE,
+  verbose = FALSE)
 }
 \arguments{
 \item{verbose}{}
