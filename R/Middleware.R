@@ -1,8 +1,8 @@
-#' @title Middleware class
+#' Middleware class
 #'
 #' The \code{Middleware} object represents middleware functions that have access
-#' to the (\code{req}) object, response object (\code{res}) and (\code{err})
-#' object in the request-response cycle via \code{RequestHandler}.
+#' to the request (\code{req}), response (\code{res}) and error (\code{err})
+#' objects in request-response cycle via the \code{RequestHandler}.
 #'
 #' @usage NULL
 #'
