@@ -1,15 +1,14 @@
-#' Middleware class
+#' @title Middleware class
 #'
-#' The \code{Middleware} object represents middleware functions that have
-#' access to the request object (\code{req}), the response object (\code{res}),
-#' and the error object (\code{err}) via the \code{RequestHandler} in the
-#' application’s request-response cycle.
+#' The \code{Middleware} object represents middleware functions that have access
+#' to the (\code{req}) object, response object (\code{res}) and (\code{err})
+#' object in the request-response cycle via \code{RequestHandler}.
 #'
 #' @usage NULL
 #'
 #' @format NULL
 #'
-#' @section Fields:
+#' @section Methods:
 #'
 #' \describe{
 #'   \item{\code{path}}{
@@ -19,7 +18,7 @@
 #'   Returns the function response.
 #'   }
 #'   \item{\code{method}}{
-#'   Returns the HTTP method for the middleware (i.e. "GET", "POST", etc.)
+#'   Returns the HTTP method for the middleware, i.e. "GET", "POST", etc.
 #'   }
 #'   \item{\code{protocol}}{
 #'   Returns the protocol, "http" or "websocket".
@@ -34,7 +33,7 @@
 #'   }
 #' }
 #'
-#' @seealso \code{\link{Middleware}}
+#' @seealso \code{\link{RequestHandler}} and \code{\link{Middleware}}
 #' @keywords internal
 Middleware <-
   R6::R6Class(
