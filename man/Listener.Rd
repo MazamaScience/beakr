@@ -4,11 +4,33 @@
 \name{Listener}
 \alias{Listener}
 \title{Listener class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Listener
-}
 \description{
-Listener class
+The \code{Listener} class listens...to things.
 }
-\keyword{datasets}
+\section{Fields}{
+
+
+\describe{
+  \item{\code{FUN}}{
+  Returns function response.
+  }
+  \item{\code{event}}{
+  Returns event type.
+  }
+}
+}
+
+\section{Methods}{
+
+
+\describe{
+  \item{\code{initialize(FUN, event)}}{
+  Sets instance object function and event state.
+  }
+}
+}
+
+\seealso{
+\code{\link{RequestHandler}} and \code{\link{Error}}
+}
+\keyword{internal}

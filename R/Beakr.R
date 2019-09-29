@@ -112,6 +112,7 @@ Beakr <-
         }
         cat( "Beakr Instance\n",
              "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,
+             "\n",
              sep = " " )
         invisible(self)
       }

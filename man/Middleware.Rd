@@ -3,12 +3,40 @@
 \docType{data}
 \name{Middleware}
 \alias{Middleware}
-\title{Middleware Class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Middleware
-}
+\title{Middleware class}
 \description{
-Middleware Class
+The \code{Middleware} object represents middleware functions that have access
+to the request (\code{req}), response (\code{res}) and error (\code{err})
+objects in request-response cycle via the \code{RequestHandler}.
 }
-\keyword{datasets}
+\section{Methods}{
+
+
+\describe{
+  \item{\code{path}}{
+  Returns the path for the specified middleware.
+  }
+  \item{\code{FUN}}{
+  Returns the function response.
+  }
+  \item{\code{method}}{
+  Returns the HTTP method for the middleware, i.e. "GET", "POST", etc.
+  }
+  \item{\code{protocol}}{
+  Returns the protocol, "http" or "websocket".
+  }
+}
+
+
+
+\describe{
+  \item{\code{initialize(FUN, path, method, websocket)}}{
+  Initializes the state of new middleware.
+  }
+}
+}
+
+\seealso{
+\code{\link{RequestHandler}} and \code{\link{Middleware}}
+}
+\keyword{internal}

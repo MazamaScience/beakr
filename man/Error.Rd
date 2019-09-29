@@ -3,12 +3,35 @@
 \docType{data}
 \name{Error}
 \alias{Error}
-\title{Error Response Class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Error
-}
+\title{Error class}
 \description{
-Error Response Class
+A \code{Error} class object represents the state and handling of instance
+or middleware errors.
 }
-\keyword{datasets}
+\section{Fields}{
+
+
+\describe{
+  \item{\code{errors}}{
+  Returns a list of errors, if any.
+  }
+  \item{\code{occured}}{
+  Returns TRUE if any error has occurred, FALSE otherwise.
+  }
+}
+}
+
+\section{Methods}{
+
+
+\describe{
+  \item{\code{set(err)}}{
+  Sets an error.
+  }
+}
+}
+
+\seealso{
+\code{\link{Beakr}} and \code{\link{Middleware}}
+}
+\keyword{internal}

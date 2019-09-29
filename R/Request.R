@@ -1,39 +1,66 @@
 #' Request Class
 #'
-#' The \code{Middleware} object represents middleware functions that have access
-#' to the (\code{req}) object, response object (\code{res}) and (\code{err})
-#' object in the request-response cycle via \code{RequestHandler}.
+#' The \code{Request} object represents the HTTP request and has properties for
+#' the request query string, parameters, body, HTTP headers, and so on.
+#' In this documentation and by convention, the object is always referred to as
+#' \code{req} (and the HTTP response is \code{res}).
 #'
 #' @usage NULL
 #'
 #' @format NULL
 #'
-#' @section Methods:
+#' @section Fields:
 #'
 #' \describe{
 #'   \item{\code{parameters}}{
-#'   A list if parameters.
+#'   A list containing properties mapped to the named route parameters.
 #'   }
-#'   \item{\code{}}{
-#'   Returns the function response.
+#'   \item{\code{headers}}{
+#'   A list of response headers.
+#'   }
+#'   \item{\code{path}}{
+#'   Contains the path part of the request URL.
 #'   }
 #'   \item{\code{method}}{
-#'   Returns the HTTP method for the middleware, i.e. "GET", "POST", etc.
+#'   Contains a string corresponding to the HTTP method of the request:
+#'   GET, POST, PUT, and so on.
+#'   }
+#'   \item{\code{raw}}{
+#'   Returns the raw request (\code{req}) object.
+#'   }
+#'   \item{\code{type}}{
+#'   Contains the body content-type, i.e. "text/html" or "application/json".
+#'   }
+#'   \item{\code{body}}{
+#'   Contains the data submitted in the request body.
 #'   }
 #'   \item{\code{protocol}}{
-#'   Returns the protocol, "http" or "websocket".
+#'   Contains the request protocol string.
 #'   }
 #' }
 #'
 #' @section Methods:
 #'
 #' \describe{
-#'   \item{\code{initialize(FUN, path, method, websocket)}}{
-#'   Initializes the state of new middleware.
+#' \item{\code{attach(key, value)}}{
+#'   Returns a key-value.
+#'   }
+#'   \item{\code{getHeader(key)}}{
+#'   Returns the key element of the \code{headers} list.
+#'   }
+#'   \item{\code{setHeader(key, value)}}{
+#'   Attaches a header to \code{headers} list.
+#'   }
+#'   \item{\code{addParameters(named_list)}}{
+#'   Adds parameters to the named key-value \code{parameters} list.
+#'   }
+#'   \item{\code{intialize(req)}}{
+#'   Creates a new \code{Request} object by parsing and extracting features of
+#'   \code{req} input and populating the object fields.
 #'   }
 #' }
 #'
-#' @seealso \code{\link{RequestHandler}} and \code{\link{Middleware}}
+#' @seealso \code{\link{Response}} and \code{\link{TestRequest}
 #' @keywords internal
 Request <-
   R6::R6Class(
@@ -48,9 +75,10 @@ Request <-
       body = NULL,
       protocol = "http",
 
-      attach = function(key, value) {
-        self$parameters[[key]] <- value
-      },
+      # Necessary?
+      # attach = function(key, value) {
+      #   self$parameters[[key]] <- value
+      # },
 
       getHeader = function(key) {
         self$headers[[key]]
@@ -77,7 +105,7 @@ Request <-
         self$body <- paste0(req$rook.input$read_lines(), collapse = "")
 
         # Parse the parameters passed, helper func in 'utils.R'
-        self$parameters <- parseParameters( req = req,
+        self$parameters <- parseParameters( req     = req,
                                             body    = self$body,
                                             query   = req$QUERY_STRING,
                                             type    = self$type )
