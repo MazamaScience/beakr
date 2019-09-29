@@ -103,16 +103,15 @@ Beakr <-
           st <- ifelse(self$serverObject$isRunning(), "Active", "Inactive")
           hst <- self$serverObject$getHost()
           prt <- self$serverObject$getPort()
+          mws <- length(self$requestHandler$middleware)
         } else {
           st <- "Inactive"
           hst <- "..."
           prt <- "..."
+          mws <- 0L
         }
         cat( "Beakr Instance\n",
-             "State:", st, "|",
-             "Host:", hst, "|",
-             "Port:", prt, "|",
-             "Middlewares:", length(self$requestHandler$middleware),
+             "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,
              sep = " " )
         invisible(self)
       }
