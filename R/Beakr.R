@@ -1,29 +1,67 @@
-#' @docType package
-#' @name Beakr
-#' @title A Simple Web Framework for R.
-#' @description A web framework mimicking the functionality found in python Flask
-#' including basic functionality for handling web GET and PUT requests. This
-#' package is a ground-up rewrite of the original "jug" package by Bart Smeets.
-NULL
-
-#' The Beakr class
+#' Beakr class
 #'
+#' The \code{Beakr} class defines the server instance utilizing the
+#' \code{httpuv} package. This class defines an interface for the rest of the
+#' \code{beakr} package and is therefore meant to be instantiated.
+#'
+#' @usage NULL
+#'
+#' @format NULL
+#'
+#' @section Methods:
+#'
+#' \describe{
+#'   \item{\code{requestHandler()}}{
+#'   An instantiated \code{RequestHandler} object.
+#'   }
+#'   \item{\code{serverObject()}}{
+#'   The instantiated \code{Server} object.
+#'   }
+#'   \item{\code{appDefinition()}}{
+#'   A method to define the functions or middleware of users application.
+#'   }
+#'   \item{\code{addCollectedMiddleware(collector)}}{
+#'   Adds the users "collected" middleware to the \code{Beakr} defined
+#'   middleware.
+#'   }
+#'   \item{\code{initialize()}}{
+#'   Creates a new \code{RequestHandler} object for the \code{requestHandler}
+#'   method.
+#'   }
+#'   \item{\code{start(host, port, daemonized)}}{
+#'   Returns a running server. If \code{daemonized = TRUE}, the server will run
+#'   in the background.
+#'   }
+#'   \item{\code{print(...)}}{
+#'   Returns a console output of the instance and its number of middleware
+#'   attached.
+#'   }
+#' }
+#'
+#' @section Package details:
+#'
+#' The \code{beakr} package provides a minimal web framework for for developing
+#' lightweight APIs in R. The package includes basic functionality for handling
+#' common \code{HTTP} requests. \code{beakr} is a ground-up rewrite and
+#' continuation of the \code{jug} package developed by Bart Smeets. The
+#' \code{beakr} package is supported and maintained by
+#' \href{http://www.mazamascience.com/}{Mazama Science}.
+#'
+#' @seealso \code{\link{RequestHandler}} and \code{\link{Middleware}}
+#' @keywords internal
 Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(
-      # Initialize server request handling
       requestHandler = NULL,
-      # Initialize server object
       serverObject = NULL,
-      # Initialize instance
       appDefinition = function() {
         list(
           # Call a request invoke
           call = function(request) {
             self$requestHandler$invoke(request)
           },
-          onWebsocketOpen = function(websocket) {
+          onWSOpen = function(websocket) {
             websocket$onMessage(function(binary, message) {
               websocket$send(self$requestHandler$invoke(
                 request          = websocket$request,
@@ -34,19 +72,16 @@ Beakr <-
           }
         )
       },
-      # Method to add middelware using `RequestHandler.R`
       addCollectedMiddleware = function(collector) {
         self$requestHandler$addMiddleware(
           collector$requestHandler$middleware
         )
       },
-      # Initialize the new requestHandler obj using `RequestHandler.R`
       initialize = function() {
         self$requestHandler <- RequestHandler$new()
         # Set Early for testing purposes when serve_it isn't called - Optional?
         options("beakr.verbose" = FALSE)
       },
-      # Method for starting/creating http/websocket server
       start = function(host, port, daemonized) {
         # Run in background
         if ( daemonized ) {
@@ -63,12 +98,22 @@ Beakr <-
         }
 
       },
-      # Let the user know what middleware has been loaded in the beakr instance
       print = function(...) {
-        cat( "Beakr instance:\n",
-             length(self$requestHandler$middleware),
-             " middleware attached\n",
-             sep = "" )
+        if ( !is.null(self$serverObject) ) {
+          st <- ifelse(self$serverObject$isRunning(), "Active", "Inactive")
+          hst <- self$serverObject$getHost()
+          prt <- self$serverObject$getPort()
+        } else {
+          st <- "Inactive"
+          hst <- "..."
+          prt <- "..."
+        }
+        cat( "Beakr Instance\n",
+             "State:", st, "|",
+             "Host:", hst, "|",
+             "Port:", prt, "|",
+             "Middlewares:", length(self$requestHandler$middleware),
+             sep = " " )
         invisible(self)
       }
     )
