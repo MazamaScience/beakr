@@ -1,6 +1,6 @@
-#' Parse the parameters passed by the request
+#' Parse the parameters passed by the req
 #'
-#' @param request an HTTP request
+#' @param req an HTTP req
 #' @param body a body text string
 #' @param query a url-encoded query string
 #' @param type a media type (a.k.a. Multipurpose Internet Mail Extensions or MIME type)
@@ -8,7 +8,7 @@
 #' @return parsed parameters list
 #' @export
 #'
-parseParameters <- function(request, body, query, type) {
+parseParameters <- function(req, body, query, type) {
   parameters <- list()
   parameters <- c(parameters, webutils::parse_query(query))
 
@@ -23,7 +23,7 @@ parseParameters <- function(request, body, query, type) {
 
   if ( grepl("multipart", type) ) {
     parameters <- c( parameters,
-                     mime::parse_multipart(request) )
+                     mime::parse_multipart(req) )
   }
 
   if ( grepl("form-urlencoded", type) ) {
@@ -363,12 +363,12 @@ webSocket <- function(beakr, path, ...) {
 #'
 #' @examples
 errorHandler <- function(beakr, path = NULL) {
-  jsoner <- function(request, response, error) {
-    response$contentType("application/json")
-    if ( error$occurred ) {
-      error_str <- paste(error$errors, collapse = "\n")
-      response$status <- 500L
-      response$json(list( status = "error",
+  jsoner <- function(req, res, err) {
+    res$contentType("application/json")
+    if ( err$occurred ) {
+      error_str <- paste(err$errors, collapse = "\n")
+      res$status <- 500L
+      res$json(list( status = "err",
                           status_code = 500L,
                           errors = error_str ))
       if ( getOption("beakr.verbose") ) {
@@ -376,8 +376,8 @@ errorHandler <- function(beakr, path = NULL) {
       }
 
     } else {
-      response$status = 404L
-      response$json(list( status = "Page not found.",
+      res$status = 404L
+      res$json(list( status = "Page not found.",
                           status_code = 404L ))
     }
   }
@@ -400,25 +400,25 @@ static <- function(beakr, path = NULL, root = NULL) {
   root <- ifelse( test = is.null(root),
                   yes  = getwd(),
                   no   = root )
-  filer <- function(response, request, error) {
-    if ( substring(text = request$path, first = nchar(request$path)) == "/" ) {
-      request$path <- paste0(request$path, "index.html")
+  filer <- function(req, res, err) {
+    if ( substring(text = req$path, first = nchar(req$path)) == "/" ) {
+      req$path <- paste0(req$path, "index.html")
     }
 
     if ( is.null(path) ) {
-      fpath <- paste0(root, "/", request$path)
+      fpath <- paste0(root, "/", req$path)
     } else {
-      ppath <- gsub(paste0(".*", path, "(.*)"), "\\1", request$path)
+      ppath <- gsub(paste0(".*", path, "(.*)"), "\\1", req$path)
       fpath <- paste0(root, "/", ppath)
     }
 
     bound <- ifelse( test = is.null(path),
                      yes  = TRUE,
-                     no   = substr(request$path, 2, nchar(path) + 1) == path )
+                     no   = substr(req$path, 2, nchar(path) + 1) == path )
 
     if ( file.exists(fpath) & bound ) {
       mime_type <- mime::guess_type(fpath)
-      response$contentType(mime_type)
+      res$contentType(mime_type)
       data <- readBin( con  = fpath,
                        what = "raw",
                        n    = file.info(fpath)$size )
@@ -428,7 +428,7 @@ static <- function(beakr, path = NULL, root = NULL) {
         return(rawToChar(data))
       }
     } else {
-      response$setStatus(404L)
+      res$setStatus(404L)
       return(NULL)
     }
   }
@@ -479,12 +479,12 @@ cors <-
 
     headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
 
-    FUN <- function(request, response, error) {
+    FUN <- function(req, res, err) {
 
-      if ( request$method == "OPTIONS" ) {
-        response$setHeader("Access-Control-Allow-Methods", with_methods)
-        response$setHeader("Access-Control-Allow-Origin", with_origin)
-        response$setHeader("Access-Control-Allow-Headers", with_headers)
+      if ( req$method == "OPTIONS" ) {
+        res$setHeader("Access-Control-Allow-Methods", with_methods)
+        res$setHeader("Access-Control-Allow-Origin", with_origin)
+        res$setHeader("Access-Control-Allow-Headers", with_headers)
         # Return empty string stops process
         return("")
       }
@@ -492,7 +492,7 @@ cors <-
       lapply(
         X = names(headers),
         FUN = function(header_name) {
-          response$setHeader(header_name, headers[[header_name]])
+          res$setHeader(header_name, headers[[header_name]])
         }
       )
 

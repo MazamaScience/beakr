@@ -3,12 +3,12 @@
 \docType{data}
 \name{TestRequest}
 \alias{TestRequest}
-\title{Generate request for testing purposes}
+\title{Generate req for testing purposes}
 \format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
 TestRequest
 }
 \description{
-Generate request for testing purposes
+Generate req for testing purposes
 }
 \keyword{datasets}

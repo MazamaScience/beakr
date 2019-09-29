@@ -28,30 +28,30 @@ Request <-
         self$parameters <- c(self$parameters, named_list)
       },
       # Run on new object creation
-      initialize = function(request) {
-        self$raw <- request
-        self$path <- request$PATH_INFO
-        self$method <- toupper(request$REQUEST_METHOD)
+      initialize = function(req) {
+        self$raw <- req
+        self$path <- req$PATH_INFO
+        self$method <- toupper(req$REQUEST_METHOD)
 
-        if ( length(request$CONTENT_TYPE) > 0 ) {
-          self$type <- tolower(request$CONTENT_TYPE)
+        if ( length(req$CONTENT_TYPE) > 0 ) {
+          self$type <- tolower(req$CONTENT_TYPE)
         }
 
         # rook.input from test _request.R
-        self$body <- paste0(request$rook.input$read_lines(), collapse = "")
+        self$body <- paste0(req$rook.input$read_lines(), collapse = "")
 
         # Parse the parameters passed, helper func in 'utils.R'
-        self$parameters <- parseParameters( request = request,
+        self$parameters <- parseParameters( req = req,
                                             body    = self$body,
-                                            query   = request$QUERY_STRING,
+                                            query   = req$QUERY_STRING,
                                             type    = self$type )
 
         header_keys <- Filter(
           f = function(x) { grepl("^HTTP", x) },
-          x = names(request)
+          x = names(req)
         )
 
-        self$headers <- as.list(request)[header_keys]
+        self$headers <- as.list(req)[header_keys]
         names(self$headers) <- Map(
           f = function(x) { tolower(gsub("^HTTP", "", x)) },
           names(self$headers)

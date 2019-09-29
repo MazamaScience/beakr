@@ -2,12 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{parseParameters}
 \alias{parseParameters}
-\title{Parse the parameters passed by the request}
+\title{Parse the parameters passed by the req}
 \usage{
-parseParameters(request, body, query, type)
+parseParameters(req, body, query, type)
 }
 \arguments{
-\item{request}{an HTTP request}
+\item{req}{an HTTP req}
 
 \item{body}{a body text string}
 
@@ -19,5 +19,5 @@ parseParameters(request, body, query, type)
 parsed parameters list
 }
 \description{
-Parse the parameters passed by the request
+Parse the parameters passed by the req
 }

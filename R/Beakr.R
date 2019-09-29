@@ -57,14 +57,14 @@ Beakr <-
       serverObject = NULL,
       appDefinition = function() {
         list(
-          # Call a request invoke
-          call = function(request) {
-            self$requestHandler$invoke(request)
+          # Call a req invoke
+          call = function(req) {
+            self$requestHandler$invoke(req)
           },
           onWSOpen = function(websocket) {
             websocket$onMessage(function(binary, message) {
               websocket$send(self$requestHandler$invoke(
-                request          = websocket$request,
+                req          = websocket$req,
                 websocket_msg    = message,
                 websocket_binary = binary
               ))
@@ -108,7 +108,7 @@ Beakr <-
           st <- "Inactive"
           hst <- "..."
           prt <- "..."
-          mws <- 0L
+          mws <- length(self$requestHandler$middleware)
         }
         cat( "Beakr Instance\n",
              "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,

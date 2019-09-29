@@ -29,7 +29,7 @@ Response <-
       body = NULL,
 
       setBody = function(body) {
-        # Hack to avoid numeric response failure
+        # Hack to avoid numeric res failure
         if ( self$headers[["Content-Type"]] == "text/html" ) {
           self$text(body)
         } else {

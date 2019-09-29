@@ -1,4 +1,4 @@
-#' Generate request for testing purposes
+#' Generate req for testing purposes
 #'
 #' @export
 
@@ -6,7 +6,7 @@ TestRequest <-
   R6::R6Class(
     classname = "TestRequest",
     public = list(
-      request = list(
+      req = list(
         HTTP_CACHE_CONTROL = "no-cache",
         HTTP_CONNECTION = "keep-alive",
         HTTP_ACCEPT = "*/*",
@@ -31,37 +31,37 @@ TestRequest <-
         ),
 
       path = function(path) {
-        self$request$PATH_INFO <- path
+        self$req$PATH_INFO <- path
       },
 
       method = function(method) {
-        self$request$REQUEST_METHOD <- method
+        self$req$REQUEST_METHOD <- method
       },
 
       query_string = function(qstring) {
-        self$request$QUERY_STRING <- qstring
+        self$req$QUERY_STRING <- qstring
       },
 
       body = function(body) {
-        self$request$rook.input$read_lines = function() { return(body) }
+        self$req$rook.input$read_lines = function() { return(body) }
       },
 
       set_header = function(key, value, prefix = "HTTP_") {
-        self$request[[paste0(prefix, toupper(key))]] <- value
+        self$req[[paste0(prefix, toupper(key))]] <- value
       },
 
       get_header = function(key, prefix = "HTTP_"){
-        self$request[[paste0(prefix, toupper(key))]]
+        self$req[[paste0(prefix, toupper(key))]]
       },
 
       print = function(...){
         cat("A TestRequest instance\n")
-        invisible(self$request)
+        invisible(self$req)
       }
     )
   )
 
-#' Initialize process of test request
+#' Initialize process of test req
 #'
 #' @param beakr the beakr instance
 #' @param test_request the TestRequest instance

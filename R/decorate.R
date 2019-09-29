@@ -14,21 +14,21 @@ decorate <-
     args <- names(formals(FUN))
 
     # Create a decorated function
-    decorated <- function(request, response, error) {
-      response$contentType(type)
+    decorated <- function(req, res, err) {
+      res$contentType(type)
       #Inspect passed in parameters
-      params <- utils::modifyList(request$parameters, request$headers)
-      params$request <- request
-      params$response <- response
-      params$error <- error
+      params <- utils::modifyList(req$parameters, req$headers)
+      params$req <- req
+      params$res <- res
+      params$err <- err
 
       # Check arguments are all present
       if ( strict ) {
         present <- sapply( X = args,
                            FUN = function(x) x %in% names(params) )
-        # Throw an error if missing requested params
+        # Throw an err if missing requested params
         if( !all(present) ) {
-          error$set(paste0( "Need requested arguments:\n",
+          err$set(paste0( "Need requested arguments:\n",
                              paste(args[!present], collapse = ", ") ))
           return(NULL)
         }

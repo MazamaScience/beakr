@@ -1,5 +1,6 @@
-#' Request Handler Object Class
-
+#'  Request Handler Object Class
+#' @method middleware
+#' @method listeners
 RequestHandler <-
   R6::R6Class(
     classname = "RequestHandler",
@@ -30,64 +31,64 @@ RequestHandler <-
       },
 
       # Invoke commands
-      invoke = function( request,
+      invoke = function( req,
                          websocket_msg = NULL,
                          websocket_binary = NULL ) {
-        # Define new request and response objects
-        response <- Response$new()
-        request <- Request$new(request)
-        error <- Error$new()
+        # Define new req and res objects
+        res <- Response$new()
+        req <- Request$new(req)
+        err <- Error$new()
 
         body <- NULL
 
-        self$processEvent(event = "start", request, response, error)
+        self$processEvent(event = "start", req, res, err)
 
         for ( mw in self$middleware ) {
-          path <- matchPath(mw$path, request$path)
-          request$addParameters(path$params)
+          path <- matchPath(mw$path, req$path)
+          req$addParameters(path$params)
 
           # Handle http protocol logic
-          httpLogic <- any( path$match && (mw$method == request$method),
+          httpLogic <- any( path$match && (mw$method == req$method),
                             path$match && is.null(mw$method),
-                            is.null(mw$path) && (mw$method == request$method),
+                            is.null(mw$path) && (mw$method == req$method),
                             is.null(mw$path) && is.null(mw$method) )
           # Handle websocket logic
           wsLogic <- any( path$match,
                           is.null(mw$path) )
 
           # Check capture group logic
-          desired <- any( (request$protocol == "http" && httpLogic),
-                         (request$protocol == "websocket" && wsLogic) )
+          desired <- any( (req$protocol == "http" && httpLogic),
+                         (req$protocol == "websocket" && wsLogic) )
 
-          # Check websocket/http logic and return proper response
+          # Check websocket/http logic and return proper res
           if ( desired ) {
             result <-
               try({
-                body <- switch(request$protocol,
-                  "http" = mw$FUN( request = request,
-                                   response = response,
-                                   error = error ),
+                body <- switch(req$protocol,
+                  "http" = mw$FUN( req = req,
+                                   res = res,
+                                   err = err ),
                   "websocket" = mw$FUN( binary = websocket_binary,
                                         message = websocket_msg,
-                                        response = response,
-                                        error = error )
+                                        res = res,
+                                        err = err )
                 )}, silent = TRUE)
 
-            if ( "try-error" %in% class(result) ) {
-              self$processEvent( event = "error",
-                                 request,
-                                 response,
-                                 error,
+            if ( "try-err" %in% class(result) ) {
+              self$processEvent( event = "err",
+                                 req,
+                                 res,
+                                 err,
                                  as.character(body) )
-              error$set(as.character(body))
+              err$set(as.character(body))
               body <- NULL
             }
 
-            if ( is.null(response$body) && !is.null(body) ) {
-              response$setBody(body)
+            if ( is.null(res$body) && !is.null(body) ) {
+              res$setBody(body)
             }
 
-            if ( !is.null(response$body) ) {
+            if ( !is.null(res$body) ) {
               break
             }
           }
@@ -95,21 +96,21 @@ RequestHandler <-
 
         # if output is verbose return the options
         if ( getOption("beakr.verbose") ) {
-          cat( toupper(request$protcol), "|",
-               request$path, "-",
-               response$status, "\n",
+          cat( toupper(req$protcol), "|",
+               req$path, "-",
+               res$status, "\n",
                sep = " " )
         }
 
         # Show failure
-        if ( is.null(response$body) ) {
+        if ( is.null(res$body) ) {
           msg <- "Request not handled: No body set by middleware"
-          self$processEvent(event = "error", request, response, error, msg)
+          self$processEvent(event = "err", req, res, err, msg)
           stop(msg)
         }
 
-        self$processEvent(event = "finish", request, response, error)
-        response$structured(protocol = request$protocol)
+        self$processEvent(event = "finish", req, res, err)
+        res$structured(protocol = req$protocol)
       }
 
     )

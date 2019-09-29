@@ -2,7 +2,7 @@
 % Please edit documentation in R/TestRequest.R
 \name{processTestRequest}
 \alias{processTestRequest}
-\title{Initialize process of test request}
+\title{Initialize process of test req}
 \usage{
 processTestRequest(beakr, test_request)
 }
@@ -12,5 +12,5 @@ processTestRequest(beakr, test_request)
 \item{test_request}{the TestRequest instance}
 }
 \description{
-Initialize process of test request
+Initialize process of test req
 }
