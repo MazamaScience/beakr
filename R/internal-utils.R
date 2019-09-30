@@ -55,7 +55,6 @@ httpMethod <- function(middleware_FUN, path, method) {
 #' @param ...
 #'
 #' @return
-#' @export
 #'
 #' @examples
 matchPath <- function(pattern, path, ...) {
@@ -93,7 +92,6 @@ matchPath <- function(pattern, path, ...) {
 #' @param type a media type (a.k.a. Multipurpose Internet Mail Extensions or MIME type)
 #'
 #' @return parsed parameters list
-#' @export
 #'
 parseParameters <- function(req, body, query, type) {
   parameters <- list()

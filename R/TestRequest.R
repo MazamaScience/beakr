@@ -31,7 +31,8 @@ TestRequest <-
         HTTP_ACCEPT_ENCODING = "gzip, deflate, sdch",
         HTTP_COOKIE = "",
         REQUEST_METHOD = "GET",
-        HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
+        HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36
+                          (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
         HTTP_TREADS = "5",
         HTTP_HOST = "127.0.0.1:8080"
         ),

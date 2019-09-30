@@ -79,156 +79,6 @@ active <- function() {
   )
 }
 
-#' GET-binding middleware
-#'
-#' @param object
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-get <- function(beakr, ...) {
-  return(UseMethod("get"))
-}
-#' Default GET-binding
-#' @export
-get.default <- function(beakr, ...) {
-  return(base::get(beakr, ...))
-}
-#' beakr GET-binding middleware
-#' @describeIn GET-binding middleware
-#' @export
-get.Beakr <- function(beakr, ...) {
-  FUNS <- list(...)
-  path <- FUNS[[1]]
-  FUNS <- FUNS[-1]
-
-  lapply(
-    X   = FUNS,
-    FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "GET" )
-    }
-  )
-  return(beakr)
-}
-
-#' POST-binding middleware
-#'
-#' @param beakr
-#' @param path
-#' @param ...
-#'
-#' @return
-#' @export
-post <- function(beakr, path, ...) {
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "POST" )
-    }
-  )
-  return(beakr)
-}
-
-#' PUT-binding middleware
-#'
-#' @param beakr
-#' @param path
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-put <- function(beakr, path, ...) {
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "PUT" )
-    }
-  )
-  return(beakr)
-}
-
-#' DELETE-binding middleware
-#'
-#' @param beakr
-#' @param path
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-delete <- function(beakr, path, ...) {
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "DELETE" )
-    }
-  )
-  return(beakr)
-}
-
-#' Title
-#'
-#' @param beakr
-#' @param path
-#' @param method
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-use <- function(beakr, path, ..., method = NULL) {
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = method )
-    }
-  )
-  return(beakr)
-}
-
-#' Title
-#'
-#' @param beakr
-#' @param path
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-webSocket <- function(beakr, path, ...) {
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = NULL )
-    }
-  )
-  return(beakr)
-}
-
 #' Title
 #'
 #' @param beakr
@@ -260,6 +110,39 @@ errorHandler <- function(beakr, path = NULL) {
 
   return(use(beakr = beakr, path = path, method = NULL, jsoner))
 
+}
+
+#' Initialize process of test req
+#'
+#' @param beakr the beakr instance
+#' @param test_request the TestRequest instance
+#'
+#' @export
+processTestRequest <- function(beakr, test_request) {
+  beakr$route$invoke(test_request)
+}
+
+#' Title
+#'
+#' @param beakr
+#' @param path
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+webSocket <- function(beakr, path, ...) {
+  lapply(
+    X = list(...),
+    FUN = function(middleware_FUN) {
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = NULL )
+    }
+  )
+  return(beakr)
 }
 
 #' Title
@@ -311,6 +194,31 @@ static <- function(beakr, path = NULL, root = NULL) {
   beakr::get(beakr = beakr, path = NULL, filer)
   return(beakr)
 }
+
+#' Title
+#'
+#' @param beakr
+#' @param path
+#' @param method
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+use <- function(beakr, path, ..., method = NULL) {
+  lapply(
+    X = list(...),
+    FUN = function(middleware_FUN) {
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = method )
+    }
+  )
+  return(beakr)
+}
+
 
 #' Title
 #'
@@ -379,13 +287,3 @@ cors <-
 
     return(beakr)
   }
-
-#' Initialize process of test req
-#'
-#' @param beakr the beakr instance
-#' @param test_request the TestRequest instance
-#'
-#' @export
-processTestRequest <- function(beakr, test_request) {
-  beakr$route$invoke(test_request)
-}
