@@ -25,7 +25,7 @@
 #'   }
 #' }
 #'
-#' @seealso \code{\link{RequestHandler}} and \code{\link{Error}}
+#' @seealso \code{\link{Router}} and \code{\link{Error}}
 #' @keywords internal
 Listener <-
   R6::R6Class(

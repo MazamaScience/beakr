@@ -31,6 +31,6 @@ The \code{Listener} class listens...to things.
 }
 
 \seealso{
-\code{\link{RequestHandler}} and \code{\link{Error}}
+\code{\link{Router}} and \code{\link{Error}}
 }
 \keyword{internal}

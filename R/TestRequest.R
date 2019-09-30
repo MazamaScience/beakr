@@ -68,5 +68,5 @@ TestRequest <-
 #'
 #' @export
 processTestRequest <- function(beakr, test_request) {
-  beakr$requestHandler$invoke(test_request)
+  beakr$route$invoke(test_request)
 }

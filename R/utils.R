@@ -50,7 +50,7 @@ beakr <- function() {
 #' @param event
 addListener <- function(beakr, FUN, event) {
   mw <- Listener$new(FUN, event)
-  beakr$requestHandler$addListener(mw)
+  beakr$route$addListener(mw)
   return(beakr)
 }
 
@@ -185,7 +185,7 @@ addMiddleware <- function( beakr, FUN, path = NULL,
   # Create new middleware
   mw <- Middleware$new(FUN, path, method, websocket)
   # Add the middleware
-  beakr$requestHandler$addMiddleware(mw)
+  beakr$route$addMiddleware(mw)
   return(beakr)
 }
 

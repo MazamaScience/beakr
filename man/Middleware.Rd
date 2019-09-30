@@ -7,7 +7,7 @@
 \description{
 The \code{Middleware} object represents middleware functions that have access
 to the request (\code{req}), response (\code{res}) and error (\code{err})
-objects in request-response cycle via the \code{RequestHandler}.
+objects in request-response cycle via the \code{Router}.
 }
 \section{Methods}{
 
@@ -37,6 +37,6 @@ objects in request-response cycle via the \code{RequestHandler}.
 }
 
 \seealso{
-\code{\link{RequestHandler}} and \code{\link{Middleware}}
+\code{\link{Router}} and \code{\link{Middleware}}
 }
 \keyword{internal}

@@ -1,9 +1,70 @@
-#'  Request Handler Object Class
-#' @method middleware
-#' @method listeners
-RequestHandler <-
+#' Router Class
+#'
+#' The \code{RequestHandler} object represents the HTTP request and has properties for
+#' the request query string, parameters, body, HTTP headers, and so on.
+#' In this documentation and by convention, the object is always referred to as
+#' \code{req} (and the HTTP response is \code{res}).
+#'
+#' @usage NULL
+#'
+#' @format NULL
+#'
+#' @section Fields:
+#'
+#' \describe{
+#'   \item{\code{parameters}}{
+#'   A list containing properties mapped to the named route parameters.
+#'   }
+#'   \item{\code{headers}}{
+#'   A list of response headers.
+#'   }
+#'   \item{\code{path}}{
+#'   Contains the path part of the request URL.
+#'   }
+#'   \item{\code{method}}{
+#'   Contains a string corresponding to the HTTP method of the request:
+#'   GET, POST, PUT, and so on.
+#'   }
+#'   \item{\code{raw}}{
+#'   Returns the raw request (\code{req}) object.
+#'   }
+#'   \item{\code{type}}{
+#'   Contains the body content-type, i.e. "text/html" or "application/json".
+#'   }
+#'   \item{\code{body}}{
+#'   Contains the data submitted in the request body.
+#'   }
+#'   \item{\code{protocol}}{
+#'   Contains the request protocol string.
+#'   }
+#' }
+#'
+#' @section Methods:
+#'
+#' \describe{
+#' \item{\code{attach(key, value)}}{
+#'   Returns a key-value.
+#'   }
+#'   \item{\code{getHeader(key)}}{
+#'   Returns the key element of the \code{headers} list.
+#'   }
+#'   \item{\code{setHeader(key, value)}}{
+#'   Attaches a header to \code{headers} list.
+#'   }
+#'   \item{\code{addParameters(named_list)}}{
+#'   Adds parameters to the named key-value \code{parameters} list.
+#'   }
+#'   \item{\code{intialize(req)}}{
+#'   Creates a new \code{Request} object by parsing and extracting features of
+#'   \code{req} input and populating the object fields.
+#'   }
+#' }
+#'
+#' @seealso \code{\link{Response}} and \code{\link{TestRequest}
+#' @keywords internal
+Router <-
   R6::R6Class(
-    classname = "RequestHandler",
+    classname = "Router",
     public = list(
       # Define middleware and listeners
       middleware = c(),

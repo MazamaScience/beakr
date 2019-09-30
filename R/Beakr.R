@@ -11,8 +11,8 @@
 #' @section Methods:
 #'
 #' \describe{
-#'   \item{\code{requestHandler()}}{
-#'   An instantiated \code{RequestHandler} object.
+#'   \item{\code{route()}}{
+#'   An instantiated \code{Router} object.
 #'   }
 #'   \item{\code{serverObject()}}{
 #'   The instantiated \code{Server} object.
@@ -25,7 +25,7 @@
 #'   middleware.
 #'   }
 #'   \item{\code{initialize()}}{
-#'   Creates a new \code{RequestHandler} object for the \code{requestHandler}
+#'   Creates a new \code{Router} object for the \code{route}
 #'   method.
 #'   }
 #'   \item{\code{start(host, port, daemonized)}}{
@@ -47,24 +47,24 @@
 #' \code{beakr} package is supported and maintained by
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
-#' @seealso \code{\link{RequestHandler}} and \code{\link{Middleware}}
+#' @seealso \code{\link{Router}} and \code{\link{Middleware}}
 #' @keywords internal
 Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(
-      requestHandler = NULL,
+      route = NULL,
       serverObject = NULL,
       appDefinition = function() {
         list(
           # Call a req invoke
           call = function(req) {
-            self$requestHandler$invoke(req)
+            self$route$invoke(req)
           },
           onWSOpen = function(websocket) {
             websocket$onMessage(function(binary, message) {
-              websocket$send(self$requestHandler$invoke(
-                req          = websocket$req,
+              websocket$send(self$route$invoke(
+                req              = websocket$req,
                 websocket_msg    = message,
                 websocket_binary = binary
               ))
@@ -73,12 +73,12 @@ Beakr <-
         )
       },
       addCollectedMiddleware = function(collector) {
-        self$requestHandler$addMiddleware(
-          collector$requestHandler$middleware
+        self$route$addMiddleware(
+          collector$route$middleware
         )
       },
       initialize = function() {
-        self$requestHandler <- RequestHandler$new()
+        self$route <- Router$new()
         # Set Early for testing purposes when serve_it isn't called - Optional?
         options("beakr.verbose" = FALSE)
       },
@@ -103,12 +103,12 @@ Beakr <-
           st <- ifelse(self$serverObject$isRunning(), "Active", "Inactive")
           hst <- self$serverObject$getHost()
           prt <- self$serverObject$getPort()
-          mws <- length(self$requestHandler$middleware)
+          mws <- length(self$route$middleware)
         } else {
           st <- "Inactive"
           hst <- "..."
           prt <- "..."
-          mws <- length(self$requestHandler$middleware)
+          mws <- length(self$route$middleware)
         }
         cat( "Beakr Instance\n",
              "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,

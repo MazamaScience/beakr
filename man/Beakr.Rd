@@ -13,8 +13,8 @@ The \code{Beakr} class defines the server instance utilizing the
 
 
 \describe{
-  \item{\code{requestHandler()}}{
-  An instantiated \code{RequestHandler} object.
+  \item{\code{route()}}{
+  An instantiated \code{Router} object.
   }
   \item{\code{serverObject()}}{
   The instantiated \code{Server} object.
@@ -27,7 +27,7 @@ The \code{Beakr} class defines the server instance utilizing the
   middleware.
   }
   \item{\code{initialize()}}{
-  Creates a new \code{RequestHandler} object for the \code{requestHandler}
+  Creates a new \code{Router} object for the \code{route}
   method.
   }
   \item{\code{start(host, port, daemonized)}}{
@@ -53,6 +53,6 @@ continuation of the \code{jug} package developed by Bart Smeets. The
 }
 
 \seealso{
-\code{\link{RequestHandler}} and \code{\link{Middleware}}
+\code{\link{Router}} and \code{\link{Middleware}}
 }
 \keyword{internal}
