@@ -1,38 +1,3 @@
-#' Parse the parameters passed by the req
-#'
-#' @param req an HTTP req
-#' @param body a body text string
-#' @param query a url-encoded query string
-#' @param type a media type (a.k.a. Multipurpose Internet Mail Extensions or MIME type)
-#'
-#' @return parsed parameters list
-#' @export
-#'
-parseParameters <- function(req, body, query, type) {
-  parameters <- list()
-  parameters <- c(parameters, webutils::parse_query(query))
-
-  if ( is.null(type) ) {
-    return(parameters)
-  }
-
-  if ( grepl("json", type) && nchar(body) > 0 ) {
-    parameters <- c( parameters,
-                     jsonlite::fromJSON(body, simplifyDataFrame = FALSE) )
-  }
-
-  if ( grepl("multipart", type) ) {
-    parameters <- c( parameters,
-                     mime::parse_multipart(req) )
-  }
-
-  if ( grepl("form-urlencoded", type) ) {
-    parameters <- c( parameters,
-                     webutils::parse_query(body) )
-  }
-  return(parameters)
-}
-
 #' Start a new beakr instance
 #' @description Creates a new beakr instance that can be used to build on with
 #' other functions (middleware).
@@ -43,14 +8,22 @@ beakr <- function() {
   Beakr$new()
 }
 
-#' Internal function to add listeners
+#' Title
 #'
 #' @param beakr
-#' @param FUN
-#' @param event
-addListener <- function(beakr, FUN, event) {
-  mw <- Listener$new(FUN, event)
-  beakr$route$addListener(mw)
+#' @param host
+#' @param port
+#' @param verbose
+#'
+#' @return
+#' @export
+#'
+#' @examples
+listen <-function( beakr, host = "127.0.0.1", port = 8080,
+                   daemonized = FALSE, verbose = FALSE ) {
+  options("beakr.verbose" = verbose)
+  message(paste0("Serving beakr instance at http://", host, ":", port))
+  beakr$start(host, port, daemonized)
   return(beakr)
 }
 
@@ -66,26 +39,6 @@ newError <- function() {
 #' Title
 #'
 #' @param beakr
-#' @param host
-#' @param port
-#' @param verbose
-#'
-#' @return
-#' @export
-#'
-#' @examples
-listen <-
-  function(beakr, host = "127.0.0.1", port = 8080, daemonized = FALSE, verbose = FALSE ) {
-    options("beakr.verbose" = verbose)
-    message(paste0("Serving beakr instance at http://", host, ":", port))
-    beakr$start(host, port, daemonized)
-    return(beakr)
-}
-
-
-#' Title
-#'
-#' @param beakr
 #'
 #' @return
 #' @export
@@ -93,7 +46,7 @@ listen <-
 #' @examples
 kill <- function(beakr) {
   httpuv::stopServer(beakr$serverObject)
-  cat("\nStopped ")
+  cat("Stopped ")
   beakr$print()
 }
 
@@ -105,7 +58,7 @@ kill <- function(beakr) {
 #' @examples
 killall <- function() {
   httpuv::stopAllServers()
-  cat("\nStopped All Instances")
+  cat("Stopped All Instances\n")
 }
 
 #' Title
@@ -124,83 +77,6 @@ active <- function() {
              sep = " | " )
     }
   )
-}
-
-
-#' Title
-#'
-#' @param string
-#' @param path
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-matchPath <- function(pattern, path, ...) {
-  # Result init
-  result <- list(match = FALSE, src = path, params = list())
-
-  if ( !is.null(pattern) ) {
-    if ( !(grepl("^\\^", pattern) ||
-           grepl("\\$$", pattern)) ) {
-      pattern <- paste0("^", pattern, "$")
-    }
-
-    rex <- regexpr(pattern, path, perl = TRUE, ...)
-
-    for ( n in attr(x = rex, which = "capture.name") ) {
-      result$params[[n]] <- substr( x     = result$src,
-                                    start = attr(rex, "capture.start")[,n],
-                                    stop  = (attr(rex, "capture.start")[,n] +
-                                      attr(rex, "capture.length")[,n] - 1) )
-
-    }
-    result$match <- ifelse(rex[[1]] > -1, TRUE, FALSE)
-  } else {
-    result$match <- TRUE
-  }
-
-  return(result)
-}
-
-#' Internal function to add middleware
-#'
-#' @param beakr
-#' @param FUN
-#' @param path
-#' @param method
-#' @param websocket
-#'
-#' @return
-addMiddleware <- function( beakr, FUN, path = NULL,
-                           method = NULL, websocket = FALSE ) {
-
-  if ( !is.null(method) ) {
-    method <- toupper(method)
-  } else {
-    method <- NULL
-  }
-
-  # Create new middleware
-  mw <- Middleware$new(FUN, path, method, websocket)
-  # Add the middleware
-  beakr$route$addMiddleware(mw)
-  return(beakr)
-}
-
-#' Adding HTTP Method Overrides
-#'
-#' @param middleware_FUN
-#' @param path
-#' @param method
-#'
-#' @return
-httpMethod <- function(middleware_FUN, path, method) {
-  addMiddleware( beakr  = beakr,
-                 FUN    = middleware_FUN,
-                 path   = path,
-                 method = method )
 }
 
 #' GET-binding middleware
@@ -230,10 +106,10 @@ get.Beakr <- function(beakr, ...) {
   lapply(
     X   = FUNS,
     FUN = function(middleware_FUN) {
-      addMiddleware( beakr  = beakr,
-                     FUN    = middleware_FUN,
-                     path   = path,
-                     method = "GET" )
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = "GET" )
     }
   )
   return(beakr)
@@ -251,10 +127,10 @@ post <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      addMiddleware( beakr  = beakr,
-                     FUN    = middleware_FUN,
-                     path   = path,
-                     method = "POST" )
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = "POST" )
     }
   )
   return(beakr)
@@ -274,10 +150,10 @@ put <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      addMiddleware( beakr  = beakr,
-                     FUN    = middleware_FUN,
-                     path   = path,
-                     method = "PUT" )
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = "PUT" )
     }
   )
   return(beakr)
@@ -297,10 +173,10 @@ delete <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      addMiddleware( beakr  = beakr,
-                     FUN    = middleware_FUN,
-                     path   = path,
-                     method = "DELETE" )
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = "DELETE" )
     }
   )
   return(beakr)
@@ -321,10 +197,10 @@ use <- function(beakr, path, ..., method = NULL) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      addMiddleware( beakr  = beakr,
-                     FUN    = middleware_FUN,
-                     path   = path,
-                     method = method )
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = method )
     }
   )
   return(beakr)
@@ -344,10 +220,10 @@ webSocket <- function(beakr, path, ...) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-     addMiddleware( beakr  = beakr,
-                    FUN    = middleware_FUN,
-                    path   = path,
-                    method = NULL )
+      routeMiddleware( beakr  = beakr,
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = NULL )
     }
   )
   return(beakr)
@@ -369,8 +245,8 @@ errorHandler <- function(beakr, path = NULL) {
       error_str <- paste(err$errors, collapse = "\n")
       res$status <- 500L
       res$json(list( status = "err",
-                          status_code = 500L,
-                          errors = error_str ))
+                     status_code = 500L,
+                     errors = error_str ))
       if ( getOption("beakr.verbose") ) {
         cat("ERROR:\n", error_str, "\n")
       }
@@ -378,7 +254,7 @@ errorHandler <- function(beakr, path = NULL) {
     } else {
       res$status = 404L
       res$json(list( status = "Page not found.",
-                          status_code = 404L ))
+                     status_code = 404L ))
     }
   }
 
@@ -499,7 +375,7 @@ cors <-
       return(NULL)
     }
 
-    addMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
+    routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
 
     return(beakr)
   }
