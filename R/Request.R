@@ -74,24 +74,19 @@ Request <-
       type = NULL,
       body = NULL,
       protocol = "http",
-
       # Necessary?
       # attach = function(key, value) {
       #   self$parameters[[key]] <- value
       # },
-
       getHeader = function(key) {
         self$headers[[key]]
       },
-
       setHeader = function(key, value) {
         self$headers[[key]] <- value
       },
-
       addParameters = function(named_list) {
         self$parameters <- c(self$parameters, named_list)
       },
-      # Run on new object creation
       initialize = function(req) {
         self$raw <- req
         self$path <- req$PATH_INFO

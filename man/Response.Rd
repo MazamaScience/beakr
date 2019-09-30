@@ -3,12 +3,62 @@
 \docType{data}
 \name{Response}
 \alias{Response}
-\title{Response Object Class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Response
-}
+\title{Response Class}
 \description{
-Response Object Class
+The \code{Response} object represents represents the HTTP response that a
+\code{Beakr} sends when it gets an HTTP request. It is by convention, the
+object is always referred to as \code{res} (and the HTTP request is
+\code{req}).
 }
-\keyword{datasets}
+\section{Fields}{
+
+
+\describe{
+  \item{\code{headers}}{
+  A list containing a key-value header list.
+  }
+  \item{\code{status}}{
+  An integer HTTP status code.
+  }
+  \item{\code{body}}{
+  Contains the response body.
+  }
+}
+}
+
+\section{Methods}{
+
+
+\describe{
+\item{\code{setHeader(key, value)}}{
+  Sets a key-value header, i.e. \code{"Content-Type" = "text/html"}.
+  }
+  \item{\code{contentType(type)}}{
+  Sets the response content-type.
+  }
+  \item{\code{setStatus(status)}}{
+  Sets the HTTP status code.
+  }
+  \item{\code{redirect(url)}}{
+  Sets the HTTP status to 302, "Found" and redirects to \code{url}.
+  }
+  \item{\code{setBody(body)}}{
+  Sets the body response.
+  }
+  \item{\code{json(txt, auto_unbox = TRUE)}}{
+  Applies a function to text convert to JSON and sets the content-type to
+  JSON.
+  }
+  \item{\code{text(txt)}}{
+  Sets the response body text.
+  }
+  \item{\code{structured(protocol)}}{
+  Sets the response protocol, i.e. "http"
+  }
+  \item{\code{plot(plot_object, base64 = TRUE, ...)}}{
+  Sets the response type to plot image output.
+  }
+}
+}
+
+\keyword{internal}

@@ -1,33 +1,84 @@
-#' Response Object Class
+#' Response Class
+#'
+#' The \code{Response} object represents represents the HTTP response that a
+#' \code{Beakr} sends when it gets an HTTP request. It is by convention, the
+#' object is always referred to as \code{res} (and the HTTP request is
+#' \code{req}).
+#'
+#' @usage NULL
+#'
+#' @format NULL
+#'
+#' @section Fields:
+#'
+#' \describe{
+#'   \item{\code{headers}}{
+#'   A list containing a key-value header list.
+#'   }
+#'   \item{\code{status}}{
+#'   An integer HTTP status code.
+#'   }
+#'   \item{\code{body}}{
+#'   Contains the response body.
+#'   }
+#' }
+#'
+#' @section Methods:
+#'
+#' \describe{
+#' \item{\code{setHeader(key, value)}}{
+#'   Sets a key-value header, i.e. \code{"Content-Type" = "text/html"}.
+#'   }
+#'   \item{\code{contentType(type)}}{
+#'   Sets the response content-type.
+#'   }
+#'   \item{\code{setStatus(status)}}{
+#'   Sets the HTTP status code.
+#'   }
+#'   \item{\code{redirect(url)}}{
+#'   Sets the HTTP status to 302, "Found" and redirects to \code{url}.
+#'   }
+#'   \item{\code{setBody(body)}}{
+#'   Sets the body response.
+#'   }
+#'   \item{\code{json(txt, auto_unbox = TRUE)}}{
+#'   Applies a function to text convert to JSON and sets the content-type to
+#'   JSON.
+#'   }
+#'   \item{\code{text(txt)}}{
+#'   Sets the response body text.
+#'   }
+#'   \item{\code{structured(protocol)}}{
+#'   Sets the response protocol, i.e. "http"
+#'   }
+#'   \item{\code{plot(plot_object, base64 = TRUE, ...)}}{
+#'   Sets the response type to plot image output.
+#'   }
+#' }
+#'
+#' @seealso \code{\link{Response}} and \code{\link{TestRequest}
+#' @keywords internal
 Response <-
   R6::R6Class(
     classname = "Response",
     public = list(
       headers = list("Content-Type" = "text/html"),
-      # Initialize status as 'OK'
-      # status = 200L,
-      # body = NULL,
-
+      status = 200L,
+      body = NULL,
       setHeader = function(key, value) {
         self$headers[[key]] <- value
       },
-
       contentType = function(type) {
         self$headers[["Content-Type"]] <- type
       },
-      status = 200L,
-
       setStatus = function(status) {
         self$status <- status
       },
-
       redirect = function(url) {
         # Set status to 'Found'
         self$status <- 302L
         self$setHeader("Location", url)
       },
-      body = NULL,
-
       setBody = function(body) {
         # Hack to avoid numeric res failure
         if ( self$headers[["Content-Type"]] == "text/html" ) {
@@ -36,20 +87,14 @@ Response <-
           self$body <- body
         }
       },
-
-      # Convert body to json
       json = function(txt, auto_unbox = TRUE) {
         self$body <- jsonlite::toJSON(txt, auto_unbox = auto_unbox)
         self$contentType("application/json")
       },
-
-      # Convert to text
       text = function(txt) {
         self$body <- as.character(txt)
         self$contentType("text/html")
       },
-
-      # Check the protocol
       structured = function(protocol) {
         switch(
           EXPR = protocol,
@@ -59,8 +104,6 @@ Response <-
           "websocket" = self$body
         )
       },
-
-      # Plotting functionality
       plot = function(plot_object, base64 = TRUE, ...) {
         # Create the plot
         plot_file <- tempfile(pattern = "beakr")

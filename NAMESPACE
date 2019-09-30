@@ -3,7 +3,6 @@
 S3method(get,Beakr)
 S3method(get,default)
 export("%>%")
-export(TestRequest)
 export(active)
 export(beakr)
 export(cors)

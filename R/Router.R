@@ -12,7 +12,7 @@
 #' @section Fields:
 #'
 #' \describe{
-#'   \item{\code{middlewares}}{
+#'   \item{\code{middleware}}{
 #'   A list of specified middleware function or functions.
 #'   }
 #'   \item{\code{listeners}}{

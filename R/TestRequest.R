@@ -1,7 +1,13 @@
-#' Generate req for testing purposes
+#' TestRequest Class
 #'
-#' @export
-
+#' The \code{TestRequest} object is for internal testing only.
+#'
+#' @usage NULL
+#'
+#' @format NULL
+#'
+#' @seealso \code{\link{Response}} and \code{\link{Request}
+#' @keywords internal
 TestRequest <-
   R6::R6Class(
     classname = "TestRequest",
@@ -29,44 +35,27 @@ TestRequest <-
         HTTP_TREADS = "5",
         HTTP_HOST = "127.0.0.1:8080"
         ),
-
       path = function(path) {
         self$req$PATH_INFO <- path
       },
-
       method = function(method) {
         self$req$REQUEST_METHOD <- method
       },
-
       query_string = function(qstring) {
         self$req$QUERY_STRING <- qstring
       },
-
       body = function(body) {
         self$req$rook.input$read_lines = function() { return(body) }
       },
-
       set_header = function(key, value, prefix = "HTTP_") {
         self$req[[paste0(prefix, toupper(key))]] <- value
       },
-
       get_header = function(key, prefix = "HTTP_"){
         self$req[[paste0(prefix, toupper(key))]]
       },
-
       print = function(...){
         cat("A TestRequest instance\n")
         invisible(self$req)
       }
     )
   )
-
-#' Initialize process of test req
-#'
-#' @param beakr the beakr instance
-#' @param test_request the TestRequest instance
-#'
-#' @export
-processTestRequest <- function(beakr, test_request) {
-  beakr$route$invoke(test_request)
-}

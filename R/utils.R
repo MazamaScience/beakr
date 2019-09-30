@@ -503,3 +503,13 @@ cors <-
 
     return(beakr)
   }
+
+#' Initialize process of test req
+#'
+#' @param beakr the beakr instance
+#' @param test_request the TestRequest instance
+#'
+#' @export
+processTestRequest <- function(beakr, test_request) {
+  beakr$route$invoke(test_request)
+}
