@@ -7,4 +7,7 @@
 \description{
 The \code{TestRequest} object is for internal testing only.
 }
+\seealso{
+\code{\link{Response}} and \code{\link{Request}}
+}
 \keyword{internal}

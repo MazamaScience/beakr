@@ -64,7 +64,7 @@ newError <- function() {
 #' @param beakr a beakr instance.
 #'
 #' @export
-#' @example
+#' @examples
 #' bk <- beakr()
 #' listen(bk, daemonized = TRUE)
 #' kill(bk)

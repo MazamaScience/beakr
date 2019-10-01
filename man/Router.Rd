@@ -43,4 +43,7 @@ instantiated, middleware and HTTP method routes can be added. The top level
 }
 }
 
+\seealso{
+\code{\link{Response}} and \code{\link{TestRequest}}
+}
 \keyword{internal}

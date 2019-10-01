@@ -60,7 +60,7 @@
 #'   }
 #' }
 #'
-#' @seealso \code{\link{Response}} and \code{\link{TestRequest}
+#' @seealso \code{\link{Response}} and \code{\link{TestRequest}}
 #' @keywords internal
 Request <-
   R6::R6Class(
@@ -132,7 +132,7 @@ Request <-
 #'
 #' @format NULL
 #'
-#' @seealso \code{\link{Response}} and \code{\link{Request}
+#' @seealso \code{\link{Response}} and \code{\link{Request}}
 #' @keywords internal
 TestRequest <-
   R6::R6Class(

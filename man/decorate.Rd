@@ -2,13 +2,36 @@
 % Please edit documentation in R/decorate.R
 \name{decorate}
 \alias{decorate}
-\title{Title}
+\title{Decorate a function}
 \usage{
-decorate(FUN, type = "text/html", strict = FALSE)
+decorate(FUN, content_type, strict = FALSE)
 }
 \arguments{
-\item{strict}{}
+\item{FUN}{the function to decorate.}
+
+\item{content_type}{the type of content to set response as.}
+
+\item{strict}{boolean, requiring strict parameter matching.}
 }
 \description{
-Title
+Convenience function to decorate an existing function to interface with beakr
+instances.
+}
+\details{
+Decorating a function associates the specified function and its parameters
+with \code{req}, \code{res}, and \code{err} objects and assigns a
+content-type to the response object. This prepares a standard R function to
+affect beakr instances and accept requests.
+}
+\examples{
+# Create some function
+hello <- function(name) {
+  return(paste("Hello, ", name))
+}
+# Create a beakr instance and accept requests of the parameter x
+beakr() \%>\% get("/", decorate(hello)) \%>\% listen()
+
+# In terminal
+# $ curl http://127.0.0.1:8080/?name=Bart
+# > Hello, Bart
 }

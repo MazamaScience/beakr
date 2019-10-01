@@ -1,21 +1,40 @@
-#' Title
+#' Decorate a function
 #'
-#' @param func
-#' @param content_type
-#' @param strict
+#' Convenience function to decorate an existing function to interface with beakr
+#' instances.
 #'
-#' @return
+#' @details
+#' Decorating a function associates the specified function and its parameters
+#' with \code{req}, \code{res}, and \code{err} objects and assigns a
+#' content-type to the response object. This prepares a standard R function to
+#' affect beakr instances and accept requests.
+#'
+#' @param FUN the function to decorate.
+#' @param content_type the type of content to set response as.
+#' @param strict boolean, requiring strict parameter matching.
+#'
+#' @usage decorate(FUN, content_type, strict = FALSE)
 #' @export
 #'
 #' @examples
+#' # Create some function
+#' hello <- function(name) {
+#'   return(paste("Hello, ", name))
+#' }
+#' # Create a beakr instance and accept requests of the parameter x
+#' beakr() %>% get("/", decorate(hello)) %>% listen()
+#'
+#' # In terminal
+#' # $ curl http://127.0.0.1:8080/?name=Bart
+#' # > Hello, Bart
 decorate <-
-  function(FUN, type = "text/html", strict = FALSE) {
+  function(FUN, content_type = "text/html", strict = FALSE) {
     # Get the parameters the function allows
     args <- names(formals(FUN))
 
     # Create a decorated function
     decorated <- function(req, res, err) {
-      res$contentType(type)
+      res$contentType(content_type)
       #Inspect passed in parameters
       params <- utils::modifyList(req$parameters, req$headers)
       params$req <- req
