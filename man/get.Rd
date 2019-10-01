@@ -2,18 +2,12 @@
 % Please edit documentation in R/http-methods.R
 \name{get}
 \alias{get}
-\alias{get.default}
-\alias{get.Beakr}
 \title{GET-binding middleware}
 \usage{
 get(beakr, path, ...)
-
-\method{get}{default}(beakr, ...)
-
-\method{get}{Beakr}(beakr, path, ...)
 }
 \arguments{
-\item{beakr}{a beakr instance.}
+\item{beakr}{a beakr instance or \code{NULL}.}
 
 \item{path}{string representing a relative path for which the middleware
 is invoked.}
@@ -24,13 +18,6 @@ is invoked.}
 Routes HTTP GET requests to the specified path with the specified callback
 functions or middleware.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{default}: Base R \code{get} function.
-
-\item \code{Beakr}: Beakr middleware function.
-}}
-
 \examples{
 \dontrun{
 # Create a beakr instance

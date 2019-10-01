@@ -138,6 +138,9 @@ active <- function() {
 #' # An erorr was thrown because the parameter "n" is not provided and
 #' # required by the middleware.
 errorHandler <- function(beakr, path = NULL) {
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   jsoner <- function(req, res, err) {
     res$contentType("application/json")
     if ( err$occurred ) {
@@ -182,6 +185,9 @@ processTestRequest <- function(beakr, test_request) {
 #'
 #' @examples
 webSocket <- function(beakr, path, ...) {
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
@@ -205,6 +211,9 @@ webSocket <- function(beakr, path, ...) {
 #'
 #' @examples
 static <- function(beakr, path = NULL, root = NULL) {
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   root <- ifelse( test = is.null(root),
                   yes  = getwd(),
                   no   = root )
@@ -256,6 +265,9 @@ static <- function(beakr, path = NULL, root = NULL) {
 #'
 #' @examples
 use <- function(beakr, path, ..., method = NULL) {
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
@@ -303,6 +315,10 @@ cors <-
       with_methods <- paste0(with_methods, collapse = ",")
     }
 
+    if ( is.null(beakr) ) {
+      beakr <- invisible(Beakr$new())
+    }
+
     headers <- list( `Access-Control-Allow-Origin`      = with_origin,
                      `Access-Control-Expose-Headers`    = expose_headers,
                      `Access-Control-Max-Age`           = max_age,
@@ -336,3 +352,28 @@ cors <-
 
     return(beakr)
   }
+
+#' Title
+#'
+#' @param beakr
+#' @param include
+#' @param file
+#'
+#' @return
+#' @export
+#'
+#' @examples
+include <- function(beakr, include, file = NULL) {
+  if ( is.null(file) ) {
+    bundle <- eval(quote(include))
+  } else {
+    tempenv <- new.env()
+    source(file, local = tempenv)
+    bundle <- eval(quote(include), envir = tempenv)
+  }
+
+  beakr$include(bundle)
+
+  return(beakr)
+
+}

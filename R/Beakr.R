@@ -72,9 +72,9 @@ Beakr <-
           }
         )
       },
-      addCollectedMiddleware = function(collector) {
+      include = function(bundle) {
         self$route$addMiddleware(
-          collector$route$middleware
+          bundle$route$middleware
         )
       },
       initialize = function() {

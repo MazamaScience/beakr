@@ -3,7 +3,7 @@
 #' Routes HTTP GET requests to the specified path with the specified callback
 #' functions or middleware.
 #'
-#' @param beakr a beakr instance.
+#' @param beakr a beakr instance or \code{NULL}.
 #' @param path string representing a relative path for which the middleware
 #' is invoked.
 #' @param ... additional middleware/functions.
@@ -21,16 +21,25 @@
 #' > Hello, world!
 #' }
 # The methods below are used to determine what "get" to use.
+# get <- function(beakr, path, ...) {
+#   if ( is.null(beakr) ) {
+#     return(get.Beakr(beakr, path, ...))
+#   } else {
+#     return(UseMethod("get"))
+#   }
+# }
+# @export
+# get.default <- function(beakr, ...) {
+#   return(base::get(beakr, ...))
+# }
+# @describeIn get Beakr middleware function.
+# @export
 get <- function(beakr, path, ...) {
-  return(UseMethod("get"))
-}
-#' @describeIn get Base R \code{get} function.
-get.default <- function(beakr, ...) {
-  return(base::get(beakr, ...))
-}
-#' @describeIn get Beakr middleware function.
-#' @export
-get.beakr <- function(beakr, path, ...) {
+  # If the beakr is NULL ->
+  # create "bundle" beakr for inlcuding in other beakrs
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   FUNS <- list(...)
   lapply(
     X   = FUNS,
@@ -68,6 +77,9 @@ get.beakr <- function(beakr, path, ...) {
 #' > Successful POST request!
 #' }
 post <- function(beakr, path, ...) {
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   FUNS <- list(...)
   lapply(
     X = FUNS,
@@ -106,6 +118,9 @@ post <- function(beakr, path, ...) {
 #' Successful PUT request!
 #' }
 put <- function(beakr, path, ...) {
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
@@ -143,6 +158,9 @@ put <- function(beakr, path, ...) {
 #' Successful DELETE request!
 #' }
 delete <- function(beakr, path, ...) {
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {

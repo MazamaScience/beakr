@@ -18,5 +18,14 @@ middleware function is added at the end of the middleware function stack.
 The Errors are handled via JSON output.
 }
 \examples{
-beakr() \%>\% get("/", function(x) x) \%>\% errorHandler() \%>\% listen()
+# Create an instance and add the error handler last.
+beakr() \%>\%
+  use("/", decorate(function(n) { paste("Hi, ", n) })) \%>\%
+  errorHandler() \%>\%
+  listen()
+# In shell
+# $ curl http://127.0.0.1:8080/
+# > {"status":"Page not found.","status_code":404}
+# An erorr was thrown because the parameter "n" is not provided and
+# required by the middleware.
 }
