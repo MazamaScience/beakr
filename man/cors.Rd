@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{cors}
 \alias{cors}
-\title{Title}
+\title{Add CORS-headers middleware}
 \usage{
 cors(beakr, path = NULL, with_methods = c("POST", "GET", "PUT",
   "OPTIONS", "DELETE", "PATCH"), with_origin = "*",
@@ -10,8 +10,32 @@ cors(beakr, path = NULL, with_methods = c("POST", "GET", "PUT",
   expose_headers = NULL)
 }
 \arguments{
-\item{expose_headers}{}
+\item{beakr}{a beakr instance.}
+
+\item{path}{a string path.}
+
+\item{with_methods}{tbd}
+
+\item{with_origin}{tbd}
+
+\item{with_headers}{tbd}
+
+\item{with_credentials}{tbd}
+
+\item{max_age}{tbd}
+
+\item{expose_headers}{tbd}
 }
 \description{
-Title
+Add Cross-Origin Resource Sharing (CORS) middleware to the instance.
+}
+\details{
+CORS is a mechanism that uses additional HTTP headers to tell browsers to
+give a web application running at one origin, access to selected resources
+from a different origin. A web application executes a cross-origin HTTP
+request when it requests a resource that has a different origin
+(domain, protocol, or port) from its own.
+
+Additional Info:
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 }

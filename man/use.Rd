@@ -2,13 +2,23 @@
 % Please edit documentation in R/utils.R
 \name{use}
 \alias{use}
-\title{Title}
+\title{Use request method-insensitive middleware}
 \usage{
-use(beakr, path, ..., method = NULL)
+use(beakr, path, ..., method)
 }
 \arguments{
-\item{...}{}
+\item{beakr}{a beakr instance.}
+
+\item{path}{string representing a relative path for which the middleware
+is invoked.}
+
+\item{...}{additional middleware/functions.}
+
+\item{method}{an optional HTTP request method.}
 }
 \description{
-Title
+Mounts the specified middleware function or functions at the specified path:
+the middleware function is executed when the base of the requested path
+matches path. to the specified path with the specified callback
+functions or middleware.
 }

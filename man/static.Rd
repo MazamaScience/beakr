@@ -2,13 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{static}
 \alias{static}
-\title{Title}
+\title{Serve static files}
 \usage{
-static(beakr, path = NULL, root = NULL)
+static(beakr, path = NULL, dir = NULL)
 }
 \arguments{
-\item{root}{}
+\item{beakr}{a beakr instance}
+
+\item{path}{a string representing a relative path for which the middleware
+is invoked.}
+
+\item{dir}{a string representing a path for which to serve as the root
+directory.}
 }
 \description{
-Title
+Binds to get requests that aren't handled by specified paths. Should support
+all filetypes; returns image and octet-stream types as a raw string.
 }

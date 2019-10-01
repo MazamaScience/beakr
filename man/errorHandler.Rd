@@ -7,7 +7,10 @@
 errorHandler(beakr, path)
 }
 \arguments{
-\item{path}{}
+\item{beakr}{a beakr instance}
+
+\item{path}{string representing a relative path for which the middleware
+is invoked.}
 }
 \description{
 An error handling middleware for beakr instances.

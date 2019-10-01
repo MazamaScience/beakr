@@ -79,7 +79,6 @@ kill <- function(beakr) {
 #' Stops all instances that have been activated by \code{\link{listen}} in the
 #' session.
 #'
-#' @return
 #' @export
 #' @usage killall()
 #' @seealso \code{\link{kill}} and \code{\link{listen}}
@@ -120,8 +119,9 @@ active <- function() {
 #' middleware function is added at the end of the middleware function stack.
 #' The Errors are handled via JSON output.
 #'
-#' @param beakr
-#' @param path
+#' @param beakr a beakr instance
+#' @param path string representing a relative path for which the middleware
+#' is invoked.
 #'
 #' @usage errorHandler(beakr, path)
 #' @export
@@ -164,7 +164,7 @@ errorHandler <- function(beakr, path = NULL) {
 
 }
 
-#' Initialize process of test req
+#' Test request
 #'
 #' @param beakr the beakr instance
 #' @param test_request the TestRequest instance
@@ -174,16 +174,17 @@ processTestRequest <- function(beakr, test_request) {
   beakr$route$invoke(test_request)
 }
 
-#' Title
+#' Websocket Access
 #'
-#' @param beakr
-#' @param path
-#' @param ...
+#' Access the instance through websocket. Experimental.
 #'
-#' @return
+#' @param beakr a beakr instance
+#' @param path string representing a relative path for which the middleware
+#' is invoked.
+#' @param ... additional middleware/functions.
+#'
+#' @usage websocket(beakr,path)
 #' @export
-#'
-#' @examples
 webSocket <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -200,33 +201,35 @@ webSocket <- function(beakr, path, ...) {
   return(beakr)
 }
 
-#' Title
+#' Serve static files
 #'
-#' @param beakr
-#' @param path
-#' @param root
+#' Binds to get requests that aren't handled by specified paths. Should support
+#' all filetypes; returns image and octet-stream types as a raw string.
 #'
-#' @return
+#' @param beakr a beakr instance
+#' @param path a string representing a relative path for which the middleware
+#' is invoked.
+#' @param dir a string representing a path for which to serve as the root
+#' directory.
+#'
 #' @export
-#'
-#' @examples
-static <- function(beakr, path = NULL, root = NULL) {
+static <- function(beakr, path = NULL, dir = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
-  root <- ifelse( test = is.null(root),
+  dir <- ifelse( test = is.null(dir),
                   yes  = getwd(),
-                  no   = root )
+                  no   = dir )
   filer <- function(req, res, err) {
     if ( substring(text = req$path, first = nchar(req$path)) == "/" ) {
       req$path <- paste0(req$path, "index.html")
     }
 
     if ( is.null(path) ) {
-      fpath <- paste0(root, "/", req$path)
+      fpath <- paste0(dir, "/", req$path)
     } else {
       ppath <- gsub(paste0(".*", path, "(.*)"), "\\1", req$path)
-      fpath <- paste0(root, "/", ppath)
+      fpath <- paste0(dir, "/", ppath)
     }
 
     bound <- ifelse( test = is.null(path),
@@ -253,17 +256,21 @@ static <- function(beakr, path = NULL, root = NULL) {
   return(beakr)
 }
 
-#' Title
+#' Use request method-insensitive middleware
 #'
-#' @param beakr
-#' @param path
-#' @param method
-#' @param ...
+#' Mounts the specified middleware function or functions at the specified path:
+#' the middleware function is executed when the base of the requested path
+#' matches path. to the specified path with the specified callback
+#' functions or middleware.
 #'
-#' @return
+#' @param beakr a beakr instance.
+#' @param path string representing a relative path for which the middleware
+#' is invoked.
+#' @param ... additional middleware/functions.
+#' @param method an optional HTTP request method.
+#'
+#' @usage use(beakr, path, ..., method)
 #' @export
-#'
-#' @examples
 use <- function(beakr, path, ..., method = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -281,21 +288,30 @@ use <- function(beakr, path, ..., method = NULL) {
 }
 
 
-#' Title
+#' Add CORS-headers middleware
 #'
-#' @param beakr
-#' @param path
-#' @param with_methods
-#' @param with_origin
-#' @param with_headers
-#' @param with_credentials
-#' @param max_age
-#' @param expose_headers
+#' Add Cross-Origin Resource Sharing (CORS) middleware to the instance.
 #'
-#' @return
+#' @details
+#' CORS is a mechanism that uses additional HTTP headers to tell browsers to
+#' give a web application running at one origin, access to selected resources
+#' from a different origin. A web application executes a cross-origin HTTP
+#' request when it requests a resource that has a different origin
+#' (domain, protocol, or port) from its own.
+#'
+#' Additional Info:
+#' https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+#'
+#' @param beakr a beakr instance.
+#' @param path a string path.
+#' @param with_methods tbd
+#' @param with_origin tbd
+#' @param with_headers tbd
+#' @param with_credentials tbd
+#' @param max_age tbd
+#' @param expose_headers tbd
+#'
 #' @export
-#'
-#' @examples
 cors <-
   function(
     beakr,

@@ -2,13 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{webSocket}
 \alias{webSocket}
-\title{Title}
+\title{Websocket Access}
 \usage{
-webSocket(beakr, path, ...)
+websocket(beakr,path)
 }
 \arguments{
-\item{...}{}
+\item{beakr}{a beakr instance}
+
+\item{path}{string representing a relative path for which the middleware
+is invoked.}
+
+\item{...}{additional middleware/functions.}
 }
 \description{
-Title
+Access the instance through websocket. Experimental.
 }
