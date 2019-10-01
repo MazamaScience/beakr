@@ -2,10 +2,14 @@
 % Please edit documentation in R/utils.R
 \name{killall}
 \alias{killall}
-\title{Title}
+\title{Stop all instances}
 \usage{
 killall()
 }
 \description{
-Title
+Stops all instances that have been activated by \code{\link{listen}} in the
+session.
+}
+\seealso{
+\code{\link{kill}} and \code{\link{listen}}
 }

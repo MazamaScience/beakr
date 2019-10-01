@@ -2,13 +2,14 @@
 % Please edit documentation in R/utils.R
 \name{kill}
 \alias{kill}
-\title{Title}
+\title{Stop the beakr instance}
 \usage{
 kill(beakr)
 }
 \arguments{
-\item{beakr}{}
+\item{beakr}{a beakr instance.}
 }
 \description{
-Title
+Stops an active instance when given a beakr object. This closes all open
+connections for the instance and unbinds the port.
 }

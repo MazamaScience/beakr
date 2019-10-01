@@ -2,13 +2,21 @@
 % Please edit documentation in R/utils.R
 \name{errorHandler}
 \alias{errorHandler}
-\title{Title}
+\title{Instance Error Handling}
 \usage{
-errorHandler(beakr, path = NULL)
+errorHandler(beakr, path)
 }
 \arguments{
 \item{path}{}
 }
 \description{
-Title
+An error handling middleware for beakr instances.
+}
+\details{
+\code{beakr} comes with a default error handler. This default error-handling
+middleware function is added at the end of the middleware function stack.
+The Errors are handled via JSON output.
+}
+\examples{
+beakr() \%>\% get("/", function(x) x) \%>\% errorHandler() \%>\% listen()
 }

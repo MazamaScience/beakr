@@ -6,10 +6,7 @@
 \usage{
 beakr()
 }
-\value{
-a beakr class instance
-}
 \description{
-Creates a new beakr instance that can be used to build on with
-other functions (middleware).
+Create a \code{Beakr} instance object by calling the top-level
+\code{beakr()} function.
 }

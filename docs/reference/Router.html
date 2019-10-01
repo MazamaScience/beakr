@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — cors • beakr</title>
+<title>Router Class — Router • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Title — cors" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Router Class — Router" />
+<meta property="og:description" content="The Router object represents the handling of routing and middleware
+(such as get, put, post, and so on). Once a Router object is
+instantiated, middleware and HTTP method routes can be added. The top level
+Beakr object initializes with the creation of a Router object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,35 +111,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>cors.Rd</code></div>
+    <h1>Router Class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Router.R'><code>R/Router.R</code></a></small>
+    <div class="hidden name"><code>Router.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>The <code>Router</code> object represents the handling of routing and middleware
+(such as get, put, post, and so on). Once a <code>Router</code> object is
+instantiated, middleware and HTTP method routes can be added. The top level
+<code>Beakr</code> object initializes with the creation of a <code>Router</code> object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cors</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_methods</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"POST"</span>, <span class='st'>"GET"</span>, <span class='st'>"PUT"</span>,
-  <span class='st'>"OPTIONS"</span>, <span class='st'>"DELETE"</span>, <span class='st'>"PATCH"</span>), <span class='kw'>with_origin</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
-  <span class='kw'>with_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_credentials</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_age</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>expose_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>expose_headers</th>
-      <td></td>
-    </tr>
-    </table>
+
+    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
+
+    
+
+
+<dl class='dl-horizontal'>
+  <dt><code>middleware</code></dt><dd><p>A list of specified middleware function or functions.</p></dd>
+  <dt><code>listeners</code></dt><dd><p>A list of specified listeners.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+
+
+<dl class='dl-horizontal'>
+<dt><code>addMiddleware(middlware)</code></dt><dd><p>A method to add middleware function(s) to <code>middleware</code>.</p></dd>
+  <dt><code><a href='addListener.html'>addListener(listener)</a></code></dt><dd><p>A method to add listeners to <code>listeners</code>.</p></dd>
+  <dt><code>processEvent(event, ...)</code></dt><dd><p>Processes the event heard by the <code>Listener</code>.</p></dd>
+  <dt><code>invoke(req, websocket_msg, websocket_binary)</code></dt><dd><p>This method is used to create the a request-response cycle objects of the
+  provided middleware.</p></dd>
+
+</dl>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#fields">Fields</a></li>
+      <li><a href="#methods">Methods</a></li>
     </ul>
 
   </div>

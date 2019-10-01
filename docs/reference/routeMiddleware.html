@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — cors • beakr</title>
+<title>Internal function to add middleware — routeMiddleware • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Title — cors" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Internal function to add middleware — routeMiddleware" />
+<meta property="og:description" content="Internal function to add middleware" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,25 +108,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>cors.Rd</code></div>
+    <h1>Internal function to add middleware</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/internal-utils.R'><code>R/internal-utils.R</code></a></small>
+    <div class="hidden name"><code>routeMiddleware.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Internal function to add middleware</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cors</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_methods</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"POST"</span>, <span class='st'>"GET"</span>, <span class='st'>"PUT"</span>,
-  <span class='st'>"OPTIONS"</span>, <span class='st'>"DELETE"</span>, <span class='st'>"PATCH"</span>), <span class='kw'>with_origin</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
-  <span class='kw'>with_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_credentials</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_age</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>expose_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>routeMiddleware</span>(<span class='no'>beakr</span>, <span class='no'>FUN</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>websocket</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>expose_headers</th>
+      <th>websocket</th>
       <td></td>
     </tr>
     </table>

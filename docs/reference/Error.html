@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Error Response Class — Error • beakr</title>
+<title>Error class — Error • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Error Response Class — Error" />
-<meta property="og:description" content="Error Response Class" />
+<meta property="og:title" content="Error class — Error" />
+<meta property="og:description" content="A Error class object represents the state and handling of instance
+or middleware errors." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -108,27 +109,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Error Response Class</h1>
+    <h1>Error class</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Error.R'><code>R/Error.R</code></a></small>
     <div class="hidden name"><code>Error.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Error Response Class</p>
+    <p>A <code>Error</code> class object represents the state and handling of instance
+or middleware errors.</p>
     </div>
 
-    <pre class="usage"><span class='no'>Error</span></pre>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
-    <p>An object of class <code>R6ClassGenerator</code> of length 24.</p>
+    
+
+
+<dl class='dl-horizontal'>
+  <dt><code>errors</code></dt><dd><p>Returns a list of errors, if any.</p></dd>
+  <dt><code>occured</code></dt><dd><p>Returns TRUE if any error has occurred, FALSE otherwise.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+
+
+<dl class='dl-horizontal'>
+  <dt><code>set(err)</code></dt><dd><p>Sets an error.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='Beakr.html'>Beakr</a></code> and <code><a href='Middleware.html'>Middleware</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#fields">Fields</a></li>
+      <li><a href="#methods">Methods</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>

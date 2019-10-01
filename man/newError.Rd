@@ -2,10 +2,10 @@
 % Please edit documentation in R/utils.R
 \name{newError}
 \alias{newError}
-\title{Title}
+\title{Create a new Error}
 \usage{
 newError()
 }
 \description{
-Title
+Used to handle errors.
 }

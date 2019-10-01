@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Response Object Class — Response • beakr</title>
+<title>Response Class — Response • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Response Object Class — Response" />
-<meta property="og:description" content="Response Object Class" />
+<meta property="og:title" content="Response Class — Response" />
+<meta property="og:description" content="The Response object represents represents the HTTP response that a
+Beakr sends when it gets an HTTP request. It is by convention, the
+object is always referred to as res (and the HTTP request is
+req)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -108,27 +111,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Response Object Class</h1>
+    <h1>Response Class</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Response.R'><code>R/Response.R</code></a></small>
     <div class="hidden name"><code>Response.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Response Object Class</p>
+    <p>The <code>Response</code> object represents represents the HTTP response that a
+<code>Beakr</code> sends when it gets an HTTP request. It is by convention, the
+object is always referred to as <code>res</code> (and the HTTP request is
+<code>req</code>).</p>
     </div>
 
-    <pre class="usage"><span class='no'>Response</span></pre>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
-    <p>An object of class <code>R6ClassGenerator</code> of length 24.</p>
+    
+
+
+<dl class='dl-horizontal'>
+  <dt><code>headers</code></dt><dd><p>A list containing a key-value header list.</p></dd>
+  <dt><code>status</code></dt><dd><p>An integer HTTP status code.</p></dd>
+  <dt><code>body</code></dt><dd><p>Contains the response body.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+
+
+<dl class='dl-horizontal'>
+<dt><code>setHeader(key, value)</code></dt><dd><p>Sets a key-value header, i.e. <code>"Content-Type" = "text/html"</code>.</p></dd>
+  <dt><code>contentType(type)</code></dt><dd><p>Sets the response content-type.</p></dd>
+  <dt><code>setStatus(status)</code></dt><dd><p>Sets the HTTP status code.</p></dd>
+  <dt><code>redirect(url)</code></dt><dd><p>Sets the HTTP status to 302, "Found" and redirects to <code>url</code>.</p></dd>
+  <dt><code>setBody(body)</code></dt><dd><p>Sets the body response.</p></dd>
+  <dt><code>json(txt, auto_unbox = TRUE)</code></dt><dd><p>Applies a function to text convert to JSON and sets the content-type to
+  JSON.</p></dd>
+  <dt><code><a href='https://rdrr.io/r/graphics/text.html'>text(txt)</a></code></dt><dd><p>Sets the response body text.</p></dd>
+  <dt><code>structured(protocol)</code></dt><dd><p>Sets the response protocol, i.e. "http"</p></dd>
+  <dt><code><a href='https://rdrr.io/r/graphics/plot.html'>plot(plot_object, base64 = TRUE, ...)</a></code></dt><dd><p>Sets the response type to plot image output.</p></dd>
+
+</dl>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#fields">Fields</a></li>
+      <li><a href="#methods">Methods</a></li>
     </ul>
 
   </div>

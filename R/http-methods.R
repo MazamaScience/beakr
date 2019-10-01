@@ -8,7 +8,6 @@
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @return
 #' @export
 #' @examples
 #' \dontrun{
@@ -17,18 +16,21 @@
 #'   get("/", function(req, res, err) { "Hello, world!" })
 #' # Listen for HTTP/WebSocket requests
 #' listen(server, daemonized = TRUE)
+#' #' # In terminal:
+#' $ curl http://127.0.0.1:8080/
+#' > Hello, world!
 #' }
+# The methods below are used to determine what "get" to use.
 get <- function(beakr, path, ...) {
   return(UseMethod("get"))
 }
-#' Default R get-binding
-#' @export
+#' @describeIn get Base R \code{get} function.
 get.default <- function(beakr, ...) {
   return(base::get(beakr, ...))
 }
-#' beakr GET-binding middleware
+#' @describeIn get Beakr middleware function.
 #' @export
-get.Beakr <- function(beakr, path, ...) {
+get.beakr <- function(beakr, path, ...) {
   FUNS <- list(...)
   lapply(
     X   = FUNS,
@@ -138,7 +140,7 @@ put <- function(beakr, path, ...) {
 #' listen(server, daemonized = TRUE)
 #' # In terminal:
 #' $ curl -X DELETE http://127.0.0.1:8080/
-#' Successful PUT request!
+#' Successful DELETE request!
 #' }
 delete <- function(beakr, path, ...) {
   lapply(

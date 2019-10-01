@@ -1,24 +1,41 @@
 #' Start a new beakr instance
-#' @description Creates a new beakr instance that can be used to build on with
-#' other functions (middleware).
-#' @return a beakr class instance
-#' @export
 #'
+#' Create a \code{Beakr} instance object by calling the top-level
+#' \code{beakr()} function.
+#'
+#' @usage beakr()
+#' @export
 beakr <- function() {
   Beakr$new()
 }
 
-#' Title
+#' Listen for connections
 #'
-#' @param beakr
-#' @param host
-#' @param port
-#' @param verbose
+#' Binds and listens for connections on the specified host and port.
 #'
-#' @return
+#' @details
+#' \code{listen} binds the port and listens for connections on a thread.
+#' The thread handles the I/O, and when it receives a HTTP request, it
+#' will schedule a call to the user-defined middleware and handle the
+#' request.
+#'
+#' If the daemon boolean value is set to \code{TRUE}, \code{listen} binds the
+#' specified port and listens for connections on an thread running in the
+#' background.
+#'
+#' See the \code{httpuv} package for more information.
+#'
+#' @param beakr a beaker instance.
+#' @param host a string that is a valid IPv4 or IPv6 address to listen on.
+#' @param port a number or integer that indicates the port to listen on.
+#' @param daemonized run the instance in the background.
+#' @param verbose boolean, debugging.
+#'
+#' @usage listen(beakr, host, port, daemonized
 #' @export
 #'
 #' @examples
+#' bk <- beakr() %>% listen(port = 1234, daemonized = TRUE)
 listen <-function( beakr, host = "127.0.0.1", port = 8080,
                    daemonized = FALSE, verbose = FALSE ) {
   options("beakr.verbose" = verbose)
@@ -27,48 +44,62 @@ listen <-function( beakr, host = "127.0.0.1", port = 8080,
   return(beakr)
 }
 
-#' Title
+#' Create a new Error
 #'
-#' @return
+#' Used to handle errors.
+#'
 #' @export
+#' @usage newError()
 #'
+# Necessary?
 newError <- function() {
   Error$new()
 }
 
-#' Title
+#' Stop the beakr instance
 #'
-#' @param beakr
+#' Stops an active instance when given a beakr object. This closes all open
+#' connections for the instance and unbinds the port.
 #'
-#' @return
+#' @param beakr a beakr instance.
+#'
 #' @export
-#'
-#' @examples
+#' @example
+#' bk <- beakr()
+#' listen(bk, daemonized = TRUE)
+#' kill(bk)
 kill <- function(beakr) {
   httpuv::stopServer(beakr$serverObject)
   cat("Stopped ")
   beakr$print()
 }
 
-#' Title
+#' Stop all instances
+#'
+#' Stops all instances that have been activated by \code{\link{listen}} in the
+#' session.
 #'
 #' @return
 #' @export
-#'
-#' @examples
+#' @usage killall()
+#' @seealso \code{\link{kill}} and \code{\link{listen}}
 killall <- function() {
   httpuv::stopAllServers()
   cat("Stopped All Instances\n")
 }
 
-#' Title
+#' List active instances
 #'
-#' @return
+#' A list containing the current sessions active instances.
+#'
+#' @return a list of active instances
 #' @export
 #'
 #' @examples
+#' bb <- listen(beakr = beakr(), daemonized = TRUE)
+#' active()
 active <- function() {
-  lapply(
+  active <- lapply(
     X = httpuv::listServers() ,
     FUN = function(s) {
       paste( paste0("Host: ", s$getHost()),
@@ -77,17 +108,35 @@ active <- function() {
              sep = " | " )
     }
   )
+  return(active)
 }
 
-#' Title
+#' Instance Error Handling
+#'
+#' An error handling middleware for beakr instances.
+#'
+#' @details
+#' \code{beakr} comes with a default error handler. This default error-handling
+#' middleware function is added at the end of the middleware function stack.
+#' The Errors are handled via JSON output.
 #'
 #' @param beakr
 #' @param path
 #'
-#' @return
+#' @usage errorHandler(beakr, path)
 #' @export
 #'
 #' @examples
+#' # Create an instance and add the error handler last.
+#' beakr() %>%
+#'   use("/", decorate(function(n) { paste("Hi, ", n) })) %>%
+#'   errorHandler() %>%
+#'   listen()
+#' # In shell
+#' # $ curl http://127.0.0.1:8080/
+#' # > {"status":"Page not found.","status_code":404}
+#' # An erorr was thrown because the parameter "n" is not provided and
+#' # required by the middleware.
 errorHandler <- function(beakr, path = NULL) {
   jsoner <- function(req, res, err) {
     res$contentType("application/json")

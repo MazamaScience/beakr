@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Request Object Class — Request • beakr</title>
+<title>Request Class — Request • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Request Object Class — Request" />
-<meta property="og:description" content="Request Object Class" />
+<meta property="og:title" content="Request Class — Request" />
+<meta property="og:description" content="The Request object represents the HTTP request and has properties for
+the request query string, parameters, body, HTTP headers, and so on.
+In this documentation and by convention, the object is always referred to as
+req (and the HTTP response is res)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -108,27 +111,60 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Request Object Class</h1>
+    <h1>Request Class</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Request.R'><code>R/Request.R</code></a></small>
     <div class="hidden name"><code>Request.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Request Object Class</p>
+    <p>The <code>Request</code> object represents the HTTP request and has properties for
+the request query string, parameters, body, HTTP headers, and so on.
+In this documentation and by convention, the object is always referred to as
+<code>req</code> (and the HTTP response is <code>res</code>).</p>
     </div>
 
-    <pre class="usage"><span class='no'>Request</span></pre>
 
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
-    <p>An object of class <code>R6ClassGenerator</code> of length 24.</p>
+    
+
+
+<dl class='dl-horizontal'>
+  <dt><code>parameters</code></dt><dd><p>A list containing properties mapped to the named route parameters.</p></dd>
+  <dt><code>headers</code></dt><dd><p>A list of response headers.</p></dd>
+  <dt><code>path</code></dt><dd><p>Contains the path part of the request URL.</p></dd>
+  <dt><code>method</code></dt><dd><p>Contains a string corresponding to the HTTP method of the request:
+  GET, POST, PUT, and so on.</p></dd>
+  <dt><code>raw</code></dt><dd><p>Returns the raw request (<code>req</code>) object.</p></dd>
+  <dt><code>type</code></dt><dd><p>Contains the body content-type, i.e. "text/html" or "application/json".</p></dd>
+  <dt><code>body</code></dt><dd><p>Contains the data submitted in the request body.</p></dd>
+  <dt><code>protocol</code></dt><dd><p>Contains the request protocol string.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+
+
+<dl class='dl-horizontal'>
+<dt><code><a href='https://rdrr.io/r/base/attach.html'>attach(key, value)</a></code></dt><dd><p>Returns a key-value.</p></dd>
+  <dt><code>getHeader(key)</code></dt><dd><p>Returns the key element of the <code>headers</code> list.</p></dd>
+  <dt><code>setHeader(key, value)</code></dt><dd><p>Attaches a header to <code>headers</code> list.</p></dd>
+  <dt><code>addParameters(named_list)</code></dt><dd><p>Adds parameters to the named key-value <code>parameters</code> list.</p></dd>
+  <dt><code>intialize(req)</code></dt><dd><p>Creates a new <code>Request</code> object by parsing and extracting features of
+  <code>req</code> input and populating the object fields.</p></dd>
+
+</dl>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#fields">Fields</a></li>
+      <li><a href="#methods">Methods</a></li>
     </ul>
 
   </div>

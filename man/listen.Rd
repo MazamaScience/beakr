@@ -2,14 +2,36 @@
 % Please edit documentation in R/utils.R
 \name{listen}
 \alias{listen}
-\title{Title}
+\title{Listen for connections}
 \usage{
-listen(beakr, host = "127.0.0.1", port = 8080, daemonized = FALSE,
-  verbose = FALSE)
+listen(beakr, host, port, daemonized
 }
 \arguments{
-\item{verbose}{}
+\item{beakr}{a beaker instance.}
+
+\item{host}{a string that is a valid IPv4 or IPv6 address to listen on.}
+
+\item{port}{a number or integer that indicates the port to listen on.}
+
+\item{daemonized}{run the instance in the background.}
+
+\item{verbose}{boolean, debugging.}
 }
 \description{
-Title
+Binds and listens for connections on the specified host and port.
+}
+\details{
+\code{listen} binds the port and listens for connections on a thread.
+The thread handles the I/O, and when it receives a HTTP request, it
+will schedule a call to the user-defined middleware and handle the
+request.
+
+If the daemon boolean value is set to \code{TRUE}, \code{listen} binds the
+specified port and listens for connections on an thread running in the
+background.
+
+See the \code{httpuv} package for more information.
+}
+\examples{
+bk <- beakr() \%>\% listen(port = 1234, daemonized = TRUE)
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — listen • beakr</title>
+<title>Listen for connections — listen • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Title — listen" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Listen for connections — listen" />
+<meta property="og:description" content="Binds and listens for connections on the specified host and port." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -108,13 +108,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Listen for connections</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>listen.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Binds and listens for connections on the specified host and port.</p>
     </div>
 
     <pre class="usage"><span class='fu'>listen</span>(<span class='no'>beakr</span>, <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"127.0.0.1"</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>8080</span>, <span class='kw'>daemonized</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -124,8 +124,20 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>beakr</th>
+      <td><p>a beaker instance.</p></td>
+    </tr>
+    <tr>
+      <th>host</th>
+      <td><p>a host URL string.</p></td>
+    </tr>
+    <tr>
+      <th>port</th>
+      <td><p>the port.</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
-      <td></td>
+      <td><p>boolean, debugging.</p></td>
     </tr>
     </table>
 

@@ -2,10 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{active}
 \alias{active}
-\title{Title}
+\title{List active instances}
 \usage{
 active()
 }
+\value{
+a list of active instances
+}
 \description{
-Title
+A list containing the current sessions active instances.
+}
+\examples{
+bb <- listen(beakr = beakr(), daemonized = TRUE)
+active()
 }

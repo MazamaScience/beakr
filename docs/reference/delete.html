@@ -36,7 +36,8 @@
 
 
 <meta property="og:title" content="DELETE-binding middleware — delete" />
-<meta property="og:description" content="DELETE-binding middleware" />
+<meta property="og:description" content="Routes HTTP DELETE requests to the specified path with the specified callback
+functions or middleware." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -109,12 +110,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>DELETE-binding middleware</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
     <div class="hidden name"><code>delete.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>DELETE-binding middleware</p>
+    <p>Routes HTTP DELETE requests to the specified path with the specified callback
+functions or middleware.</p>
     </div>
 
     <pre class="usage"><span class='fu'>delete</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
@@ -123,17 +125,29 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>beakr</th>
+      <td><p>a beakr instance.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>string representing a relative path for which the middleware
+is invoked.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td></td>
+      <td><p>additional middleware/functions.</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
