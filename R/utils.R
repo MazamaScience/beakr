@@ -369,16 +369,33 @@ cors <-
     return(beakr)
   }
 
-#' Title
+#' Construct an instance
 #'
-#' @param beakr
-#' @param include
-#' @param file
+#' The \code{include} function is used to merge beakr middleware that has been
+#' constructed elsewhere.
 #'
-#' @return
+#' @details Hierarchy
+#'
+#' @param beakr primary beakr instance.
+#' @param include the external middleware to include.
+#' @param file the source file path, if external middleware in separate .R file.
+#'
+#' @usage include(beakr, include, file = NULL)
 #' @export
 #'
 #' @examples
+#' # Construct primary instance
+#' primary <- beakr() %>%
+#'   get("/primary-app",
+#'       function(req, res, err) { "Primary Application!" })
+#'
+#' # Construct middleware
+#' ext <- use(beakr = NULL, "/",
+#'            decorate(function(name) { paste("Hi ", name, "!\n") })) %>%
+#'   errorHandler()
+#'
+#' # Include the external middleware in the primary instance
+#' primary %>% include(ext)
 include <- function(beakr, include, file = NULL) {
   if ( is.null(file) ) {
     bundle <- eval(quote(include))
