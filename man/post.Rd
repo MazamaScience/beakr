@@ -4,7 +4,7 @@
 \alias{post}
 \title{POST-binding middleware}
 \usage{
-post(beakr, path, ...)
+post(beakr, path)
 }
 \arguments{
 \item{beakr}{a beakr instance.}

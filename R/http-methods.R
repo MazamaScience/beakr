@@ -63,7 +63,7 @@ get <- function(beakr, path, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @return
+#' @usage post(beakr, path)
 #' @export
 #' @examples
 #' \dontrun{
@@ -103,7 +103,7 @@ post <- function(beakr, path, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @return
+#' @usage put(beakr, path)
 #' @export
 #'
 #' @examples
@@ -143,7 +143,7 @@ put <- function(beakr, path, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @return
+#' @usage delete(beakr, path)
 #' @export
 #'
 #' @examples

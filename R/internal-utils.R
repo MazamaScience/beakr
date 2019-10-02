@@ -1,8 +1,10 @@
 #' Internal function to add listeners
 #'
-#' @param beakr
-#' @param FUN
-#' @param event
+#' Internal function.
+#'
+#' @param beakr a beakr instance.
+#' @param FUN listener function
+#' @param event the event to listen for, such as "start" or "finish".
 addListener <- function(beakr, FUN, event) {
   mw <- Listener$new(FUN, event)
   beakr$route$addListener(mw)
@@ -11,13 +13,13 @@ addListener <- function(beakr, FUN, event) {
 
 #' Internal function to add middleware
 #'
-#' @param beakr
-#' @param FUN
-#' @param path
-#' @param method
-#' @param websocket
+#' Internal function.
 #'
-#' @return
+#' @param beakr a beakr instance.
+#' @param FUN the function to route middleware
+#' @param path the path to rouet the middleware
+#' @param method the HTTP method to employ
+#' @param websocket boolean, TRUE if websocket.
 routeMiddleware <- function( beakr, FUN, path = NULL,
                              method = NULL, websocket = FALSE ) {
 
@@ -34,29 +36,11 @@ routeMiddleware <- function( beakr, FUN, path = NULL,
   return(beakr)
 }
 
-#' Adding HTTP Method Overrides
+#' Internal regex path query.
 #'
-#' @param middleware_FUN
-#' @param path
-#' @param method
-#'
-#' @return
-httpMethod <- function(middleware_FUN, path, method) {
-  routeMiddleware( beakr  = beakr,
-                   FUN    = middleware_FUN,
-                   path   = path,
-                   method = method )
-}
-
-#' Title
-#'
-#' @param string
-#' @param path
-#' @param ...
-#'
-#' @return
-#'
-#' @examples
+#' @param pattern the string pattern to parse
+#' @param path the path to match to
+#' @param ... additional parameters
 matchPath <- function(pattern, path, ...) {
   # Result init
   result <- list(match = FALSE, src = path, params = list())
@@ -89,10 +73,8 @@ matchPath <- function(pattern, path, ...) {
 #' @param req an HTTP req
 #' @param body a body text string
 #' @param query a url-encoded query string
-#' @param type a media type (a.k.a. Multipurpose Internet Mail Extensions or MIME type)
-#'
-#' @return parsed parameters list
-#'
+#' @param type a media mime type (a.k.a. Multipurpose Internet Mail Extensions
+#' or MIME type).
 parseParameters <- function(req, body, query, type) {
   parameters <- list()
   parameters <- c(parameters, webutils::parse_query(query))

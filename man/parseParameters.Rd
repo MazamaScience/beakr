@@ -13,10 +13,8 @@ parseParameters(req, body, query, type)
 
 \item{query}{a url-encoded query string}
 
-\item{type}{a media type (a.k.a. Multipurpose Internet Mail Extensions or MIME type)}
-}
-\value{
-parsed parameters list
+\item{type}{a media mime type (a.k.a. Multipurpose Internet Mail Extensions
+or MIME type).}
 }
 \description{
 Parse the parameters passed by the req

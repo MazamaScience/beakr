@@ -4,7 +4,7 @@
 \alias{put}
 \title{PUT-binding middleware}
 \usage{
-put(beakr, path, ...)
+put(beakr, path)
 }
 \arguments{
 \item{beakr}{a beakr instance.}

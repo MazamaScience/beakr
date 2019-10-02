@@ -2,16 +2,17 @@
 % Please edit documentation in R/internal-utils.R
 \name{matchPath}
 \alias{matchPath}
-\title{Title}
+\title{Internal regex path query.}
 \usage{
 matchPath(pattern, path, ...)
 }
 \arguments{
-\item{...}{}
-}
-\value{
+\item{pattern}{the string pattern to parse}
 
+\item{path}{the path to match to}
+
+\item{...}{additional parameters}
 }
 \description{
-Title
+Internal regex path query.
 }

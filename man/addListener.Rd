@@ -6,6 +6,13 @@
 \usage{
 addListener(beakr, FUN, event)
 }
+\arguments{
+\item{beakr}{a beakr instance.}
+
+\item{FUN}{listener function}
+
+\item{event}{the event to listen for, such as "start" or "finish".}
+}
 \description{
-Internal function to add listeners
+Internal function.
 }

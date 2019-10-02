@@ -4,7 +4,7 @@
 \alias{delete}
 \title{DELETE-binding middleware}
 \usage{
-delete(beakr, path, ...)
+delete(beakr, path)
 }
 \arguments{
 \item{beakr}{a beakr instance.}

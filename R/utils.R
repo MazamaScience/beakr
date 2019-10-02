@@ -5,7 +5,7 @@
 #'
 #' @usage beakr()
 #' @export
-beakr <- function() {
+newBeakr <- function() {
   Beakr$new()
 }
 
@@ -35,7 +35,7 @@ beakr <- function() {
 #' @export
 #'
 #' @examples
-#' bk <- beakr() %>% listen(port = 1234, daemonized = TRUE)
+#' bk <- newBeakr() %>% listen(port = 1234, daemonized = TRUE)
 listen <-function( beakr, host = "127.0.0.1", port = 8080,
                    daemonized = FALSE, verbose = FALSE ) {
   options("beakr.verbose" = verbose)
@@ -95,7 +95,7 @@ killall <- function() {
 #' @export
 #'
 #' @examples
-#' bb <- listen(beakr = beakr(), daemonized = TRUE)
+#' bb <- listen(beakr = newBeakr(), daemonized = TRUE)
 #' active()
 active <- function() {
   active <- lapply(

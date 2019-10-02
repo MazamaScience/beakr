@@ -8,8 +8,16 @@ routeMiddleware(beakr, FUN, path = NULL, method = NULL,
   websocket = FALSE)
 }
 \arguments{
-\item{websocket}{}
+\item{beakr}{a beakr instance.}
+
+\item{FUN}{the function to route middleware}
+
+\item{path}{the path to rouet the middleware}
+
+\item{method}{the HTTP method to employ}
+
+\item{websocket}{boolean, TRUE if websocket.}
 }
 \description{
-Internal function to add middleware
+Internal function.
 }
