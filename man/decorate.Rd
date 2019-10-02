@@ -23,15 +23,3 @@ with \code{req}, \code{res}, and \code{err} objects and assigns a
 content-type to the response object. This prepares a standard R function to
 affect beakr instances and accept requests.
 }
-\examples{
-# Create some function
-hello <- function(name) {
-  return(paste("Hello, ", name))
-}
-# Create a beakr instance and accept requests of the parameter x
-beakr() \%>\% get("/", decorate(hello)) \%>\% listen()
-
-# In terminal
-# $ curl http://127.0.0.1:8080/?name=Bart
-# > Hello, Bart
-}

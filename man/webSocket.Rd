@@ -4,7 +4,7 @@
 \alias{webSocket}
 \title{Websocket Access}
 \usage{
-websocket(beakr,path)
+webSocket(beakr, path, ...)
 }
 \arguments{
 \item{beakr}{a beakr instance}

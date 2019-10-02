@@ -4,7 +4,7 @@
 \alias{delete}
 \title{DELETE-binding middleware}
 \usage{
-delete(beakr, path)
+delete(beakr, path, ...)
 }
 \arguments{
 \item{beakr}{a beakr instance.}
@@ -17,16 +17,4 @@ is invoked.}
 \description{
 Routes HTTP DELETE requests to the specified path with the specified callback
 functions or middleware.
-}
-\examples{
-\dontrun{
-# Create a beakr instance
-server <- beakr() \%>\%
-  delete("/", function(req, res, err) { "Successful DELETE request!" })
-# Listen for HTTP/WebSocket requests
-listen(server, daemonized = TRUE)
-# In terminal:
-$ curl -X DELETE http://127.0.0.1:8080/
-Successful DELETE request!
-}
 }

@@ -1,9 +1,9 @@
-#' Start a new beakr instance
+#' Start a new Beakr instance
 #'
 #' Create a \code{Beakr} instance object by calling the top-level
-#' \code{beakr()} function.
+#' \code{newBeakr()} function.
 #'
-#' @usage beakr()
+#' @usage newBeakr()
 #' @export
 newBeakr <- function() {
   Beakr$new()
@@ -31,11 +31,13 @@ newBeakr <- function() {
 #' @param daemonized run the instance in the background.
 #' @param verbose boolean, debugging.
 #'
-#' @usage listen(beakr, host, port, daemonized
+#' @usage listen(beakr, host, port, daemonized, verbose)
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' bk <- newBeakr() %>% listen(port = 1234, daemonized = TRUE)
+#' }
 listen <-function( beakr, host = "127.0.0.1", port = 8080,
                    daemonized = FALSE, verbose = FALSE ) {
   options("beakr.verbose" = verbose)
@@ -65,7 +67,7 @@ newError <- function() {
 #'
 #' @export
 #' @examples
-#' bk <- beakr()
+#' bk <- newBeakr()
 #' listen(bk, daemonized = TRUE)
 #' kill(bk)
 kill <- function(beakr) {
@@ -94,9 +96,7 @@ killall <- function() {
 #' @return a list of active instances
 #' @export
 #'
-#' @examples
-#' bb <- listen(beakr = newBeakr(), daemonized = TRUE)
-#' active()
+#' @usage active()
 active <- function() {
   active <- lapply(
     X = httpuv::listServers() ,
@@ -127,16 +127,17 @@ active <- function() {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Create an instance and add the error handler last.
-#' beakr() %>%
-#'   use("/", decorate(function(n) { paste("Hi, ", n) })) %>%
-#'   errorHandler() %>%
-#'   listen()
+#' newBeakr() %>%
+#'   use(path = "/", decorate(function(n) { paste("Hi, ", n) })) %>%
+#'   errorHandler() %>% listen()
 #' # In shell
 #' # $ curl http://127.0.0.1:8080/
 #' # > {"status":"Page not found.","status_code":404}
 #' # An erorr was thrown because the parameter "n" is not provided and
 #' # required by the middleware.
+#' }
 errorHandler <- function(beakr, path = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -183,7 +184,7 @@ processTestRequest <- function(beakr, test_request) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage websocket(beakr,path)
+#' @usage webSocket(beakr, path, ...)
 #' @export
 webSocket <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
@@ -384,8 +385,9 @@ cors <-
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Construct primary instance
-#' primary <- beakr() %>%
+#' primary <- newBeakr() %>%
 #'   get("/primary-app",
 #'       function(req, res, err) { "Primary Application!" })
 #'
@@ -396,6 +398,7 @@ cors <-
 #'
 #' # Include the external middleware in the primary instance
 #' primary %>% include(ext)
+#' }
 include <- function(beakr, include, file = NULL) {
   if ( is.null(file) ) {
     bundle <- eval(quote(include))

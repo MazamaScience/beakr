@@ -21,8 +21,9 @@ constructed elsewhere.
 Hierarchy
 }
 \examples{
+\dontrun{
 # Construct primary instance
-primary <- beakr() \%>\%
+primary <- newBeakr() \%>\%
   get("/primary-app",
       function(req, res, err) { "Primary Application!" })
 
@@ -33,4 +34,5 @@ ext <- use(beakr = NULL, "/",
 
 # Include the external middleware in the primary instance
 primary \%>\% include(ext)
+}
 }

@@ -12,7 +12,3 @@ a list of active instances
 \description{
 A list containing the current sessions active instances.
 }
-\examples{
-bb <- listen(beakr = beakr(), daemonized = TRUE)
-active()
-}

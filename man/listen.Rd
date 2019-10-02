@@ -4,7 +4,7 @@
 \alias{listen}
 \title{Listen for connections}
 \usage{
-listen(beakr, host, port, daemonized
+listen(beakr, host, port, daemonized, verbose)
 }
 \arguments{
 \item{beakr}{a beaker instance.}
@@ -33,5 +33,7 @@ background.
 See the \code{httpuv} package for more information.
 }
 \examples{
-bk <- beakr() \%>\% listen(port = 1234, daemonized = TRUE)
+\dontrun{
+bk <- newBeakr() \%>\% listen(port = 1234, daemonized = TRUE)
+}
 }

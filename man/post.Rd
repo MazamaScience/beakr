@@ -4,7 +4,7 @@
 \alias{post}
 \title{POST-binding middleware}
 \usage{
-post(beakr, path)
+post(beakr, path, ...)
 }
 \arguments{
 \item{beakr}{a beakr instance.}
@@ -21,12 +21,12 @@ functions or middleware.
 \examples{
 \dontrun{
 # Create a beakr instance
-server <- beakr() \%>\%
+server <- newBeakr() \%>\%
   post("/", function(req, res, err) { "Successful POST request!" })
 # Listen for HTTP/WebSocket requests
 listen(server)
 # In terminal:
-$ curl -X POST http://127.0.0.1:8080/
-> Successful POST request!
+# $ curl -X POST http://127.0.0.1:8080/
+# > Successful POST request!
 }
 }

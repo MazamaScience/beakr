@@ -2,11 +2,11 @@
 % Please edit documentation in R/utils.R
 \name{newBeakr}
 \alias{newBeakr}
-\title{Start a new beakr instance}
+\title{Start a new Beakr instance}
 \usage{
-beakr()
+newBeakr()
 }
 \description{
 Create a \code{Beakr} instance object by calling the top-level
-\code{beakr()} function.
+\code{newBeakr()} function.
 }

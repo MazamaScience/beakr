@@ -15,18 +15,7 @@
 #'
 #' @usage decorate(FUN, content_type, strict = FALSE)
 #' @export
-#'
-#' @examples
-#' # Create some function
-#' hello <- function(name) {
-#'   return(paste("Hello, ", name))
-#' }
-#' # Create a beakr instance and accept requests of the parameter x
-#' beakr() %>% get("/", decorate(hello)) %>% listen()
-#'
-#' # In terminal
-#' # $ curl http://127.0.0.1:8080/?name=Bart
-#' # > Hello, Bart
+
 decorate <-
   function(FUN, content_type = "text/html", strict = FALSE) {
     # Get the parameters the function allows

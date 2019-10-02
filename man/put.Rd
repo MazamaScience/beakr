@@ -4,7 +4,7 @@
 \alias{put}
 \title{PUT-binding middleware}
 \usage{
-put(beakr, path)
+put(beakr, path, ...)
 }
 \arguments{
 \item{beakr}{a beakr instance.}
@@ -21,12 +21,12 @@ functions or middleware.
 \examples{
 \dontrun{
 # Create a beakr instance
-server <- beakr() \%>\%
+server <- newBeakr() \%>\%
   put("/", function(req, res, err) { "Successful PUT request!" })
 # Listen for HTTP/WebSocket requests
 listen(server)
 # In terminal:
-$ curl -X PUT http://127.0.0.1:8080/
-Successful PUT request!
+# $ curl -X PUT http://127.0.0.1:8080/
+# Successful PUT request!
 }
 }

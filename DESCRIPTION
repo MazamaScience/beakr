@@ -32,5 +32,6 @@ Suggests:
     knitr,
     rmarkdown,
     futile.logger
+Encoding: UTF-8
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1

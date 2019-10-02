@@ -21,12 +21,12 @@ functions or middleware.
 \examples{
 \dontrun{
 # Create a beakr instance
-server <- beakr() \%>\%
+server <- newBeakr() \%>\%
   get("/", function(req, res, err) { "Hello, world!" })
 # Listen for HTTP/WebSocket requests
 listen(server, daemonized = TRUE)
-#' # In terminal:
-$ curl http://127.0.0.1:8080/
-> Hello, world!
+# In terminal:
+# $ curl http://127.0.0.1:8080/
+# > Hello, world!
 }
 }

@@ -12,13 +12,13 @@
 #' @examples
 #' \dontrun{
 #' # Create a beakr instance
-#' server <- beakr() %>%
+#' server <- newBeakr() %>%
 #'   get("/", function(req, res, err) { "Hello, world!" })
 #' # Listen for HTTP/WebSocket requests
 #' listen(server, daemonized = TRUE)
-#' #' # In terminal:
-#' $ curl http://127.0.0.1:8080/
-#' > Hello, world!
+#' # In terminal:
+#' # $ curl http://127.0.0.1:8080/
+#' # > Hello, world!
 #' }
 # The methods below are used to determine what "get" to use.
 # get <- function(beakr, path, ...) {
@@ -63,18 +63,18 @@ get <- function(beakr, path, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage post(beakr, path)
+#' @usage post(beakr, path, ...)
 #' @export
 #' @examples
 #' \dontrun{
 #' # Create a beakr instance
-#' server <- beakr() %>%
+#' server <- newBeakr() %>%
 #'   post("/", function(req, res, err) { "Successful POST request!" })
 #' # Listen for HTTP/WebSocket requests
 #' listen(server)
 #' # In terminal:
-#' $ curl -X POST http://127.0.0.1:8080/
-#' > Successful POST request!
+#' # $ curl -X POST http://127.0.0.1:8080/
+#' # > Successful POST request!
 #' }
 post <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
@@ -103,19 +103,19 @@ post <- function(beakr, path, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage put(beakr, path)
+#' @usage put(beakr, path, ...)
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' # Create a beakr instance
-#' server <- beakr() %>%
+#' server <- newBeakr() %>%
 #'   put("/", function(req, res, err) { "Successful PUT request!" })
 #' # Listen for HTTP/WebSocket requests
 #' listen(server)
 #' # In terminal:
-#' $ curl -X PUT http://127.0.0.1:8080/
-#' Successful PUT request!
+#' # $ curl -X PUT http://127.0.0.1:8080/
+#' # Successful PUT request!
 #' }
 put <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
@@ -143,20 +143,8 @@ put <- function(beakr, path, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage delete(beakr, path)
+#' @usage delete(beakr, path, ...)
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' # Create a beakr instance
-#' server <- beakr() %>%
-#'   delete("/", function(req, res, err) { "Successful DELETE request!" })
-#' # Listen for HTTP/WebSocket requests
-#' listen(server, daemonized = TRUE)
-#' # In terminal:
-#' $ curl -X DELETE http://127.0.0.1:8080/
-#' Successful DELETE request!
-#' }
 delete <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
