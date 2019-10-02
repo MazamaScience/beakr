@@ -13,11 +13,11 @@
 #' \dontrun{
 #' # Create a beakr instance
 #' server <- newBeakr() %>%
-#'   get("/", function(req, res, err) { "Hello, world!" })
+#'   get(path = "/", function(req, res, err) { "Hello, world!" })
 #' # Listen for HTTP/WebSocket requests
-#' listen(server, daemonized = TRUE)
+#' listen(server)
 #' # In terminal:
-#' # $ curl http://127.0.0.1:8080/
+#' #  curl http://127.0.0.1:8080/
 #' # > Hello, world!
 #' }
 # The methods below are used to determine what "get" to use.
@@ -34,7 +34,7 @@
 # }
 # @describeIn get Beakr middleware function.
 # @export
-get <- function(beakr, path, ...) {
+get <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
   if ( is.null(beakr) ) {
@@ -73,10 +73,10 @@ get <- function(beakr, path, ...) {
 #' # Listen for HTTP/WebSocket requests
 #' listen(server)
 #' # In terminal:
-#' # $ curl -X POST http://127.0.0.1:8080/
+#' #  curl -X POST http://127.0.0.1:8080/
 #' # > Successful POST request!
 #' }
-post <- function(beakr, path, ...) {
+post <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
@@ -114,10 +114,10 @@ post <- function(beakr, path, ...) {
 #' # Listen for HTTP/WebSocket requests
 #' listen(server)
 #' # In terminal:
-#' # $ curl -X PUT http://127.0.0.1:8080/
-#' # Successful PUT request!
+#' #  curl -X PUT http://127.0.0.1:8080/
+#' # > Successful PUT request!
 #' }
-put <- function(beakr, path, ...) {
+put <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
@@ -145,7 +145,7 @@ put <- function(beakr, path, ...) {
 #'
 #' @usage delete(beakr, path, ...)
 #' @export
-delete <- function(beakr, path, ...) {
+delete <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }

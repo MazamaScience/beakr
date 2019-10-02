@@ -131,12 +131,14 @@ active <- function() {
 #' # Create an instance and add the error handler last.
 #' newBeakr() %>%
 #'   use(path = "/", decorate(function(n) { paste("Hi, ", n) })) %>%
-#'   errorHandler() %>% listen()
+#'   errorHandler() %>%
+#'   listen()
 #' # In shell
-#' # $ curl http://127.0.0.1:8080/
-#' # > {"status":"Page not found.","status_code":404}
-#' # An erorr was thrown because the parameter "n" is not provided and
+#' #  curl http://127.0.0.1:8080/
+#' # > "status":"Page not found.","status_code":404
+#' # An error was thrown because the parameter "n" is not provided and
 #' # required by the middleware.
+#' killall()
 #' }
 errorHandler <- function(beakr, path = NULL) {
   if ( is.null(beakr) ) {

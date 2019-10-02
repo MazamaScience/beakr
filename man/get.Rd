@@ -4,7 +4,7 @@
 \alias{get}
 \title{GET-binding middleware}
 \usage{
-get(beakr, path, ...)
+get(beakr, path = NULL, ...)
 }
 \arguments{
 \item{beakr}{a beakr instance or \code{NULL}.}
@@ -22,11 +22,11 @@ functions or middleware.
 \dontrun{
 # Create a beakr instance
 server <- newBeakr() \%>\%
-  get("/", function(req, res, err) { "Hello, world!" })
+  get(path = "/", function(req, res, err) { "Hello, world!" })
 # Listen for HTTP/WebSocket requests
-listen(server, daemonized = TRUE)
+listen(server)
 # In terminal:
-# $ curl http://127.0.0.1:8080/
+#  curl http://127.0.0.1:8080/
 # > Hello, world!
 }
 }

@@ -26,7 +26,7 @@ server <- newBeakr() \%>\%
 # Listen for HTTP/WebSocket requests
 listen(server)
 # In terminal:
-# $ curl -X PUT http://127.0.0.1:8080/
-# Successful PUT request!
+#  curl -X PUT http://127.0.0.1:8080/
+# > Successful PUT request!
 }
 }
