@@ -15,7 +15,6 @@
 #'
 #' @usage decorate(FUN, content_type, strict = FALSE)
 #' @export
-
 decorate <-
   function(FUN, content_type = "text/html", strict = FALSE) {
     # Get the parameters the function allows
