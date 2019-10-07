@@ -104,7 +104,7 @@ Router <-
                                         err = err )
                 )}, silent = TRUE)
 
-            if ( "try-err" %in% class(result) ) {
+            if ( "try-error" %in% class(result) ) {
               self$processEvent( event = "err",
                                  req,
                                  res,
