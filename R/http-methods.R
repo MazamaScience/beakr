@@ -20,6 +20,7 @@
 #' #  curl http://127.0.0.1:8080/
 #' # > Hello, world!
 #' }
+# TODO:  Some cleanup needed here.
 # The methods below are used to determine what "get" to use.
 # get <- function(beakr, path, ...) {
 #   if ( is.null(beakr) ) {

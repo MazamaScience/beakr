@@ -1,9 +1,14 @@
-# beakr 0.1.02
+# beakr 0.1.3
 
-* Changed request, response, and error object names to req, res, err, as more consistent with popular frameworks
+* Internal cleanup and harmonization
+
+# beakr 0.1.2
+
+* Changed `request`, `response`, and `error` object names to `req`, `res`, 
+`err`, as more consistent with popular frameworks
 * Added fancy beakr prints
 
-# beakr 0.1.01
+# beakr 0.1.1
 
 * CORS functionality
 * Daemonized instances
