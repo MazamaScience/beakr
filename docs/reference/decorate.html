@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — decorate • beakr</title>
+<title>Decorate a function — decorate • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Title — decorate" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Decorate a function — decorate" />
+<meta property="og:description" content="Convenience function to decorate an existing function to interface with beakr
+instances." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,32 +109,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Decorate a function</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/decorate.R'><code>R/decorate.R</code></a></small>
     <div class="hidden name"><code>decorate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Convenience function to decorate an existing function to interface with beakr
+instances.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>decorate</span>(<span class='no'>FUN</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"text/html"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>decorate</span>(<span class='no'>FUN</span>, <span class='no'>content_type</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>FUN</th>
+      <td><p>the function to decorate.</p></td>
+    </tr>
+    <tr>
+      <th>content_type</th>
+      <td><p>the type of content to set response as.</p></td>
+    </tr>
+    <tr>
       <th>strict</th>
-      <td></td>
+      <td><p>boolean, requiring strict parameter matching.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Decorating a function associates the specified function and its parameters
+with <code>req</code>, <code>res</code>, and <code>err</code> objects and assigns a
+content-type to the response object. This prepares a standard R function to
+affect beakr instances and accept requests.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

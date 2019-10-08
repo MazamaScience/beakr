@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — errorHandler • beakr</title>
+<title>Instance Error Handling — errorHandler • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Title — errorHandler" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Instance Error Handling — errorHandler" />
+<meta property="og:description" content="An error handling middleware for beakr instances." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,32 +108,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Instance Error Handling</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>errorHandler.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>An error handling middleware for beakr instances.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>errorHandler</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>errorHandler</span>(<span class='no'>beakr</span>, <span class='no'>path</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>beakr</th>
+      <td><p>a beakr instance</p></td>
+    </tr>
+    <tr>
       <th>path</th>
-      <td></td>
+      <td><p>string representing a relative path for which the middleware
+is invoked.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p><code>beakr</code> comes with a default error handler. This default error-handling
+middleware function is added at the end of the middleware function stack.
+The Errors are handled via JSON output.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Create an instance and add the error handler last.</span>
+<span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='use.html'>use</a></span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"/"</span>, <span class='fu'><a href='decorate.html'>decorate</a></span>(<span class='kw'>function</span>(<span class='no'>n</span>) { <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Hi, "</span>, <span class='no'>n</span>) })) <span class='kw'>%&gt;%</span>
+  <span class='fu'>errorHandler</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='listen.html'>listen</a></span>()
+<span class='co'># In shell</span>
+<span class='co'>#  curl http://127.0.0.1:8080/</span>
+<span class='co'># &gt; "status":"Page not found.","status_code":404</span>
+<span class='co'># An error was thrown because the parameter "n" is not provided and</span>
+<span class='co'># required by the middleware.</span>
+<span class='fu'><a href='killall.html'>killall</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

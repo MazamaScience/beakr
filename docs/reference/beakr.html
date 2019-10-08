@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Start a new beakr instance — beakr • beakr</title>
+<title>Beakr class — Beakr • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,10 @@
 
 
 
-<meta property="og:title" content="Start a new beakr instance — beakr" />
-<meta property="og:description" content="Create a Beakr instance object by calling the top-level
-beakr() function." />
+<meta property="og:title" content="Beakr class — Beakr" />
+<meta property="og:description" content="The Beakr class defines the server instance utilizing the
+httpuv package. This class defines an interface for the rest of the
+beakr package and is therefore meant to be instantiated." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,28 +110,61 @@ beakr() function." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Start a new beakr instance</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>beakr.Rd</code></div>
+    <h1>Beakr class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Beakr.R'><code>R/Beakr.R</code></a></small>
+    <div class="hidden name"><code>Beakr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a <code>Beakr</code> instance object by calling the top-level
-<code>beakr()</code> function.</p>
+    <p>The <code>Beakr</code> class defines the server instance utilizing the
+<code>httpuv</code> package. This class defines an interface for the rest of the
+<code>beakr</code> package and is therefore meant to be instantiated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>beakr</span>()</pre>
 
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    <p>a beakr instance object.</p>
+    
+
+
+<dl class='dl-horizontal'>
+  <dt><code>route()</code></dt><dd><p>An instantiated <code>Router</code> object.</p></dd>
+  <dt><code>serverObject()</code></dt><dd><p>The instantiated <code>Server</code> object.</p></dd>
+  <dt><code>appDefinition()</code></dt><dd><p>A method to define the functions or middleware of users application.</p></dd>
+  <dt><code>addCollectedMiddleware(collector)</code></dt><dd><p>Adds the users "collected" middleware to the <code>Beakr</code> defined
+  middleware.</p></dd>
+  <dt><code>initialize()</code></dt><dd><p>Creates a new <code>Router</code> object for the <code>route</code>
+  method.</p></dd>
+  <dt><code><a href='https://rdrr.io/r/stats/start.html'>start(host, port, daemonized)</a></code></dt><dd><p>Returns a running server. If <code>daemonized = TRUE</code>, the server will run
+  in the background.</p></dd>
+  <dt><code><a href='https://rdrr.io/r/base/print.html'>print(...)</a></code></dt><dd><p>Returns a console output of the instance and its number of middleware
+  attached.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="package-details"><a class="anchor" href="#package-details"></a>Package details</h2>
+
+    
+
+
+<p>The <code>beakr</code> package provides a minimal web framework for for developing
+lightweight APIs in R. The package includes basic functionality for handling
+common <code>HTTP</code> requests. <code>beakr</code> is a ground-up rewrite and
+continuation of the <code>jug</code> package developed by Bart Smeets. The
+<code>beakr</code> package is supported and maintained by
+<a href='http://www.mazamascience.com/'>Mazama Science</a>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='Router.html'>Router</a></code> and <code><a href='Middleware.html'>Middleware</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#value">Value</a></li>
+      <li><a href="#methods">Methods</a></li>
+      <li><a href="#package-details">Package details</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>

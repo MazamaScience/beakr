@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — static • beakr</title>
+<title>Serve static files — static • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Title — static" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Serve static files — static" />
+<meta property="og:description" content="Binds to get requests that aren't handled by specified paths. Should support
+all filetypes; returns image and octet-stream types as a raw string." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,23 +109,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Serve static files</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>static.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Binds to get requests that aren't handled by specified paths. Should support
+all filetypes; returns image and octet-stream types as a raw string.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>static</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>root</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>static</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>root</th>
-      <td></td>
+      <th>beakr</th>
+      <td><p>a beakr instance</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>a string representing a relative path for which the middleware
+is invoked.</p></td>
+    </tr>
+    <tr>
+      <th>dir</th>
+      <td><p>a string representing a path for which to serve as the root
+directory.</p></td>
     </tr>
     </table>
 

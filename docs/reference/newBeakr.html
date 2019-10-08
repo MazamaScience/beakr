@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>POST-binding middleware — post • beakr</title>
+<title>Start a new Beakr instance — newBeakr • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="POST-binding middleware — post" />
-<meta property="og:description" content="Routes HTTP POST requests to the specified path with the specified callback
-functions or middleware." />
+<meta property="og:title" content="Start a new Beakr instance — newBeakr" />
+<meta property="og:description" content="Create a Beakr instance object by calling the top-level
+newBeakr() function." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,54 +109,24 @@ functions or middleware." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>POST-binding middleware</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
-    <div class="hidden name"><code>post.Rd</code></div>
+    <h1>Start a new Beakr instance</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>newBeakr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Routes HTTP POST requests to the specified path with the specified callback
-functions or middleware.</p>
+    <p>Create a <code>Beakr</code> instance object by calling the top-level
+<code>newBeakr()</code> function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>post</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>beakr</th>
-      <td><p>a beakr instance.</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>string representing a relative path for which the middleware
-is invoked.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional middleware/functions.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>newBeakr</span>()</pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Create a beakr instance</span>
-<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>post</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) { <span class='st'>"Successful POST request!"</span> })
-<span class='co'># Listen for HTTP/WebSocket requests</span>
-<span class='fu'><a href='listen.html'>listen</a></span>(<span class='no'>server</span>)
-<span class='co'># In terminal:</span>
-<span class='co'>#  curl -X POST http://127.0.0.1:8080/</span>
-<span class='co'># &gt; Successful POST request!</span>
-}</div></pre>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

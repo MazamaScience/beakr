@@ -141,7 +141,16 @@ is invoked.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Create a beakr instance</span>
+<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>put</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) { <span class='st'>"Successful PUT request!"</span> })
+<span class='co'># Listen for HTTP/WebSocket requests</span>
+<span class='fu'><a href='listen.html'>listen</a></span>(<span class='no'>server</span>)
+<span class='co'># In terminal:</span>
+<span class='co'>#  curl -X PUT http://127.0.0.1:8080/</span>
+<span class='co'># &gt; Successful PUT request!</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

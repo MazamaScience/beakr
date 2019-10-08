@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>POST-binding middleware — post • beakr</title>
+<title>Construct an instance — include • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="POST-binding middleware — post" />
-<meta property="og:description" content="Routes HTTP POST requests to the specified path with the specified callback
-functions or middleware." />
+<meta property="og:title" content="Construct an instance — include" />
+<meta property="og:description" content="The include function is used to merge beakr middleware that has been
+constructed elsewhere." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,53 +109,60 @@ functions or middleware." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>POST-binding middleware</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
-    <div class="hidden name"><code>post.Rd</code></div>
+    <h1>Construct an instance</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>include.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Routes HTTP POST requests to the specified path with the specified callback
-functions or middleware.</p>
+    <p>The <code>include</code> function is used to merge beakr middleware that has been
+constructed elsewhere.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>post</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>include</span>(<span class='no'>beakr</span>, <span class='no'>include</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>beakr</th>
-      <td><p>a beakr instance.</p></td>
+      <td><p>primary beakr instance.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>string representing a relative path for which the middleware
-is invoked.</p></td>
+      <th>include</th>
+      <td><p>the external middleware to include.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>additional middleware/functions.</p></td>
+      <th>file</th>
+      <td><p>the source file path, if external middleware in separate .R file.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Hierarchy</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Create a beakr instance</span>
-<span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>post</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) { <span class='st'>"Successful POST request!"</span> })
-<span class='co'># Listen for HTTP/WebSocket requests</span>
-<span class='fu'><a href='listen.html'>listen</a></span>(<span class='no'>server</span>)
-<span class='co'># In terminal:</span>
-<span class='co'>#  curl -X POST http://127.0.0.1:8080/</span>
-<span class='co'># &gt; Successful POST request!</span>
+<span class='co'># Construct primary instance</span>
+<span class='no'>primary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='get.html'>get</a></span>(<span class='st'>"/primary-app"</span>,
+      <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) { <span class='st'>"Primary Application!"</span> })
+
+<span class='co'># Construct middleware</span>
+<span class='no'>ext</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='use.html'>use</a></span>(<span class='kw'>beakr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='st'>"/"</span>,
+           <span class='fu'><a href='decorate.html'>decorate</a></span>(<span class='kw'>function</span>(<span class='no'>name</span>) { <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Hi "</span>, <span class='no'>name</span>, <span class='st'>"!\n"</span>) })) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='errorHandler.html'>errorHandler</a></span>()
+
+<span class='co'># Include the external middleware in the primary instance</span>
+<span class='no'>primary</span> <span class='kw'>%&gt;%</span> <span class='fu'>include</span>(<span class='no'>ext</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
