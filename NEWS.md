@@ -1,6 +1,6 @@
 # beakr 0.1.3
 
-* Internal cleanup and harmonization
+* Internal refactoring and cleanup.
 
 # beakr 0.1.2
 

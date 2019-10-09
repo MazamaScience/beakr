@@ -74,7 +74,7 @@ Router <-
         self$processEvent(event = "start", req, res, err)
 
         for ( mw in self$middleware ) {
-          path <- matchPath(mw$path, req$path)
+          path <- .matchPath(mw$path, req$path)
           req$addParameters(path$params)
 
           # Handle http protocol logic
@@ -104,7 +104,7 @@ Router <-
                                         err = err )
                 )}, silent = TRUE)
 
-            if ( "try-err" %in% class(result) ) {
+            if ( "try-error" %in% class(result) ) {
               self$processEvent( event = "err",
                                  req,
                                  res,
@@ -145,3 +145,38 @@ Router <-
 
     )
   )
+
+# ===== Internal Functions =====================================================
+
+#' Regex path query
+#'
+#' @param pattern the string pattern to parse
+#' @param path the path to match to
+#' @param ... additional parameters
+.matchPath <- function(pattern, path, ...) {
+  # Result init
+  result <- list(match = FALSE, src = path, params = list())
+
+  if ( !is.null(pattern) ) {
+    if ( !(grepl("^\\^", pattern) ||
+           grepl("\\$$", pattern)) ) {
+      pattern <- paste0("^", pattern, "$")
+    }
+
+    rex <- regexpr(pattern, path, perl = TRUE, ...)
+
+    for ( n in attr(x = rex, which = "capture.name") ) {
+      result$params[[n]] <- substr( x     = result$src,
+                                    start = attr(rex, "capture.start")[,n],
+                                    stop  = (attr(rex, "capture.start")[,n] +
+                                               attr(rex, "capture.length")[,n] - 1) )
+
+    }
+    result$match <- ifelse(rex[[1]] > -1, TRUE, FALSE)
+  } else {
+    result$match <- TRUE
+  }
+
+  return(result)
+}
+
