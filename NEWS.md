@@ -2,6 +2,7 @@
 
 * Renamed http methods to upper case: `get()` ==> `GET()`, _etc._.
 * Renamed `killall()` to `killAll()`.
+* Restored documentation `@examples`.
 
 # beakr 0.1.3
 

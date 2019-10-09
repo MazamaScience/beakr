@@ -1,14 +1,29 @@
-#' GET-binding middleware
+#' @export
+#' @title GET-binding middleware
 #'
-#' Routes HTTP GET requests to the specified path with the specified callback
-#' functions or middleware.
+#' @description Routes HTTP GET requests to the specified path with the
+#' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance or \code{NULL}.
 #' @param path string representing a relative path for which the middleware
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @export
+#' @usage GET(beakr, path, ...)
+#'
+#' @examples
+#' \dontrun{
+#' newBeakr() %>%
+#'   GET("/", function(req, res, err) {
+#'     return("Successful GET request!\n")
+#'   }) %>%
+#'   startBeakr()
+#'
+#' # In browser:
+#' #   http://127.0.0.1:8080
+#' # > Successful GET request!
+#' }
+#'
 GET <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
@@ -28,10 +43,11 @@ GET <- function(beakr, path = NULL, ...) {
   return(beakr)
 }
 
-#' POST-binding middleware
+#' @export
+#' @title POST-binding middleware
 #'
-#' Routes HTTP POST requests to the specified path with the specified callback
-#' functions or middleware.
+#' @description Routes HTTP POST requests to the specified path with the
+#' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
 #' @param path string representing a relative path for which the middleware
@@ -39,7 +55,19 @@ GET <- function(beakr, path = NULL, ...) {
 #' @param ... additional middleware/functions.
 #'
 #' @usage POST(beakr, path, ...)
-#' @export
+#'
+#' @examples
+#' \dontrun{
+#' newBeakr() %>%
+#'   POST("/", function(req, res, err) {
+#'     return("Successful POST request!\n")
+#'   }) %>%
+#'   startBeakr()
+#'
+#' # In terminal:
+#' #  curl -X POST http://127.0.0.1:8080/
+#' # > Successful POST request!
+#' }
 POST <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -57,10 +85,11 @@ POST <- function(beakr, path = NULL, ...) {
   return(beakr)
 }
 
-#' PUT-binding middleware
+#' @export
+#' @title PUT-binding middleware
 #'
-#' Routes HTTP PUT requests to the specified path with the specified callback
-#' functions or middleware.
+#' @description Routes HTTP PUT requests to the specified path with the
+#' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
 #' @param path string representing a relative path for which the middleware
@@ -68,7 +97,19 @@ POST <- function(beakr, path = NULL, ...) {
 #' @param ... additional middleware/functions.
 #'
 #' @usage PUT(beakr, path, ...)
-#' @export
+#'
+#' @examples
+#' \dontrun{
+#' newBeakr() %>%
+#'   PUT("/", function(req, res, err) {
+#'     return("Successful PUT request!\n")
+#'   }) %>%
+#'   startBeakr()
+#'
+#' # In terminal:
+#' #  curl -X PUT http://127.0.0.1:8080/
+#' # > Successful PUT request!
+#' }
 #'
 PUT <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
@@ -86,10 +127,11 @@ PUT <- function(beakr, path = NULL, ...) {
   return(beakr)
 }
 
-#' DELETE-binding middleware
+#' @export
+#' @title DELETE-binding middleware
 #'
-#' Routes HTTP DELETE requests to the specified path with the specified callback
-#' functions or middleware.
+#' @description Routes HTTP DELETE requests to the specified path with the
+#' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
 #' @param path string representing a relative path for which the middleware
@@ -97,7 +139,6 @@ PUT <- function(beakr, path = NULL, ...) {
 #' @param ... additional middleware/functions.
 #'
 #' @usage DELETE(beakr, path, ...)
-#' @export
 DELETE <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())

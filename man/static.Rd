@@ -16,6 +16,7 @@ is invoked.}
 directory.}
 }
 \description{
-Binds to get requests that aren't handled by specified paths. Should support
-all filetypes; returns image and octet-stream types as a raw string.
+Binds to get requests that aren't handled by specified paths.
+Should support all filetypes; returns image and octet-stream types as a raw
+string.
 }

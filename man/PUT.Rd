@@ -15,6 +15,20 @@ is invoked.}
 \item{...}{additional middleware/functions.}
 }
 \description{
-Routes HTTP PUT requests to the specified path with the specified callback
-functions or middleware.
+Routes HTTP PUT requests to the specified path with the
+specified callback functions or middleware.
+}
+\examples{
+\dontrun{
+newBeakr() \%>\%
+  PUT("/", function(req, res, err) {
+    return("Successful PUT request!\\n")
+  }) \%>\%
+  startBeakr()
+
+# In terminal:
+#  curl -X PUT http://127.0.0.1:8080/
+# > Successful PUT request!
+}
+
 }

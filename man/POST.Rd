@@ -15,6 +15,19 @@ is invoked.}
 \item{...}{additional middleware/functions.}
 }
 \description{
-Routes HTTP POST requests to the specified path with the specified callback
-functions or middleware.
+Routes HTTP POST requests to the specified path with the
+specified callback functions or middleware.
+}
+\examples{
+\dontrun{
+newBeakr() \%>\%
+  POST("/", function(req, res, err) {
+    return("Successful POST request!\\n")
+  }) \%>\%
+  startBeakr()
+
+# In terminal:
+#  curl -X POST http://127.0.0.1:8080/
+# > Successful POST request!
+}
 }

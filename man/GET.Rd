@@ -4,7 +4,7 @@
 \alias{GET}
 \title{GET-binding middleware}
 \usage{
-GET(beakr, path = NULL, ...)
+GET(beakr, path, ...)
 }
 \arguments{
 \item{beakr}{a beakr instance or \code{NULL}.}
@@ -15,6 +15,20 @@ is invoked.}
 \item{...}{additional middleware/functions.}
 }
 \description{
-Routes HTTP GET requests to the specified path with the specified callback
-functions or middleware.
+Routes HTTP GET requests to the specified path with the
+specified callback functions or middleware.
+}
+\examples{
+\dontrun{
+newBeakr() \%>\%
+  GET("/", function(req, res, err) {
+    return("Successful GET request!\\n")
+  }) \%>\%
+  startBeakr()
+
+# In browser:
+#   http://127.0.0.1:8080
+# > Successful GET request!
+}
+
 }

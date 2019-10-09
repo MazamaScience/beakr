@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{startBeakr}
 \alias{startBeakr}
-\title{Listen for connections}
+\title{Start a beakr instance and listen for connections}
 \usage{
 startBeakr(beakr, host, port, daemonized, verbose)
 }
@@ -31,4 +31,14 @@ the specified port and listens for connections on an thread running in the
 background.
 
 See the \code{httpuv} package for more information.
+}
+\examples{
+\dontrun{
+newBeakr() \%>\%
+  GET("/", function(req, res, err) {
+    return("Successful GET request!\\n")
+  }) \%>\%
+  startBeakr()
+}
+
 }

@@ -27,7 +27,8 @@ cors(beakr, path = NULL, with_methods = c("POST", "GET", "PUT",
 \item{expose_headers}{tbd}
 }
 \description{
-Add Cross-Origin Resource Sharing (CORS) middleware to the instance.
+Add Cross-Origin Resource Sharing (CORS) middleware to the
+instance.
 }
 \details{
 CORS is a mechanism that uses additional HTTP headers to tell browsers to

@@ -15,5 +15,5 @@ is invoked.}
 \item{...}{additional middleware/functions.}
 }
 \description{
-Access the instance through websocket. Experimental.
+Access the instance through websocket. \strong{Experimental.}
 }

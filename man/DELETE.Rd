@@ -15,6 +15,6 @@ is invoked.}
 \item{...}{additional middleware/functions.}
 }
 \description{
-Routes HTTP DELETE requests to the specified path with the specified callback
-functions or middleware.
+Routes HTTP DELETE requests to the specified path with the
+specified callback functions or middleware.
 }
