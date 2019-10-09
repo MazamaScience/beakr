@@ -33,6 +33,7 @@ newBeakr <- function() {
 #' @param verbose boolean, debugging.
 #'
 #' @usage startBeakr(beakr, host, port, daemonized, verbose)
+#'
 #' @examples
 #' \dontrun{
 #' newBeakr() %>%
@@ -75,6 +76,8 @@ newError <- function() {
 #'
 #' @param beakr a beakr instance.
 #'
+#' @usage kill(beakr)
+#'
 #' @examples
 #' \donttest{
 #' beakr <- newBeakr()
@@ -93,6 +96,8 @@ kill <- function(beakr) {
 #'
 #' @description Stops all instances that have been activated by
 #' \code{\link{startBeakr}} in the session.
+#'
+#' @usage killAll()
 #'
 #' @seealso \code{\link{kill}} and \code{\link{startBeakr}}
 killAll <- function() {

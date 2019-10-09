@@ -148,7 +148,8 @@ Router <-
 
 # ===== Internal Functions =====================================================
 
-#' Regex path query
+#' @keywords internal
+#' @title Regex path query
 #'
 #' @param pattern the string pattern to parse
 #' @param path the path to match to

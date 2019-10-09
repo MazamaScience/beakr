@@ -189,7 +189,8 @@ TestRequest <-
 
 # ===== Internal Functions =====================================================
 
-#' Parse the parameters passed by the req
+#' @keywords internal
+#' @title Parse the parameters passed by the req
 #'
 #' @param req an HTTP req
 #' @param body a body text string

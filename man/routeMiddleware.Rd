@@ -19,5 +19,6 @@ routeMiddleware(beakr, FUN, path = NULL, method = NULL,
 \item{websocket}{boolean, TRUE if websocket.}
 }
 \description{
-Internal function.
+Internal function to add middleware
 }
+\keyword{internal}

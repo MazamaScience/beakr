@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Listen for connections — listen • beakr</title>
+<title>GET-binding middleware — GET • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Listen for connections — listen" />
-<meta property="og:description" content="Binds and listens for connections on the specified host and port." />
+<meta property="og:title" content="GET-binding middleware — GET" />
+<meta property="og:description" content="Routes HTTP GET requests to the specified path with the
+specified callback functions or middleware." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -108,63 +109,54 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Listen for connections</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>listen.Rd</code></div>
+    <h1>GET-binding middleware</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
+    <div class="hidden name"><code>GET.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Binds and listens for connections on the specified host and port.</p>
+    <p>Routes HTTP GET requests to the specified path with the
+specified callback functions or middleware.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>listen</span>(<span class='no'>beakr</span>, <span class='no'>host</span>, <span class='no'>port</span>, <span class='no'>daemonized</span>, <span class='no'>verbose</span>)</pre>
+    <pre class="usage"><span class='fu'>GET</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>beakr</th>
-      <td><p>a beaker instance.</p></td>
+      <td><p>a beakr instance or <code>NULL</code>.</p></td>
     </tr>
     <tr>
-      <th>host</th>
-      <td><p>a string that is a valid IPv4 or IPv6 address to listen on.</p></td>
+      <th>path</th>
+      <td><p>string representing a relative path for which the middleware
+is invoked.</p></td>
     </tr>
     <tr>
-      <th>port</th>
-      <td><p>a number or integer that indicates the port to listen on.</p></td>
-    </tr>
-    <tr>
-      <th>daemonized</th>
-      <td><p>run the instance in the background.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>boolean, debugging.</p></td>
+      <th>...</th>
+      <td><p>additional middleware/functions.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>listen</code> binds the port and listens for connections on a thread.
-The thread handles the I/O, and when it receives a HTTP request, it
-will schedule a call to the user-defined middleware and handle the
-request.</p>
-<p>If the daemon boolean value is set to <code>TRUE</code>, <code>listen</code> binds the
-specified port and listens for connections on an thread running in the
-background.</p>
-<p>See the <code>httpuv</code> package for more information.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>bk</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>listen</span>(<span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>1234</span>, <span class='kw'>daemonized</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>GET</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful GET request!\n"</span>)
+  }) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='startBeakr.html'>startBeakr</a></span>()
+
+<span class='co'># In browser:</span>
+<span class='co'>#   http://127.0.0.1:8080</span>
+<span class='co'># &gt; Successful GET request!</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

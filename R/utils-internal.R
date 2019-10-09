@@ -11,17 +11,21 @@
 #   return(beakr)
 # }
 
-#' Internal function to add middleware
-#'
-#' Internal function.
+#' @keywords internal
+#' @title Internal function to add middleware
 #'
 #' @param beakr a beakr instance.
 #' @param FUN the function to route middleware
 #' @param path the path to rouet the middleware
 #' @param method the HTTP method to employ
 #' @param websocket boolean, TRUE if websocket.
-routeMiddleware <- function( beakr, FUN, path = NULL,
-                             method = NULL, websocket = FALSE ) {
+routeMiddleware <- function(
+  beakr,
+  FUN,
+  path = NULL,
+  method = NULL,
+  websocket = FALSE
+) {
 
   if ( !is.null(method) ) {
     method <- toupper(method)
@@ -31,8 +35,10 @@ routeMiddleware <- function( beakr, FUN, path = NULL,
 
   # Create new middleware
   mw <- Middleware$new(FUN, path, method, websocket)
+
   # Add the middleware
   beakr$routerObject$addMiddleware(mw)
   return(beakr)
+
 }
 

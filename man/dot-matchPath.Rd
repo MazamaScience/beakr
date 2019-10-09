@@ -16,3 +16,4 @@
 \description{
 Regex path query
 }
+\keyword{internal}
