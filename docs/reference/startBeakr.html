@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Middleware class — Middleware • beakr</title>
+<title>Listen for connections — startBeakr • beakr</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,8 @@
 
 
 
-<meta property="og:title" content="Middleware class — Middleware" />
-<meta property="og:description" content="The Middleware object represents middleware functions that have access
-to the request (req), response (res) and error (err)
-objects in request-response cycle via the Router." />
+<meta property="og:title" content="Listen for connections — startBeakr" />
+<meta property="og:description" content="Binds and listens for connections on the specified host and port." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,49 +108,59 @@ objects in request-response cycle via the Router." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Middleware class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Middleware.R'><code>R/Middleware.R</code></a></small>
-    <div class="hidden name"><code>Middleware.Rd</code></div>
+    <h1>Listen for connections</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>startBeakr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>Middleware</code> object represents middleware functions that have access
-to the request (<code>req</code>), response (<code>res</code>) and error (<code>err</code>)
-objects in request-response cycle via the <code>Router</code>.</p>
+    <p>Binds and listens for connections on the specified host and port.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>startBeakr</span>(<span class='no'>beakr</span>, <span class='no'>host</span>, <span class='no'>port</span>, <span class='no'>daemonized</span>, <span class='no'>verbose</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>beakr</th>
+      <td><p>a beakr instance.</p></td>
+    </tr>
+    <tr>
+      <th>host</th>
+      <td><p>a string that is a valid IPv4 or IPv6 address to listen on.</p></td>
+    </tr>
+    <tr>
+      <th>port</th>
+      <td><p>a number or integer that indicates the port to listen on.</p></td>
+    </tr>
+    <tr>
+      <th>daemonized</th>
+      <td><p>run the instance in the background.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>boolean, debugging.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-
-<dl class='dl-horizontal'>
-  <dt><code>path</code></dt><dd><p>Returns the path for the specified middleware.</p></dd>
-  <dt><code>FUN</code></dt><dd><p>Returns the function response.</p></dd>
-  <dt><code>method</code></dt><dd><p>Returns the HTTP method for the middleware, i.e. "GET", "POST", etc.</p></dd>
-  <dt><code>protocol</code></dt><dd><p>Returns the protocol, "http" or "websocket".</p></dd>
-
-</dl>
-
-
-
-<dl class='dl-horizontal'>
-  <dt><code>initialize(FUN, path, method, websocket)</code></dt><dd><p>Initializes the state of new middleware.</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='Router.html'>Router</a></code> and <code>Middleware</code></p></div>
+    <p><code>startBeakr()</code> binds the port and listens for connections on a thread.
+The thread handles the I/O, and when it receives a HTTP request, it
+will schedule a call to the user-defined middleware and handle the
+request.</p>
+<p>If the daemon boolean value is set to <code>TRUE</code>, <code>startBeakr()</code> binds
+the specified port and listens for connections on an thread running in the
+background.</p>
+<p>See the <code>httpuv</code> package for more information.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

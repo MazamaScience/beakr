@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Middleware class — Middleware • beakr</title>
+<title>Parse the parameters passed by the req — .parseParameters • beakr</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,8 @@
 
 
 
-<meta property="og:title" content="Middleware class — Middleware" />
-<meta property="og:description" content="The Middleware object represents middleware functions that have access
-to the request (req), response (res) and error (err)
-objects in request-response cycle via the Router." />
+<meta property="og:title" content="Parse the parameters passed by the req — .parseParameters" />
+<meta property="og:description" content="Parse the parameters passed by the req" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,49 +108,45 @@ objects in request-response cycle via the Router." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Middleware class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Middleware.R'><code>R/Middleware.R</code></a></small>
-    <div class="hidden name"><code>Middleware.Rd</code></div>
+    <h1>Parse the parameters passed by the req</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Request.R'><code>R/Request.R</code></a></small>
+    <div class="hidden name"><code>dot-parseParameters.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>Middleware</code> object represents middleware functions that have access
-to the request (<code>req</code>), response (<code>res</code>) and error (<code>err</code>)
-objects in request-response cycle via the <code>Router</code>.</p>
+    <p>Parse the parameters passed by the req</p>
     </div>
 
+    <pre class="usage"><span class='fu'>.parseParameters</span>(<span class='no'>req</span>, <span class='no'>body</span>, <span class='no'>query</span>, <span class='no'>type</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>req</th>
+      <td><p>an HTTP req</p></td>
+    </tr>
+    <tr>
+      <th>body</th>
+      <td><p>a body text string</p></td>
+    </tr>
+    <tr>
+      <th>query</th>
+      <td><p>a url-encoded query string</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>a media mime type (a.k.a. Multipurpose Internet Mail Extensions
+or MIME type).</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-
-
-<dl class='dl-horizontal'>
-  <dt><code>path</code></dt><dd><p>Returns the path for the specified middleware.</p></dd>
-  <dt><code>FUN</code></dt><dd><p>Returns the function response.</p></dd>
-  <dt><code>method</code></dt><dd><p>Returns the HTTP method for the middleware, i.e. "GET", "POST", etc.</p></dd>
-  <dt><code>protocol</code></dt><dd><p>Returns the protocol, "http" or "websocket".</p></dd>
-
-</dl>
-
-
-
-<dl class='dl-horizontal'>
-  <dt><code>initialize(FUN, path, method, websocket)</code></dt><dd><p>Initializes the state of new middleware.</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='Router.html'>Router</a></code> and <code>Middleware</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

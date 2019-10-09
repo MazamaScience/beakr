@@ -7,7 +7,7 @@ newBeakr() %>%
   get("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) %>%
-  listen()
+  startBeakr()
 
 # In browser:
 #   http://127.0.0.1:8080
@@ -21,7 +21,7 @@ newBeakr() %>%
   post("/", function(req, res, err) {
     return("Successful POST request!\n")
   }) %>%
-  listen()
+  startBeakr()
 
 # In terminal:
 #  curl -X POST http://127.0.0.1:8080/
@@ -35,7 +35,7 @@ newBeakr() %>%
   put("/", function(req, res, err) {
     return("Successful PUT request!\n")
   }) %>%
-  listen()
+  startBeakr()
 
 # In terminal:
 #  curl -X PUT http://127.0.0.1:8080/

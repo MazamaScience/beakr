@@ -7,7 +7,7 @@
 # #' @param event the event to listen for, such as "start" or "finish".
 # addListener <- function(beakr, FUN, event) {
 #   mw <- Listener$new(FUN, event)
-#   beakr$route$addListener(mw)
+#   beakr$routerObject$addListener(mw)
 #   return(beakr)
 # }
 
@@ -32,7 +32,7 @@ routeMiddleware <- function( beakr, FUN, path = NULL,
   # Create new middleware
   mw <- Middleware$new(FUN, path, method, websocket)
   # Add the middleware
-  beakr$route$addMiddleware(mw)
+  beakr$routerObject$addMiddleware(mw)
   return(beakr)
 }
 

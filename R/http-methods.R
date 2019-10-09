@@ -9,32 +9,6 @@
 #' @param ... additional middleware/functions.
 #'
 #' @export
-#' @examples
-#' \dontrun{
-#' # Create a beakr instance
-#' server <- newBeakr() %>%
-#'   get(path = "/", function(req, res, err) { "Hello, world!" })
-#' # Listen for HTTP/WebSocket requests
-#' listen(server)
-#' # In terminal:
-#' #  curl http://127.0.0.1:8080/
-#' # > Hello, world!
-#' }
-# TODO:  Some cleanup needed here.
-# The methods below are used to determine what "get" to use.
-# get <- function(beakr, path, ...) {
-#   if ( is.null(beakr) ) {
-#     return(get.Beakr(beakr, path, ...))
-#   } else {
-#     return(UseMethod("get"))
-#   }
-# }
-# @export
-# get.default <- function(beakr, ...) {
-#   return(base::get(beakr, ...))
-# }
-# @describeIn get Beakr middleware function.
-# @export
 get <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
@@ -66,17 +40,6 @@ get <- function(beakr, path = NULL, ...) {
 #'
 #' @usage post(beakr, path, ...)
 #' @export
-#' @examples
-#' \dontrun{
-#' # Create a beakr instance
-#' server <- newBeakr() %>%
-#'   post("/", function(req, res, err) { "Successful POST request!" })
-#' # Listen for HTTP/WebSocket requests
-#' listen(server)
-#' # In terminal:
-#' #  curl -X POST http://127.0.0.1:8080/
-#' # > Successful POST request!
-#' }
 post <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -107,17 +70,6 @@ post <- function(beakr, path = NULL, ...) {
 #' @usage put(beakr, path, ...)
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' # Create a beakr instance
-#' server <- newBeakr() %>%
-#'   put("/", function(req, res, err) { "Successful PUT request!" })
-#' # Listen for HTTP/WebSocket requests
-#' listen(server)
-#' # In terminal:
-#' #  curl -X PUT http://127.0.0.1:8080/
-#' # > Successful PUT request!
-#' }
 put <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())

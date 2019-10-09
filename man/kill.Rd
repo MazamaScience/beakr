@@ -13,8 +13,3 @@ kill(beakr)
 Stops an active instance when given a beakr object. This closes all open
 connections for the instance and unbinds the port.
 }
-\examples{
-bk <- newBeakr()
-listen(bk, daemonized = TRUE)
-kill(bk)
-}

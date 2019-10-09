@@ -1,5 +1,6 @@
 # beakr 0.1.3
 
+* Renamed `listen()` to `startBeakr()`.
 * Internal refactoring and cleanup.
 
 # beakr 0.1.2

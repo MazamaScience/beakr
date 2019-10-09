@@ -14,32 +14,33 @@ newBeakr <- function() {
 #' Binds and listens for connections on the specified host and port.
 #'
 #' @details
-#' \code{listen} binds the port and listens for connections on a thread.
+#' \code{startBeakr()} binds the port and listens for connections on a thread.
 #' The thread handles the I/O, and when it receives a HTTP request, it
 #' will schedule a call to the user-defined middleware and handle the
 #' request.
 #'
-#' If the daemon boolean value is set to \code{TRUE}, \code{listen} binds the
-#' specified port and listens for connections on an thread running in the
+#' If the daemon boolean value is set to \code{TRUE}, \code{startBeakr()} binds
+#' the specified port and listens for connections on an thread running in the
 #' background.
 #'
 #' See the \code{httpuv} package for more information.
 #'
-#' @param beakr a beaker instance.
+#' @param beakr a beakr instance.
 #' @param host a string that is a valid IPv4 or IPv6 address to listen on.
 #' @param port a number or integer that indicates the port to listen on.
 #' @param daemonized run the instance in the background.
 #' @param verbose boolean, debugging.
 #'
-#' @usage listen(beakr, host, port, daemonized, verbose)
+#' @usage startBeakr(beakr, host, port, daemonized, verbose)
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' bk <- newBeakr() %>% listen(port = 1234, daemonized = TRUE)
-#' }
-listen <-function( beakr, host = "127.0.0.1", port = 8080,
-                   daemonized = FALSE, verbose = FALSE ) {
+startBeakr <-function(
+  beakr,
+  host = "127.0.0.1",
+  port = 8080,
+  daemonized = FALSE,
+  verbose = FALSE
+) {
   options("beakr.verbose" = verbose)
   message(paste0("Serving beakr instance at http://", host, ":", port))
   beakr$start(host, port, daemonized)
@@ -53,7 +54,7 @@ listen <-function( beakr, host = "127.0.0.1", port = 8080,
 #' @export
 #' @usage newError()
 #'
-# Necessary?
+# TODO:  Is NewError() necessary?
 newError <- function() {
   Error$new()
 }
@@ -66,10 +67,6 @@ newError <- function() {
 #' @param beakr a beakr instance.
 #'
 #' @export
-#' @examples
-#' bk <- newBeakr()
-#' listen(bk, daemonized = TRUE)
-#' kill(bk)
 kill <- function(beakr) {
   httpuv::stopServer(beakr$serverObject)
   cat("Stopped ")
@@ -78,12 +75,12 @@ kill <- function(beakr) {
 
 #' Stop all instances
 #'
-#' Stops all instances that have been activated by \code{\link{listen}} in the
-#' session.
+#' Stops all instances that have been activated by \code{\link{startBeakr}} in
+#' the session.
 #'
 #' @export
 #' @usage killall()
-#' @seealso \code{\link{kill}} and \code{\link{listen}}
+#' @seealso \code{\link{kill}} and \code{\link{startBeakr}}
 killall <- function() {
   httpuv::stopAllServers()
   cat("Stopped All Instances\n")
@@ -126,20 +123,6 @@ active <- function() {
 #' @usage errorHandler(beakr, path)
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' # Create an instance and add the error handler last.
-#' newBeakr() %>%
-#'   use(path = "/", decorate(function(n) { paste("Hi, ", n) })) %>%
-#'   errorHandler() %>%
-#'   listen()
-#' # In shell
-#' #  curl http://127.0.0.1:8080/
-#' # > "status":"Page not found.","status_code":404
-#' # An error was thrown because the parameter "n" is not provided and
-#' # required by the middleware.
-#' killall()
-#' }
 errorHandler <- function(beakr, path = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -174,7 +157,7 @@ errorHandler <- function(beakr, path = NULL) {
 #'
 #' @export
 processTestRequest <- function(beakr, test_request) {
-  beakr$route$invoke(test_request)
+  beakr$routerObject$invoke(test_request)
 }
 
 #' Websocket Access
@@ -386,21 +369,6 @@ cors <-
 #' @usage include(beakr, include, file = NULL)
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' # Construct primary instance
-#' primary <- newBeakr() %>%
-#'   get("/primary-app",
-#'       function(req, res, err) { "Primary Application!" })
-#'
-#' # Construct middleware
-#' ext <- use(beakr = NULL, "/",
-#'            decorate(function(name) { paste("Hi ", name, "!\n") })) %>%
-#'   errorHandler()
-#'
-#' # Include the external middleware in the primary instance
-#' primary %>% include(ext)
-#' }
 include <- function(beakr, include, file = NULL) {
   if ( is.null(file) ) {
     bundle <- eval(quote(include))

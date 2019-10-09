@@ -71,7 +71,7 @@ beakr package and is therefore meant to be instantiated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -129,13 +129,12 @@ beakr package and is therefore meant to be instantiated." />
 
 
 <dl class='dl-horizontal'>
-  <dt><code>route()</code></dt><dd><p>An instantiated <code>Router</code> object.</p></dd>
+  <dt><code>routerObject()</code></dt><dd><p>An instantiated <code>Router</code> object.</p></dd>
   <dt><code>serverObject()</code></dt><dd><p>The instantiated <code>Server</code> object.</p></dd>
   <dt><code>appDefinition()</code></dt><dd><p>A method to define the functions or middleware of users application.</p></dd>
   <dt><code>addCollectedMiddleware(collector)</code></dt><dd><p>Adds the users "collected" middleware to the <code>Beakr</code> defined
   middleware.</p></dd>
-  <dt><code>initialize()</code></dt><dd><p>Creates a new <code>Router</code> object for the <code>route</code>
-  method.</p></dd>
+  <dt><code>initialize()</code></dt><dd><p>Creates a new <code>Router</code> object.</p></dd>
   <dt><code><a href='https://rdrr.io/r/stats/start.html'>start(host, port, daemonized)</a></code></dt><dd><p>Returns a running server. If <code>daemonized = TRUE</code>, the server will run
   in the background.</p></dd>
   <dt><code><a href='https://rdrr.io/r/base/print.html'>print(...)</a></code></dt><dd><p>Returns a console output of the instance and its number of middleware
