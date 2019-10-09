@@ -38,7 +38,7 @@ GET <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage post(beakr, path, ...)
+#' @usage POST(beakr, path, ...)
 #' @export
 POST <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
@@ -67,7 +67,7 @@ POST <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage put(beakr, path, ...)
+#' @usage PUT(beakr, path, ...)
 #' @export
 #'
 PUT <- function(beakr, path = NULL, ...) {
@@ -96,7 +96,7 @@ PUT <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage delete(beakr, path, ...)
+#' @usage DELETE(beakr, path, ...)
 #' @export
 DELETE <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {

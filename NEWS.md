@@ -1,7 +1,7 @@
 # beakr 0.1.4
 
-* Convert http methods to upper case: `get()` ==> `GET()`, _etc._.
-* Internal refactoring and cleanup.
+* Renamed http methods to upper case: `get()` ==> `GET()`, _etc._.
+* Renamed `killall()` to `killAll()`.
 
 # beakr 0.1.3
 

@@ -79,9 +79,9 @@ kill <- function(beakr) {
 #' the session.
 #'
 #' @export
-#' @usage killall()
+#' @usage killAll()
 #' @seealso \code{\link{kill}} and \code{\link{startBeakr}}
-killall <- function() {
+killAll <- function() {
   httpuv::stopAllServers()
   cat("Stopped All Instances\n")
 }
@@ -147,7 +147,6 @@ errorHandler <- function(beakr, path = NULL) {
   }
 
   return(use(beakr = beakr, path = path, method = NULL, jsoner))
-
 }
 
 #' Test request
@@ -204,8 +203,8 @@ static <- function(beakr, path = NULL, dir = NULL) {
     beakr <- invisible(Beakr$new())
   }
   dir <- ifelse( test = is.null(dir),
-                  yes  = getwd(),
-                  no   = dir )
+                 yes  = getwd(),
+                 no   = dir )
   filer <- function(req, res, err) {
     if ( substring(text = req$path, first = nchar(req$path)) == "/" ) {
       req$path <- paste0(req$path, "index.html")
@@ -238,7 +237,7 @@ static <- function(beakr, path = NULL, dir = NULL) {
       return(NULL)
     }
   }
-  beakr::GET(beakr = beakr, path = NULL, filer)
+  GET(beakr = beakr, path = NULL, filer)
   return(beakr)
 }
 
@@ -298,62 +297,61 @@ use <- function(beakr, path, ..., method = NULL) {
 #' @param expose_headers tbd
 #'
 #' @export
-cors <-
-  function(
-    beakr,
-    path = NULL,
-    with_methods = c("POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH"),
-    with_origin = "*",
-    with_headers = NULL,
-    with_credentials = NULL,
-    max_age = NULL,
-    expose_headers = NULL
-  ) {
+cors <- function(
+  beakr,
+  path = NULL,
+  with_methods = c("POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH"),
+  with_origin = "*",
+  with_headers = NULL,
+  with_credentials = NULL,
+  max_age = NULL,
+  expose_headers = NULL
+) {
 
-    if ( !is.null(with_headers) ) {
-      with_headers <- paste0(with_headers, collapse = ",")
-    }
-    if ( !is.null(with_methods) ) {
-      with_methods <- paste0(with_methods, collapse = ",")
-    }
-
-    if ( is.null(beakr) ) {
-      beakr <- invisible(Beakr$new())
-    }
-
-    headers <- list( `Access-Control-Allow-Origin`      = with_origin,
-                     `Access-Control-Expose-Headers`    = expose_headers,
-                     `Access-Control-Max-Age`           = max_age,
-                     `Access-Control-Allow-Credentials` = with_credentials,
-                     `Access-Control-Allow-Methods`     = with_methods,
-                     `Access-Control-Allow-Headers`     = with_headers )
-
-    headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
-
-    FUN <- function(req, res, err) {
-
-      if ( req$method == "OPTIONS" ) {
-        res$setHeader("Access-Control-Allow-Methods", with_methods)
-        res$setHeader("Access-Control-Allow-Origin", with_origin)
-        res$setHeader("Access-Control-Allow-Headers", with_headers)
-        # Return empty string stops process
-        return("")
-      }
-
-      lapply(
-        X = names(headers),
-        FUN = function(header_name) {
-          res$setHeader(header_name, headers[[header_name]])
-        }
-      )
-
-      return(NULL)
-    }
-
-    routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
-
-    return(beakr)
+  if ( !is.null(with_headers) ) {
+    with_headers <- paste0(with_headers, collapse = ",")
   }
+  if ( !is.null(with_methods) ) {
+    with_methods <- paste0(with_methods, collapse = ",")
+  }
+
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
+
+  headers <- list( `Access-Control-Allow-Origin`      = with_origin,
+                   `Access-Control-Expose-Headers`    = expose_headers,
+                   `Access-Control-Max-Age`           = max_age,
+                   `Access-Control-Allow-Credentials` = with_credentials,
+                   `Access-Control-Allow-Methods`     = with_methods,
+                   `Access-Control-Allow-Headers`     = with_headers )
+
+  headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
+
+  FUN <- function(req, res, err) {
+
+    if ( req$method == "OPTIONS" ) {
+      res$setHeader("Access-Control-Allow-Methods", with_methods)
+      res$setHeader("Access-Control-Allow-Origin", with_origin)
+      res$setHeader("Access-Control-Allow-Headers", with_headers)
+      # Return empty string stops process
+      return("")
+    }
+
+    lapply(
+      X = names(headers),
+      FUN = function(header_name) {
+        res$setHeader(header_name, headers[[header_name]])
+      }
+    )
+
+    return(NULL)
+  }
+
+  routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
+
+  return(beakr)
+}
 
 #' Construct an instance
 #'
@@ -381,5 +379,4 @@ include <- function(beakr, include, file = NULL) {
   beakr$include(bundle)
 
   return(beakr)
-
 }
