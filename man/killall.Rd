@@ -7,9 +7,9 @@
 killall()
 }
 \description{
-Stops all instances that have been activated by \code{\link{listen}} in the
-session.
+Stops all instances that have been activated by \code{\link{startBeakr}} in
+the session.
 }
 \seealso{
-\code{\link{kill}} and \code{\link{listen}}
+\code{\link{kill}} and \code{\link{startBeakr}}
 }

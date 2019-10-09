@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Middleware class — Middleware • beakr</title>
+<title>Regex path query — .matchPath • beakr</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,8 @@
 
 
 
-<meta property="og:title" content="Middleware class — Middleware" />
-<meta property="og:description" content="The Middleware object represents middleware functions that have access
-to the request (req), response (res) and error (err)
-objects in request-response cycle via the Router." />
+<meta property="og:title" content="Regex path query — .matchPath" />
+<meta property="og:description" content="Regex path query" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,49 +108,40 @@ objects in request-response cycle via the Router." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Middleware class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Middleware.R'><code>R/Middleware.R</code></a></small>
-    <div class="hidden name"><code>Middleware.Rd</code></div>
+    <h1>Regex path query</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Router.R'><code>R/Router.R</code></a></small>
+    <div class="hidden name"><code>dot-matchPath.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>Middleware</code> object represents middleware functions that have access
-to the request (<code>req</code>), response (<code>res</code>) and error (<code>err</code>)
-objects in request-response cycle via the <code>Router</code>.</p>
+    <p>Regex path query</p>
     </div>
 
+    <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pattern</th>
+      <td><p>the string pattern to parse</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>the path to match to</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional parameters</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-
-
-<dl class='dl-horizontal'>
-  <dt><code>path</code></dt><dd><p>Returns the path for the specified middleware.</p></dd>
-  <dt><code>FUN</code></dt><dd><p>Returns the function response.</p></dd>
-  <dt><code>method</code></dt><dd><p>Returns the HTTP method for the middleware, i.e. "GET", "POST", etc.</p></dd>
-  <dt><code>protocol</code></dt><dd><p>Returns the protocol, "http" or "websocket".</p></dd>
-
-</dl>
-
-
-
-<dl class='dl-horizontal'>
-  <dt><code>initialize(FUN, path, method, websocket)</code></dt><dd><p>Initializes the state of new middleware.</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='Router.html'>Router</a></code> and <code>Middleware</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#methods">Methods</a></li>
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

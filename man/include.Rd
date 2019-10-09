@@ -20,19 +20,3 @@ constructed elsewhere.
 \details{
 Hierarchy
 }
-\examples{
-\dontrun{
-# Construct primary instance
-primary <- newBeakr() \%>\%
-  get("/primary-app",
-      function(req, res, err) { "Primary Application!" })
-
-# Construct middleware
-ext <- use(beakr = NULL, "/",
-           decorate(function(name) { paste("Hi ", name, "!\\n") })) \%>\%
-  errorHandler()
-
-# Include the external middleware in the primary instance
-primary \%>\% include(ext)
-}
-}

@@ -100,10 +100,10 @@ Request <-
         self$body <- paste0(req$rook.input$read_lines(), collapse = "")
 
         # Parse the parameters passed, helper func in 'utils.R'
-        self$parameters <- parseParameters( req     = req,
-                                            body    = self$body,
-                                            query   = req$QUERY_STRING,
-                                            type    = self$type )
+        self$parameters <- .parseParameters( req     = req,
+                                             body    = self$body,
+                                             query   = req$QUERY_STRING,
+                                             type    = self$type )
 
         header_keys <- Filter(
           f = function(x) { grepl("^HTTP", x) },
@@ -186,3 +186,37 @@ TestRequest <-
       }
     )
   )
+
+# ===== Internal Functions =====================================================
+
+#' Parse the parameters passed by the req
+#'
+#' @param req an HTTP req
+#' @param body a body text string
+#' @param query a url-encoded query string
+#' @param type a media mime type (a.k.a. Multipurpose Internet Mail Extensions
+#' or MIME type).
+.parseParameters <- function(req, body, query, type) {
+  parameters <- list()
+  parameters <- c(parameters, webutils::parse_query(query))
+
+  if ( is.null(type) ) {
+    return(parameters)
+  }
+
+  if ( grepl("json", type) && nchar(body) > 0 ) {
+    parameters <- c( parameters,
+                     jsonlite::fromJSON(body, simplifyDataFrame = FALSE) )
+  }
+
+  if ( grepl("multipart", type) ) {
+    parameters <- c( parameters,
+                     mime::parse_multipart(req) )
+  }
+
+  if ( grepl("form-urlencoded", type) ) {
+    parameters <- c( parameters,
+                     webutils::parse_query(body) )
+  }
+  return(parameters)
+}

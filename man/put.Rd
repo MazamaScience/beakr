@@ -18,15 +18,3 @@ is invoked.}
 Routes HTTP PUT requests to the specified path with the specified callback
 functions or middleware.
 }
-\examples{
-\dontrun{
-# Create a beakr instance
-server <- newBeakr() \%>\%
-  put("/", function(req, res, err) { "Successful PUT request!" })
-# Listen for HTTP/WebSocket requests
-listen(server)
-# In terminal:
-#  curl -X PUT http://127.0.0.1:8080/
-# > Successful PUT request!
-}
-}

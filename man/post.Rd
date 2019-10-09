@@ -18,15 +18,3 @@ is invoked.}
 Routes HTTP POST requests to the specified path with the specified callback
 functions or middleware.
 }
-\examples{
-\dontrun{
-# Create a beakr instance
-server <- newBeakr() \%>\%
-  post("/", function(req, res, err) { "Successful POST request!" })
-# Listen for HTTP/WebSocket requests
-listen(server)
-# In terminal:
-#  curl -X POST http://127.0.0.1:8080/
-# > Successful POST request!
-}
-}
