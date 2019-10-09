@@ -1,11 +1,11 @@
 #
-# ----- http-methods.R get() ---------------------------------------------------
+# ----- http-methods.R GET() ---------------------------------------------------
 
 #' @examples
 #' \dontrun{
 #' # Create a beakr instance
 #' server <- newBeakr() %>%
-#'   get(path = "/", function(req, res, err) { "Hello, world!" })
+#'   GET(path = "/", function(req, res, err) { "Hello, world!" })
 #' # Listen for HTTP/WebSocket requests
 #' starBeakr(server)
 #' # In terminal:
@@ -25,17 +25,17 @@
 # get.default <- function(beakr, ...) {
 #   return(base::get(beakr, ...))
 # }
-# @describeIn get Beakr middleware function.
+# @describeIn GET Beakr middleware function.
 # @export
 
 
-# ----- http-methods.R post() --------------------------------------------------
+# ----- http-methods.R POST() --------------------------------------------------
 
 #' @examples
 #' \dontrun{
 #' # Create a beakr instance
 #' server <- newBeakr() %>%
-#'   post("/", function(req, res, err) { "Successful POST request!" })
+#'   POST("/", function(req, res, err) { "Successful POST request!" })
 #' # Listen for HTTP/WebSocket requests
 #' starBeakr(server)
 #' # In terminal:
@@ -43,13 +43,13 @@
 #' # > Successful POST request!
 #' }
 
-# ----- http-methods.R put() ---------------------------------------------------
+# ----- http-methods.R PUT() ---------------------------------------------------
 
 #' @examples
 #' \dontrun{
 #' # Create a beakr instance
 #' server <- newBeakr() %>%
-#'   put("/", function(req, res, err) { "Successful PUT request!" })
+#'   PUT("/", function(req, res, err) { "Successful PUT request!" })
 #' # Listen for HTTP/WebSocket requests
 #' starBeakr(server)
 #' # In terminal:
@@ -95,7 +95,7 @@
 #' \dontrun{
 #' # Construct primary instance
 #' primary <- newBeakr() %>%
-#'   get("/primary-app",
+#'   GET("/primary-app",
 #'       function(req, res, err) { "Primary Application!" })
 #'
 #' # Construct middleware

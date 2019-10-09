@@ -4,7 +4,7 @@
 library(beakr)
 
 newBeakr() %>%
-  get("/", function(req, res, err) {
+  GET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) %>%
   startBeakr()
@@ -18,7 +18,7 @@ newBeakr() %>%
 library(beakr)
 
 newBeakr() %>%
-  post("/", function(req, res, err) {
+  POST("/", function(req, res, err) {
     return("Successful POST request!\n")
   }) %>%
   startBeakr()
@@ -32,7 +32,7 @@ newBeakr() %>%
 library(beakr)
 
 newBeakr() %>%
-  put("/", function(req, res, err) {
+  PUT("/", function(req, res, err) {
     return("Successful PUT request!\n")
   }) %>%
   startBeakr()

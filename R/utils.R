@@ -238,7 +238,7 @@ static <- function(beakr, path = NULL, dir = NULL) {
       return(NULL)
     }
   }
-  beakr::get(beakr = beakr, path = NULL, filer)
+  beakr::GET(beakr = beakr, path = NULL, filer)
   return(beakr)
 }
 

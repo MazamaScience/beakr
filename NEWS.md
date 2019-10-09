@@ -1,3 +1,8 @@
+# beakr 0.1.4
+
+* Convert http methods to upper case: `get()` ==> `GET()`, _etc._.
+* Internal refactoring and cleanup.
+
 # beakr 0.1.3
 
 * Renamed `listen()` to `startBeakr()`.

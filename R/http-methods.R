@@ -9,7 +9,7 @@
 #' @param ... additional middleware/functions.
 #'
 #' @export
-get <- function(beakr, path = NULL, ...) {
+GET <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
   if ( is.null(beakr) ) {
@@ -40,7 +40,7 @@ get <- function(beakr, path = NULL, ...) {
 #'
 #' @usage post(beakr, path, ...)
 #' @export
-post <- function(beakr, path = NULL, ...) {
+POST <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
@@ -70,7 +70,7 @@ post <- function(beakr, path = NULL, ...) {
 #' @usage put(beakr, path, ...)
 #' @export
 #'
-put <- function(beakr, path = NULL, ...) {
+PUT <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
@@ -98,7 +98,7 @@ put <- function(beakr, path = NULL, ...) {
 #'
 #' @usage delete(beakr, path, ...)
 #' @export
-delete <- function(beakr, path = NULL, ...) {
+DELETE <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
