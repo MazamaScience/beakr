@@ -1,12 +1,19 @@
 #' @export
 #' @title Start a new Beakr instance
 #'
+#' @param name an optional name assigned to the \emph{Beakr} object.
+#'
 #' @description Create a \code{Beakr} instance object by calling the top-level
-#' \code{newBeakr()} function.
+#' \code{newBeakr()} function. If \code{name} is not supplied, a random name
+#' will be assigned.
 #'
 #' @usage newBeakr()
-newBeakr <- function() {
-  Beakr$new()
+newBeakr <- function(name = NULL) {
+  beakr <- Beakr$new()
+  if ( !is.null(name) ) {
+    beakr$name <- name
+  }
+  return(beakr)
 }
 
 #' @export

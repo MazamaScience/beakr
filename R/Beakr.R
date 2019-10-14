@@ -53,6 +53,7 @@ Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(
+      name = NULL,
       router = NULL,
       server = NULL,
       appDefinition = function() {
@@ -81,6 +82,9 @@ Beakr <-
         self$router <- Router$new()
         # Set Early for testing purposes when serve_it isn't called - Optional?
         options("beakr.verbose" = TRUE)
+        if ( is.null(self$name) ) {
+          self$name <- randomName()
+        }
       },
       start = function(host, port, daemon) {
         # Run in background
@@ -98,20 +102,21 @@ Beakr <-
         }
       },
       print = function() {
-
         if ( !is.null(self$server) ) {
+          name <- self$name
           st <- ifelse(self$server$isRunning(), "Active", "Inactive")
           hst <- self$server$getHost()
           prt <- self$server$getPort()
           mws <- length(self$router$middleware)
         } else {
+          name <- self$name
           st <- "Inactive"
           hst <- "..."
           prt <- "..."
           mws <- length(self$router$middleware)
         }
 
-        cat( "Beakr Instance\n",
+        cat( "Beakr Instance: ",self$name, "\n",
              "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,
              "\n",
              sep = " " )
