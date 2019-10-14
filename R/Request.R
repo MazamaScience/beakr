@@ -13,7 +13,7 @@
 #'
 #' \describe{
 #'   \item{\code{parameters}}{
-#'   A list containing properties mapped to the named route parameters.
+#'   A list containing properties mapped to the named router parameters.
 #'   }
 #'   \item{\code{headers}}{
 #'   A list of response headers.

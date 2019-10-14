@@ -13,10 +13,10 @@ The \code{Beakr} class defines the server instance utilizing the
 
 
 \describe{
-  \item{\code{routerObject()}}{
+  \item{\code{router()}}{
   An instantiated \code{Router} object.
   }
-  \item{\code{serverObject()}}{
+  \item{\code{server()}}{
   The instantiated \code{Server} object.
   }
   \item{\code{appDefinition()}}{
@@ -27,10 +27,11 @@ The \code{Beakr} class defines the server instance utilizing the
   middleware.
   }
   \item{\code{initialize()}}{
-  Creates a new \code{Router} object.
+  Creates a new \code{Router} object for the \code{router}
+  method.
   }
-  \item{\code{start(host, port, daemonized)}}{
-  Returns a running server. If \code{daemonized = TRUE}, the server will run
+  \item{\code{start(host, port, daemon)}}{
+  Returns a running server. If \code{daemon = TRUE}, the server will run
   in the background.
   }
   \item{\code{print(...)}}{

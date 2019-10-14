@@ -29,10 +29,10 @@ newBeakr <- function() {
 #' @param beakr a beakr instance.
 #' @param host a string that is a valid IPv4 or IPv6 address to listen on.
 #' @param port a number or integer that indicates the port to listen on.
-#' @param daemonized run the instance in the background.
+#' @param daemon run the instance in the background.
 #' @param verbose boolean, debugging.
 #'
-#' @usage startBeakr(beakr, host, port, daemonized, verbose)
+#' @usage startBeakr(beakr, host, port, daemon, verbose)
 #'
 #' @examples
 #' \dontrun{
@@ -47,12 +47,12 @@ startBeakr <-function(
   beakr,
   host = "127.0.0.1",
   port = 8080,
-  daemonized = FALSE,
+  daemon = FALSE,
   verbose = FALSE
 ) {
   options("beakr.verbose" = verbose)
   message(paste0("Serving beakr instance at http://", host, ":", port))
-  beakr$start(host, port, daemonized)
+  beakr$start(host, port, daemon)
   return(beakr)
 }
 
@@ -81,12 +81,12 @@ newError <- function() {
 #' @examples
 #' \donttest{
 #' beakr <- newBeakr()
-#' startBeakr(beakr, daemonized = TRUE)
+#' startBeakr(beakr, daemon = TRUE)
 #' kill(beakr)
 #' }
 #'
 kill <- function(beakr) {
-  httpuv::stopServer(beakr$serverObject)
+  httpuv::stopServer(beakr$server)
   cat("Stopped ")
   beakr$print()
 }
@@ -113,7 +113,7 @@ killAll <- function() {
 #' @return a list of active instances
 #'
 #' @usage active()
-active <- function() {
+listActive <- function() {
   active <- lapply(
     X = httpuv::listServers() ,
     FUN = function(s) {
@@ -175,7 +175,7 @@ errorHandler <- function(beakr, path = NULL) {
 #' @param test_request the TestRequest instance
 #'
 processTestRequest <- function(beakr, test_request) {
-  beakr$routerObject$invoke(test_request)
+  beakr$router$invoke(test_request)
 }
 
 #' @export
@@ -400,4 +400,20 @@ include <- function(beakr, include, file = NULL) {
   beakr$include(bundle)
 
   return(beakr)
+}
+
+#' @title Beakr Event Listener
+#'
+#' @description Add an event listener to a \emph{beakr} instance. Currently
+#' supported events are \code{"start", "finish", "error"}. The events \code{"start"} and
+#' \code{"finish"} will pass the current state of the \code{req}, \code{res} and \code{err}
+#' objects to the Listener. The \code{"error"} event will pass string error message.
+#'
+#' @param beakr a beakr instance.
+#' @param event the event to listen for, (\emph{"start", "finish", "end"}).
+#' @param FUN the response middleware function.
+#'
+#' @export
+onEvent <- function(beakr, event, FUN) {
+  return(addListener(beakr = beakr, event = event, FUN = FUN))
 }

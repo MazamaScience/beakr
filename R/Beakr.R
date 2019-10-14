@@ -11,10 +11,10 @@
 #' @section Methods:
 #'
 #' \describe{
-#'   \item{\code{routerObject()}}{
+#'   \item{\code{router()}}{
 #'   An instantiated \code{Router} object.
 #'   }
-#'   \item{\code{serverObject()}}{
+#'   \item{\code{server()}}{
 #'   The instantiated \code{Server} object.
 #'   }
 #'   \item{\code{appDefinition()}}{
@@ -25,10 +25,11 @@
 #'   middleware.
 #'   }
 #'   \item{\code{initialize()}}{
-#'   Creates a new \code{Router} object.
+#'   Creates a new \code{Router} object for the \code{router}
+#'   method.
 #'   }
-#'   \item{\code{start(host, port, daemonized)}}{
-#'   Returns a running server. If \code{daemonized = TRUE}, the server will run
+#'   \item{\code{start(host, port, daemon)}}{
+#'   Returns a running server. If \code{daemon = TRUE}, the server will run
 #'   in the background.
 #'   }
 #'   \item{\code{print(...)}}{
@@ -52,17 +53,17 @@ Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(
-      routerObject = NULL,
-      serverObject = NULL,
+      router = NULL,
+      server = NULL,
       appDefinition = function() {
         list(
           # Call a req invoke
           call = function(req) {
-            self$routerObject$invoke(req)
+            self$router$invoke(req)
           },
           onWSOpen = function(websocket) {
             websocket$onMessage(function(binary, message) {
-              websocket$send(self$routerObject$invoke(
+              websocket$send(self$router$invoke(
                 req              = websocket$req,
                 websocket_msg    = message,
                 websocket_binary = binary
@@ -72,43 +73,44 @@ Beakr <-
         )
       },
       include = function(bundle) {
-        self$routerObject$addMiddleware(
-          bundle$routerObject$middleware
+        self$router$addMiddleware(
+          bundle$router$middleware
         )
       },
       initialize = function() {
-        self$routerObject <- Router$new()
+        self$router <- Router$new()
         # Set Early for testing purposes when serve_it isn't called - Optional?
-        options("beakr.verbose" = FALSE)
+        options("beakr.verbose" = TRUE)
       },
-      start = function(host, port, daemonized) {
+      start = function(host, port, daemon) {
         # Run in background
-        if ( daemonized ) {
-        self$serverObject <-
-          httpuv::startServer( host = host,
-                               port = port,
-                               app  = self$appDefinition() )
+        if ( daemon ) {
+          self$server <-
+            httpuv::startServer( host = host,
+                                 port = port,
+                                 app  = self$appDefinition() )
         # Run in foreground
         } else {
-          self$serverObject <-
+          self$server <-
             httpuv::runServer( host = host,
                                port = port,
                                app  = self$appDefinition() )
         }
-
       },
-      print = function(...) {
-        if ( !is.null(self$serverObject) ) {
-          st <- ifelse(self$serverObject$isRunning(), "Active", "Inactive")
-          hst <- self$serverObject$getHost()
-          prt <- self$serverObject$getPort()
-          mws <- length(self$routerObject$middleware)
+      print = function() {
+
+        if ( !is.null(self$server) ) {
+          st <- ifelse(self$server$isRunning(), "Active", "Inactive")
+          hst <- self$server$getHost()
+          prt <- self$server$getPort()
+          mws <- length(self$router$middleware)
         } else {
           st <- "Inactive"
           hst <- "..."
           prt <- "..."
-          mws <- length(self$routerObject$middleware)
+          mws <- length(self$router$middleware)
         }
+
         cat( "Beakr Instance\n",
              "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,
              "\n",

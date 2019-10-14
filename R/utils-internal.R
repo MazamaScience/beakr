@@ -7,7 +7,7 @@
 # #' @param event the event to listen for, such as "start" or "finish".
 # addListener <- function(beakr, FUN, event) {
 #   mw <- Listener$new(FUN, event)
-#   beakr$routerObject$addListener(mw)
+#   beakr$router$addListener(mw)
 #   return(beakr)
 # }
 
@@ -27,6 +27,10 @@ routeMiddleware <- function(
   websocket = FALSE
 ) {
 
+  # if ( is.null(beakr) ) {
+  #   beakr <- invisible(Beakr$new())
+  # }
+
   if ( !is.null(method) ) {
     method <- toupper(method)
   } else {
@@ -37,8 +41,20 @@ routeMiddleware <- function(
   mw <- Middleware$new(FUN, path, method, websocket)
 
   # Add the middleware
-  beakr$routerObject$addMiddleware(mw)
+  beakr$router$addMiddleware(mw)
   return(beakr)
 
+}
+
+#' @keywords internal
+#' @title Internal function to add listeners
+#'
+#' @param beakr
+#' @param event
+#' @param FUN
+addListener <- function(beakr, event, FUN){
+  mw <- Listener$new(event = event, FUN = FUN)
+  beakr$router$addListener(mw)
+  return(beakr)
 }
 

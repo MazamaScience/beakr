@@ -4,7 +4,7 @@
 \alias{startBeakr}
 \title{Start a beakr instance and listen for connections}
 \usage{
-startBeakr(beakr, host, port, daemonized, verbose)
+startBeakr(beakr, host, port, daemon, verbose)
 }
 \arguments{
 \item{beakr}{a beakr instance.}
@@ -13,7 +13,7 @@ startBeakr(beakr, host, port, daemonized, verbose)
 
 \item{port}{a number or integer that indicates the port to listen on.}
 
-\item{daemonized}{run the instance in the background.}
+\item{daemon}{run the instance in the background.}
 
 \item{verbose}{boolean, debugging.}
 }
