@@ -6,7 +6,11 @@
 \usage{
 newBeakr()
 }
+\arguments{
+\item{name}{an optional name assigned to the \emph{Beakr} object.}
+}
 \description{
 Create a \code{Beakr} instance object by calling the top-level
-\code{newBeakr()} function.
+\code{newBeakr()} function. If \code{name} is not supplied, a random name
+will be assigned.
 }
