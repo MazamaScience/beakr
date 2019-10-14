@@ -6,6 +6,13 @@
 \usage{
 addListener(beakr, event, FUN)
 }
+\arguments{
+\item{beakr}{a beakr instance}
+
+\item{event}{an event (\emph{"start", "finish", "error"})}
+
+\item{FUN}{middleware function.}
+}
 \description{
 Internal function to add listeners
 }

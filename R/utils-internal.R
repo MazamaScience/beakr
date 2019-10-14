@@ -1,15 +1,14 @@
-# #' Internal function to add listeners
-# #'
-# #' Internal function.
-# #'
-# #' @param beakr a beakr instance.
-# #' @param FUN listener function
-# #' @param event the event to listen for, such as "start" or "finish".
-# addListener <- function(beakr, FUN, event) {
-#   mw <- Listener$new(FUN, event)
-#   beakr$router$addListener(mw)
-#   return(beakr)
-# }
+#' Pipe operator
+#'
+#' See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
 
 #' @keywords internal
 #' @title Internal function to add middleware
@@ -49,9 +48,9 @@ routeMiddleware <- function(
 #' @keywords internal
 #' @title Internal function to add listeners
 #'
-#' @param beakr
-#' @param event
-#' @param FUN
+#' @param beakr a beakr instance
+#' @param event an event (\emph{"start", "finish", "error"})
+#' @param FUN middleware function.
 addListener <- function(beakr, event, FUN){
   mw <- Listener$new(event = event, FUN = FUN)
   beakr$router$addListener(mw)
@@ -62,6 +61,7 @@ addListener <- function(beakr, event, FUN){
 #'
 #' @title Internal random name generator.
 randomName <-  function() {
+  # f U n  n a M e S!
   first <- c("Fear", "Frontier", "Nanny", "Job", "Yard", "Airport", "Pint",
              "Commando", "Basketball", "Bachelorette", "Diva",
              "Baggage", "College", "Octane", "Clean", "Sister", "Army", "Drama",
@@ -71,8 +71,8 @@ randomName <-  function() {
              "Outback", "Celebrity", "Air", "Restaurant", "Bachelor", "Family",
              "Royal", "Surf", "Ulitmate", "Date", "Operation", "Tank",
              "Logging", "Hollywood", "Amateur", "Craft", "Mystery", "Dog",
-             "Human", "Rock", "Ice Road", "Shipping", "Modern", "Crocodile",
-             "Farm", "Tool", "Boot Camp", "Pioneer", "Kid", "Action", "Bounty",
+             "Human", "Rock", "Ice", "Shipping", "Modern", "Crocodile",
+             "Farm", "Tool", "Boot", "Pioneer", "Kid", "Action", "Bounty",
              "Paradise", "Mega", "Love", "Style", "Teen", "Pop", "Treasure",
              "Myth", "Empire", "Motorway", "Room", "Casino", "Comedy",
              "Undercover", "Millionaire", "Chopper", "Space", "Cajun", "The",
@@ -82,7 +82,7 @@ randomName <-  function() {
              "Fame", "Music", "BBQ", "Spouse", "Wife", "Road",
              "Star", "Renovation", "Comic", "Chef", "Band", "House", "Sweet")
   second <- c("Hunters", "Hoarders", "Contest", "Party", "Stars", "Truckers",
-              "Camp", "Dance Crew", "Casting Call", "Inventor", "Search",
+              "Camp", "Crew", "Casting", "Inventor", "Search",
               "Pitmasters", "Blitz", "Marvels", "Wedding", "Crew", "Men",
               "Project", "Intervention", "Celebrities", "Treasure", "Master",
               "Days", "Wishes", "Sweets", "Haul", "Hour", "Mania", "Warrior",
@@ -100,7 +100,7 @@ randomName <-  function() {
               "Diners", "Chef", "Makeover", "Ninja", "Show", "Dancing",
               "Greenlight", "Mates", "Wives", "Jail", "Model", "Ship",
               "Family", "Videos", "Repo", "Rivals", "Room", "Dad", "Star",
-              "Island", "Next Door", "Missions", "Kings", "Loser", "Shore",
+              "Island", "Neighbor", "Missions", "Kings", "Loser", "Shore",
               "Assistant", "Comedians", "Rooms", "Enigma")
 
   rname <- paste0( sample(sample(first, round(runif(1, 1, 25))), 1),
