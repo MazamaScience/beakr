@@ -1,100 +1,116 @@
-#' Start a new Beakr instance
+#' @export
+#' @title Start a new Beakr instance
 #'
-#' Create a \code{Beakr} instance object by calling the top-level
+#' @description Create a \code{Beakr} instance object by calling the top-level
 #' \code{newBeakr()} function.
 #'
 #' @usage newBeakr()
-#' @export
 newBeakr <- function() {
   Beakr$new()
 }
 
-#' Listen for connections
+#' @export
+#' @title Start a beakr instance and listen for connections
 #'
-#' Binds and listens for connections on the specified host and port.
+#' @description Binds and listens for connections on the specified host and port.
 #'
 #' @details
-#' \code{listen} binds the port and listens for connections on a thread.
+#' \code{startBeakr()} binds the port and listens for connections on a thread.
 #' The thread handles the I/O, and when it receives a HTTP request, it
 #' will schedule a call to the user-defined middleware and handle the
 #' request.
 #'
-#' If the daemon boolean value is set to \code{TRUE}, \code{listen} binds the
-#' specified port and listens for connections on an thread running in the
+#' If the daemon boolean value is set to \code{TRUE}, \code{startBeakr()} binds
+#' the specified port and listens for connections on an thread running in the
 #' background.
 #'
 #' See the \code{httpuv} package for more information.
 #'
-#' @param beakr a beaker instance.
+#' @param beakr a beakr instance.
 #' @param host a string that is a valid IPv4 or IPv6 address to listen on.
 #' @param port a number or integer that indicates the port to listen on.
 #' @param daemonized run the instance in the background.
 #' @param verbose boolean, debugging.
 #'
-#' @usage listen(beakr, host, port, daemonized, verbose)
-#' @export
+#' @usage startBeakr(beakr, host, port, daemonized, verbose)
 #'
 #' @examples
 #' \dontrun{
-#' bk <- newBeakr() %>% listen(port = 1234, daemonized = TRUE)
+#' newBeakr() %>%
+#'   GET("/", function(req, res, err) {
+#'     return("Successful GET request!\n")
+#'   }) %>%
+#'   startBeakr()
 #' }
-listen <-function( beakr, host = "127.0.0.1", port = 8080,
-                   daemonized = FALSE, verbose = FALSE ) {
+#'
+startBeakr <-function(
+  beakr,
+  host = "127.0.0.1",
+  port = 8080,
+  daemonized = FALSE,
+  verbose = FALSE
+) {
   options("beakr.verbose" = verbose)
   message(paste0("Serving beakr instance at http://", host, ":", port))
   beakr$start(host, port, daemonized)
   return(beakr)
 }
 
-#' Create a new Error
-#'
-#' Used to handle errors.
-#'
 #' @export
+#' @title Create a new Error
+#'
+#' @description Used to handle errors.
+#'
 #' @usage newError()
 #'
-# Necessary?
+# TODO:  Is NewError() necessary?
 newError <- function() {
   Error$new()
 }
 
-#' Stop the beakr instance
+#' @export
+#' @title Stop the beakr instance
 #'
-#' Stops an active instance when given a beakr object. This closes all open
-#' connections for the instance and unbinds the port.
+#' @description Stops an active instance when given a beakr object. This closes
+#' all open connections for the instance and unbinds the port.
 #'
 #' @param beakr a beakr instance.
 #'
-#' @export
+#' @usage kill(beakr)
+#'
 #' @examples
-#' bk <- newBeakr()
-#' listen(bk, daemonized = TRUE)
-#' kill(bk)
+#' \donttest{
+#' beakr <- newBeakr()
+#' startBeakr(beakr, daemonized = TRUE)
+#' kill(beakr)
+#' }
+#'
 kill <- function(beakr) {
   httpuv::stopServer(beakr$serverObject)
   cat("Stopped ")
   beakr$print()
 }
 
-#' Stop all instances
-#'
-#' Stops all instances that have been activated by \code{\link{listen}} in the
-#' session.
-#'
 #' @export
-#' @usage killall()
-#' @seealso \code{\link{kill}} and \code{\link{listen}}
-killall <- function() {
+#' @title Stop all beakr instances
+#'
+#' @description Stops all instances that have been activated by
+#' \code{\link{startBeakr}} in the session.
+#'
+#' @usage killAll()
+#'
+#' @seealso \code{\link{kill}} and \code{\link{startBeakr}}
+killAll <- function() {
   httpuv::stopAllServers()
   cat("Stopped All Instances\n")
 }
 
-#' List active instances
+#' @export
+#' @title List active instances
 #'
-#' A list containing the current sessions active instances.
+#' @description A list containing the current sessions active instances.
 #'
 #' @return a list of active instances
-#' @export
 #'
 #' @usage active()
 active <- function() {
@@ -110,9 +126,10 @@ active <- function() {
   return(active)
 }
 
-#' Instance Error Handling
+#' @export
+#' @title Instance Error Handling
 #'
-#' An error handling middleware for beakr instances.
+#' @description An error handling middleware for beakr instances.
 #'
 #' @details
 #' \code{beakr} comes with a default error handler. This default error-handling
@@ -124,22 +141,7 @@ active <- function() {
 #' is invoked.
 #'
 #' @usage errorHandler(beakr, path)
-#' @export
 #'
-#' @examples
-#' \dontrun{
-#' # Create an instance and add the error handler last.
-#' newBeakr() %>%
-#'   use(path = "/", decorate(function(n) { paste("Hi, ", n) })) %>%
-#'   errorHandler() %>%
-#'   listen()
-#' # In shell
-#' #  curl http://127.0.0.1:8080/
-#' # > "status":"Page not found.","status_code":404
-#' # An error was thrown because the parameter "n" is not provided and
-#' # required by the middleware.
-#' killall()
-#' }
 errorHandler <- function(beakr, path = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -164,22 +166,22 @@ errorHandler <- function(beakr, path = NULL) {
   }
 
   return(use(beakr = beakr, path = path, method = NULL, jsoner))
-
 }
 
-#' Test request
+#' @export
+#' @title Test request
 #'
 #' @param beakr the beakr instance
 #' @param test_request the TestRequest instance
 #'
-#' @export
 processTestRequest <- function(beakr, test_request) {
-  beakr$route$invoke(test_request)
+  beakr$routerObject$invoke(test_request)
 }
 
-#' Websocket Access
+#' @export
+#' @title Websocket Access
 #'
-#' Access the instance through websocket. Experimental.
+#' @description Access the instance through websocket. \strong{Experimental.}
 #'
 #' @param beakr a beakr instance
 #' @param path string representing a relative path for which the middleware
@@ -187,7 +189,6 @@ processTestRequest <- function(beakr, test_request) {
 #' @param ... additional middleware/functions.
 #'
 #' @usage webSocket(beakr, path, ...)
-#' @export
 webSocket <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -204,10 +205,12 @@ webSocket <- function(beakr, path, ...) {
   return(beakr)
 }
 
-#' Serve static files
+#' @export
+#' @title Serve static files
 #'
-#' Binds to get requests that aren't handled by specified paths. Should support
-#' all filetypes; returns image and octet-stream types as a raw string.
+#' @description Binds to get requests that aren't handled by specified paths.
+#' Should support all filetypes; returns image and octet-stream types as a raw
+#' string.
 #'
 #' @param beakr a beakr instance
 #' @param path a string representing a relative path for which the middleware
@@ -215,14 +218,13 @@ webSocket <- function(beakr, path, ...) {
 #' @param dir a string representing a path for which to serve as the root
 #' directory.
 #'
-#' @export
 static <- function(beakr, path = NULL, dir = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
   dir <- ifelse( test = is.null(dir),
-                  yes  = getwd(),
-                  no   = dir )
+                 yes  = getwd(),
+                 no   = dir )
   filer <- function(req, res, err) {
     if ( substring(text = req$path, first = nchar(req$path)) == "/" ) {
       req$path <- paste0(req$path, "index.html")
@@ -255,16 +257,17 @@ static <- function(beakr, path = NULL, dir = NULL) {
       return(NULL)
     }
   }
-  beakr::get(beakr = beakr, path = NULL, filer)
+  GET(beakr = beakr, path = NULL, filer)
   return(beakr)
 }
 
-#' Use request method-insensitive middleware
+#' @export
+#' @title Use request method-insensitive middleware
 #'
-#' Mounts the specified middleware function or functions at the specified path:
-#' the middleware function is executed when the base of the requested path
-#' matches path. to the specified path with the specified callback
-#' functions or middleware.
+#' @description Mounts the specified middleware function or functions at the
+#' specified path: the middleware function is executed when the base of the
+#' requested path matches path. to the specified path with the specified
+#' callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
 #' @param path string representing a relative path for which the middleware
@@ -273,7 +276,6 @@ static <- function(beakr, path = NULL, dir = NULL) {
 #' @param method an optional HTTP request method.
 #'
 #' @usage use(beakr, path, ..., method)
-#' @export
 use <- function(beakr, path, ..., method = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -291,9 +293,11 @@ use <- function(beakr, path, ..., method = NULL) {
 }
 
 
-#' Add CORS-headers middleware
+#' @export
+#' @title Add CORS-headers middleware
 #'
-#' Add Cross-Origin Resource Sharing (CORS) middleware to the instance.
+#' @description Add Cross-Origin Resource Sharing (CORS) middleware to the
+#' instance.
 #'
 #' @details
 #' CORS is a mechanism that uses additional HTTP headers to tell browsers to
@@ -314,68 +318,67 @@ use <- function(beakr, path, ..., method = NULL) {
 #' @param max_age tbd
 #' @param expose_headers tbd
 #'
-#' @export
-cors <-
-  function(
-    beakr,
-    path = NULL,
-    with_methods = c("POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH"),
-    with_origin = "*",
-    with_headers = NULL,
-    with_credentials = NULL,
-    max_age = NULL,
-    expose_headers = NULL
-  ) {
+cors <- function(
+  beakr,
+  path = NULL,
+  with_methods = c("POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH"),
+  with_origin = "*",
+  with_headers = NULL,
+  with_credentials = NULL,
+  max_age = NULL,
+  expose_headers = NULL
+) {
 
-    if ( !is.null(with_headers) ) {
-      with_headers <- paste0(with_headers, collapse = ",")
-    }
-    if ( !is.null(with_methods) ) {
-      with_methods <- paste0(with_methods, collapse = ",")
-    }
-
-    if ( is.null(beakr) ) {
-      beakr <- invisible(Beakr$new())
-    }
-
-    headers <- list( `Access-Control-Allow-Origin`      = with_origin,
-                     `Access-Control-Expose-Headers`    = expose_headers,
-                     `Access-Control-Max-Age`           = max_age,
-                     `Access-Control-Allow-Credentials` = with_credentials,
-                     `Access-Control-Allow-Methods`     = with_methods,
-                     `Access-Control-Allow-Headers`     = with_headers )
-
-    headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
-
-    FUN <- function(req, res, err) {
-
-      if ( req$method == "OPTIONS" ) {
-        res$setHeader("Access-Control-Allow-Methods", with_methods)
-        res$setHeader("Access-Control-Allow-Origin", with_origin)
-        res$setHeader("Access-Control-Allow-Headers", with_headers)
-        # Return empty string stops process
-        return("")
-      }
-
-      lapply(
-        X = names(headers),
-        FUN = function(header_name) {
-          res$setHeader(header_name, headers[[header_name]])
-        }
-      )
-
-      return(NULL)
-    }
-
-    routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
-
-    return(beakr)
+  if ( !is.null(with_headers) ) {
+    with_headers <- paste0(with_headers, collapse = ",")
+  }
+  if ( !is.null(with_methods) ) {
+    with_methods <- paste0(with_methods, collapse = ",")
   }
 
-#' Construct an instance
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
+
+  headers <- list( `Access-Control-Allow-Origin`      = with_origin,
+                   `Access-Control-Expose-Headers`    = expose_headers,
+                   `Access-Control-Max-Age`           = max_age,
+                   `Access-Control-Allow-Credentials` = with_credentials,
+                   `Access-Control-Allow-Methods`     = with_methods,
+                   `Access-Control-Allow-Headers`     = with_headers )
+
+  headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
+
+  FUN <- function(req, res, err) {
+
+    if ( req$method == "OPTIONS" ) {
+      res$setHeader("Access-Control-Allow-Methods", with_methods)
+      res$setHeader("Access-Control-Allow-Origin", with_origin)
+      res$setHeader("Access-Control-Allow-Headers", with_headers)
+      # Return empty string stops process
+      return("")
+    }
+
+    lapply(
+      X = names(headers),
+      FUN = function(header_name) {
+        res$setHeader(header_name, headers[[header_name]])
+      }
+    )
+
+    return(NULL)
+  }
+
+  routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
+
+  return(beakr)
+}
+
+#' @export
+#' @title Construct an instance
 #'
-#' The \code{include} function is used to merge beakr middleware that has been
-#' constructed elsewhere.
+#' @description The \code{include} function is used to merge beakr middleware
+#' that has been constructed elsewhere.
 #'
 #' @details Hierarchy
 #'
@@ -384,23 +387,7 @@ cors <-
 #' @param file the source file path, if external middleware in separate .R file.
 #'
 #' @usage include(beakr, include, file = NULL)
-#' @export
 #'
-#' @examples
-#' \dontrun{
-#' # Construct primary instance
-#' primary <- newBeakr() %>%
-#'   get("/primary-app",
-#'       function(req, res, err) { "Primary Application!" })
-#'
-#' # Construct middleware
-#' ext <- use(beakr = NULL, "/",
-#'            decorate(function(name) { paste("Hi ", name, "!\n") })) %>%
-#'   errorHandler()
-#'
-#' # Include the external middleware in the primary instance
-#' primary %>% include(ext)
-#' }
 include <- function(beakr, include, file = NULL) {
   if ( is.null(file) ) {
     bundle <- eval(quote(include))
@@ -413,5 +400,4 @@ include <- function(beakr, include, file = NULL) {
   beakr$include(bundle)
 
   return(beakr)
-
 }

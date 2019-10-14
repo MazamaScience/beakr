@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — use • beakr</title>
+<title>Use request method-insensitive middleware — use • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,11 @@
 
 
 
-<meta property="og:title" content="Title — use" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="Use request method-insensitive middleware — use" />
+<meta property="og:description" content="Mounts the specified middleware function or functions at the
+specified path: the middleware function is executed when the base of the
+requested path matches path. to the specified path with the specified
+callback functions or middleware." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -108,23 +111,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Use request method-insensitive middleware</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>use.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Mounts the specified middleware function or functions at the
+specified path: the middleware function is executed when the base of the
+requested path matches path. to the specified path with the specified
+callback functions or middleware.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>use</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>, <span class='no'>method</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>beakr</th>
+      <td><p>a beakr instance.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>string representing a relative path for which the middleware
+is invoked.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td></td>
+      <td><p>additional middleware/functions.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>an optional HTTP request method.</p></td>
     </tr>
     </table>
 

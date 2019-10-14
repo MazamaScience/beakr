@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Request Handler Object Class — RequestHandler • beakr</title>
+<title>Parse the parameters passed by the req — .parseParameters • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Request Handler Object Class — RequestHandler" />
-<meta property="og:description" content="Request Handler Object Class" />
+<meta property="og:title" content="Parse the parameters passed by the req — .parseParameters" />
+<meta property="og:description" content="Parse the parameters passed by the req" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -108,27 +108,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Request Handler Object Class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/RequestHandler.R'><code>R/RequestHandler.R</code></a></small>
-    <div class="hidden name"><code>RequestHandler.Rd</code></div>
+    <h1>Parse the parameters passed by the req</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Request.R'><code>R/Request.R</code></a></small>
+    <div class="hidden name"><code>dot-parseParameters.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Request Handler Object Class</p>
+    <p>Parse the parameters passed by the req</p>
     </div>
 
-    <pre class="usage"><span class='no'>RequestHandler</span></pre>
+    <pre class="usage"><span class='fu'>.parseParameters</span>(<span class='no'>req</span>, <span class='no'>body</span>, <span class='no'>query</span>, <span class='no'>type</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>req</th>
+      <td><p>an HTTP req</p></td>
+    </tr>
+    <tr>
+      <th>body</th>
+      <td><p>a body text string</p></td>
+    </tr>
+    <tr>
+      <th>query</th>
+      <td><p>a url-encoded query string</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>a media mime type (a.k.a. Multipurpose Internet Mail Extensions
+or MIME type).</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>R6ClassGenerator</code> of length 24.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

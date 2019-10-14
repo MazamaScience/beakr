@@ -11,7 +11,7 @@
 #' @section Methods:
 #'
 #' \describe{
-#'   \item{\code{route()}}{
+#'   \item{\code{routerObject()}}{
 #'   An instantiated \code{Router} object.
 #'   }
 #'   \item{\code{serverObject()}}{
@@ -25,8 +25,7 @@
 #'   middleware.
 #'   }
 #'   \item{\code{initialize()}}{
-#'   Creates a new \code{Router} object for the \code{route}
-#'   method.
+#'   Creates a new \code{Router} object.
 #'   }
 #'   \item{\code{start(host, port, daemonized)}}{
 #'   Returns a running server. If \code{daemonized = TRUE}, the server will run
@@ -53,17 +52,17 @@ Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(
-      route = NULL,
+      routerObject = NULL,
       serverObject = NULL,
       appDefinition = function() {
         list(
           # Call a req invoke
           call = function(req) {
-            self$route$invoke(req)
+            self$routerObject$invoke(req)
           },
           onWSOpen = function(websocket) {
             websocket$onMessage(function(binary, message) {
-              websocket$send(self$route$invoke(
+              websocket$send(self$routerObject$invoke(
                 req              = websocket$req,
                 websocket_msg    = message,
                 websocket_binary = binary
@@ -73,12 +72,12 @@ Beakr <-
         )
       },
       include = function(bundle) {
-        self$route$addMiddleware(
-          bundle$route$middleware
+        self$routerObject$addMiddleware(
+          bundle$routerObject$middleware
         )
       },
       initialize = function() {
-        self$route <- Router$new()
+        self$routerObject <- Router$new()
         # Set Early for testing purposes when serve_it isn't called - Optional?
         options("beakr.verbose" = FALSE)
       },
@@ -103,12 +102,12 @@ Beakr <-
           st <- ifelse(self$serverObject$isRunning(), "Active", "Inactive")
           hst <- self$serverObject$getHost()
           prt <- self$serverObject$getPort()
-          mws <- length(self$route$middleware)
+          mws <- length(self$routerObject$middleware)
         } else {
           st <- "Inactive"
           hst <- "..."
           prt <- "..."
-          mws <- length(self$route$middleware)
+          mws <- length(self$routerObject$middleware)
         }
         cat( "Beakr Instance\n",
              "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,

@@ -36,8 +36,8 @@
 
 
 <meta property="og:title" content="Stop the beakr instance — kill" />
-<meta property="og:description" content="Stops an active instance when given a beakr object. This closes all open
-connections for the instance and unbinds the port." />
+<meta property="og:description" content="Stops an active instance when given a beakr object. This closes
+all open connections for the instance and unbinds the port." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +70,7 @@ connections for the instance and unbinds the port." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -115,8 +115,8 @@ connections for the instance and unbinds the port." />
     </div>
 
     <div class="ref-description">
-    <p>Stops an active instance when given a beakr object. This closes all open
-connections for the instance and unbinds the port.</p>
+    <p>Stops an active instance when given a beakr object. This closes
+all open connections for the instance and unbinds the port.</p>
     </div>
 
     <pre class="usage"><span class='fu'>kill</span>(<span class='no'>beakr</span>)</pre>
@@ -131,11 +131,20 @@ connections for the instance and unbinds the port.</p>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>beakr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>()
+<span class='fu'><a href='startBeakr.html'>startBeakr</a></span>(<span class='no'>beakr</span>, <span class='kw'>daemonized</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Serving beakr instance at http://127.0.0.1:8080</span></div><div class='output co'>#&gt; Beakr Instance
+#&gt;  State: Active | Host: 127.0.0.1 | Port: 8080 | Middlewares: 0 </div><div class='input'><span class='fu'>kill</span>(<span class='no'>beakr</span>)</div><div class='output co'>#&gt; Stopped Beakr Instance
+#&gt;  State: Inactive | Host: 127.0.0.1 | Port: 8080 | Middlewares: 0 </div><div class='input'># }
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

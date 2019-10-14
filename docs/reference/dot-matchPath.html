@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>beakr GET-binding middleware — get.Beakr • beakr</title>
+<title>Regex path query — .matchPath • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="beakr GET-binding middleware — get.Beakr" />
-<meta property="og:description" content="beakr GET-binding middleware" />
+<meta property="og:title" content="Regex path query — .matchPath" />
+<meta property="og:description" content="Regex path query" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -108,24 +108,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>beakr GET-binding middleware</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
-    <div class="hidden name"><code>get.Beakr.Rd</code></div>
+    <h1>Regex path query</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Router.R'><code>R/Router.R</code></a></small>
+    <div class="hidden name"><code>dot-matchPath.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>beakr GET-binding middleware</p>
+    <p>Regex path query</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for Beakr</span>
-<span class='fu'><a href='get.html'>get</a></span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pattern</th>
+      <td><p>the string pattern to parse</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>the path to match to</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional parameters</p></td>
+    </tr>
+    </table>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal function to add listeners — addListener • beakr</title>
+<title>DELETE-binding middleware — DELETE • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Internal function to add listeners — addListener" />
-<meta property="og:description" content="Internal function to add listeners" />
+<meta property="og:title" content="DELETE-binding middleware — DELETE" />
+<meta property="og:description" content="Routes HTTP DELETE requests to the specified path with the
+specified callback functions or middleware." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -108,23 +109,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal function to add listeners</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/internal-utils.R'><code>R/internal-utils.R</code></a></small>
-    <div class="hidden name"><code>addListener.Rd</code></div>
+    <h1>DELETE-binding middleware</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
+    <div class="hidden name"><code>DELETE.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Internal function to add listeners</p>
+    <p>Routes HTTP DELETE requests to the specified path with the
+specified callback functions or middleware.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>addListener</span>(<span class='no'>beakr</span>, <span class='no'>FUN</span>, <span class='no'>event</span>)</pre>
+    <pre class="usage"><span class='fu'>DELETE</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>beakr</th>
+      <td><p>a beakr instance.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>string representing a relative path for which the middleware
+is invoked.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional middleware/functions.</p></td>
+    </tr>
+    </table>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

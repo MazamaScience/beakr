@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Default R get-binding — get.default • beakr</title>
+<title>Construct an instance — include • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Default R get-binding — get.default" />
-<meta property="og:description" content="Default R get-binding" />
+<meta property="og:title" content="Construct an instance — include" />
+<meta property="og:description" content="The include function is used to merge beakr middleware
+that has been constructed elsewhere." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -108,24 +109,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Default R get-binding</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
-    <div class="hidden name"><code>get.default.Rd</code></div>
+    <h1>Construct an instance</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>include.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Default R get-binding</p>
+    <p>The <code>include</code> function is used to merge beakr middleware
+that has been constructed elsewhere.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for default</span>
-<span class='fu'><a href='get.html'>get</a></span>(<span class='no'>beakr</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>include</span>(<span class='no'>beakr</span>, <span class='no'>include</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>beakr</th>
+      <td><p>primary beakr instance.</p></td>
+    </tr>
+    <tr>
+      <th>include</th>
+      <td><p>the external middleware to include.</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>the source file path, if external middleware in separate .R file.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Hierarchy</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

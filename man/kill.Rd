@@ -10,11 +10,14 @@ kill(beakr)
 \item{beakr}{a beakr instance.}
 }
 \description{
-Stops an active instance when given a beakr object. This closes all open
-connections for the instance and unbinds the port.
+Stops an active instance when given a beakr object. This closes
+all open connections for the instance and unbinds the port.
 }
 \examples{
-bk <- newBeakr()
-listen(bk, daemonized = TRUE)
-kill(bk)
+\donttest{
+beakr <- newBeakr()
+startBeakr(beakr, daemonized = TRUE)
+kill(beakr)
+}
+
 }

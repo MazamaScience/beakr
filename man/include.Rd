@@ -14,25 +14,9 @@ include(beakr, include, file = NULL)
 \item{file}{the source file path, if external middleware in separate .R file.}
 }
 \description{
-The \code{include} function is used to merge beakr middleware that has been
-constructed elsewhere.
+The \code{include} function is used to merge beakr middleware
+that has been constructed elsewhere.
 }
 \details{
 Hierarchy
-}
-\examples{
-\dontrun{
-# Construct primary instance
-primary <- newBeakr() \%>\%
-  get("/primary-app",
-      function(req, res, err) { "Primary Application!" })
-
-# Construct middleware
-ext <- use(beakr = NULL, "/",
-           decorate(function(name) { paste("Hi ", name, "!\\n") })) \%>\%
-  errorHandler()
-
-# Include the external middleware in the primary instance
-primary \%>\% include(ext)
-}
 }

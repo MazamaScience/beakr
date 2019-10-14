@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Internal function to add middleware</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/internal-utils.R'><code>R/internal-utils.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
     <div class="hidden name"><code>routeMiddleware.Rd</code></div>
     </div>
 
@@ -124,8 +124,24 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>beakr</th>
+      <td><p>a beakr instance.</p></td>
+    </tr>
+    <tr>
+      <th>FUN</th>
+      <td><p>the function to route middleware</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>the path to rouet the middleware</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>the HTTP method to employ</p></td>
+    </tr>
+    <tr>
       <th>websocket</th>
-      <td></td>
+      <td><p>boolean, TRUE if websocket.</p></td>
     </tr>
     </table>
 

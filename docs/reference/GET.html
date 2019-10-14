@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GET-binding middleware — get • beakr</title>
+<title>GET-binding middleware — GET • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="GET-binding middleware — get" />
-<meta property="og:description" content="Routes HTTP GET requests to the specified path with the specified callback
-functions or middleware." />
+<meta property="og:title" content="GET-binding middleware — GET" />
+<meta property="og:description" content="Routes HTTP GET requests to the specified path with the
+specified callback functions or middleware." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +70,7 @@ functions or middleware." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -111,22 +111,22 @@ functions or middleware." />
     <div class="page-header">
     <h1>GET-binding middleware</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
-    <div class="hidden name"><code>get.Rd</code></div>
+    <div class="hidden name"><code>GET.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Routes HTTP GET requests to the specified path with the specified callback
-functions or middleware.</p>
+    <p>Routes HTTP GET requests to the specified path with the
+specified callback functions or middleware.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>GET</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>beakr</th>
-      <td><p>a beakr instance.</p></td>
+      <td><p>a beakr instance or <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -141,7 +141,17 @@ is invoked.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>GET</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful GET request!\n"</span>)
+  }) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='startBeakr.html'>startBeakr</a></span>()
+
+<span class='co'># In browser:</span>
+<span class='co'>#   http://127.0.0.1:8080</span>
+<span class='co'># &gt; Successful GET request!</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
