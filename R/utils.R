@@ -28,7 +28,7 @@ newBeakr <- function(name = NULL) {
 #' request.
 #'
 #' If the daemon boolean value is set to \code{TRUE}, \code{startBeakr()} binds
-#' the specified port and listens for connections on an thread running in the
+#' the specified port and listens for connections on a thread running in the
 #' background.
 #'
 #' See the \code{httpuv} package for more information.
