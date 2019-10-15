@@ -58,7 +58,6 @@ addListener <- function(beakr, event, FUN){
 }
 
 #' @keywords internal
-#'
 #' @title Internal random name generator.
 randomName <-  function() {
   # f U n  n a M e S!
@@ -103,8 +102,8 @@ randomName <-  function() {
               "Island", "Neighbor", "Missions", "Kings", "Loser", "Shore",
               "Assistant", "Comedians", "Rooms", "Enigma")
 
-  rname <- paste0( sample(sample(first, round(runif(1, 1, 25))), 1),
-                  sample(sample(second, round(runif(1, 1, 25))), 1),
+  rname <- paste0( sample(sample(first, round(stats::runif(1, 1, 25))), 1),
+                  sample(sample(second, round(stats::runif(1, 1, 25))), 1),
                   collapse = " " )
   return(rname)
 }

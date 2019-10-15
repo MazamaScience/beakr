@@ -4,7 +4,7 @@
 \alias{listActive}
 \title{List active instances}
 \usage{
-active()
+listActive()
 }
 \value{
 a list of active instances

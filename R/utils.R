@@ -7,7 +7,7 @@
 #' \code{newBeakr()} function. If \code{name} is not supplied, a random name
 #' will be assigned.
 #'
-#' @usage newBeakr()
+#' @usage newBeakr(name = NULL)
 newBeakr <- function(name = NULL) {
   beakr <- Beakr$new()
   if ( !is.null(name) ) {
@@ -119,7 +119,7 @@ killAll <- function() {
 #'
 #' @return a list of active instances
 #'
-#' @usage active()
+#' @usage listActive()
 listActive <- function() {
   active <- lapply(
     X = httpuv::listServers() ,

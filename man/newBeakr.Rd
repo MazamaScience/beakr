@@ -4,7 +4,7 @@
 \alias{newBeakr}
 \title{Start a new Beakr instance}
 \usage{
-newBeakr()
+newBeakr(name = NULL)
 }
 \arguments{
 \item{name}{an optional name assigned to the \emph{Beakr} object.}

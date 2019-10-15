@@ -1,7 +1,7 @@
 Package: beakr
 Type: Package
 Title: A Simple Web Framework for R
-Version: 0.1.4
+Version: 0.1.5
 Authors@R: c(
     person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut","cre")),
     person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut"))
@@ -21,6 +21,7 @@ Depends:
     R (>= 3.1.0)
 Imports:
     R6,
+    stats,
     webutils,
     httpuv,
     mime,

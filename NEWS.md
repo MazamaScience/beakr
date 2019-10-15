@@ -1,3 +1,10 @@
+# beakr 0.1.5 
+
+* Added `onEvent()` event listening
+* Fixed beakr instance information view
+* Added `beakr` instance names
+* Added support for more internal functionality 
+
 # beakr 0.1.4
 
 * Renamed http methods to upper case: `get()` ==> `GET()`, _etc._.
