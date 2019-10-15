@@ -14,7 +14,7 @@ newBeakr() %>%
 ```
 
 The beakr package includes functionality for handling common
-HTTP-requests, custom middleware, errors, and logging. 
+HTTP-requests, custom middleware, websockets, errors, and logging.
 
 ### Installation
 Install the release version from CRAN:
@@ -32,8 +32,8 @@ devtools::install_github("MazamaScience/beakr")
 Fundementally, beakr is built on top of the `libuv` and `http-parser` C libraries 
 as beakr relies heavily upon the [httpuv](https://github.com/rstudio/httpuv), 
 a package that provides low-level socket and protocol support for handling HTTP 
-and WebSocket requests directly from within R. The development of beakr and much of the packages functionality
-was inpsired by the excellent (deprecated) [jug](https://github.com/Bart6114/jug) 
+and WebSocket requests directly from within R. beakr and much of the development
+of the package was inpsired by the excellent (now deprecated) [jug](https://github.com/Bart6114/jug) 
 package, developed by Bart Smeets. 
 
 The beakr package was developed by [Hans Martin](https://github.com/hansmrtn) and [Jonathan Callahan](https://github.com/jonathancallahan), and is supported by 

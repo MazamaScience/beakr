@@ -19,5 +19,4 @@ beakr <- newBeakr()
 startBeakr(beakr, daemon = TRUE)
 kill(beakr)
 }
-
 }

@@ -49,7 +49,6 @@ newBeakr <- function(name = NULL) {
 #'   }) %>%
 #'   startBeakr()
 #' }
-#'
 startBeakr <-function(
   beakr,
   host = "127.0.0.1",
@@ -91,7 +90,6 @@ newError <- function() {
 #' startBeakr(beakr, daemon = TRUE)
 #' kill(beakr)
 #' }
-#'
 kill <- function(beakr) {
   httpuv::stopServer(beakr$server)
   cat("Stopped ")
@@ -148,7 +146,6 @@ listActive <- function() {
 #' is invoked.
 #'
 #' @usage errorHandler(beakr, path)
-#'
 errorHandler <- function(beakr, path = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -224,7 +221,6 @@ webSocket <- function(beakr, path, ...) {
 #' is invoked.
 #' @param dir a string representing a path for which to serve as the root
 #' directory.
-#'
 static <- function(beakr, path = NULL, dir = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
@@ -394,7 +390,6 @@ cors <- function(
 #' @param file the source file path, if external middleware in separate .R file.
 #'
 #' @usage include(beakr, include, file = NULL)
-#'
 include <- function(beakr, include, file = NULL) {
   if ( is.null(file) ) {
     bundle <- eval(quote(include))
@@ -423,4 +418,90 @@ include <- function(beakr, include, file = NULL) {
 #' @export
 onEvent <- function(beakr, event, FUN) {
   return(addListener(beakr = beakr, event = event, FUN = FUN))
+}
+
+#' @title Instance logging
+#'
+#' @description A wrapper for \emph{futile.logger} to log events.
+#' Currently supported logged events: \emph{'start', 'finish', error'}.
+#'
+#' @param beakr a beakr instance.
+#' @param level the log level (i.e. 'DEBUG', 'INFO', etc.).
+#' @param file if provided, a file to write log output to.
+#' @param echo if TRUE will print the log to console.
+#'
+#' @export
+logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
+
+  beakr <-
+    if ( is.null(beakr) ) {
+      beakr <- newBeakr(name = "NULL")
+    }
+
+  level <-
+    if ( level == 'TRACE' ) {
+      return(futile.logger::TRACE)
+    } else if ( level == 'ERROR' ) {
+      return(futile.logger::ERROR)
+    } else if ( level == 'FATAL' ) {
+      return(futile.logger::FATAL)
+    } else if ( level == 'WARN' ) {
+      return(futile.logger::WARN)
+    } else if ( level == 'INFO' ) {
+      return(futile.logger::INFO)
+    } else {
+      return(futile.logger::DEBUG)
+    }
+
+  appender <-
+    if ( is.null(file) & echo ) {
+      return(futile.logger::appender.console())
+    } else if ( !is.null(file) & echo ) {
+      return(futile.logger::appender.tee())
+    } else if ( !is.null(file) & !echo ) {
+      return(futile.logger::appender.file(file))
+    } else {
+      stop("logger requires  a file and/or console output to write to.")
+    }
+
+ doLog <- function(event, req, res, err) {
+   futile.logger::flog.logger( name = "beakr",
+                               threshold = level,
+                               appender = appender )
+    if ( event == 'start' ) {
+      msg <- paste( toupper(req$protocol), "|",
+                    req$path,
+                    "-",
+                    req$method,
+                    "- Request Received",
+                    "\n",
+                    sep = " " )
+      return(futile.logger::flog.debug(msg, name = "beakr"))
+    } else if ( event == 'finish' ) {
+      msg <- paste( toupper(req$protocol),
+                    "|",
+                    req$path,
+                    "-",
+                    req$method,
+                    "-",
+                    res$status,
+                    "\n",
+                    sep = " " )
+      return(futile.logger::flog.info(msg, name = "beakr"))
+    } else if ( event == 'error' ) {
+      msg <- paste( toupper(req$protocol),
+                    "|",
+                    req$path,
+                    "-",
+                    req$method,
+                    "- error encountered:",
+                    "\n" ,
+                   err_msg,
+                   sep = " " )
+      return(futile.logger::flog.error(msg, name = "beakr"))
+    }
+  }
+
+  # Add listeners to beakr instance
+  return(onEvent(beakr, event = "start", FUN = doLog))
 }
