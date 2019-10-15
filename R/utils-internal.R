@@ -11,6 +11,39 @@
 NULL
 
 #' @keywords internal
+#' @title Regex path query
+#'
+#' @param pattern the string pattern to parse
+#' @param path the path to match to
+#' @param ... additional parameters
+.matchPath <- function(pattern, path, ...) {
+  # Result init
+  result <- list(match = FALSE, src = path, params = list())
+
+  if ( !is.null(pattern) ) {
+    if ( !(grepl("^\\^", pattern) ||
+           grepl("\\$$", pattern)) ) {
+      pattern <- paste0("^", pattern, "$")
+    }
+
+    rex <- regexpr(pattern, path, perl = TRUE, ...)
+
+    for ( n in attr(x = rex, which = "capture.name") ) {
+      result$params[[n]] <- substr( x     = result$src,
+                                    start = attr(rex, "capture.start")[,n],
+                                    stop  = (attr(rex, "capture.start")[,n] +
+                                               attr(rex, "capture.length")[,n] - 1) )
+
+    }
+    result$match <- ifelse(rex[[1]] > -1, TRUE, FALSE)
+  } else {
+    result$match <- TRUE
+  }
+
+  return(result)
+}
+
+#' @keywords internal
 #' @title Internal function to add middleware
 #'
 #' @param beakr a beakr instance.
@@ -59,7 +92,7 @@ routeMiddleware <- function(
 
 #' @keywords internal
 #' @title Internal random name generator.
-randomName <-  function() {
+.randomName <-  function() {
   # f U n  n a M e S!
   first <- c("Fear", "Frontier", "Nanny", "Job", "Yard", "Airport", "Pint",
              "Commando", "Basketball", "Bachelorette", "Diva",
