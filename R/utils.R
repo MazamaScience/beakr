@@ -417,7 +417,8 @@ include <- function(beakr, include, file = NULL) {
 #'
 #' @export
 onEvent <- function(beakr, event, FUN) {
-  return(addListener(beakr = beakr, event = event, FUN = FUN))
+  .addListener(beakr = beakr, event = event, FUN = FUN)
+  return(beakr)
 }
 
 #' @title Instance logging
@@ -433,43 +434,46 @@ onEvent <- function(beakr, event, FUN) {
 #' @export
 logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
 
-  beakr <-
     if ( is.null(beakr) ) {
       beakr <- newBeakr(name = "NULL")
     }
 
-  level <-
     if ( level == 'TRACE' ) {
-      return(futile.logger::TRACE)
+      thresh <- futile.logger::TRACE
     } else if ( level == 'ERROR' ) {
-      return(futile.logger::ERROR)
+      thresh <- futile.logger::ERROR
     } else if ( level == 'FATAL' ) {
-      return(futile.logger::FATAL)
+      thresh <- futile.logger::FATAL
     } else if ( level == 'WARN' ) {
-      return(futile.logger::WARN)
+      thresh <- futile.logger::WARN
     } else if ( level == 'INFO' ) {
-      return(futile.logger::INFO)
+      thresh <- futile.logger::INFO
     } else {
-      return(futile.logger::DEBUG)
+      thresh <- futile.logger::DEBUG
     }
 
-  appender <-
+
     if ( is.null(file) & echo ) {
-      return(futile.logger::appender.console())
+      appdr <- futile.logger::appender.console()
     } else if ( !is.null(file) & echo ) {
-      return(futile.logger::appender.tee())
+      appdr <- futile.logger::appender.tee(file)
     } else if ( !is.null(file) & !echo ) {
-      return(futile.logger::appender.file(file))
+      appdr <- futile.logger::appender.file(file)
     } else {
       stop("logger requires  a file and/or console output to write to.")
     }
 
- doLog <- function(event, req, res, err) {
-   futile.logger::flog.logger( name = "beakr",
-                               threshold = level,
-                               appender = appender )
-    if ( event == 'start' ) {
-      msg <- paste( toupper(req$protocol), "|",
+  futile.logger::flog.logger( name = "beakr",
+                              threshold = thresh,
+                              appender = appdr )
+
+
+  onEvent(
+    beakr = beakr,
+    event = 'start',
+    FUN = function(event, req, res, err) {
+      msg <- paste( toupper(req$protocol),
+                    "|",
                     req$path,
                     "-",
                     req$method,
@@ -477,7 +481,12 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
                     "\n",
                     sep = " " )
       return(futile.logger::flog.debug(msg, name = "beakr"))
-    } else if ( event == 'finish' ) {
+    }
+  )
+  onEvent(
+    beakr = beakr,
+    event = 'finish',
+    FUN = function(event, req, res, err) {
       msg <- paste( toupper(req$protocol),
                     "|",
                     req$path,
@@ -488,7 +497,12 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
                     "\n",
                     sep = " " )
       return(futile.logger::flog.info(msg, name = "beakr"))
-    } else if ( event == 'error' ) {
+    }
+  )
+  onEvent(
+    beakr = beakr,
+    event = 'error',
+    FUN = function(event, req, res, err, err_msg) {
       msg <- paste( toupper(req$protocol),
                     "|",
                     req$path,
@@ -496,12 +510,12 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
                     req$method,
                     "- error encountered:",
                     "\n" ,
-                   err_msg,
-                   sep = " " )
+                    err_msg,
+                    sep = " " )
       return(futile.logger::flog.error(msg, name = "beakr"))
     }
-  }
+  )
 
-  # Add listeners to beakr instance
-  return(onEvent(beakr, event = "start", FUN = doLog))
+  return(beakr)
+
 }

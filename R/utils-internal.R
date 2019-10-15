@@ -51,9 +51,9 @@ routeMiddleware <- function(
 #' @param beakr a beakr instance
 #' @param event an event (\emph{"start", "finish", "error"})
 #' @param FUN middleware function.
-addListener <- function(beakr, event, FUN){
-  mw <- Listener$new(event = event, FUN = FUN)
-  beakr$router$addListener(mw)
+.addListener <- function(beakr, event, FUN){
+  l <- Listener$new(FUN = FUN, event = event)
+  beakr$router$addListener(l)
   return(beakr)
 }
 
