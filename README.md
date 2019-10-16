@@ -1,4 +1,5 @@
-![beakr_logo](/docs/beakr_logo.png)
+![beakr_logo](https://cdn3.imggmi.com/uploads/2019/10/16/f74987f8804a4512f70e0e8d17f05983-full.png)
+
 ### A Minimalist Web Framework for R. 
 beakr is a minimalist web framework for developing APIs in the R Language. beakr offers
 a robust set of fundamental web application features and is intended to simplify data 
