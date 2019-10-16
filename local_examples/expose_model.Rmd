@@ -9,27 +9,31 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ```{r}
+# Import libraries 
 library(beakr)
 library(caret)
-
-  # Train using KNN
-knn_fit <- train( Species ~ ., 
+# Load the Iris data set 
+data('iris')
+# Train using KNN
+knn_model <- train( Species ~ ., 
                   data = iris, 
                   method = 'knn', 
                   trControl = trainControl(method='cv', number=10), 
                   metric = 'Accuracy' )
+```
 
+```{r}
 predict_species <- function(sl, sw, pl, pw) {
-  # Capture input 
-  iris_test <- data.frame( Sepal.Length = sl, 
-                           Sepal.Width = sw, 
-                           Petal.Length = pl, 
-                           Petal.Width = pw, 
-                           Species = NA )
+  test <- data.frame( Sepal.Length = sl, 
+                      Sepal.Width = sw, 
+                      Petal.Length = pl, 
+                      Petal.Width = pw, 
+                      Species = NA )
   
-  predicted <- predict(knn_fit, iris_test)
-  output <- paste0("Predicted species: ", predicted)
+  predicted <- predict(knn_model, test)
+  output <- paste0('Predicted species: ', predicted, ' ')
   
   return(output)
 }
@@ -38,7 +42,7 @@ predict_species <- function(sl, sw, pl, pw) {
 
 ```{r, eval=FALSE}
 beakr <- newBeakr() %>%  
-  POST(path = "/predict-species", decorate(predict_species)) %>% 
+  POST(path = '/predict-species', decorate(predict_species)) %>% 
   logger() %>% 
   errorHandler() %>% 
   startBeakr(port = 1234, daemon = T)

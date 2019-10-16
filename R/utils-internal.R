@@ -94,7 +94,7 @@ routeMiddleware <- function(
 #' @title Internal random name generator.
 .randomName <-  function() {
   # f U n  n a M e S!
-  first <- c("Fear", "Frontier", "Nanny", "Job", "Yard", "Airport", "Pint",
+  dic <- c("Fear", "Frontier", "Nanny", "Job", "Yard", "Airport", "Pint",
              "Commando", "Basketball", "Bachelorette", "Diva",
              "Baggage", "College", "Octane", "Clean", "Sister", "Army", "Drama",
              "Backyard", "Pirate", "Shark", "Project", "Model", "Survival",
@@ -112,8 +112,8 @@ routeMiddleware <- function(
              "Mountain", "Auction", "Extreme", "Whale", "Storage", "Cake",
              "Turf", "UFO", "Real", "Wild", "Duck", "Queer", "Voice",
              "Fame", "Music", "BBQ", "Spouse", "Wife", "Road",
-             "Star", "Renovation", "Comic", "Chef", "Band", "House", "Sweet")
-  second <- c("Hunters", "Hoarders", "Contest", "Party", "Stars", "Truckers",
+             "Star", "Renovation", "Comic", "Chef", "Band", "House", "Sweet",
+             "Hunters", "Hoarders", "Contest", "Party", "Stars", "Truckers",
               "Camp", "Crew", "Casting", "Inventor", "Search",
               "Pitmasters", "Blitz", "Marvels", "Wedding", "Crew", "Men",
               "Project", "Intervention", "Celebrities", "Treasure", "Master",
@@ -135,9 +135,6 @@ routeMiddleware <- function(
               "Island", "Neighbor", "Missions", "Kings", "Loser", "Shore",
               "Assistant", "Comedians", "Rooms", "Enigma")
 
-  rname <- paste0( sample(sample(first, round(stats::runif(1, 1, 25))), 1),
-                  sample(sample(second, round(stats::runif(1, 1, 25))), 1),
-                  collapse = " " )
-  return(rname)
+  return(paste(sample(dic, 2, replace = F), collapse = " "))
 }
 
