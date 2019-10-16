@@ -34,8 +34,10 @@ beakr is incredibly flexible. It provides the ability for integrating your R
 code as middleware in a beakr instance. Middleware functions can execute any 
 R code, make changes to the request, response, and error objects, and end the 
 request-response cycle. The beakr package loosely follows Express.js middleware 
-semantics, where middleware functions are functions that have access to the request 
-object (`req`), the response object (`res`), and error (`err`) object of a beakr instance.
+semantics, where middleware functions are functions that have access to the request, 
+response, and error objects of a beakr instance. In this documentation and by 
+convention, the response, request, and error objects are always referred to as 
+`res`, `req`, `err`, respectively. 
 
 ### Installation
 Install the release version from CRAN:
@@ -49,12 +51,12 @@ Install the development version for GitHub:
 devtools::install_github("MazamaScience/beakr")
 ```
 
-### Example
+### Examples
 
-#### Deploy a machine learning model
+#### 1. Deploy a machine learning model
 Let's use the [caret](https://github.com/topepo/caret) package and Iris data set
 to train a simple model for predicting the species of iris, given a sepal length
-& width, and petal length & width. 
+& width, and petal length & width. We can expose this model with beakr.
 ```
 # Import libraries 
 library(beakr)
@@ -102,6 +104,43 @@ $ curl -X POST http://127.0.0.1:1234/predict-species \
   
 > setosa
 ```
+
+#### 2. Plotting
+We can use a built-in convience function of a beakr's response object to display 
+an image of any static plot. In this example we'll make a map of the United States 
+and serve it with beakr. Use `help('Response')` to view other response object 
+methods and documentation.
+
+```
+library(beakr)
+library(ggplot2)
+
+# Create a plot of the US States
+states_plot <- function(res) {
+  states <- ggplot2::map_data('state')
+
+  plot <- ggplot(data = states) + 
+    geom_polygon(aes(x = long, y = lat, fill = region, group = group), color = "white") + 
+    coord_fixed(1.3) +
+    guides(fill=FALSE) 
+  
+  # Pass the plot to the beakrs response plot method 
+  res$plot(plot, base64 = FALSE, height = 800, width = 800)
+}
+
+# Create and start a default beakr instance
+newBeakr() %>% 
+  GET(path = '/usa', decorate(states_plot)) %>% 
+  startBeakr()
+
+```
+By visiting `http://127.0.0.1:8080/usa`, we can view a ggplot of the United States.
+
+Note: By convention, the response, request, and error objects are always 
+referred to as `res`, `req`, `err`, respectively, but its actual name is 
+determined by the parameters to the callback function in which you’re working with. 
+
+
 See the package documentation for more information.
 
 ### Notes
