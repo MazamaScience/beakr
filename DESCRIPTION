@@ -20,6 +20,7 @@ ByteCompile: TRUE
 Depends:
     R (>= 3.1.0)
 Imports:
+    futile.logger,
     R6,
     stats,
     webutils,
@@ -31,8 +32,7 @@ Imports:
 Suggests:
     testthat,
     knitr,
-    rmarkdown,
-    futile.logger
+    rmarkdown
 Encoding: UTF-8
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
