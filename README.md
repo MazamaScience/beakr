@@ -88,7 +88,7 @@ beakr %>%
 
 By sending an HTTP POST request to `http://127.0.0.1:1234/predict-species`, the 
 beakr instance will return a predicted species of iris. 
-We can use JSON to and beakr will parse the parameters. In this case, we will 
+We can use JSON and beakr will parse the parameters. In this case, we will 
 supply a sepal length & width (`sl`, `sw`) and petal length & width (`pl`, `pw`).
 ```
 $ curl -X POST http://127.0.0.1:1234/predict-species \
@@ -97,6 +97,7 @@ $ curl -X POST http://127.0.0.1:1234/predict-species \
   
 > setosa
 ```
+See the package documentation for more information.
 
 ### Notes
 Fundementally, beakr is built on top of the `libuv` and `http-parser` C libraries 

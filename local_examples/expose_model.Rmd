@@ -32,11 +32,11 @@ predict_species <- function(sl, sw, pl, pw) {
                       Petal.Width = pw, 
                       Species = NA )
   
-  predicted <- predict(knn_model, test)
-  output <- paste0('Predicted species: ', predicted, ' ')
+  species <- predict(knn_model, test)
   
-  return(output)
+  return(paste0('Predicted species: ', species, ' '))
 }
+
 ```
 
 
