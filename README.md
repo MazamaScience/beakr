@@ -18,8 +18,9 @@ newBeakr() %>%
 ```
 
 ###  Overview
-beakr provides functionality for handling common HTTP-requests, errors, and 
-logging - with R. The beakr package is intended to be lightweight, unopinionated, and simple. 
+The beakr package allows R code to listen for and interact with HTTP and WebSocket clients, 
+so you can serve web traffic directly out of an instance made with beakr. The beakr 
+package is intended to be lightweight, unoppioniated, and simple.  
 
 While beakr is not recommended for building extensive web frameworks, R and the flexibility 
 of the package - in theory - could allow it. Keep in mind, it is not intended to be an 
@@ -28,21 +29,12 @@ you're looking for full featured web frameworks, there are better tools and lang
 that (see Shiny, Django, etc., etc.). beakr is inspired by the minimal functionality and
 massive expandability of of Express and Flask. 
 
-beakr allows R code to listen for and interact with HTTP and WebSocket clients, 
-so you can serve web traffic directly out of a beakr instance. The beakr 
-package is intended to be lightweight, unoppioniated, and simple.  
-
-beakr provides foundational functionality for handling common HTTP-requests, 
-errors, and logging. While beakr is not recommended for building extensive web 
-frameworks, the flexibility of beakr could, in theory, allow it. beakr is not 
-intended to be an especially preformant web framework and the 'batteries' are 
-not included (see Shiny, Django, etc., etc.).
 beakr is incredibly flexible. It provides the ability for integrating your R 
 code as middleware in a beakr instance. Middleware functions can execute any 
 R code, make changes to the request, response, and error objects, and end the 
 request-response cycle. The beakr package loosely follows Express.js middleware 
 semantics, where middleware functions are functions that have access to the request 
-object (req), the response object (res), and error (err) object of a beakr instance.
+object (`req`), the response object (`res`), and error (`err`) object of a beakr instance.
 
 ### Installation
 Install the release version from CRAN:
@@ -113,10 +105,11 @@ See the package documentation for more information.
 
 ### Notes
 Fundamentally, beakr is built on top of the libuv and http-parser C libraries as 
-beakr relies heavily upon the httpuv, a package that provides low-level socket and 
-protocol support for handling HTTP and WebSocket requests directly from within R. 
-beakr and much of the development of the package was inspired by the excellent 
-(now deprecated) jug package, developed by Bart Smeets.
+beakr relies heavily upon the [httpuv](https://github.com/rstudio/httpuv), a package 
+that provides low-level socket and protocol support for handling HTTP and WebSocket 
+requests directly from within R. beakr and much of the development of the package 
+was inspired by the excellent and no longer supported 
+[jug](https://github.com/Bart6114/jug) package, developed by Bart Smeets.
 
 The beakr package was developed by [Hans Martin](https://github.com/hansmrtn) 
 and [Jonathan Callahan](https://github.com/jonathancallahan), and is supported by 
