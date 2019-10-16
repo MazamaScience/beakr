@@ -47,9 +47,9 @@ devtools::install_github("MazamaScience/beakr")
 ### Example
 
 #### Deploy a machine learning model
-Let's use the [caret](https://github.com/topepo/caret) package and \
-Iris data set to train a simple model for predicting the species of iris,
-given a sepal length & width, and petal length & width. 
+Let's use the [caret](https://github.com/topepo/caret) package and Iris data set
+to train a simple model for predicting the species of iris, given a sepal length
+& width, and petal length & width. 
 ```
 # Import libraries 
 library(beakr)
@@ -79,6 +79,7 @@ predict_species <- function(sl, sw, pl, pw) {
 beakr <- newBeakr()
 
 # Use beakr to expose the model in the '/predict-species' url path. 
+#   See help('decorate') for more info about decorating functions. 
 beakr %>%  
   POST(path = '/predict-species', decorate(predict_species)) %>% 
   errorHandler() %>% 
@@ -96,9 +97,6 @@ $ curl -X POST http://127.0.0.1:1234/predict-species \
   
 > setosa
 ```
-
-
-
 
 ### Notes
 Fundementally, beakr is built on top of the `libuv` and `http-parser` C libraries 
