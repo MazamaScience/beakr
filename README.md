@@ -1,9 +1,8 @@
 ![beakr_logo](/docs/beakr_logo.png)
 ### A Minimalist Web Framework for R. 
-beakr is a minimalist web framework for developing APIs in the R Language.
-beakr offers a robust set of fundemental web application features and is 
-intended to simplify data science API development - without obscurring 
-R's data processing capability and ease of use. 
+beakr is a minimalist web framework for developing APIs in the R Language. beakr offers
+a robust set of fundamental web application features and is intended to simplify data 
+science API development - without obscuring R's data processing capability and ease of use.
 
 #### Hello, world! - The beakr way.
 ```
@@ -12,8 +11,23 @@ newBeakr() %>%
   GET(path = "/", function(req, res, err) "Hello, World!") %>% 
   startBeakr(host = "127.0.0.1", port = 1234) 
 ```
+```
+## Serving beakr instance at http://127.0.0.1:1234
+## Beakr Instance: Human Room
+##  State: Active | Host: 127.0.0.1 | Port: 1234 | Middlewares: 1
+```
 
 ###  Overview
+beakr provides functionality for handling common HTTP-requests, errors, and 
+logging - with R. The beakr package is intended to be lightweight, unopinionated, and simple. 
+
+While beakr is not recommended for building extensive web frameworks, R and the flexibility 
+of the package - in theory - could allow it. Keep in mind, it is not intended to be an 
+especially performant web framework and the 'batteries' are certainly not included. If 
+you're looking for full featured web frameworks, there are better tools and languages for 
+that (see Shiny, Django, etc., etc.). beakr is inspired by the minimal functionality and
+massive expandability of of Express and Flask. 
+
 beakr allows R code to listen for and interact with HTTP and WebSocket clients, 
 so you can serve web traffic directly out of a beakr instance. The beakr 
 package is intended to be lightweight, unoppioniated, and simple.  
@@ -23,14 +37,12 @@ errors, and logging. While beakr is not recommended for building extensive web
 frameworks, the flexibility of beakr could, in theory, allow it. beakr is not 
 intended to be an especially preformant web framework and the 'batteries' are 
 not included (see Shiny, Django, etc., etc.).
-
-beakr is incredibly flexible. It provides the ability for integrating
-your R code as middleware in a beakr instance. Middleware functions
-can execute any R code, make changes to the request, response, and error objects, and 
-end the request-response cycle. The beakr package loosely follows
-[Express.js](http://expressjs.com/) middleware semantics. beakr middleware functions 
-are functions that have access to the request object (`req`), the response 
-object (`res`), and error (`err`) object of a beakr instance. 
+beakr is incredibly flexible. It provides the ability for integrating your R 
+code as middleware in a beakr instance. Middleware functions can execute any 
+R code, make changes to the request, response, and error objects, and end the 
+request-response cycle. The beakr package loosely follows Express.js middleware 
+semantics, where middleware functions are functions that have access to the request 
+object (req), the response object (res), and error (err) object of a beakr instance.
 
 ### Installation
 Install the release version from CRAN:
@@ -100,12 +112,11 @@ $ curl -X POST http://127.0.0.1:1234/predict-species \
 See the package documentation for more information.
 
 ### Notes
-Fundementally, beakr is built on top of the `libuv` and `http-parser` C libraries 
-as beakr relies heavily upon the [httpuv](https://github.com/rstudio/httpuv), 
-a package that provides low-level socket and protocol support for handling HTTP 
-and WebSocket requests directly from within R. beakr and much of the development
-of the package was inpsired by the excellent (now deprecated) [jug](https://github.com/Bart6114/jug) 
-package, developed by Bart Smeets. 
+Fundamentally, beakr is built on top of the libuv and http-parser C libraries as 
+beakr relies heavily upon the httpuv, a package that provides low-level socket and 
+protocol support for handling HTTP and WebSocket requests directly from within R. 
+beakr and much of the development of the package was inspired by the excellent 
+(now deprecated) jug package, developed by Bart Smeets.
 
 The beakr package was developed by [Hans Martin](https://github.com/hansmrtn) 
 and [Jonathan Callahan](https://github.com/jonathancallahan), and is supported by 
