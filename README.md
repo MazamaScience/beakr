@@ -27,8 +27,8 @@ While beakr is not recommended for building extensive web frameworks, R and the 
 of the package - in theory - could allow it. Keep in mind, it is not intended to be an 
 especially performant web framework and the 'batteries' are certainly not included. If 
 you're looking for full featured web frameworks, there are better tools and languages for 
-that (see Shiny, Django, etc., etc.). beakr is inspired by the minimal functionality and
-massive expandability of of Express and Flask. 
+that (see Shiny, Django, etc., etc.). beakr is inspired by the minimalist and
+massively-expandable frameworks offered by Express and Flask. 
 
 beakr is incredibly flexible. It provides the ability for integrating your R 
 code as middleware in a beakr instance. Middleware functions can execute any 
