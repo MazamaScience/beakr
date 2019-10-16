@@ -107,7 +107,7 @@ $ curl -X POST http://127.0.0.1:1234/predict-species \
 
 #### 2. Plotting
 We can use a built-in convience function of a beakr's response object to display 
-an image of any static plot. In this example we'll make a map of the United States 
+an image of a static plot. In this example we'll make a map of the United States 
 and serve it with beakr. Use `help('Response')` to view other response object 
 methods and documentation.
 
