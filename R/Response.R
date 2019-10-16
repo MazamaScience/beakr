@@ -123,7 +123,7 @@ Response <-
           self$body <- base64enc::base64encode(binary_image)
         } else {
           # Set content type to image
-          self$contentType
+          self$contentType("image/png")
           # Display plot
           self$body <- binary_image
         }
