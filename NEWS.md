@@ -4,6 +4,7 @@
 * Fixed beakr instance information view
 * Added `beakr` instance names
 * Added support for more internal functionality 
+* Added logging capability `logger()`.
 
 # beakr 0.1.4
 
