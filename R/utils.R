@@ -1,14 +1,14 @@
 #' @export
-#' @title Start a new Beakr instance
+#' @title Create a new Beakr instance
 #'
 #' @param name an optional name assigned to the \emph{Beakr} object.
 #'
 #' @description Create a \code{Beakr} instance object by calling the top-level
-#' \code{newBeakr()} function. If \code{name} is not supplied, a random name
+#' \code{createBeakr()} function. If \code{name} is not supplied, a random name
 #' will be assigned.
 #'
-#' @usage newBeakr(name = NULL)
-newBeakr <- function(name = NULL) {
+#' @usage createBeakr(name = NULL)
+createBeakr <- function(name = NULL) {
   beakr <- Beakr$new()
   if ( !is.null(name) ) {
     beakr$name <- name
@@ -17,17 +17,17 @@ newBeakr <- function(name = NULL) {
 }
 
 #' @export
-#' @title Start a beakr instance and listen for connections
+#' @title Listen for connections on a beakr instance
 #'
 #' @description Binds and listens for connections on the specified host and port.
 #'
 #' @details
-#' \code{startBeakr()} binds the port and listens for connections on a thread.
+#' \code{listen()} binds the port and listens for connections on a thread.
 #' The thread handles the I/O, and when it receives a HTTP request, it
 #' will schedule a call to the user-defined middleware and handle the
 #' request.
 #'
-#' If the daemon boolean value is set to \code{TRUE}, \code{startBeakr()} binds
+#' If the daemon boolean value is set to \code{TRUE}, \code{listen()} binds
 #' the specified port and listens for connections on a thread running in the
 #' background.
 #'
@@ -41,17 +41,17 @@ newBeakr <- function(name = NULL) {
 #' @param daemon run the instance in the background, the deafault is FALSE.
 #' @param verbose boolean, debugging.
 #'
-#' @usage startBeakr(beakr, host, port, daemon, verbose)
+#' @usage listen(beakr, host, port, daemon, verbose)
 #'
 #' @examples
 #' \dontrun{
-#' newBeakr() %>%
+#' createBeakr() %>%
 #'   GET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
-#'   startBeakr()
+#'   listen()
 #' }
-startBeakr <-function(
+listen <-function(
   beakr,
   host = "127.0.0.1",
   port = 8080,
@@ -88,8 +88,8 @@ newError <- function() {
 #'
 #' @examples
 #' \donttest{
-#' beakr <- newBeakr()
-#' startBeakr(beakr, daemon = TRUE)
+#' beakr <- createBeakr()
+#' listen(beakr, daemon = TRUE)
 #' kill(beakr)
 #' }
 kill <- function(beakr) {
@@ -102,11 +102,11 @@ kill <- function(beakr) {
 #' @title Stop all beakr instances
 #'
 #' @description Stops all instances that have been activated by
-#' \code{\link{startBeakr}} in the session.
+#' \code{\link{listen}} in the session.
 #'
 #' @usage killAll()
 #'
-#' @seealso \code{\link{kill}} and \code{\link{startBeakr}}
+#' @seealso \code{\link{kill}} and \code{\link{listen}}
 killAll <- function() {
   httpuv::stopAllServers()
   cat("Stopped All Instances\n")
@@ -147,31 +147,30 @@ listActive <- function() {
 #' @param path string representing a relative path for which the middleware
 #' is invoked.
 #'
-#' @usage errorHandler(beakr, path)
-errorHandler <- function(beakr, path = NULL) {
-  if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
-  }
-  jsoner <- function(req, res, err) {
-    res$contentType("application/json")
-    if ( err$occurred ) {
-      error_str <- paste(err$errors, collapse = "\n")
-      res$status <- 500L
-      res$json(list( status = "err",
-                     status_code = 500L,
-                     errors = error_str ))
-      if ( getOption("beakr.verbose") ) {
-        cat("ERROR:\n", error_str, "\n")
+#' @usage handleErrors(beakr, path)
+handleErrors <- function(beakr, path = NULL) {
+  use(
+    beakr = beakr,
+    path = path,
+    function(req, res, err) {
+      res$contentType("application/json")
+      if ( err$occurred ) {
+        error_str <- paste(err$errors, collapse = "\n")
+        res$status <- 500L
+        res$json(list( status = "error",
+                       status_code = 500L,
+                       errors = error_str ))
+        if ( getOption("beakr.verbose") ) {
+          cat("ERROR:\n", error_str, "\n")
+        }
+
+      } else {
+        res$status = 404L
+        res$json(list( status = "Page not found.",
+                       status_code = 404L ))
       }
-
-    } else {
-      res$status = 404L
-      res$json(list( status = "Page not found.",
-                     status_code = 404L ))
     }
-  }
-
-  return(use(beakr = beakr, path = path, method = NULL, jsoner))
+  )
 }
 
 #' @export

@@ -105,7 +105,7 @@ Router <-
                 )}, silent = TRUE)
 
             if ( "try-error" %in% class(result) ) {
-              self$processEvent( event = "err",
+              self$processEvent( event = "error",
                                  req,
                                  res,
                                  err,
@@ -135,7 +135,7 @@ Router <-
         # Show failure
         if ( is.null(res$body) ) {
           msg <- "Request not handled: No body set by middleware"
-          self$processEvent(event = "err", req, res, err, msg)
+          self$processEvent(event = "error", req, res, err, msg)
           stop(msg)
         }
 

@@ -24,7 +24,7 @@ continuation of the \code{jug} package developed by Bart Smeets. The
 \href{http://www.mazamascience.com/}{Mazama Science}.
 }
 \seealso{
-\link{startBeakr}
+\link{createBeakr}
 }
 \author{
 Hans Martin \email{hans@mazamascience.com}

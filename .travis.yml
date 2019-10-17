@@ -1,6 +1,6 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 #
-# .travis.ytml file examples:
+# .travis.yml file examples:
 #
 #  * https://github.com/cdeterman/gpuR/blob/develop/.travis.yml
 
@@ -15,23 +15,23 @@ warnings_are_errors: false
 cache: packages
 
 r:
-  # - oldrel
+  - oldrel
   - release
-  # - devel
+  - devel
 
 addons:
   apt:
     packages:
-      - libcurl4-openssl-dev
-      - libgdal-dev
-      - libgeos-dev
-      - libjq-dev
-      - libproj-dev
-      - libprotobuf-dev
-      - libssl-dev
-      - libudunits2-dev
-      - libv8-dev
-      - protobuf-compiler
+#      - libcurl4-openssl-dev
+#      - libgdal-dev
+#      - libgeos-dev
+#      - libjq-dev
+#      - libproj-dev
+#      - libprotobuf-dev
+#      - libssl-dev
+#      - libudunits2-dev
+#      - libv8-dev
+#      - protobuf-compiler
 
 # R packages
 r_packages:

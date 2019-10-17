@@ -12,7 +12,7 @@
 logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
 
   if ( is.null(beakr) ) {
-    beakr <- newBeakr(name = "NULL")
+    beakr <- createBeakr(name = "NULL")
   }
 
   if ( level == 'TRACE' ) {

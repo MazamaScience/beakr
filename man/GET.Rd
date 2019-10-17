@@ -20,11 +20,11 @@ specified callback functions or middleware.
 }
 \examples{
 \dontrun{
-newBeakr() \%>\%
+createBeakr() \%>\%
   GET("/", function(req, res, err) {
     return("Successful GET request!\\n")
   }) \%>\%
-  startBeakr()
+  listen()
 
 # In browser:
 #   http://127.0.0.1:8080

@@ -14,7 +14,7 @@
 #' \code{beakr} package is supported and maintained by
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
-#' @seealso \link{startBeakr}
+#' @seealso \link{createBeakr}
 #'
 #' @name beakr-package
 #' @aliases beakr

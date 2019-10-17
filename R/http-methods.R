@@ -13,11 +13,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' newBeakr() %>%
+#' createBeakr() %>%
 #'   GET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
-#'   startBeakr()
+#'   listen()
 #'
 #' # In browser:
 #' #   http://127.0.0.1:8080
@@ -58,11 +58,11 @@ GET <- function(beakr, path = NULL, ...) {
 #'
 #' @examples
 #' \dontrun{
-#' newBeakr() %>%
+#' createBeakr() %>%
 #'   POST("/", function(req, res, err) {
 #'     return("Successful POST request!\n")
 #'   }) %>%
-#'   startBeakr()
+#'   listen()
 #'
 #' # In terminal:
 #' #  curl -X POST http://127.0.0.1:8080/
@@ -100,11 +100,11 @@ POST <- function(beakr, path = NULL, ...) {
 #'
 #' @examples
 #' \dontrun{
-#' newBeakr() %>%
+#' createBeakr() %>%
 #'   PUT("/", function(req, res, err) {
 #'     return("Successful PUT request!\n")
 #'   }) %>%
-#'   startBeakr()
+#'   listen()
 #'
 #' # In terminal:
 #' #  curl -X PUT http://127.0.0.1:8080/

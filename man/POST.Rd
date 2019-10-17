@@ -20,11 +20,11 @@ specified callback functions or middleware.
 }
 \examples{
 \dontrun{
-newBeakr() \%>\%
+createBeakr() \%>\%
   POST("/", function(req, res, err) {
     return("Successful POST request!\\n")
   }) \%>\%
-  startBeakr()
+  listen()
 
 # In terminal:
 #  curl -X POST http://127.0.0.1:8080/
