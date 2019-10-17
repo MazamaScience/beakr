@@ -35,14 +35,14 @@ newBeakr() %>%
 
   GET("/repeater", function(req, res, err) {
 
-    text <- setIfNull(req$params$text, "Howdy")
-    times <- setIfNull(req$params$times, 8)
-    responseType <- setIfNull(req$params$responseType, "txt")
+    text <- setIfNull(req$parameters$text, "Howdy")
+    times <- setIfNull(req$parameters$times, 8)
+    responseType <- setIfNull(req$parameters$responseType, "txt")
 
     if ( times > 10 )
       stop("Parameter 'times' must be < 10")
 
-    res$content_type(mime::mimemap[responseType])
+    res$contentType(mime::mimemap[responseType])
 
     if ( responseType == "txt" ) {
 

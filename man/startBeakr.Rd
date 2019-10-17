@@ -9,11 +9,13 @@ startBeakr(beakr, host, port, daemon, verbose)
 \arguments{
 \item{beakr}{a beakr instance.}
 
-\item{host}{a string that is a valid IPv4 or IPv6 address to listen on.}
+\item{host}{a string that is a valid IPv4 or IPv6 address to listen on.
+Defaults to the local host ("127.0.0.1").}
 
-\item{port}{a number or integer that indicates the port to listen on.}
+\item{port}{a number or integer that indicates the port to listen on. Default
+is a port opened on 8080.}
 
-\item{daemon}{run the instance in the background.}
+\item{daemon}{run the instance in the background, the deafault is FALSE.}
 
 \item{verbose}{boolean, debugging.}
 }

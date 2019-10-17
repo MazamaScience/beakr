@@ -74,10 +74,10 @@ Request <-
       type = NULL,
       body = NULL,
       protocol = "http",
-      # Necessary?
-      # attach = function(key, value) {
-      #   self$parameters[[key]] <- value
-      # },
+      # Necessary? - YES.
+      attach = function(key, value) {
+        self$parameters[[key]] <- value
+      },
       getHeader = function(key) {
         self$headers[[key]]
       },
@@ -112,7 +112,7 @@ Request <-
 
         self$headers <- as.list(req)[header_keys]
         names(self$headers) <- Map(
-          f = function(x) { tolower(gsub("^HTTP", "", x)) },
+          f = function(x) { tolower(gsub("^HTTP_", "", x)) },
           names(self$headers)
         )
 
