@@ -35,8 +35,10 @@ newBeakr <- function(name = NULL) {
 #'
 #' @param beakr a beakr instance.
 #' @param host a string that is a valid IPv4 or IPv6 address to listen on.
-#' @param port a number or integer that indicates the port to listen on.
-#' @param daemon run the instance in the background.
+#' Defaults to the local host ("127.0.0.1").
+#' @param port a number or integer that indicates the port to listen on. Default
+#' is a port opened on 8080.
+#' @param daemon run the instance in the background, the deafault is FALSE.
 #' @param verbose boolean, debugging.
 #'
 #' @usage startBeakr(beakr, host, port, daemon, verbose)
