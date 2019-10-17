@@ -1,4 +1,11 @@
+
+
 ![beakr_logo](https://cdn3.imggmi.com/uploads/2019/10/16/f74987f8804a4512f70e0e8d17f05983-full.png)
+
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/AirSensor)](https://cran.r-project.org/package=beakr)
+[![Downloads](http://cranlogs.r-pkg.org/badges/AirSensor)](https://cran.r-project.org/package=beakr)
+[![Build Status](https://travis-ci.org/MazamaScience/AirSensor.svg?branch=master)](https://travis-ci.org/MazamaScience/beakr)
+
 
 ### A Minimalist Web Framework for R. 
 beakr is a minimalist web framework for developing APIs in the R Language. beakr offers
