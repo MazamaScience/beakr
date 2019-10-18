@@ -153,7 +153,7 @@ handleErrors <- function(beakr, path = NULL) {
     beakr = beakr,
     path = NULL,
     function(req, res, err) {
-      res$contentType("application/json")
+      res$setContentType("application/json")
       if ( err$occurred ) {
         res$status <- 500L
         error_str <- paste(err$errors, collapse = "\n")
@@ -249,7 +249,7 @@ static <- function(beakr, path = NULL, dir = NULL) {
 
     if ( file.exists(fpath) & bound ) {
       mime_type <- mime::guess_type(fpath)
-      res$contentType(mime_type)
+      res$setContentType(mime_type)
       data <- readBin( con  = fpath,
                        what = "raw",
                        n    = file.info(fpath)$size )

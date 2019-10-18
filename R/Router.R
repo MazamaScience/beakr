@@ -124,12 +124,12 @@ Router <-
         }
 
         # if output is verbose return the options
-        if ( getOption('beakr.verbose') ) {
-          cat( toupper(req$protcol), '|',
-               req$path, '-',
-               res$status, '\n',
-               sep = ' ' )
-        }
+        # if ( getOption('beakr.verbose') ) {
+        #   cat( toupper(req$protcol), '|',
+        #        req$path, '-',
+        #        res$status, '\n',
+        #        sep = ' ' )
+        # }
 
         # Show failure
         if ( is.null(res$body) ) {

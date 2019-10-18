@@ -33,7 +33,7 @@ object is always referred to as \code{res} (and the HTTP request is
 \item{\code{setHeader(key, value)}}{
   Sets a key-value header, i.e. \code{"Content-Type" = "text/html"}.
   }
-  \item{\code{contentType(type)}}{
+  \item{\code{setContentType(type)}}{
   Sets the response content-type.
   }
   \item{\code{setStatus(status)}}{

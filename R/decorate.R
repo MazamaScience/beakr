@@ -22,7 +22,7 @@ decorate <-
 
     # Create a decorated function
     decorated <- function(req, res, err) {
-      res$contentType(content_type)
+      res$setContentType(content_type)
       #Inspect passed in parameters
       parameters <- utils::modifyList(req$parameters, req$headers)
       parameters$req <- req

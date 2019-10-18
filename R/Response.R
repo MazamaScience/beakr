@@ -29,7 +29,7 @@
 #' \item{\code{setHeader(key, value)}}{
 #'   Sets a key-value header, i.e. \code{"Content-Type" = "text/html"}.
 #'   }
-#'   \item{\code{contentType(type)}}{
+#'   \item{\code{setContentType(type)}}{
 #'   Sets the response content-type.
 #'   }
 #'   \item{\code{setStatus(status)}}{
@@ -68,7 +68,7 @@ Response <-
       setHeader = function(key, value) {
         self$headers[[key]] <- value
       },
-      contentType = function(type) {
+      setContentType = function(type) {
         self$headers[["Content-Type"]] <- type
       },
       setStatus = function(status) {
@@ -89,11 +89,11 @@ Response <-
       },
       json = function(txt, auto_unbox = TRUE) {
         self$body <- jsonlite::toJSON(txt, auto_unbox = auto_unbox)
-        self$contentType("application/json")
+        self$setContentType("application/json")
       },
       text = function(txt) {
         self$body <- as.character(txt)
-        self$contentType("text/html")
+        self$setContentType("text/html")
       },
       structured = function(protocol) {
         switch(
@@ -118,12 +118,12 @@ Response <-
         # if base 64 colors, encode binary image, otherwise dont
         if ( base64 ) {
           # Set content type to base64 image render
-          self$contentType("application/base64")
+          self$setContentType("application/base64")
           # Display plot
           self$body <- base64enc::base64encode(binary_image)
         } else {
           # Set content type to image
-          self$contentType("image/png")
+          self$setContentType("image/png")
           # Display plot
           self$body <- binary_image
         }
