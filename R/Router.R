@@ -71,7 +71,7 @@ Router <-
 
         body <- NULL
 
-        self$processEvent(event = "start", req, res, err)
+        self$processEvent(event = 'start', req, res, err)
 
         for ( mw in self$middleware ) {
           path <- .matchPath(mw$path, req$path)
@@ -87,32 +87,24 @@ Router <-
                           is.null(mw$path) )
 
           # Check capture group logic
-          desired <- any( (req$protocol == "http" && httpLogic),
-                         (req$protocol == "websocket" && wsLogic) )
+          desired <- any( (req$protocol == 'http' && httpLogic),
+                         (req$protocol == 'websocket' && wsLogic) )
 
           # Check websocket/http logic and return proper res
           if ( desired ) {
-            print('desired!')
-            # result <-
-            #   try({
-            #     body <- switch(req$protocol,
-            #       "http" = mw$FUN( req = req,
-            #                        res = res,
-            #                        err = err ),
-            #       "websocket" = mw$FUN( binary = websocket_binary,
-            #                             message = websocket_msg,
-            #                             res = res,
-            #                             err = err )
-            #     )}, silent = TRUE)
 
-            body <- try(switch( req$protocol,
-              'http' = mw$FUN(req = req, res = res, err = err),
-              'websocket' = mw$FUN(binary = websocket_binary, message = websocket_msg, res = res, err = err)),
-              silent = TRUE
-            )
+            body <-
+              try({
+                switch( req$protocol,
+                        'http' = mw$FUN(req = req, res = res, err = err),
+                        'websocket' = mw$FUN( binary = websocket_binary,
+                                              message = websocket_msg,
+                                              res = res,
+                                              err = err ))
+              })
 
-            if ( "try-error" %in% class(body) ) {
-              self$processEvent( event = "error",
+            if ( 'try-error' %in% class(body) ) {
+              self$processEvent( event = 'error',
                                  req,
                                  res,
                                  err,
@@ -132,11 +124,11 @@ Router <-
         }
 
         # if output is verbose return the options
-        if ( getOption("beakr.verbose") ) {
-          cat( toupper(req$protcol), "|",
-               req$path, "-",
-               res$status, "\n",
-               sep = " " )
+        if ( getOption('beakr.verbose') ) {
+          cat( toupper(req$protcol), '|',
+               req$path, '-',
+               res$status, '\n',
+               sep = ' ' )
         }
 
         # Show failure

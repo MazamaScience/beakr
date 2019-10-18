@@ -24,15 +24,15 @@ decorate <-
     decorated <- function(req, res, err) {
       res$contentType(content_type)
       #Inspect passed in parameters
-      params <- utils::modifyList(req$parameters, req$headers)
-      params$req <- req
-      params$res <- res
-      params$err <- err
+      parameters <- utils::modifyList(req$parameters, req$headers)
+      parameters$req <- req
+      parameters$res <- res
+      parameters$err <- err
 
       # Check arguments are all present
       if ( strict ) {
         present <- sapply( X = args,
-                           FUN = function(x) x %in% names(params) )
+                           FUN = function(x) x %in% names(parameters) )
         # Throw an err if missing requested params
         if( !all(present) ) {
           err$set(paste0( "Need requested arguments:\n",
@@ -43,11 +43,11 @@ decorate <-
 
       # Drop unrequested params from query params
       if ( !("..." %in% args) ) {
-        params <- params[names(params) %in% args]
+        parameters <- parameters[names(parameters) %in% args]
       }
 
-      # Execute the passed in function with the params
-      return(do.call(what = FUN, args = params))
+      # Execute the passed in function with the param
+      return(do.call(what = FUN, args = parameters))
     }
 
     # Return decorated function

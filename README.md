@@ -158,10 +158,9 @@ requests directly from within R. Much of the development of the package
 was inspired by the excellent, no longer supported(?) [jug](https://github.com/Bart6114/jug) 
 package, developed by Bart Smeets.
 
-The beakr package was developed by [Hans Martin](https://github.com/hansmrtn) 
-and [Jonathan Callahan](https://github.com/jonathancallahan), and is supported by 
-[Mazama Science](http://mazamascience.com/).
+The beakr package is supported by [Mazama Science](http://mazamascience.com/).
 
+i
 
 
 
