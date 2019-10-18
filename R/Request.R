@@ -186,38 +186,3 @@ TestRequest <-
       }
     )
   )
-
-# ===== Internal Functions =====================================================
-
-#' @keywords internal
-#' @title Parse the parameters passed by the req
-#'
-#' @param req an HTTP req
-#' @param body a body text string
-#' @param query a url-encoded query string
-#' @param type a media mime type (a.k.a. Multipurpose Internet Mail Extensions
-#' or MIME type).
-.parseParameters <- function(req, body, query, type) {
-  parameters <- list()
-  parameters <- c(parameters, webutils::parse_query(query))
-
-  if ( is.null(type) ) {
-    return(parameters)
-  }
-
-  if ( grepl("json", type) && nchar(body) > 0 ) {
-    parameters <- c( parameters,
-                     jsonlite::fromJSON(body, simplifyDataFrame = FALSE) )
-  }
-
-  if ( grepl("multipart", type) ) {
-    parameters <- c( parameters,
-                     mime::parse_multipart(req) )
-  }
-
-  if ( grepl("form-urlencoded", type) ) {
-    parameters <- c( parameters,
-                     webutils::parse_query(body) )
-  }
-  return(parameters)
-}

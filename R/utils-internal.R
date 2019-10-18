@@ -18,7 +18,7 @@ NULL
 #' @param ... additional parameters
 .matchPath <- function(pattern, path, ...) {
   # Result init
-  result <- list(match = FALSE, src = path, params = list())
+  result <- list(match = FALSE, src = path, parameters = list())
 
   if ( !is.null(pattern) ) {
     if ( !(grepl("^\\^", pattern) ||
@@ -29,10 +29,10 @@ NULL
     rex <- regexpr(pattern, path, perl = TRUE, ...)
 
     for ( n in attr(x = rex, which = "capture.name") ) {
-      result$params[[n]] <- substr( x     = result$src,
-                                    start = attr(rex, "capture.start")[,n],
-                                    stop  = (attr(rex, "capture.start")[,n] +
-                                               attr(rex, "capture.length")[,n] - 1) )
+      result$parameters[[n]] <- substr( x     = result$src,
+                                        start = attr(rex, "capture.start")[,n],
+                                        stop  = (attr(rex, "capture.start")[,n] +
+                                                   attr(rex, "capture.length")[,n] - 1) )
 
     }
     result$match <- ifelse(rex[[1]] > -1, TRUE, FALSE)
@@ -41,6 +41,39 @@ NULL
   }
 
   return(result)
+}
+
+#' @keywords internal
+#' @title Parse the parameters passed by the req
+#'
+#' @param req an HTTP req
+#' @param body a body text string
+#' @param query a url-encoded query string
+#' @param type a media mime type (a.k.a. Multipurpose Internet Mail Extensions
+#' or MIME type).
+.parseParameters <- function(req, body, query, type) {
+  parameters <- list()
+  parameters <- c(parameters, webutils::parse_query(query))
+
+  if ( is.null(type) ) {
+    return(parameters)
+  }
+
+  if ( grepl("json", type) && nchar(body) > 0 ) {
+    parameters <- c( parameters,
+                     jsonlite::fromJSON(body, simplifyDataFrame = FALSE) )
+  }
+
+  if ( grepl("multipart", type) ) {
+    parameters <- c( parameters,
+                     mime::parse_multipart(req) )
+  }
+
+  if ( grepl("form-urlencoded", type) ) {
+    parameters <- c( parameters,
+                     webutils::parse_query(body) )
+  }
+  return(parameters)
 }
 
 #' @keywords internal
@@ -70,7 +103,7 @@ routeMiddleware <- function(
   }
 
   # Create new middleware
-  mw <- Middleware$new(FUN, path, method, websocket)
+  mw <- Middleware$new(FUN = FUN, path, method, websocket)
 
   # Add the middleware
   beakr$router$addMiddleware(mw)

@@ -75,7 +75,7 @@ Router <-
 
         for ( mw in self$middleware ) {
           path <- .matchPath(mw$path, req$path)
-          req$addParameters(path$params)
+          req$addParameters(path$parameters)
 
           # Handle http protocol logic
           httpLogic <- any( path$match && (mw$method == req$method),
@@ -92,19 +92,26 @@ Router <-
 
           # Check websocket/http logic and return proper res
           if ( desired ) {
-            result <-
-              try({
-                body <- switch(req$protocol,
-                  "http" = mw$FUN( req = req,
-                                   res = res,
-                                   err = err ),
-                  "websocket" = mw$FUN( binary = websocket_binary,
-                                        message = websocket_msg,
-                                        res = res,
-                                        err = err )
-                )}, silent = TRUE)
+            print('desired!')
+            # result <-
+            #   try({
+            #     body <- switch(req$protocol,
+            #       "http" = mw$FUN( req = req,
+            #                        res = res,
+            #                        err = err ),
+            #       "websocket" = mw$FUN( binary = websocket_binary,
+            #                             message = websocket_msg,
+            #                             res = res,
+            #                             err = err )
+            #     )}, silent = TRUE)
 
-            if ( "try-error" %in% class(result) ) {
+            body <- try(switch( req$protocol,
+              'http' = mw$FUN(req = req, res = res, err = err),
+              'websocket' = mw$FUN(binary = websocket_binary, message = websocket_msg, res = res, err = err)),
+              silent = TRUE
+            )
+
+            if ( "try-error" %in% class(body) ) {
               self$processEvent( event = "error",
                                  req,
                                  res,

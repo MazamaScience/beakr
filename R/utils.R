@@ -151,18 +151,20 @@ listActive <- function() {
 handleErrors <- function(beakr, path = NULL) {
   use(
     beakr = beakr,
-    path = path,
+    path = NULL,
     function(req, res, err) {
       res$contentType("application/json")
       if ( err$occurred ) {
-        error_str <- paste(err$errors, collapse = "\n")
         res$status <- 500L
-        res$json(list( status = "error",
-                       status_code = 500L,
-                       errors = error_str ))
+        error_str <- paste(err$errors, collapse = "\n")
+
         if ( getOption("beakr.verbose") ) {
           cat("ERROR:\n", error_str, "\n")
         }
+
+        res$json(list( status = "error",
+                       status_code = 500L,
+                       errors = error_str ))
 
       } else {
         res$status = 404L
