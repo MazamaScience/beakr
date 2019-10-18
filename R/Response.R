@@ -74,11 +74,6 @@ Response <-
       setStatus = function(status) {
         self$status <- status
       },
-      redirect = function(url) {
-        # Set status to 'Found'
-        self$status <- 302L
-        self$setHeader("Location", url)
-      },
       setBody = function(body) {
         # Hack to avoid numeric res failure
         if ( self$headers[["Content-Type"]] == "text/html" ) {
@@ -86,6 +81,11 @@ Response <-
         } else {
           self$body <- body
         }
+      },
+      redirect = function(url) {
+        # Set status to 'Found'
+        self$status <- 302L
+        self$setHeader("Location", url)
       },
       json = function(txt, auto_unbox = TRUE) {
         self$body <- jsonlite::toJSON(txt, auto_unbox = auto_unbox)
