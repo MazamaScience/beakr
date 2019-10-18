@@ -15,9 +15,9 @@ science API development - without obscuring R's data processing capability and e
 #### Hello, world! - The beakr way.
 ```
 library(beakr)
-newBeakr() %>% 
+createBeakr() %>% 
   GET(path = "/", function(req, res, err) "Hello, World!") %>% 
-  startBeakr(host = "127.0.0.1", port = 1234) 
+  listen(host = "127.0.0.1", port = 1234) 
 ```
 ```
 ## Serving beakr instance at http://127.0.0.1:1234
@@ -61,9 +61,11 @@ devtools::install_github("MazamaScience/beakr")
 ### Examples
 
 #### 1. Deploy a machine learning model
-Let's use the [caret](https://github.com/topepo/caret) package and Iris data set
-to train a simple model for predicting the species of iris, given a sepal length
-& width, and petal length & width. We can expose this model with beakr.
+beakr can expose code in an R session. As an example, let's expose a simple 
+machine learning model using the [caret](https://github.com/topepo/caret) 
+package and the Iris data set. We can train a KNN model for categorizing the 
+species of an iris, when the beakr instance is given a sepal length & width, 
+and petal length & width, as a JSON post request.
 ```
 # Import libraries 
 library(beakr)
@@ -90,20 +92,18 @@ predict_species <- function(sl, sw, pl, pw) {
 }
 
 # Create the beakr instance 
-beakr <- newBeakr()
+beakr <- createBeakr()
 
 # Use beakr to expose the model in the '/predict-species' url path. 
 #   See help('decorate') for more info about decorating functions. 
 beakr %>%  
   POST(path = '/predict-species', decorate(predict_species)) %>% 
-  errorHandler() %>% 
-  startBeakr(host = '127.0.0.1', port = 1234)
+  handleErrors() %>% 
+  listen(host = '127.0.0.1', port = 1234)
 ```
-
-By sending an HTTP POST request to `http://127.0.0.1:1234/predict-species`, the 
-beakr instance will return a predicted species of iris. 
-We can use JSON and beakr will parse the parameters. In this case, we will 
-supply a sepal length & width (`sl`, `sw`) and petal length & width (`pl`, `pw`).
+By sending an HTTP POST request to `http://127.0.0.1:1234/predict-species` with 
+the data as a JSON string (of sepal length & width (`sl`, `sw`) and petal length 
+& width (`pl`, `pw`)), the beakr instance will return a predicted species of iris. 
 ```
 $ curl -X POST http://127.0.0.1:1234/predict-species \
   -H 'content-type: application/json' \
@@ -136,9 +136,9 @@ states_plot <- function(res) {
 }
 
 # Create and start a default beakr instance
-newBeakr() %>% 
+createBeakr() %>% 
   GET(path = '/usa', decorate(states_plot)) %>% 
-  startBeakr()
+  listen()
 
 ```
 By visiting `http://127.0.0.1:8080/usa`, we can view a ggplot of the United States.
@@ -154,9 +154,9 @@ See the package documentation for more information.
 Fundamentally, beakr is built on top of the libuv and http-parser C libraries as 
 beakr relies heavily upon the [httpuv](https://github.com/rstudio/httpuv), a package 
 that provides low-level socket and protocol support for handling HTTP and WebSocket 
-requests directly from within R. beakr and much of the development of the package 
-was inspired by the excellent and no longer supported 
-[jug](https://github.com/Bart6114/jug) package, developed by Bart Smeets.
+requests directly from within R. Much of the development of the package 
+was inspired by the excellent, no longer supported(?) [jug](https://github.com/Bart6114/jug) 
+package, developed by Bart Smeets.
 
 The beakr package was developed by [Hans Martin](https://github.com/hansmrtn) 
 and [Jonathan Callahan](https://github.com/jonathancallahan), and is supported by 
