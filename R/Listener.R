@@ -33,7 +33,7 @@ Listener <-
     public = list(
       FUN = NULL,
       event = NULL,
-      initialize = function(event, ...) {
+      initialize = function(event, FUN, ...) {
         self$FUN = FUN
         self$event = event
       }

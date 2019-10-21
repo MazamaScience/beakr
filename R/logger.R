@@ -40,11 +40,9 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
     stop("logger requires  a file and/or console output to write to.")
   }
 
-  futile.logger::flog.logger( name = "beakr",
+  try(futile.logger::flog.logger( name = "beakr",
                               threshold = thresh,
-                              appender = appdr )
-
-
+                              appender = appdr ), silent = TRUE)
   onEvent(
     beakr = beakr,
     event = 'start',
@@ -54,7 +52,7 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
                     req$path,
                     "-",
                     req$method,
-                    "- Request Received",
+                    "- REQUEST RECEIVED",
                     "\n",
                     sep = " " )
       return(futile.logger::flog.debug(msg, name = "beakr"))
@@ -85,7 +83,7 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
                     req$path,
                     "-",
                     req$method,
-                    "- error encountered:",
+                    "- ERROR:",
                     "\n" ,
                     err_msg,
                     sep = " " )
@@ -96,3 +94,4 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
   return(beakr)
 
 }
+

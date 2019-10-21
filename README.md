@@ -30,8 +30,7 @@ The beakr package allows R code to listen for and interact with HTTP and WebSock
 so you can serve web traffic directly out of an instance made with beakr. The beakr 
 package is intended to be lightweight, unoppioniated, and simple.  
 
-While beakr is not recommended for building extensive web frameworks, R and the flexibility 
-of the package - in theory - could allow it. Keep in mind, it is not intended to be an 
+While beakr is not recommended for building extensive web frameworks, R and the flexibility of the package - in theory - could allow it. Keep in mind, it is not intended to be an 
 especially performant web framework and the 'batteries' are certainly not included. If 
 you're looking for full featured web frameworks, there are better tools and languages for 
 that (see Shiny, Django, etc., etc.). beakr is inspired by the minimalist and
@@ -60,7 +59,7 @@ devtools::install_github("MazamaScience/beakr")
 
 ### Examples
 
-#### 1. Deploy a machine learning model
+#### 1. Expose R code 
 beakr can expose code in an R session. As an example, let's expose a simple 
 machine learning model using the [caret](https://github.com/topepo/caret) 
 package and the Iris data set. We can train a KNN model for categorizing the 
@@ -159,8 +158,3 @@ was inspired by the excellent, no longer supported(?) [jug](https://github.com/B
 package, developed by Bart Smeets.
 
 The beakr package is supported by [Mazama Science](http://mazamascience.com/).
-
-i
-
-
-

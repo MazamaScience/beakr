@@ -70,7 +70,7 @@ specified callback functions or middleware." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -142,11 +142,11 @@ is invoked.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
+<span class='fu'><a href='createBeakr.html'>createBeakr</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>GET</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
     <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful GET request!\n"</span>)
   }) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='startBeakr.html'>startBeakr</a></span>()
+  <span class='fu'><a href='listen.html'>listen</a></span>()
 
 <span class='co'># In browser:</span>
 <span class='co'>#   http://127.0.0.1:8080</span>

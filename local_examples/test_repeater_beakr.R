@@ -8,7 +8,7 @@
 library(beakr)
 library(MazamaCoreUtils)
 
-newBeakr() %>%
+createBeakr() %>%
 
   # ----- Welcome --------------------------------------------------------------
 
@@ -85,9 +85,9 @@ newBeakr() %>%
 
   # ----- Handle errors --------------------------------------------------------
 
-  errorHandler() %>%
+  handleErrors() %>%
 
   # ----- Start Beakr ----------------------------------------------------------
 
-  startBeakr(daemon = FALSE)
+  listen(daemon = FALSE)
 

@@ -82,6 +82,7 @@ Beakr <-
       name = NULL,
       router = NULL,
       server = NULL,
+      verbose = NULL,
       appDefinition = function() { # Look into renaming
         list(
           # Call a req invoke
@@ -108,6 +109,7 @@ Beakr <-
         self$router <- Router$new()
         # Set Early for testing purposes when serve_it isn't called - Optional?
         # options("beakr.verbose" = TRUE)
+        self$verbose = TRUE
         if ( is.null(self$name) ) {
           self$name <- .randomName()
         }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PUT-binding middleware — PUT • beakr</title>
+<title>Stop all beakr instances — killAll • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="PUT-binding middleware — PUT" />
-<meta property="og:description" content="Routes HTTP PUT requests to the specified path with the
-specified callback functions or middleware." />
+<meta property="og:title" content="Stop all beakr instances — killAll" />
+<meta property="og:description" content="Stops all instances that have been activated by
+listen in the session." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,55 +109,28 @@ specified callback functions or middleware." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>PUT-binding middleware</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
-    <div class="hidden name"><code>PUT.Rd</code></div>
+    <h1>Stop all beakr instances</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>killAll.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Routes HTTP PUT requests to the specified path with the
-specified callback functions or middleware.</p>
+    <p>Stops all instances that have been activated by
+<code><a href='listen.html'>listen</a></code> in the session.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>PUT</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>beakr</th>
-      <td><p>a beakr instance.</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>string representing a relative path for which the middleware
-is invoked.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional middleware/functions.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>killAll</span>()</pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='createBeakr.html'>createBeakr</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>PUT</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
-    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful PUT request!\n"</span>)
-  }) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='listen.html'>listen</a></span>()
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-<span class='co'># In terminal:</span>
-<span class='co'>#  curl -X PUT http://127.0.0.1:8080/</span>
-<span class='co'># &gt; Successful PUT request!</span>
-}</div></pre>
+    <div class='dont-index'><p><code><a href='kill.html'>kill</a></code> and <code><a href='listen.html'>listen</a></code></p></div>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>
