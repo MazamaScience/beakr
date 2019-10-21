@@ -155,9 +155,7 @@ handleErrors <- function(beakr, path = NULL) {
         res$status <- 500L
         error_str <- paste(err$errors, collapse = "\n")
 
-        if ( getOption("beakr.verbose") ) {
-          cat("ERROR:\n", error_str, "\n")
-        }
+        cat("ERROR:\n", error_str, "\n")
 
         res$json(list( status = "error",
                        status_code = 500L,
