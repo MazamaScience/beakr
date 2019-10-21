@@ -123,14 +123,6 @@ Router <-
           }
         }
 
-        # if output is verbose return the options
-        # if ( getOption('beakr.verbose') ) {
-        #   cat( toupper(req$protcol), '|',
-        #        req$path, '-',
-        #        res$status, '\n',
-        #        sep = ' ' )
-        # }
-
         # Show failure
         if ( is.null(res$body) ) {
           msg <- "Request not handled: No body set by middleware"

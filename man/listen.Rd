@@ -4,7 +4,7 @@
 \alias{listen}
 \title{Listen for connections on a beakr instance}
 \usage{
-listen(beakr, host, port, daemon, verbose)
+listen(beakr, host, port, daemon)
 }
 \arguments{
 \item{beakr}{a beakr instance.}
@@ -15,9 +15,7 @@ Defaults to the local host ("127.0.0.1").}
 \item{port}{a number or integer that indicates the port to listen on. Default
 is a port opened on 8080.}
 
-\item{daemon}{run the instance in the background, the deafault is FALSE.}
-
-\item{verbose}{boolean, debugging.}
+\item{daemon}{run the instance in the background, the default is FALSE.}
 }
 \description{
 Binds and listens for connections on the specified host and port.

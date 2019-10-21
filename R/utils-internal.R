@@ -92,9 +92,9 @@ routeMiddleware <- function(
   websocket = FALSE
 ) {
 
-  # if ( is.null(beakr) ) {
-  #   beakr <- invisible(Beakr$new())
-  # }
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
 
   if ( !is.null(method) ) {
     method <- toupper(method)

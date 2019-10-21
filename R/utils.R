@@ -38,10 +38,9 @@ createBeakr <- function(name = NULL) {
 #' Defaults to the local host ("127.0.0.1").
 #' @param port a number or integer that indicates the port to listen on. Default
 #' is a port opened on 8080.
-#' @param daemon run the instance in the background, the deafault is FALSE.
-#' @param verbose boolean, debugging.
+#' @param daemon run the instance in the background, the default is FALSE.
 #'
-#' @usage listen(beakr, host, port, daemon, verbose)
+#' @usage listen(beakr, host, port, daemon)
 #'
 #' @examples
 #' \dontrun{
@@ -55,10 +54,8 @@ listen <-function(
   beakr,
   host = "127.0.0.1",
   port = 8080,
-  daemon = FALSE,
-  verbose = FALSE
+  daemon = FALSE
 ) {
-  options("beakr.verbose" = verbose)
   message(paste0("Serving beakr instance at http://", host, ":", port))
   beakr$start(host, port, daemon)
   return(beakr)
