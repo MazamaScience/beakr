@@ -1,3 +1,7 @@
+# beakr 0.1.6
+
+* Minor documentation tweaks.
+
 # beakr 0.1.5 
 
 * Added `onEvent()` event listening
