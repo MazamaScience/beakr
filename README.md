@@ -9,7 +9,7 @@
 
 ### A Minimalist Web Framework for R
 
-**beakr** is a minimalist web framework for developing APIs in the R Language.
+**beakr** is a minimalist web framework for developing web servicess in the R Language.
 **beakr** offers a robust set of fundamental web application features and is 
 intended to simplify the development of web services that reflect R package APIs 
 — without obscuring R's data processing capability and ease of use.
@@ -36,26 +36,28 @@ instance. The **beakr** package is intended to be simple, lightweight and
 unopinionated.  
 
 While **beakr** is not recommended for building extensive web frameworks, R and the 
-flexibility of the package are — potentially — up to the task. Keep in mind that
+flexibility of the package are (potentially) up to the task. Keep in mind that
 **beakr** was not designed to be an especially performant web framework and the 
 _"batteries are certainly not included"_. If you're looking for full featured 
 web frameworks, there are better tools and languages for that (see 
 [Shiny](https://shiny.rstudio.com), 
 [django](https://www.djangoproject.com), 
-_etc., etc._). **beakr** is inspired by the minimalist and massively-expandable 
+_etc.). **beakr** is inspired by the minimalist and massively-expandable 
 frameworks offered by 
 [Express.js](https://expressjs.com) and 
 [Flask](https://palletsprojects.com/p/flask/). 
 
 One of the reasons to use **beakr** is that it is incredibly flexible. It allows
-you to integrate your R code as _middleware_ in a beakr instance. Middleware 
+you to integrate your R code as _middleware_ in a _beakr_ instance. Middleware 
 functions can execute any R code, make changes to the _request_, _response_, and
-_error_ objects, and then serve up the _response_ at the end the request-response 
+_error_ objects, and then serve up the response at the end the request-response 
 cycle. The **beakr** package loosely follows Express.js middleware semantics, 
 where middleware functions are functions that have access to the _request_, 
-_response_, and _error_ objects of a _beakr_ instance. In this documentation and 
-by convention, these objects are always referred to as `res`, `req`, `err`, 
-respectively. 
+_response_, and _error_ objects of a _beakr_ instance.
+
+_Note:_ By convention, the _response_, _request_, and _error_ objects are always 
+referred to as `res`, `req`, `err`, respectively. See the package documentation 
+for more information.
 
 ### Installation
 
@@ -82,7 +84,7 @@ example, let's expose a simple machine learning model using the
 [caret](https://github.com/topepo/caret) package and the Iris data set. The
 `predict_species()` function trains a KNN model for categorizing iris species
 and  predicts the species associated with incoming data. The _beakr_
-instance exposes this API and, when a beakr instance is given JSON input with 
+instance exposes this API and, when given JSON input with 
 the required arguments, identifies and returns the species.
 
 ```
@@ -141,12 +143,12 @@ $ curl -X POST http://127.0.0.1:1234/predict-species \
 
 #### 2. Plotting
 
-We can use a built-in convenience function of a beakr's _response_ object to 
-display a _ggplot_ object. Use `help('Response')` to view other response object 
+We can use a built-in convenience function of a **beakr**'s _response_ object to 
+display a _ggplot_ object. Use `help('Response')` to view other _response_ object 
 methods and documentation.  In this example we'll wrap some map generation code 
-and serve it with beakr.  Instead of decorating an existing package function, 
-we will create a beakr-oriented wrapper function that extracts parameters from
-the request object and uses a response object method to create raw image bytes.
+and serve it with a _beakr_ instance.  Instead of decorating an existing package function, 
+we will create a **beakr**-oriented wrapper function that extracts parameters from
+the request object and uses a response object method to send back raw image bytes.
 
 ```
 library(beakr)
@@ -180,18 +182,13 @@ createBeakr() %>%
 By visiting [http://127.0.0.1:8080/usa](http://127.0.0.1:8080/usa), we can view 
 a ggplot of the United States.
 
-> Note: By convention, the _response_, _request_, and _error_ objects are always referred to as `res`, `req`, `err`, respectively. 
-
-
-See the package documentation for more information.
-
 ### Notes
 
 Fundamentally, **beakr** is built on top of the **libuv** and **http-parser** C 
 libraries as beakr relies heavily upon [httpuv](https://github.com/rstudio/httpuv), 
-a package that provides low-level socket and protocol support for handling HTTP 
+an package that provides low-level socket and protocol support for handling HTTP 
 and WebSocket requests directly from within R. Much of the development of the 
-package was inspired by the excellent, no longer supported(?) 
+package was inspired by the excellent but no longer supported(?) 
 [jug](https://github.com/Bart6114/jug) package, developed by Bart Smeets.
 
 ---- 
