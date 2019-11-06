@@ -81,7 +81,7 @@ NULL
 #'
 #' @param beakr a beakr instance.
 #' @param FUN the function to route middleware
-#' @param path the path to rouet the middleware
+#' @param path the path to route the middleware
 #' @param method the HTTP method to employ
 #' @param websocket boolean, TRUE if websocket.
 routeMiddleware <- function(
