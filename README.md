@@ -9,7 +9,7 @@
 
 ### A Minimalist Web Framework for R
 
-**beakr** is a minimalist web framework for developing web servicess in the R Language.
+**beakr** is a minimalist web framework for developing web services in the R Language.
 **beakr** offers a robust set of fundamental web application features and is 
 intended to simplify the development of web services that reflect R package APIs 
 — without obscuring R's data processing capability and ease of use.
