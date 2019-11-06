@@ -12,7 +12,7 @@ routeMiddleware(beakr, FUN, path = NULL, method = NULL,
 
 \item{FUN}{the function to route middleware}
 
-\item{path}{the path to rouet the middleware}
+\item{path}{the path to route the middleware}
 
 \item{method}{the HTTP method to employ}
 
