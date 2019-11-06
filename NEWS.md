@@ -1,3 +1,7 @@
+# beakr 0.2.0 
+
+* Prepare for CRAN
+
 # beakr 0.1.6
 
 * Minor documentation tweaks.

@@ -168,6 +168,6 @@ routeMiddleware <- function(
               "Island", "Neighbor", "Missions", "Kings", "Loser", "Shore",
               "Assistant", "Comedians", "Rooms", "Enigma")
 
-  return(paste(sample(dic, 2, replace = F), collapse = " "))
+  return(paste(sample(dic, 2, replace = FALSE), collapse = " "))
 }
 

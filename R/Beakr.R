@@ -24,9 +24,10 @@
 #' @keywords package
 NULL
 
-#' Beakr class
+#' @importFrom R6 R6Class
+#' @title Beakr class
 #'
-#' The \code{Beakr} class defines the server instance utilizing the
+#' @description The \code{Beakr} class defines the server instance utilizing the
 #' \code{httpuv} package. This class defines an interface for the rest of the
 #' \code{beakr} package and is therefore meant to be instantiated.
 #'
