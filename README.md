@@ -1,6 +1,4 @@
-
-
-![beakr_logo](https://cdn3.imggmi.com/uploads/2019/10/16/f74987f8804a4512f70e0e8d17f05983-full.png)
+[![sm-beakr.png](https://i.postimg.cc/7YBB0Hnp/sm-beakr.png)](https://postimg.cc/bstHjjMT)
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/AirSensor)](https://cran.r-project.org/package=beakr)
 [![Downloads](http://cranlogs.r-pkg.org/badges/AirSensor)](https://cran.r-project.org/package=beakr)
