@@ -24,3 +24,6 @@
 # Ignore configuration files for other tools
 ^\.travis\.yml$
 ^data-raw$
+
+# Ignore cran-comments.md
+cran-comments.md

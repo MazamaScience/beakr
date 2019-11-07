@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@
 <div id="a-minimalist-web-framework-for-r" class="section level3">
 <h3 class="hasAnchor">
 <a href="#a-minimalist-web-framework-for-r" class="anchor"></a>A Minimalist Web Framework for R</h3>
-<p><strong>beakr</strong> is a minimalist web framework for developing APIs in the R Language. <strong>beakr</strong> offers a robust set of fundamental web application features and is intended to simplify the development of web services that reflect R package APIs — without obscuring R’s data processing capability and ease of use.</p>
+<p><strong>beakr</strong> is a minimalist web framework for developing web services in the R Language. <strong>beakr</strong> offers a robust set of fundamental web application features and is intended to simplify the development of web services that reflect R package APIs — without obscuring R’s data processing capability and ease of use.</p>
 <div id="hello-world---the-beakr-way" class="section level4">
 <h4 class="hasAnchor">
 <a href="#hello-world---the-beakr-way" class="anchor"></a>Hello, world! - The beakr way</h4>
@@ -94,8 +94,9 @@ createBeakr() %&gt;%
 <h3 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h3>
 <p>The <strong>beakr</strong> package allows R code to listen for and interact with HTTP and WebSocket clients, so you can serve web traffic directly from a <em>beakr</em> instance. The <strong>beakr</strong> package is intended to be simple, lightweight and unopinionated.</p>
-<p>While <strong>beakr</strong> is not recommended for building extensive web frameworks, R and the flexibility of the package are — potentially — up to the task. Keep in mind that <strong>beakr</strong> was not designed to be an especially performant web framework and the <em>“batteries are certainly not included”</em>. If you’re looking for full featured web frameworks, there are better tools and languages for that (see <a href="https://shiny.rstudio.com">Shiny</a>, <a href="https://www.djangoproject.com">django</a>, <em>etc., etc.</em>). <strong>beakr</strong> is inspired by the minimalist and massively-expandable frameworks offered by <a href="https://expressjs.com">Express.js</a> and <a href="https://palletsprojects.com/p/flask/">Flask</a>.</p>
-<p>One of the reasons to use <strong>beakr</strong> is that it is incredibly flexible. It allows you to integrate your R code as <em>middleware</em> in a beakr instance. Middleware functions can execute any R code, make changes to the <em>request</em>, <em>response</em>, and <em>error</em> objects, and then serve up the <em>response</em> at the end the request-response cycle. The <strong>beakr</strong> package loosely follows Express.js middleware semantics, where middleware functions are functions that have access to the <em>request</em>, <em>response</em>, and <em>error</em> objects of a <em>beakr</em> instance. In this documentation and by convention, these objects are always referred to as <code>res</code>, <code>req</code>, <code>err</code>, respectively.</p>
+<p>While <strong>beakr</strong> is not recommended for building extensive web frameworks, R and the flexibility of the package are (potentially) up to the task. Keep in mind that <strong>beakr</strong> was not designed to be an especially performant web framework and the <em>“batteries are certainly not included”</em>. If you’re looking for full featured web frameworks, there are better tools and languages for that (see <a href="https://shiny.rstudio.com">Shiny</a>, <a href="https://www.djangoproject.com">django</a>, _etc.). <strong>beakr</strong> is inspired by the minimalist and massively-expandable frameworks offered by <a href="https://expressjs.com">Express.js</a> and <a href="https://palletsprojects.com/p/flask/">Flask</a>.</p>
+<p>One of the reasons to use <strong>beakr</strong> is that it is incredibly flexible. It allows you to integrate your R code as <em>middleware</em> in a <em>beakr</em> instance. Middleware functions can execute any R code, make changes to the <em>request</em>, <em>response</em>, and <em>error</em> objects, and then serve up the response at the end the request-response cycle. The <strong>beakr</strong> package loosely follows Express.js middleware semantics, where middleware functions are functions that have access to the <em>request</em>, <em>response</em>, and <em>error</em> objects of a <em>beakr</em> instance.</p>
+<p><em>Note:</em> By convention, the <em>response</em>, <em>request</em>, and <em>error</em> objects are always referred to as <code>res</code>, <code>req</code>, <code>err</code>, respectively. See the package documentation for more information.</p>
 </div>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
@@ -113,7 +114,7 @@ devtools::install_github("MazamaScience/beakr")</a></code></pre>
 <div id="expose-r-code" class="section level4">
 <h4 class="hasAnchor">
 <a href="#expose-r-code" class="anchor"></a>1. Expose R code</h4>
-<p>A <em>beakr</em> instance can easily expose R function signatures (APIs). As an example, let’s expose a simple machine learning model using the <a href="https://github.com/topepo/caret">caret</a> package and the Iris data set. The <code>predict_species()</code> function trains a KNN model for categorizing iris species and predicts the species associated with incoming data. The <em>beakr</em> instance exposes this API and, when a beakr instance is given JSON input with the required arguments, identifies and returns the species.</p>
+<p>A <em>beakr</em> instance can easily expose R function signatures (APIs). As an example, let’s expose a simple machine learning model using the <a href="https://github.com/topepo/caret">caret</a> package and the Iris data set. The <code>predict_species()</code> function trains a KNN model for categorizing iris species and predicts the species associated with incoming data. The <em>beakr</em> instance exposes this API and, when given JSON input with the required arguments, identifies and returns the species.</p>
 <pre><code><a href="https://rdrr.io/r/base/library.html"># Import libraries 
 library(beakr)
 library(caret)
@@ -151,7 +152,7 @@ beakr %&gt;%
   POST(path = '/predict-species', decorate(predict_species)) %&gt;% 
   handleErrors() %&gt;% 
   listen(host = '127.0.0.1', port = 1234)</a></code></pre>
-<p>The user can send an HTTP POST request to <a href="http://127.0.0.1:1234/predict-species" class="uri">http://127.0.0.1:1234/predict-species</a> with incoming data supplied as a JSON string containing sepal length and width (<code>sl</code>, <code>sw</code>) and petal length and width (<code>pl</code>, <code>pw</code>). The <em>beakr</em> instance responds with the predicted species of iris.</p>
+<p>The user can send an HTTP POST request to <a href="http://127.0.0.1:1234/predict-species">http://127.0.0.1:1234/predict-species</a> with incoming data supplied as a JSON string containing sepal length and width (<code>sl</code>, <code>sw</code>) and petal length and width (<code>pl</code>, <code>pw</code>). The <em>beakr</em> instance responds with the predicted species of iris.</p>
 <pre><code>$ curl -X POST http://127.0.0.1:1234/predict-species \
   -H 'content-type: application/json' \
   -d '{ "sl": 5.3, "sw": 4, "pl": 1.6, "pw": 0.2 }'
@@ -161,7 +162,7 @@ beakr %&gt;%
 <div id="plotting" class="section level4">
 <h4 class="hasAnchor">
 <a href="#plotting" class="anchor"></a>2. Plotting</h4>
-<p>We can use a built-in convenience function of a beakr’s <em>response</em> object to display a <em>ggplot</em> object. Use <code><a href="https://rdrr.io/r/utils/help.html">help('Response')</a></code> to view other response object methods and documentation. In this example we’ll wrap some map generation code and serve it with beakr. Instead of decorating an existing package function, we will create a beakr-oriented wrapper function that extracts parameters from the request object and uses a response object method to create raw image bytes.</p>
+<p>We can use a built-in convenience function of a <strong>beakr</strong>’s <em>response</em> object to display a <em>ggplot</em> object. Use <code><a href="https://rdrr.io/r/utils/help.html">help('Response')</a></code> to view other <em>response</em> object methods and documentation. In this example we’ll wrap some map generation code and serve it with a <em>beakr</em> instance. Instead of decorating an existing package function, we will create a <strong>beakr</strong>-oriented wrapper function that extracts parameters from the request object and uses a response object method to send back raw image bytes.</p>
 <pre><code><a href="https://rdrr.io/r/base/library.html">library(beakr)
 library(ggplot2)
 
@@ -188,17 +189,13 @@ createBeakr() %&gt;%
   GET(path = '/usa', states_plot) %&gt;% 
   listen()
 </a></code></pre>
-<p>By visiting <a href="http://127.0.0.1:8080/usa" class="uri">http://127.0.0.1:8080/usa</a>, we can view a ggplot of the United States.</p>
-<blockquote>
-<p>Note: By convention, the <em>response</em>, <em>request</em>, and <em>error</em> objects are always referred to as <code>res</code>, <code>req</code>, <code>err</code>, respectively.</p>
-</blockquote>
-<p>See the package documentation for more information.</p>
+<p>By visiting <a href="http://127.0.0.1:8080/usa">http://127.0.0.1:8080/usa</a>, we can view a ggplot of the United States.</p>
 </div>
 </div>
 <div id="notes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#notes" class="anchor"></a>Notes</h3>
-<p>Fundamentally, <strong>beakr</strong> is built on top of the <strong>libuv</strong> and <strong>http-parser</strong> C libraries as beakr relies heavily upon <a href="https://github.com/rstudio/httpuv">httpuv</a>, a package that provides low-level socket and protocol support for handling HTTP and WebSocket requests directly from within R. Much of the development of the package was inspired by the excellent, no longer supported(?) <a href="https://github.com/Bart6114/jug">jug</a> package, developed by Bart Smeets.</p>
+<p>Fundamentally, <strong>beakr</strong> is built on top of the <strong>libuv</strong> and <strong>http-parser</strong> C libraries as beakr relies heavily upon <a href="https://github.com/rstudio/httpuv">httpuv</a>, an package that provides low-level socket and protocol support for handling HTTP and WebSocket requests directly from within R. Much of the development of the package was inspired by the excellent but no longer supported(?) <a href="https://github.com/Bart6114/jug">jug</a> package, developed by Bart Smeets.</p>
 <hr>
 <p>The beakr package is supported by <a href="http://mazamascience.com/">Mazama Science</a>.</p>
 </div>
