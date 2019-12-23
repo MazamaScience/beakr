@@ -1,6 +1,7 @@
-# beakr 0.2.0 
+# beakr 0.2.1 
 
 * Prepare for CRAN
+* Update the docs and export objects
 
 # beakr 0.1.6
 

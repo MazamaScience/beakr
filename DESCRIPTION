@@ -1,7 +1,7 @@
 Package: beakr
 Type: Package
 Title: A Minimalist Webframework for R
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut","cre")),
     person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut"))
@@ -34,4 +34,4 @@ Suggests:
     rmarkdown
 Encoding: UTF-8
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
