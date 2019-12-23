@@ -4,10 +4,16 @@
 \alias{cors}
 \title{Add CORS-headers middleware}
 \usage{
-cors(beakr, path = NULL, with_methods = c("POST", "GET", "PUT",
-  "OPTIONS", "DELETE", "PATCH"), with_origin = "*",
-  with_headers = NULL, with_credentials = NULL, max_age = NULL,
-  expose_headers = NULL)
+cors(
+  beakr,
+  path = NULL,
+  with_methods = c("POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH"),
+  with_origin = "*",
+  with_headers = NULL,
+  with_credentials = NULL,
+  max_age = NULL,
+  expose_headers = NULL
+)
 }
 \arguments{
 \item{beakr}{a beakr instance.}

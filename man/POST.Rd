@@ -22,7 +22,7 @@ specified callback functions or middleware.
 \dontrun{
 createBeakr() \%>\%
   POST("/", function(req, res, err) {
-    return("Successful POST request!\\n")
+    return("Successful POST request!\n")
   }) \%>\%
   listen()
 

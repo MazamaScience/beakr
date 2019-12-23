@@ -4,11 +4,8 @@
 \name{beakr-package}
 \alias{beakr-package}
 \alias{beakr}
-\title{A minimalist web framework}
+\title{A minimalist web framework.}
 \description{
-A minimalist web framework.
-}
-\details{
 The \code{beakr} package provides a minimalist web framework for for
 developing APIs in R. The package includes basic functionality for handling
 common \code{HTTP} requests.

@@ -4,8 +4,7 @@
 \alias{routeMiddleware}
 \title{Internal function to add middleware}
 \usage{
-routeMiddleware(beakr, FUN, path = NULL, method = NULL,
-  websocket = FALSE)
+routeMiddleware(beakr, FUN, path = NULL, method = NULL, websocket = FALSE)
 }
 \arguments{
 \item{beakr}{a beakr instance.}
