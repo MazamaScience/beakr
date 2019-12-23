@@ -27,3 +27,4 @@
 
 # Ignore cran-comments.md
 cran-comments.md
+^CRAN-RELEASE$
