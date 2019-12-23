@@ -1,5 +1,7 @@
-#' A minimalist web framework.
 #'
+#' @title A minimalist web framework.
+#'
+#' @description
 #' The \code{beakr} package provides a minimalist web framework for for
 #' developing APIs in R. The package includes basic functionality for handling
 #' common \code{HTTP} requests.
@@ -24,6 +26,7 @@
 #' @keywords package
 NULL
 
+#' @export
 #' @importFrom R6 R6Class
 #' @title Beakr class
 #'

@@ -1,5 +1,7 @@
-#' Request Class
+#' @export
+#' @title Request Class
 #'
+#' @description
 #' The \code{Request} object represents the HTTP request and has properties for
 #' the request query string, parameters, body, HTTP headers, and so on.
 #' In this documentation and by convention, the object is always referred to as

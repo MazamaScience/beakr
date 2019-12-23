@@ -1,7 +1,9 @@
+#' @export
 #' @importFrom base64enc base64encode
 #' @title Response Class
 #'
-#' @description The \code{Response} object represents represents the HTTP response that a
+#' @description
+#' The \code{Response} object represents represents the HTTP response that a
 #' \code{Beakr} sends when it gets an HTTP request. It is by convention, the
 #' object is always referred to as \code{res} (and the HTTP request is
 #' \code{req}).

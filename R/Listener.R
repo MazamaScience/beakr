@@ -1,6 +1,9 @@
-#' Listener class
+#' @export
+#' @title Listener class
 #'
-#' The \code{Listener} class listens...to things.
+#' @description
+#' The \code{Listener} class listens provides a simple, programmatically
+#' controlled HTTP protocol listener.
 #'
 #' @usage NULL
 #'
