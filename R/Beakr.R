@@ -3,8 +3,8 @@
 #'
 #' @description
 #' The \code{beakr} package provides a minimalist web framework for for
-#' developing APIs in R. The package includes basic functionality for handling
-#' common \code{HTTP} requests.
+#' developing application programming interfaces in R. The package includes
+#' basic functionality for handling common \code{HTTP} requests.
 #'
 #' beakr allows R code to listen for and interact with HTTP and WebSocket clients, so
 #' you can serve web traffic directly out of your R process. beakr relies heavily
@@ -39,7 +39,6 @@ NULL
 #' @format NULL
 #'
 #' @section Methods:
-#'
 #' \describe{
 #'   \item{\code{router()}}{
 #'   An instantiated \code{Router} object.
