@@ -2,6 +2,7 @@
 
 * Prepare for CRAN
 * Update the docs and export objects
+* Fix deprecated local_examples/
 
 # beakr 0.1.6
 
