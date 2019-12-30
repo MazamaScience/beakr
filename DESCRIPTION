@@ -12,7 +12,7 @@ Maintainer: Hans Martin <hans@mazamascience.com>
 Description: A minimalist web framework for developing application programming 
     interfaces in R that provides a flexible framework for handling common 
     HTTP-requests, errors, logging, and an ability to integrate any R code as 
-    server `middleware`.
+    server middle-ware.
 License: GPL-3
 URL: https://github.com/MazamaScience/beakr
 BugReports: https://github.com/MazamaScience/beakr/issues
