@@ -312,12 +312,18 @@ use <- function(beakr, path, ..., method = NULL) {
 #'
 #' @param beakr a beakr instance.
 #' @param path a string path.
-#' @param with_methods tbd
-#' @param with_origin tbd
-#' @param with_headers tbd
-#' @param with_credentials tbd
-#' @param max_age tbd
-#' @param expose_headers tbd
+#' @param with_methods set \code{Access-Control-Allow-Methods} response header
+#' that specifies the method or methods allowed when accessing the resource in
+#' response to a preflight request.
+#' @param with_origin set \code{Access-Control-Allow-Origin} response header
+#' indicating whether the response can be shared with requesting code from the
+#' given origin.
+#' @param with_headers set \code{Acess-Control-Allow-Headers} to indicate which HTTP
+#' headers can be used during the actual request.
+#' @param with_credentials set \code{Access-Control-Allow-Credentials} response header.
+#' @param max_age set \code{Access-Control-Max-Age} in seconds.
+#' @param expose_headers set \code{Access-Control-Expose-Headers}  indicate which
+#' headers can be exposed as part of the response.
 #'
 cors <- function(
   beakr,
