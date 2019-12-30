@@ -9,67 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-```{r}
-# Import libraries 
-library(beakr)
-library(caret)
-# Load the Iris data set 
-data('iris')
-# Train using KNN
-knn_model <- train( Species ~ ., 
-                  data = iris, 
-                  method = 'knn', 
-                  trControl = trainControl(method='cv', number=10), 
-                  metric = 'Accuracy' )
-```
-
-```{r}
-predict_species <- function(sl, sw, pl, pw) {
-  test <- data.frame( Sepal.Length = sl, 
-                      Sepal.Width = sw, 
-                      Petal.Length = pl, 
-                      Petal.Width = pw, 
-                      Species = NA )
-  
-  species <- predict(knn_model, test)
-  
-  return(paste0('Predicted species: ', species, ' '))
-}
-
-```
-
-
-```{r, eval=FALSE}
-beakr <- newBeakr() %>%  
-  POST(path = '/predict-species', decorate(predict_species)) %>% 
-  logger() %>% 
-  errorHandler() %>% 
-  startBeakr(port = 1234, daemon = T)
-
-```
-
-
-Curl the inputs
-
-$ curl -X POST \
-  http://127.0.0.1:1234/predict-species \
-  -H 'content-type: application/json' \
-  -d '{ "sl": 5.3, "sw": 4, "pl": 1.6, "pw": 0.2 }'
-  
-```{r}
-httr::set_config(httr::use_proxy(url="10.3.100.207",port=1234))
-
-pp <- list(sl = 5.1, sw = 4.2, pl = .1, pw = 0.2)
-
-test <- jsonlite::toJSON(pp, auto_unbox = TRUE)
-
-httr::POST("http://127.0.0.1:1234/predict-species", body = test, encode = 'raw', httr::accept_json()) 
-`httr::GET("http://127.0.0.1:1234/", )
-
-```
-  
-
 ```{r}
 # Import 
 library(beakr)
@@ -104,11 +43,7 @@ beakr %>%
   beakr::GET('/', function(req, res, err) "Hi") %>% 
   beakr::POST(path = '/predict-species', decorate(predict_species)) %>% 
   handleErrors() %>% 
-  listen(host = '127.0.0.1', port = 1234, daemon = T)
-```
-
-```{r}
-
-
+  listen(host = '127.0.0.1', port = 1234, daemon = TRUE) %>%  
+  kill() # Comment line to test example.
 ```
 

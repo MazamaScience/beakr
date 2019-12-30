@@ -27,7 +27,8 @@ states_plot <- function(res) {
 }
 
 # Create and start a default beakr instance
-newBeakr() %>% 
+createBeakr() %>% 
   GET(path = '/usa', decorate(states_plot)) %>% 
-  startBeakr()
+  listen(daemon = TRUE) %>% 
+  kill() # Comment to test example.
 ```
