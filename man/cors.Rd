@@ -20,17 +20,23 @@ cors(
 
 \item{path}{a string path.}
 
-\item{with_methods}{tbd}
+\item{with_methods}{set \code{Access-Control-Allow-Methods} response header
+that specifies the method or methods allowed when accessing the resource in
+response to a preflight request.}
 
-\item{with_origin}{tbd}
+\item{with_origin}{set \code{Access-Control-Allow-Origin} response header
+indicating whether the response can be shared with requesting code from the
+given origin.}
 
-\item{with_headers}{tbd}
+\item{with_headers}{set \code{Acess-Control-Allow-Headers} to indicate which HTTP
+headers can be used during the actual request.}
 
-\item{with_credentials}{tbd}
+\item{with_credentials}{set \code{Access-Control-Allow-Credentials} response header.}
 
-\item{max_age}{tbd}
+\item{max_age}{set \code{Access-Control-Max-Age} in seconds.}
 
-\item{expose_headers}{tbd}
+\item{expose_headers}{set \code{Access-Control-Expose-Headers}  indicate which
+headers can be exposed as part of the response.}
 }
 \description{
 Add Cross-Origin Resource Sharing (CORS) middleware to the
