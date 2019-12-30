@@ -10,7 +10,6 @@ The \code{Beakr} class defines the server instance utilizing the
 }
 \section{Methods}{
 
-
 \describe{
   \item{\code{router()}}{
   An instantiated \code{Router} object.
