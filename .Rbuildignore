@@ -8,6 +8,9 @@
 # Ignore LICENSE file which is included for display on Github
 ^LICENSE$
 
+# Ignore .gitignore
+^\.gitignore$
+
 # Ignore all directories beginning with "local"
 ^local*
 
@@ -26,5 +29,5 @@
 ^data-raw$
 
 # Ignore cran-comments.md
-cran-comments.md
+^cran-comments.md
 ^CRAN-RELEASE$
