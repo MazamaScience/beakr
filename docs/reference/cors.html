@@ -70,7 +70,7 @@ instance." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -119,10 +119,16 @@ instance." />
 instance.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cors</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_methods</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"POST"</span>, <span class='st'>"GET"</span>, <span class='st'>"PUT"</span>,
-  <span class='st'>"OPTIONS"</span>, <span class='st'>"DELETE"</span>, <span class='st'>"PATCH"</span>), <span class='kw'>with_origin</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
-  <span class='kw'>with_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>with_credentials</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_age</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>expose_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>cors</span>(
+  <span class='no'>beakr</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>with_methods</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"POST"</span>, <span class='st'>"GET"</span>, <span class='st'>"PUT"</span>, <span class='st'>"OPTIONS"</span>, <span class='st'>"DELETE"</span>, <span class='st'>"PATCH"</span>),
+  <span class='kw'>with_origin</span> <span class='kw'>=</span> <span class='st'>"*"</span>,
+  <span class='kw'>with_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>with_credentials</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_age</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>expose_headers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,27 +143,33 @@ instance.</p>
     </tr>
     <tr>
       <th>with_methods</th>
-      <td><p>tbd</p></td>
+      <td><p>set <code>Access-Control-Allow-Methods</code> response header
+that specifies the method or methods allowed when accessing the resource in
+response to a preflight request.</p></td>
     </tr>
     <tr>
       <th>with_origin</th>
-      <td><p>tbd</p></td>
+      <td><p>set <code>Access-Control-Allow-Origin</code> response header
+indicating whether the response can be shared with requesting code from the
+given origin.</p></td>
     </tr>
     <tr>
       <th>with_headers</th>
-      <td><p>tbd</p></td>
+      <td><p>set <code>Acess-Control-Allow-Headers</code> to indicate which HTTP
+headers can be used during the actual request.</p></td>
     </tr>
     <tr>
       <th>with_credentials</th>
-      <td><p>tbd</p></td>
+      <td><p>set <code>Access-Control-Allow-Credentials</code> response header.</p></td>
     </tr>
     <tr>
       <th>max_age</th>
-      <td><p>tbd</p></td>
+      <td><p>set <code>Access-Control-Max-Age</code> in seconds.</p></td>
     </tr>
     <tr>
       <th>expose_headers</th>
-      <td><p>tbd</p></td>
+      <td><p>set <code>Access-Control-Expose-Headers</code>  indicate which
+headers can be exposed as part of the response.</p></td>
     </tr>
     </table>
 

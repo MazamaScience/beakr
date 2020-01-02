@@ -72,7 +72,7 @@ req)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -159,6 +159,89 @@ object is always referred to as <code>res</code> (and the HTTP request is
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>Response</code> and <code><a href='TestRequest.html'>TestRequest</a></code></p></div>
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+<h3>Public methods</h3>
+
+<ul>
+<li><p><a href='#method-setHeader'><code>Response$setHeader()</code></a></p></li>
+<li><p><a href='#method-setContentType'><code>Response$setContentType()</code></a></p></li>
+<li><p><a href='#method-setStatus'><code>Response$setStatus()</code></a></p></li>
+<li><p><a href='#method-setBody'><code>Response$setBody()</code></a></p></li>
+<li><p><a href='#method-redirect'><code>Response$redirect()</code></a></p></li>
+<li><p><a href='#method-json'><code>Response$json()</code></a></p></li>
+<li><p><a href='#method-text'><code>Response$text()</code></a></p></li>
+<li><p><a href='#method-structured'><code>Response$structured()</code></a></p></li>
+<li><p><a href='#method-plot'><code>Response$plot()</code></a></p></li>
+<li><p><a href='#method-clone'><code>Response$clone()</code></a></p></li>
+</ul>
+<p><hr>
+<a id="method-setHeader"></a></p><h3>Method <code>setHeader()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$setHeader(key, value)</pre><p></div></p>
+
+<p><hr>
+<a id="method-setContentType"></a></p><h3>Method <code>setContentType()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$setContentType(type)</pre><p></div></p>
+
+<p><hr>
+<a id="method-setStatus"></a></p><h3>Method <code>setStatus()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$setStatus(status)</pre><p></div></p>
+
+<p><hr>
+<a id="method-setBody"></a></p><h3>Method <code>setBody()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$setBody(body)</pre><p></div></p>
+
+<p><hr>
+<a id="method-redirect"></a></p><h3>Method <code>redirect()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$redirect(url)</pre><p></div></p>
+
+<p><hr>
+<a id="method-json"></a></p><h3>Method <code>json()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$json(txt, auto_unbox = TRUE)</pre><p></div></p>
+
+<p><hr>
+<a id="method-text"></a></p><h3>Method <code><a href='https://rdrr.io/r/graphics/text.html'>text()</a></code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$text(txt)</pre><p></div></p>
+
+<p><hr>
+<a id="method-structured"></a></p><h3>Method <code>structured()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$structured(protocol)</pre><p></div></p>
+
+<p><hr>
+<a id="method-plot"></a></p><h3>Method <code><a href='https://rdrr.io/r/graphics/plot.html'>plot()</a></code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>Response$plot(plot_object, base64 = TRUE, ...)</pre><p></div></p>
+
+<p><hr>
+<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
+<p><div class="r"></p><pre>Response$clone(deep = FALSE)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl class='dl-horizontal'>
+<dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+
+</dl><p></div></p>
+
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -167,6 +250,7 @@ object is always referred to as <code>res</code> (and the HTTP request is
       <li><a href="#fields">Fields</a></li>
       <li><a href="#methods">Methods</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#methods">Methods</a></li>
     </ul>
 
   </div>
