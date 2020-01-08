@@ -44,7 +44,7 @@ install.packages("beakr")
 Install the development version for GitHub: 
 
 ```
-# install.packages("devtools")
+install.packages("devtools")
 devtools::install_github("MazamaScience/beakr")
 ```
 
