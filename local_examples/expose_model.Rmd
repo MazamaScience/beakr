@@ -40,8 +40,8 @@ beakr <- createBeakr()
 # Use beakr to expose the model in the '/predict-species' url path. 
 #   See help('decorate') for more info about decorating functions. 
 beakr %>% 
-  beakr::GET('/', function(req, res, err) "Hi") %>% 
-  beakr::POST(path = '/predict-species', decorate(predict_species)) %>% 
+  beakr::getr('/', function(req, res, err) "Hi") %>% 
+  beakr::putr(path = '/predict-species', decorate(predict_species)) %>% 
   handleErrors() %>% 
   listen(host = '127.0.0.1', port = 1234, daemon = TRUE) %>%  
   kill() # Comment line to test example.

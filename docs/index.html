@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
 <a href="#hello-world---the-beakr-way" class="anchor"></a>Hello, world! - The beakr way</h4>
 <pre><code><a href="https://rdrr.io/r/base/library.html">library(beakr)
 createBeakr() %&gt;% 
-  GET(path = "/", function(req, res, err) "Hello, World!") %&gt;% 
+  getr(path = "/", function(req, res, err) "Hello, World!") %&gt;% 
   listen(host = "127.0.0.1", port = 1234) </a></code></pre>
 <pre><code>## Serving beakr instance at http://127.0.0.1:1234
 ## Beakr Instance: Human Room
@@ -150,11 +150,11 @@ beakr &lt;- createBeakr()
 # Use beakr to expose the model in the '/predict-species' url path. 
 #   See help('decorate') for more info about decorating functions. 
 beakr %&gt;%  
-  POST(path = '/predict-species', decorate(predict_species)) %&gt;% 
+  postr(path = '/predict-species', decorate(predict_species)) %&gt;% 
   handleErrors() %&gt;% 
   listen(host = '127.0.0.1', port = 1234)</a></code></pre>
-<p>The user can send an HTTP POST request to <a href="http://127.0.0.1:1234/predict-species">http://127.0.0.1:1234/predict-species</a> with incoming data supplied as a JSON string containing sepal length and width (<code>sl</code>, <code>sw</code>) and petal length and width (<code>pl</code>, <code>pw</code>). The <em>beakr</em> instance responds with the predicted species of iris.</p>
-<pre><code>$ curl -X POST http://127.0.0.1:1234/predict-species \
+<p>The user can send an HTTP postr request to <code>http://127.0.0.1:1234/predict-species</code> with incoming data supplied as a JSON string containing sepal length and width (<code>sl</code>, <code>sw</code>) and petal length and width (<code>pl</code>, <code>pw</code>). The <em>beakr</em> instance responds with the predicted species of iris.</p>
+<pre><code>$ curl -X postr http://127.0.0.1:1234/predict-species \
   -H 'content-type: application/json' \
   -d '{ "sl": 5.3, "sw": 4, "pl": 1.6, "pw": 0.2 }'
   
@@ -163,7 +163,7 @@ beakr %&gt;%
 <div id="2-plotting" class="section level4">
 <h4 class="hasAnchor">
 <a href="#2-plotting" class="anchor"></a>2. Plotting</h4>
-<p>We can use a built-in convenience function of a <strong>beakr</strong>’s <em>response</em> object to display a <em>ggplot</em> object. Use <code><a href="https://rdrr.io/r/utils/help.html">help('Response')</a></code> to view other <em>response</em> object methods and documentation. In this example we’ll wrap some map generation code and serve it with a <em>beakr</em> instance. Instead of decorating an existing package function, we will create a <strong>beakr</strong>-oriented wrapper function that extracts parameters from the request object and uses a response object method to send back raw image bytes.</p>
+<p>We can use a built-in convenience function of a <strong>beakr</strong>’s <em>response</em> object to display a <em>ggplot</em> object. Use <code><a href="https://rdrr.io/r/utils/help.html">help('Response')</a></code> to view other <em>response</em> object methods and documentation. In this example we’ll wrap some map generation code and serve it with a <em>beakr</em> instance. Instead of decorating an existing package function, we will create a <strong>beakr</strong>-oriented wrapper function that extracts parameters fromthe request object and uses a response object method to send back raw image bytes.</p>
 <pre><code><a href="https://rdrr.io/r/base/library.html">library(beakr)
 library(ggplot2)
 
@@ -187,10 +187,10 @@ states_plot &lt;- function(req, res, err) {
 
 # Create and start a default beakr instance
 createBeakr() %&gt;% 
-  GET(path = '/usa', states_plot) %&gt;% 
+  getr(path = '/usa', states_plot) %&gt;% 
   listen()
 </a></code></pre>
-<p>By visiting <a href="http://127.0.0.1:8080/usa">http://127.0.0.1:8080/usa</a>, we can view a ggplot of the United States.</p>
+<p>By visiting <code>http://127.0.0.1:8080/usa</code>, we can view a ggplot map of the United States.</p>
 </div>
 </div>
 <div id="notes" class="section level3">

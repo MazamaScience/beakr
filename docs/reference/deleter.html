@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal random name generator. — .randomName • beakr</title>
+<title>DELETE-binding middleware — deleter • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Internal random name generator. — .randomName" />
-<meta property="og:description" content="Internal random name generator." />
+<meta property="og:title" content="DELETE-binding middleware — deleter" />
+<meta property="og:description" content="Routes HTTP deleter requests to the specified path with the
+specified callback functions or middleware." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,23 +109,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal random name generator.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
-    <div class="hidden name"><code>dot-randomName.Rd</code></div>
+    <h1>DELETE-binding middleware</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
+    <div class="hidden name"><code>deleter.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Internal random name generator.</p>
+    <p>Routes HTTP deleter requests to the specified path with the
+specified callback functions or middleware.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.randomName</span>()</pre>
+    <pre class="usage"><span class='fu'>deleter</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>beakr</th>
+      <td><p>a beakr instance.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>string representing a relative path for which the middleware
+is invoked.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional middleware/functions.</p></td>
+    </tr>
+    </table>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

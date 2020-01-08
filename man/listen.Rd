@@ -35,8 +35,8 @@ See the \code{httpuv} package for more information.
 \examples{
 \dontrun{
 createBeakr() \%>\%
-  GET("/", function(req, res, err) {
-    return("Successful GET request!\n")
+  getr("/", function(req, res, err) {
+    return("Successful getr request!\n")
   }) \%>\%
   listen()
 }

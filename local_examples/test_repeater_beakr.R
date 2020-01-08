@@ -12,7 +12,7 @@ createBeakr() %>%
 
   # ----- Welcome --------------------------------------------------------------
 
-  GET("/", function(req, res, err) {
+  getr("/", function(req, res, err) {
 
     response <- "
 <html>
@@ -33,7 +33,7 @@ createBeakr() %>%
 
   # ----- Repeater -------------------------------------------------------------
 
-  GET("/repeater", function(req, res, err) {
+  getr("/repeater", function(req, res, err) {
 
     text <- setIfNull(req$parameters$text, "Howdy")
     times <- setIfNull(req$parameters$times, 8)

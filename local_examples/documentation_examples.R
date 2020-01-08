@@ -4,10 +4,10 @@
 #' @examples
 #' \dontrun{
 #' # Create an instance and add the error handler last.
-#' newBeakr() %>%
+#' createBeakr() %>%
 #'   use(path = "/", decorate(function(n) { paste("Hi, ", n) })) %>%
-#'   errorHandler() %>%
-#'   startBeakr()
+#'   handleErrors() %>%
+#'   listen()
 #' # In shell
 #' #  curl http://127.0.0.1:8080/
 #' # > "status":"Page not found.","status_code":404
@@ -22,13 +22,13 @@
 #' \dontrun{
 #' # Construct primary instance
 #' primary <- newBeakr() %>%
-#'   GET("/primary-app",
+#'   getr("/primary-app",
 #'       function(req, res, err) { "Primary Application!" })
 #'
 #' # Construct middleware
 #' ext <- use(beakr = NULL, "/",
 #'            decorate(function(name) { paste("Hi ", name, "!\n") })) %>%
-#'   errorHandler()
+#'   handleErrors()
 #'
 #' # Include the external middleware in the primary instance
 #' primary %>% include(ext)
