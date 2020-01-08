@@ -83,7 +83,7 @@
 <h4 class="hasAnchor">
 <a href="#hello-world---the-beakr-way" class="anchor"></a>Hello, world! - The beakr way</h4>
 <pre><code><a href="https://rdrr.io/r/base/library.html">library(beakr)
-createBeakr() %&gt;% 
+beakr() %&gt;% 
   getr(path = "/", function(req, res, err) "Hello, World!") %&gt;% 
   listen(host = "127.0.0.1", port = 1234) </a></code></pre>
 <pre><code>## Serving beakr instance at http://127.0.0.1:1234
@@ -103,10 +103,9 @@ createBeakr() %&gt;%
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
 <p>Install the release version from CRAN:</p>
-<pre><code><a href="https://rdrr.io/r/utils/install.packages.html"># Not yet on CRAN network. 
-install.packages("beakr")</a></code></pre>
+<pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("beakr")</a></code></pre>
 <p>Install the development version for GitHub:</p>
-<pre><code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html"># install.packages("devtools")
+<pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("devtools")
 devtools::install_github("MazamaScience/beakr")</a></code></pre>
 </div>
 <div id="examples" class="section level3">
@@ -145,11 +144,9 @@ predict_species &lt;- function(sl, sw, pl, pw) {
 }
 
 # Create the beakr instance 
-beakr &lt;- createBeakr()
-
 # Use beakr to expose the model in the '/predict-species' url path. 
 #   See help('decorate') for more info about decorating functions. 
-beakr %&gt;%  
+beakr() %&gt;%  
   postr(path = '/predict-species', decorate(predict_species)) %&gt;% 
   handleErrors() %&gt;% 
   listen(host = '127.0.0.1', port = 1234)</a></code></pre>
@@ -186,7 +183,7 @@ states_plot &lt;- function(req, res, err) {
 }
 
 # Create and start a default beakr instance
-createBeakr() %&gt;% 
+beakr() %&gt;% 
   getr(path = '/usa', states_plot) %&gt;% 
   listen()
 </a></code></pre>

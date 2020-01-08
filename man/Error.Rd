@@ -31,7 +31,7 @@ or middleware errors.
 }
 
 \seealso{
-\code{\link{Beakr}} and \code{\link{Middleware}}
+\code{\link{handler}} and \code{\link{Middleware}}
 }
 \keyword{internal}
 \section{Methods}{

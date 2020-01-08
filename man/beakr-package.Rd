@@ -3,7 +3,7 @@
 \docType{package}
 \name{beakr-package}
 \alias{beakr-package}
-\alias{beakr}
+\alias{Beakr-Package}
 \title{A minimalist web framework.}
 \description{
 The \code{beakr} package provides a minimalist web framework for for
@@ -21,7 +21,7 @@ continuation of the \code{jug} package developed by Bart Smeets. The
 \href{http://www.mazamascience.com/}{Mazama Science}.
 }
 \seealso{
-\link{createBeakr}
+\link{beakr}
 }
 \author{
 Hans Martin \email{hans@mazamascience.com}

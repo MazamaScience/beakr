@@ -20,7 +20,7 @@ specified callback functions or middleware.
 }
 \examples{
 \dontrun{
-createBeakr() \%>\%
+beakr() \%>\%
   getr("/", function(req, res, err) {
     return("Successful getr request!\n")
   }) \%>\%

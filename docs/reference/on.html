@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GET-binding middleware — getr • beakr</title>
+<title>Beakr Event Listener — on • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,11 @@
 
 
 
-<meta property="og:title" content="GET-binding middleware — getr" />
-<meta property="og:description" content="Routes HTTP getr requests to the specified path with the
-specified callback functions or middleware." />
+<meta property="og:title" content="Beakr Event Listener — on" />
+<meta property="og:description" content="Add an event listener to a beakr instance. Currently
+supported events are &quot;start&quot;, &quot;finish&quot;, &quot;error&quot;. The events &quot;start&quot; and
+&quot;finish&quot; will pass the current state of the req, res and err
+objects to the Listener. The &quot;error&quot; event will pass string error message." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,55 +111,43 @@ specified callback functions or middleware." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>GET-binding middleware</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
-    <div class="hidden name"><code>getr.Rd</code></div>
+    <h1>Beakr Event Listener</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>on.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Routes HTTP getr requests to the specified path with the
-specified callback functions or middleware.</p>
+    <p>Add an event listener to a <em>beakr</em> instance. Currently
+supported events are <code>"start", "finish", "error"</code>. The events <code>"start"</code> and
+<code>"finish"</code> will pass the current state of the <code>req</code>, <code>res</code> and <code>err</code>
+objects to the Listener. The <code>"error"</code> event will pass string error message.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getr</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>on</span>(<span class='no'>beakr</span>, <span class='no'>event</span>, <span class='no'>FUN</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>beakr</th>
-      <td><p>a beakr instance or <code>NULL</code>.</p></td>
+      <td><p>a beakr instance.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>string representing a relative path for which the middleware
-is invoked.</p></td>
+      <th>event</th>
+      <td><p>the event to listen for, (<em>"start", "finish", "end"</em>).</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>additional middleware/functions.</p></td>
+      <th>FUN</th>
+      <td><p>the response middleware function.</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='beakr.html'>beakr</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>getr</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
-    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful getr request!\n"</span>)
-  }) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='listen.html'>listen</a></span>()
-
-<span class='co'># In browser:</span>
-<span class='co'>#   http://127.0.0.1:8080</span>
-<span class='co'># &gt; Successful getr request!</span>
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

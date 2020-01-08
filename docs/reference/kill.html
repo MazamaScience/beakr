@@ -133,7 +133,7 @@ all open connections for the instance and unbinds the port.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>beakr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createBeakr.html'>createBeakr</a></span>()
+<span class='no'>beakr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='beakr.html'>beakr</a></span>()
 <span class='fu'><a href='listen.html'>listen</a></span>(<span class='no'>beakr</span>, <span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Serving beakr instance at http://127.0.0.1:8080</span></div><div class='output co'>#&gt; Beakr Instance:  Towers Superhero 
 #&gt;  State: Active | Host: 127.0.0.1 | Port: 8080 | Middlewares: 0 </div><div class='input'><span class='fu'>kill</span>(<span class='no'>beakr</span>)</div><div class='output co'>#&gt; Stopped Beakr Instance:  Towers Superhero 
 #&gt;  State: Inactive | Host: 127.0.0.1 | Port: 8080 | Middlewares: 0 </div><div class='input'># }

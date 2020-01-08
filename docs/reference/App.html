@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A minimalist web framework. — beakr-package • beakr</title>
+<title>Beakr Application class — App • beakr</title>
 
 
 <!-- jquery -->
@@ -35,19 +35,10 @@
 
 
 
-<meta property="og:title" content="A minimalist web framework. — beakr-package" />
-<meta property="og:description" content="The beakr package provides a minimalist web framework for for
-developing application programming interfaces in R. The package includes
-basic functionality for handling common HTTP requests.
-beakr allows R code to listen for and interact with HTTP and WebSocket clients, so
-you can serve web traffic directly out of your R process. beakr relies heavily
-on the httpuv package, and therefore
-the lower level libuv and
-http-parser C libraries.
-beakr is a ground-up rewrite and
-continuation of the jug package developed by Bart Smeets. The
-beakr package is supported and maintained by
-Mazama Science." />
+<meta property="og:title" content="Beakr Application class — App" />
+<meta property="og:description" content="The Beakr class defines the server instance utilizing the
+httpuv package. This class defines an interface for the rest of the
+beakr package and is therefore meant to be instantiated." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -119,41 +110,118 @@ Mazama Science." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A minimalist web framework.</h1>
+    <h1>Beakr Application class</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Beakr.R'><code>R/Beakr.R</code></a></small>
-    <div class="hidden name"><code>beakr-package.Rd</code></div>
+    <div class="hidden name"><code>App.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>beakr</code> package provides a minimalist web framework for for
-developing application programming interfaces in R. The package includes
-basic functionality for handling common <code>HTTP</code> requests.</p>
-<p>beakr allows R code to listen for and interact with HTTP and WebSocket clients, so
-you can serve web traffic directly out of your R process. beakr relies heavily
-on the <a href='https://github.com/rstudio/httpuv'>httpuv</a> package, and therefore
-the lower level <a href='https://github.com/joyent/libuv'>libuv</a> and
-<a href='https://github.com/joyent/http-parser'>http-parser</a> C libraries.
-<code>beakr</code> is a ground-up rewrite and
-continuation of the <code>jug</code> package developed by Bart Smeets. The
-<code>beakr</code> package is supported and maintained by
-<a href='http://www.mazamascience.com/'>Mazama Science</a>.</p>
+    <p>The <code>Beakr</code> class defines the server instance utilizing the
+<code>httpuv</code> package. This class defines an interface for the rest of the
+<code>beakr</code> package and is therefore meant to be instantiated.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+
+<dl class='dl-horizontal'>
+  <dt><code>router()</code></dt><dd><p>An instantiated <code>Router</code> object.</p></dd>
+  <dt><code>server()</code></dt><dd><p>The instantiated <code>Server</code> object.</p></dd>
+  <dt><code>appDefinition()</code></dt><dd><p>A method to define the functions or middleware of users application.</p></dd>
+  <dt><code>addCollectedMiddleware(collector)</code></dt><dd><p>Adds the users "collected" middleware to the <code>Beakr</code> defined
+  middleware.</p></dd>
+  <dt><code>initialize()</code></dt><dd><p>Creates a new <code>Router</code> object for the <code>router</code>
+  method.</p></dd>
+  <dt><code><a href='https://rdrr.io/r/stats/start.html'>start(host, port, daemon)</a></code></dt><dd><p>Returns a running server. If <code>daemon = TRUE</code>, the server will run
+  in the background.</p></dd>
+  <dt><code><a href='https://rdrr.io/r/base/print.html'>print(...)</a></code></dt><dd><p>Returns a console output of the instance and its number of middleware
+  attached.</p></dd>
+
+</dl>
+
+    <h2 class="hasAnchor" id="package-details"><a class="anchor" href="#package-details"></a>Package details</h2>
+
+    
+
+
+<p>The <code>beakr</code> package provides a minimal web framework for for developing
+lightweight APIs in R. The package includes basic functionality for handling
+common <code>HTTP</code> requests. <code>beakr</code> is a ground-up rewrite and
+continuation of the <code>jug</code> package developed by Bart Smeets. The
+<code>beakr</code> package is supported and maintained by
+<a href='http://www.mazamascience.com/'>Mazama Science</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='beakr.html'>beakr</a></p></div>
+    <div class='dont-index'><p><code><a href='Router.html'>Router</a></code> and <code><a href='Middleware.html'>Middleware</a></code></p></div>
+    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
+
+    
+<h3>Public methods</h3>
+
+<ul>
+<li><p><a href='#method-appDefinition'><code>App$appDefinition()</code></a></p></li>
+<li><p><a href='#method-include'><code>App$include()</code></a></p></li>
+<li><p><a href='#method-new'><code>App$new()</code></a></p></li>
+<li><p><a href='#method-start'><code>App$start()</code></a></p></li>
+<li><p><a href='#method-print'><code>App$print()</code></a></p></li>
+<li><p><a href='#method-clone'><code>App$clone()</code></a></p></li>
+</ul>
+<p><hr>
+<a id="method-appDefinition"></a></p><h3>Method <code>appDefinition()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>App$appDefinition()</pre><p></div></p>
+
+<p><hr>
+<a id="method-include"></a></p><h3>Method <code><a href='include.html'>include()</a></code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>App$include(bundle)</pre><p></div></p>
+
+<p><hr>
+<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>App$new()</pre><p></div></p>
+
+<p><hr>
+<a id="method-start"></a></p><h3>Method <code><a href='https://rdrr.io/r/stats/start.html'>start()</a></code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>App$start(host, port, daemon)</pre><p></div></p>
+
+<p><hr>
+<a id="method-print"></a></p><h3>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+
+<h3>Usage</h3>
+<p><div class="r"></p><pre>App$print()</pre><p></div></p>
+
+<p><hr>
+<a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
+<p><div class="r"></p><pre>App$clone(deep = FALSE)</pre><p></div></p>
+
+<h3>Arguments</h3>
+<p><div class="arguments"></p><dl class='dl-horizontal'>
+<dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
+
+</dl><p></div></p>
+
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#methods">Methods</a></li>
+      <li><a href="#package-details">Package details</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#methods">Methods</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p>Hans Martin <a href='mailto:hans@mazamascience.com'>hans@mazamascience.com</a></p>
   </div>
 </div>
 

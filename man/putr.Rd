@@ -20,7 +20,7 @@ specified callback functions or middleware.
 }
 \examples{
 \dontrun{
-createBeakr() \%>\%
+beakr() \%>\%
   putr("/", function(req, res, err) {
     return("Successful putr request!\n")
   }) \%>\%
