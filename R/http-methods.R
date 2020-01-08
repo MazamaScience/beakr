@@ -1,7 +1,7 @@
 #' @export
 #' @title GET-binding middleware
 #'
-#' @description Routes HTTP GET requests to the specified path with the
+#' @description Routes HTTP getr requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance or \code{NULL}.
@@ -9,22 +9,22 @@
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage GET(beakr, path, ...)
+#' @usage getr(beakr, path, ...)
 #'
 #' @examples
 #' \dontrun{
 #' createBeakr() %>%
-#'   GET("/", function(req, res, err) {
-#'     return("Successful GET request!\n")
+#'   getr("/", function(req, res, err) {
+#'     return("Successful getr request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # In browser:
 #' #   http://127.0.0.1:8080
-#' # > Successful GET request!
+#' # > Successful getr request!
 #' }
 #'
-GET <- function(beakr, path = NULL, ...) {
+getr <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
   if ( is.null(beakr) ) {
@@ -46,7 +46,7 @@ GET <- function(beakr, path = NULL, ...) {
 #' @export
 #' @title POST-binding middleware
 #'
-#' @description Routes HTTP POST requests to the specified path with the
+#' @description Routes HTTP postr requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
@@ -54,21 +54,21 @@ GET <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage POST(beakr, path, ...)
+#' @usage postr(beakr, path, ...)
 #'
 #' @examples
 #' \dontrun{
 #' createBeakr() %>%
-#'   POST("/", function(req, res, err) {
-#'     return("Successful POST request!\n")
+#'   postr("/", function(req, res, err) {
+#'     return("Successful postr request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # In terminal:
-#' #  curl -X POST http://127.0.0.1:8080/
-#' # > Successful POST request!
+#' #  curl -X postr http://127.0.0.1:8080/
+#' # > Successful postr request!
 #' }
-POST <- function(beakr, path = NULL, ...) {
+postr <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
@@ -88,7 +88,7 @@ POST <- function(beakr, path = NULL, ...) {
 #' @export
 #' @title PUT-binding middleware
 #'
-#' @description Routes HTTP PUT requests to the specified path with the
+#' @description Routes HTTP putr requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
@@ -96,22 +96,22 @@ POST <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage PUT(beakr, path, ...)
+#' @usage putr(beakr, path, ...)
 #'
 #' @examples
 #' \dontrun{
 #' createBeakr() %>%
-#'   PUT("/", function(req, res, err) {
-#'     return("Successful PUT request!\n")
+#'   putr("/", function(req, res, err) {
+#'     return("Successful putr request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # In terminal:
-#' #  curl -X PUT http://127.0.0.1:8080/
-#' # > Successful PUT request!
+#' #  curl -X putr http://127.0.0.1:8080/
+#' # > Successful putr request!
 #' }
 #'
-PUT <- function(beakr, path = NULL, ...) {
+putr <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
@@ -128,9 +128,9 @@ PUT <- function(beakr, path = NULL, ...) {
 }
 
 #' @export
-#' @title DELETE-binding middleware
+#' @title deleter-binding middleware
 #'
-#' @description Routes HTTP DELETE requests to the specified path with the
+#' @description Routes HTTP deleter requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
@@ -138,8 +138,8 @@ PUT <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage DELETE(beakr, path, ...)
-DELETE <- function(beakr, path = NULL, ...) {
+#' @usage deleter(beakr, path, ...)
+deleter <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }

@@ -14,7 +14,7 @@
 ```
 library(beakr)
 createBeakr() %>% 
-  GET(path = "/", function(req, res, err) "Hello, World!") %>% 
+  getr(path = "/", function(req, res, err) "Hello, World!") %>% 
   listen(host = "127.0.0.1", port = 1234) 
 ```
 ```
@@ -90,15 +90,15 @@ beakr <- createBeakr()
 # Use beakr to expose the model in the '/predict-species' url path. 
 #   See help('decorate') for more info about decorating functions. 
 beakr %>%  
-  POST(path = '/predict-species', decorate(predict_species)) %>% 
+  postr(path = '/predict-species', decorate(predict_species)) %>% 
   handleErrors() %>% 
   listen(host = '127.0.0.1', port = 1234)
 ```
 
-The user can send an HTTP POST request to `http://127.0.0.1:1234/predict-species` with incoming data supplied as a JSON string containing sepal length and width (`sl`, `sw`) and petal length and width (`pl`, `pw`). The _beakr_ instance responds with the predicted species of iris. 
+The user can send an HTTP postr request to `http://127.0.0.1:1234/predict-species` with incoming data supplied as a JSON string containing sepal length and width (`sl`, `sw`) and petal length and width (`pl`, `pw`). The _beakr_ instance responds with the predicted species of iris. 
 
 ```
-$ curl -X POST http://127.0.0.1:1234/predict-species \
+$ curl -X postr http://127.0.0.1:1234/predict-species \
   -H 'content-type: application/json' \
   -d '{ "sl": 5.3, "sw": 4, "pl": 1.6, "pw": 0.2 }'
   
@@ -133,7 +133,7 @@ states_plot <- function(req, res, err) {
 
 # Create and start a default beakr instance
 createBeakr() %>% 
-  GET(path = '/usa', states_plot) %>% 
+  getr(path = '/usa', states_plot) %>% 
   listen()
 
 ```

@@ -45,8 +45,8 @@ createBeakr <- function(name = NULL) {
 #' @examples
 #' \dontrun{
 #' createBeakr() %>%
-#'   GET("/", function(req, res, err) {
-#'     return("Successful GET request!\n")
+#'   getr("/", function(req, res, err) {
+#'     return("Successful getr request!\n")
 #'   }) %>%
 #'   listen()
 #' }
@@ -258,7 +258,7 @@ static <- function(beakr, path = NULL, dir = NULL) {
       return(NULL)
     }
   }
-  GET(beakr = beakr, path = NULL, filer)
+  getr(beakr = beakr, path = NULL, filer)
   return(beakr)
 }
 
