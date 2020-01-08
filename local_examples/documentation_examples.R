@@ -4,9 +4,9 @@
 #' @examples
 #' \dontrun{
 #' # Create an instance and add the error handler last.
-#' createBeakr() %>%
+#' beakr() %>%
 #'   use(path = "/", decorate(function(n) { paste("Hi, ", n) })) %>%
-#'   handleErrors() %>%
+#'   handler() %>%
 #'   listen()
 #' # In shell
 #' #  curl http://127.0.0.1:8080/
@@ -28,7 +28,7 @@
 #' # Construct middleware
 #' ext <- use(beakr = NULL, "/",
 #'            decorate(function(name) { paste("Hi ", name, "!\n") })) %>%
-#'   handleErrors()
+#'   handler()
 #'
 #' # Include the external middleware in the primary instance
 #' primary %>% include(ext)
