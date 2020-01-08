@@ -12,7 +12,7 @@
 logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
 
   if ( is.null(beakr) ) {
-    beakr <- createBeakr(name = "NULL")
+    beakr <- beakr(name = "NULL")
   }
 
   if ( level == 'TRACE' ) {
@@ -43,7 +43,7 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
   try(futile.logger::flog.logger( name = "beakr",
                               threshold = thresh,
                               appender = appdr ), silent = TRUE)
-  onEvent(
+  on(
     beakr = beakr,
     event = 'start',
     FUN = function(event, req, res, err) {
@@ -58,7 +58,7 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
       return(futile.logger::flog.debug(msg, name = "beakr"))
     }
   )
-  onEvent(
+  on(
     beakr = beakr,
     event = 'finish',
     FUN = function(event, req, res, err) {
@@ -74,7 +74,7 @@ logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
       return(futile.logger::flog.info(msg, name = "beakr"))
     }
   )
-  onEvent(
+  on(
     beakr = beakr,
     event = 'error',
     FUN = function(event, req, res, err, err_msg) {

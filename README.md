@@ -13,7 +13,7 @@
 
 ```
 library(beakr)
-createBeakr() %>% 
+beakr() %>% 
   getr(path = "/", function(req, res, err) "Hello, World!") %>% 
   listen(host = "127.0.0.1", port = 1234) 
 ```
@@ -27,7 +27,7 @@ createBeakr() %>%
 
 The **beakr** package allows R code to listen for and interact with HTTP and WebSocket clients, so you can serve web traffic directly from a _beakr_ instance. The **beakr** package is intended to be simple, lightweight and unopinionated.  
 
-While **beakr** is not recommended for building extensive web frameworks, R and the flexibility of the package are (potentially) up to the task. Keep in mind that **beakr** was not designed to be an especially performant web framework and the  _"batteries are certainly not included"_. If you're looking for full featured  web frameworks, there are better tools and languages for that (see [Shiny](https://shiny.rstudio.com), [django](https://www.djangoproject.com), _etc.). **beakr** is inspired by the minimalist and massively-expandable frameworks offered by [Express.js](https://expressjs.com) and [Flask](https://palletsprojects.com/p/flask/). 
+While **beakr** is not recommended for building extensive web frameworks, R and the flexibility of the package are (potentially) up to the task. Keep in mind that **beakr** was not designed to be an especially performant web framework and the  _"batteries are certainly not included"_. If you're looking for full featured  web frameworks, there are better tools and languages for that (see [Shiny](https://shiny.rstudio.com), [django](https://www.djangoproject.com), etc.). **beakr** is inspired by the minimalist and massively-expandable frameworks offered by [Express.js](https://expressjs.com) and [Flask](https://palletsprojects.com/p/flask/). 
 
 One of the reasons to use **beakr** is that it is incredibly flexible. It allows you to integrate your R code as _middleware_ in a _beakr_ instance. Middleware functions can execute any R code, make changes to the _request_, _response_, and _error_ objects, and then serve up the response at the end the request-response cycle. The **beakr** package loosely follows Express.js middleware semantics, where middleware functions are functions that have access to the _request_, _response_, and _error_ objects of a _beakr_ instance.
 
@@ -84,11 +84,9 @@ predict_species <- function(sl, sw, pl, pw) {
 }
 
 # Create the beakr instance 
-beakr <- createBeakr()
-
 # Use beakr to expose the model in the '/predict-species' url path. 
 #   See help('decorate') for more info about decorating functions. 
-beakr %>%  
+beakr() %>%  
   postr(path = '/predict-species', decorate(predict_species)) %>% 
   handleErrors() %>% 
   listen(host = '127.0.0.1', port = 1234)
@@ -131,7 +129,7 @@ states_plot <- function(req, res, err) {
 }
 
 # Create and start a default beakr instance
-createBeakr() %>% 
+beakr() %>% 
   getr(path = '/usa', states_plot) %>% 
   listen()
 

@@ -4,12 +4,12 @@
 #' @param name an optional name assigned to the \emph{Beakr} object.
 #'
 #' @description Create a \code{Beakr} instance object by calling the top-level
-#' \code{createBeakr()} function. If \code{name} is not supplied, a random name
+#' \code{beakr()} function. If \code{name} is not supplied, a random name
 #' will be assigned.
 #'
-#' @usage createBeakr(name = NULL)
-createBeakr <- function(name = NULL) {
-  beakr <- Beakr$new()
+#' @usage beakr(name = NULL)
+beakr <- function(name = NULL) {
+  beakr <- App$new()
   if ( !is.null(name) ) {
     beakr$name <- name
   }
@@ -44,7 +44,7 @@ createBeakr <- function(name = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#' createBeakr() %>%
+#' beakr() %>%
 #'   getr("/", function(req, res, err) {
 #'     return("Successful getr request!\n")
 #'   }) %>%
@@ -85,7 +85,7 @@ newError <- function() {
 #'
 #' @examples
 #' \donttest{
-#' beakr <- createBeakr()
+#' beakr <- beakr()
 #' listen(beakr, daemon = TRUE)
 #' kill(beakr)
 #' }
@@ -144,8 +144,8 @@ listActive <- function() {
 #' @param path string representing a relative path for which the middleware
 #' is invoked.
 #'
-#' @usage handleErrors(beakr, path)
-handleErrors <- function(beakr, path = NULL) {
+#' @usage handler(beakr, path)
+handler <- function(beakr, path = NULL) {
   use(
     beakr = beakr,
     path = NULL,
@@ -193,7 +193,7 @@ processTestRequest <- function(beakr, test_request) {
 #' @usage webSocket(beakr, path, ...)
 webSocket <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
   lapply(
     X = list(...),
@@ -221,7 +221,7 @@ webSocket <- function(beakr, path, ...) {
 #' directory.
 static <- function(beakr, path = NULL, dir = NULL) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
   dir <- ifelse( test = is.null(dir),
                  yes  = getwd(),
@@ -279,7 +279,7 @@ static <- function(beakr, path = NULL, dir = NULL) {
 #' @usage use(beakr, path, ..., method)
 use <- function(beakr, path, ..., method = NULL) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
   lapply(
     X = list(...),
@@ -344,7 +344,7 @@ cors <- function(
   }
 
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
 
   headers <- list( `Access-Control-Allow-Origin`      = with_origin,
@@ -420,7 +420,7 @@ include <- function(beakr, include, file = NULL) {
 #' @param FUN the response middleware function.
 #'
 #' @export
-onEvent <- function(beakr, event, FUN) {
+on <- function(beakr, event, FUN) {
   .addListener(beakr = beakr, event = event, FUN = FUN)
   return(beakr)
 }

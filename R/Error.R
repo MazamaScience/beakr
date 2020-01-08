@@ -28,7 +28,7 @@
 #'   }
 #' }
 #'
-#' @seealso \code{\link{Beakr}} and \code{\link{Middleware}}
+#' @seealso \code{\link{handler}} and \code{\link{Middleware}}
 #' @keywords internal
 Error <-
   R6::R6Class(

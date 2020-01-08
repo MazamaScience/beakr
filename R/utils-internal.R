@@ -93,7 +93,7 @@ routeMiddleware <- function(
 ) {
 
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
 
   if ( !is.null(method) ) {

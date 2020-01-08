@@ -16,10 +16,10 @@
 #' \code{beakr} package is supported and maintained by
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
-#' @seealso \link{createBeakr}
+#' @seealso \link{beakr}
 #'
 #' @name beakr-package
-#' @aliases beakr
+#' @aliases Beakr-Package
 #' @docType package
 #' @title A minimalist web framework
 #' @author Hans Martin \email{hans@mazamascience.com}
@@ -28,7 +28,7 @@ NULL
 
 #' @export
 #' @importFrom R6 R6Class
-#' @title Beakr class
+#' @title Beakr Application class
 #'
 #' @description The \code{Beakr} class defines the server instance utilizing the
 #' \code{httpuv} package. This class defines an interface for the rest of the
@@ -78,7 +78,7 @@ NULL
 #'
 #' @seealso \code{\link{Router}} and \code{\link{Middleware}}
 #' @keywords internal
-Beakr <-
+App <-
   R6::R6Class(
     classname = "Beakr",
     public = list(

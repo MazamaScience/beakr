@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' createBeakr() %>%
+#' beakr() %>%
 #'   getr("/", function(req, res, err) {
 #'     return("Successful getr request!\n")
 #'   }) %>%
@@ -28,7 +28,7 @@ getr <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
   FUNS <- list(...)
   lapply(
@@ -58,7 +58,7 @@ getr <- function(beakr, path = NULL, ...) {
 #'
 #' @examples
 #' \dontrun{
-#' createBeakr() %>%
+#' beakr() %>%
 #'   postr("/", function(req, res, err) {
 #'     return("Successful postr request!\n")
 #'   }) %>%
@@ -70,7 +70,7 @@ getr <- function(beakr, path = NULL, ...) {
 #' }
 postr <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
   FUNS <- list(...)
   lapply(
@@ -100,7 +100,7 @@ postr <- function(beakr, path = NULL, ...) {
 #'
 #' @examples
 #' \dontrun{
-#' createBeakr() %>%
+#' beakr() %>%
 #'   putr("/", function(req, res, err) {
 #'     return("Successful putr request!\n")
 #'   }) %>%
@@ -113,7 +113,7 @@ postr <- function(beakr, path = NULL, ...) {
 #'
 putr <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
   lapply(
     X = list(...),
@@ -141,7 +141,7 @@ putr <- function(beakr, path = NULL, ...) {
 #' @usage deleter(beakr, path, ...)
 deleter <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
+    beakr <- invisible(App$new())
   }
   lapply(
     X = list(...),

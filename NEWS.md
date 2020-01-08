@@ -3,6 +3,10 @@
 * Prepared for CRAN x2
 * Updated README to avoid CRAN notes
 * Updated http-methods functions to avoid CRAN suggestions: `GET()` -> `getr()`, `POST()` -> `postr()`, `PUT()` -> `putr()`, `DELETE()` -> `deleter()`
+* Updated `createBeakr()` -> `beakr()` 
+* Renamed `Beakr` class object to `App` to align with other popular webframeworks (Express.js, Flask)
+* Renamed `handleErrors()` to `handler()`
+* Renamed `onEvent()` to `on()`
 
 # beakr 0.2.1 
 
