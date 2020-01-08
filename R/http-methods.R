@@ -128,7 +128,7 @@ putr <- function(beakr, path = NULL, ...) {
 }
 
 #' @export
-#' @title deleter-binding middleware
+#' @title DELETE-binding middleware
 #'
 #' @description Routes HTTP deleter requests to the specified path with the
 #' specified callback functions or middleware.

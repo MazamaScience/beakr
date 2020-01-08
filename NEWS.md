@@ -1,3 +1,9 @@
+# beakr 0.2.2
+
+* Prepared for CRAN x2
+* Updated README to avoid CRAN notes
+* Updated http-methods functions to avoid CRAN suggestions: `GET()` -> `getr()`, `POST()` -> `postr()`, `PUT()` -> `putr()`, `DELETE()` -> `deleter()`
+
 # beakr 0.2.1 
 
 * Prepare for CRAN
