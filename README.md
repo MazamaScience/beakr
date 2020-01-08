@@ -38,7 +38,6 @@ _Note:_ By convention, the _response_, _request_, and _error_ objects are always
 Install the release version from CRAN:
 
 ```
-# Not yet on CRAN network. 
 install.packages("beakr")
 ```
 
