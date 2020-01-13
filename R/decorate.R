@@ -14,6 +14,7 @@
 #' @param strict boolean, requiring strict parameter matching.
 #'
 #' @usage decorate(FUN, content_type, strict = FALSE)
+#' @value A `decorated` middleware function
 #' @export
 decorate <-
   function(FUN, content_type = "text/html", strict = FALSE) {

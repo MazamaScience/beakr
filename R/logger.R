@@ -9,6 +9,17 @@
 #' @param echo if TRUE will print the log to console.
 #'
 #' @export
+#' @value A `beakr` App object with added middleware.
+#' @examples
+#' \donttest{
+#' beakr() %>%
+#'   http_get('/', function(req, res, err) 'LOG TEST') %>%
+#'   logger() %>%
+#'   listen()
+#' ## In browser at 127.0.0.1:8080
+#' # DEBUG -datestamp- HTTP | / - GET - REQUEST RECEIVED
+#' # INFO -datestamp- HTTP | / - GET - 200
+#' }
 logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
 
   if ( is.null(beakr) ) {
