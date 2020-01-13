@@ -8,6 +8,15 @@
 #' will be assigned.
 #'
 #' @usage beakr(name = NULL)
+#' @return A new and empty `beakr` App.
+#' @examples
+#' \donttest{
+#' # Standard
+#' app <- beakr()
+#' listen(app)
+#' # Pipe
+#' beakr() %>% listen()
+#' }
 beakr <- function(name = NULL) {
   beakr <- App$new()
   if ( !is.null(name) ) {
@@ -41,14 +50,22 @@ beakr <- function(name = NULL) {
 #' @param daemon run the instance in the background, the default is FALSE.
 #'
 #' @usage listen(beakr, host, port, daemon)
-#'
+#' @raturn A `beakr` App object.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' # Run in foreground
 #' beakr() %>%
-#'   getr("/", function(req, res, err) {
-#'     return("Successful getr request!\n")
+#'   http_get("/", function(req, res, err) {
+#'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen()
+#'
+#' # Run in background
+#' #' beakr() %>%
+#'   http_get("/", function(req, res, err) {
+#'     return("Successful GET request!\n")
+#'   }) %>%
+#'   listen(daemon = TRUE)
 #' }
 listen <-function(
   beakr,
@@ -62,18 +79,6 @@ listen <-function(
 }
 
 #' @export
-#' @title Create a new Error
-#'
-#' @description Used to handle errors.
-#'
-#' @usage newError()
-#'
-# TODO:  Is NewError() necessary?
-newError <- function() {
-  Error$new()
-}
-
-#' @export
 #' @title Stop the beakr instance
 #'
 #' @description Stops an active instance when given a beakr object. This closes
@@ -82,6 +87,7 @@ newError <- function() {
 #' @param beakr a beakr instance.
 #'
 #' @usage kill(beakr)
+#' @return None
 #'
 #' @examples
 #' \donttest{
@@ -101,10 +107,17 @@ kill <- function(beakr) {
 #' @description Stops all instances that have been activated by
 #' \code{\link{listen}} in the session.
 #'
-#' @usage killAll()
-#'
+#' @usage kill_all()
+#' @return None
 #' @seealso \code{\link{kill}} and \code{\link{listen}}
-killAll <- function() {
+#' @examples
+#' \donttest{
+#' beakr() %>% listen(daemon = TRUE)
+#' # Kill all instances
+#' kill_all()
+#' ## Stopped All Instances
+#' }
+kill_all <- function() {
   httpuv::stopAllServers()
   cat("Stopped All Instances\n")
 }
@@ -116,8 +129,20 @@ killAll <- function() {
 #'
 #' @return a list of active instances
 #'
-#' @usage listActive()
-listActive <- function() {
+#' @usage list_active()
+#' @return A `list` of all active instances
+#' @examples
+#' \donttest{
+#' beakr('Test1') %>% listen(port = 1234, daemon = TRUE)
+#' beakr('Test2') %>% listen(port = 2234, daemon = TRUE)
+#' list_active()
+#' ## [[1]]
+#' ## [1] "Host: 127.0.0.1 | Port: 1234 | Active: TRUE"
+#'
+#' ## [[2]]
+#' ## [1] "Host: 127.0.0.1 | Port: 2234 | Active: TRUE"
+#' }
+list_active <- function() {
   active <- lapply(
     X = httpuv::listServers() ,
     FUN = function(s) {
@@ -144,8 +169,9 @@ listActive <- function() {
 #' @param path string representing a relative path for which the middleware
 #' is invoked.
 #'
-#' @usage handler(beakr, path)
-handler <- function(beakr, path = NULL) {
+#' @usage error_handler(beakr, path)
+#' @return A `beakr` App object with added middleware.
+error_handler <- function(beakr, path = NULL) {
   use(
     beakr = beakr,
     path = NULL,
@@ -176,7 +202,7 @@ handler <- function(beakr, path = NULL) {
 #' @param beakr the beakr instance
 #' @param test_request the TestRequest instance
 #'
-processTestRequest <- function(beakr, test_request) {
+test_request <- function(beakr, test_request) {
   beakr$router$invoke(test_request)
 }
 
@@ -190,15 +216,22 @@ processTestRequest <- function(beakr, test_request) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage webSocket(beakr, path, ...)
-webSocket <- function(beakr, path, ...) {
+#' @usage websocket(beakr, path, ...)
+#' @return A `beakr` App object with added middleware.
+#' @examples
+#' \donttest{
+#' beakr() %>%
+#'   websocket('/ws_test', function(req, res, err) 'Websocket Test') %>%
+#'   listen()
+#' }
+websocket <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(App$new())
   }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
+      .routeMiddleware( beakr  = beakr,
                        FUN    = middleware_FUN,
                        path   = path,
                        method = NULL )
@@ -210,56 +243,60 @@ webSocket <- function(beakr, path, ...) {
 #' @export
 #' @title Serve static files
 #'
-#' @description Binds to get requests that aren't handled by specified paths.
+#' @description Binds to GET requests that aren't handled by specified paths.
 #' Should support all filetypes; returns image and octet-stream types as a raw
 #' string.
 #'
 #' @param beakr a beakr instance
 #' @param path a string representing a relative path for which the middleware
 #' is invoked.
-#' @param dir a string representing a path for which to serve as the root
-#' directory.
-static <- function(beakr, path = NULL, dir = NULL) {
+#' @param file a string representing the path to the file that is to be served.
+#'
+#' @details Serve static files from the host machine. Currently supports images,
+#' PDF, JSON, HTML, and raw text. The static file will be served on the `path`
+#' specified in addition to the file name and extension. For example, an image
+#' `example_dir/path_to_pictures/pic.png` will be served on the URL extension
+#' `/path/pic.png`.
+#' @return A `beakr` App object with added middleware.
+#' @examples
+#' \dontrun{
+#' path_to_file <- "example_dir/path_to_pictures/pic.png"
+#' beakr() %>%
+#'   static(path = 'readme/', file = path_to_file) %>%
+#'   listen()
+#' }
+static <- function(beakr, path = NULL, file = NULL) {
   if ( is.null(beakr) ) {
     beakr <- invisible(App$new())
   }
-  dir <- ifelse( test = is.null(dir),
-                 yes  = getwd(),
-                 no   = dir )
-  filer <- function(req, res, err) {
-    if ( substring(text = req$path, first = nchar(req$path)) == "/" ) {
-      req$path <- paste0(req$path, "index.html")
-    }
+  serve_file <- function(req, res, err) {
 
-    if ( is.null(path) ) {
-      fpath <- paste0(dir, "/", req$path)
-    } else {
-      ppath <- gsub(paste0(".*", path, "(.*)"), "\\1", req$path)
-      fpath <- paste0(dir, "/", ppath)
-    }
+    if ( file.exists(file) ) {
 
-    bound <- ifelse( test = is.null(path),
-                     yes  = TRUE,
-                     no   = substr(req$path, 2, nchar(path) + 1) == path )
+      url_path <- paste0('/', path, tail(unlist(strsplit(file, '/')), n = 1))
 
-    if ( file.exists(fpath) & bound ) {
-      mime_type <- mime::guess_type(fpath)
-      res$setContentType(mime_type)
-      data <- readBin( con  = fpath,
-                       what = "raw",
-                       n    = file.info(fpath)$size )
-      if( grepl("image|octect|pdf", mime_type) ) { # Assumptions...
-        return(data)
+      if ( req$path == url_path ) {
+        mime_type <- mime::guess_type(file)
+        res$setContentType(mime_type)
+        data <- readBin( con  = file,
+                         what = "raw",
+                         n    = file.info(file)$size )
+        if( grepl("image|octect|pdf|json", mime_type) ) { # Assumptions...
+          return(data)
+        } else {
+          return(rawToChar(data))
+        }
       } else {
-        return(rawToChar(data))
+        res$setStatus(404L)
+        return(NULL)
       }
-    } else {
-      res$setStatus(404L)
-      return(NULL)
+
     }
+
   }
-  getr(beakr = beakr, path = NULL, filer)
-  return(beakr)
+
+  return(http_get(beakr = beakr, path = NULL, serve_file))
+
 }
 
 #' @export
@@ -284,7 +321,7 @@ use <- function(beakr, path, ..., method = NULL) {
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
+      .routeMiddleware( beakr  = beakr,
                        FUN    = middleware_FUN,
                        path   = path,
                        method = method )
@@ -376,7 +413,7 @@ cors <- function(
     return(NULL)
   }
 
-  routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
+  .routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
 
   return(beakr)
 }
