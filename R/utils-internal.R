@@ -84,7 +84,7 @@ NULL
 #' @param path the path to route the middleware
 #' @param method the HTTP method to employ
 #' @param websocket boolean, TRUE if websocket.
-routeMiddleware <- function(
+.routeMiddleware <- function(
   beakr,
   FUN,
   path = NULL,
