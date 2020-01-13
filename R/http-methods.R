@@ -1,7 +1,7 @@
 #' @export
 #' @title GET-binding middleware
 #'
-#' @description Routes HTTP getr requests to the specified path with the
+#' @description Routes HTTP GET requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance or \code{NULL}.
@@ -9,22 +9,23 @@
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage getr(beakr, path, ...)
+#' @usage http_get(beakr, path, ...)
+#' @value A `beakr` App object with added middleware.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' beakr() %>%
-#'   getr("/", function(req, res, err) {
-#'     return("Successful getr request!\n")
+#'   http_get("/", function(req, res, err) {
+#'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # In browser:
 #' #   http://127.0.0.1:8080
-#' # > Successful getr request!
+#' # > Successful GET request!
 #' }
 #'
-getr <- function(beakr, path = NULL, ...) {
+http_get <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
   if ( is.null(beakr) ) {
@@ -34,7 +35,7 @@ getr <- function(beakr, path = NULL, ...) {
   lapply(
     X   = FUNS,
     FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
+      .routeMiddleware( beakr  = beakr,
                        FUN    = middleware_FUN,
                        path   = path,
                        method = "GET" )
@@ -46,7 +47,7 @@ getr <- function(beakr, path = NULL, ...) {
 #' @export
 #' @title POST-binding middleware
 #'
-#' @description Routes HTTP postr requests to the specified path with the
+#' @description Routes HTTP POST requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
@@ -54,21 +55,22 @@ getr <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage postr(beakr, path, ...)
+#' @usage http_post(beakr, path, ...)
+#' @value A `beakr` App object with added middleware.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' beakr() %>%
-#'   postr("/", function(req, res, err) {
-#'     return("Successful postr request!\n")
+#'   http_post("/", function(req, res, err) {
+#'     return("Successful POST request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # In terminal:
-#' #  curl -X postr http://127.0.0.1:8080/
-#' # > Successful postr request!
+#' #  curl -X POST http://127.0.0.1:8080/
+#' # > Successful POST request!
 #' }
-postr <- function(beakr, path = NULL, ...) {
+http_post <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(App$new())
   }
@@ -76,7 +78,7 @@ postr <- function(beakr, path = NULL, ...) {
   lapply(
     X = FUNS,
     FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
+      .routeMiddleware( beakr  = beakr,
                        FUN    = middleware_FUN,
                        path   = path,
                        method = "POST" )
@@ -88,7 +90,7 @@ postr <- function(beakr, path = NULL, ...) {
 #' @export
 #' @title PUT-binding middleware
 #'
-#' @description Routes HTTP putr requests to the specified path with the
+#' @description Routes HTTP PUT requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
@@ -96,29 +98,30 @@ postr <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage putr(beakr, path, ...)
+#' @usage http_put(beakr, path, ...)
+#' @value A `beakr` App object with added middleware.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' beakr() %>%
-#'   putr("/", function(req, res, err) {
-#'     return("Successful putr request!\n")
+#'   http_put("/", function(req, res, err) {
+#'     return("Successful PUT request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # In terminal:
-#' #  curl -X putr http://127.0.0.1:8080/
-#' # > Successful putr request!
+#' #  curl -X PUT http://127.0.0.1:8080/
+#' # > Successful PUT request!
 #' }
 #'
-putr <- function(beakr, path = NULL, ...) {
+http_put <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(App$new())
   }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
+      .routeMiddleware( beakr  = beakr,
                        FUN    = middleware_FUN,
                        path   = path,
                        method = "PUT" )
@@ -130,7 +133,7 @@ putr <- function(beakr, path = NULL, ...) {
 #' @export
 #' @title DELETE-binding middleware
 #'
-#' @description Routes HTTP deleter requests to the specified path with the
+#' @description Routes HTTP DELETE requests to the specified path with the
 #' specified callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
@@ -138,15 +141,16 @@ putr <- function(beakr, path = NULL, ...) {
 #' is invoked.
 #' @param ... additional middleware/functions.
 #'
-#' @usage deleter(beakr, path, ...)
-deleter <- function(beakr, path = NULL, ...) {
+#' @usage http_delete(beakr, path, ...)
+#' @value A `beakr` App object with added middleware.
+http_delete <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
     beakr <- invisible(App$new())
   }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
-      routeMiddleware( beakr  = beakr,
+      .routeMiddleware( beakr  = beakr,
                        FUN    = middleware_FUN,
                        path   = path,
                        method = "DELETE" )
