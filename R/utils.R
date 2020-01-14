@@ -234,7 +234,8 @@ websocket <- function(beakr, path, ...) {
       .routeMiddleware( beakr  = beakr,
                        FUN    = middleware_FUN,
                        path   = path,
-                       method = NULL )
+                       method = NULL,
+                       websocket = TRUE)
     }
   )
   return(beakr)
@@ -304,7 +305,7 @@ static <- function(beakr, path = NULL, file = NULL) {
 #'
 #' @description Mounts the specified middleware function or functions at the
 #' specified path: the middleware function is executed when the base of the
-#' requested path matches path. to the specified path with the specified
+#' requested path matches the specified path with the specified
 #' callback functions or middleware.
 #'
 #' @param beakr a beakr instance.
@@ -315,6 +316,7 @@ static <- function(beakr, path = NULL, file = NULL) {
 #'
 #' @usage use(beakr, path, ..., method)
 use <- function(beakr, path, ..., method = NULL) {
+# TODO: FIX THIS.
   if ( is.null(beakr) ) {
     beakr <- invisible(App$new())
   }
