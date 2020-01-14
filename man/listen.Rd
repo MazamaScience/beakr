@@ -33,11 +33,19 @@ background.
 See the \code{httpuv} package for more information.
 }
 \examples{
-\dontrun{
+\donttest{
+# Run in foreground
 beakr() \%>\%
-  getr("/", function(req, res, err) {
-    return("Successful getr request!\n")
+  http_get("/", function(req, res, err) {
+    return("Successful GET request!\n")
   }) \%>\%
   listen()
+
+# Run in background
+#' beakr() \%>\%
+  http_get("/", function(req, res, err) {
+    return("Successful GET request!\n")
+  }) \%>\%
+  listen(daemon = TRUE)
 }
 }

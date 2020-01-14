@@ -1,8 +1,16 @@
+# beakr 0.2.3
+
+* Prepare for CRAN x3
+* renamed http-methods to `http_get()`, `http_post()`, `http_put()`, `http_delete()`.
+* renamed error-methods to `new_error()`, `error_handler()`
+* renamed other utils and internal methods
+* Fixed `static()` function to serve static files. 
+
 # beakr 0.2.2
 
 * Prepared for CRAN x2
 * Updated README to avoid CRAN notes
-* Updated http-methods functions to avoid CRAN suggestions: `GET()` -> `getr()`, `POST()` -> `postr()`, `PUT()` -> `putr()`, `DELETE()` -> `deleter()`
+* Updated http-methods functions to avoid CRAN suggestions
 * Updated `createBeakr()` -> `beakr()` 
 * Renamed `Beakr` class object to `App` to align with other popular webframeworks (Express.js, Flask)
 * Renamed `handleErrors()` to `handler()`

@@ -9,8 +9,20 @@ beakr(name = NULL)
 \arguments{
 \item{name}{an optional name assigned to the \emph{Beakr} object.}
 }
+\value{
+A new and empty `beakr` App.
+}
 \description{
 Create a \code{Beakr} instance object by calling the top-level
 \code{beakr()} function. If \code{name} is not supplied, a random name
 will be assigned.
+}
+\examples{
+\donttest{
+# Standard
+app <- beakr()
+listen(app)
+# Pipe
+beakr() \%>\% listen()
+}
 }

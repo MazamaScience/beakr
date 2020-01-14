@@ -9,6 +9,9 @@ kill(beakr)
 \arguments{
 \item{beakr}{a beakr instance.}
 }
+\value{
+None
+}
 \description{
 Stops an active instance when given a beakr object. This closes
 all open connections for the instance and unbinds the port.

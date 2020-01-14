@@ -4,7 +4,7 @@
 \alias{static}
 \title{Serve static files}
 \usage{
-static(beakr, path = NULL, dir = NULL)
+static(beakr, path = NULL, file = NULL)
 }
 \arguments{
 \item{beakr}{a beakr instance}
@@ -12,11 +12,27 @@ static(beakr, path = NULL, dir = NULL)
 \item{path}{a string representing a relative path for which the middleware
 is invoked.}
 
-\item{dir}{a string representing a path for which to serve as the root
-directory.}
+\item{file}{a string representing the path to the file that is to be served.}
+}
+\value{
+A `beakr` App object with added middleware.
 }
 \description{
-Binds to get requests that aren't handled by specified paths.
+Binds to GET requests that aren't handled by specified paths.
 Should support all filetypes; returns image and octet-stream types as a raw
 string.
+}
+\details{
+Serve static files from the host machine. Currently supports images,
+PDF, JSON, HTML, and raw text. The static file will be served on the `path`
+specified in addition to the file name and extension. For example, an image
+`example_dir/path_to_pictures/pic.png` will be served on the URL extension
+`/path/pic.png`.
+}
+\examples{
+\donttest{
+beakr() \%>\%
+  static(path = 'readme/', file = path_to_file) \%>\%
+  listen()
+}
 }

@@ -19,3 +19,14 @@ logger(beakr, level = "DEBUG", file = NULL, echo = TRUE)
 A wrapper for \emph{futile.logger} to log events.
 Currently supported logged events: \emph{'start', 'finish', error'}.
 }
+\examples{
+\donttest{
+beakr() \%>\%
+  http_get('/', function(req, res, err) 'LOG TEST') \%>\%
+  logger() \%>\%
+  listen()
+## In browser at 127.0.0.1:8080
+# DEBUG -datestamp- HTTP | / - GET - REQUEST RECEIVED
+# INFO -datestamp- HTTP | / - GET - 200
+}
+}
