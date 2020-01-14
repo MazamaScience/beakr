@@ -103,7 +103,10 @@ NULL
   }
 
   # Create new middleware
-  mw <- Middleware$new(FUN = FUN, path, method, websocket)
+  mw <- Middleware$new( FUN = FUN,
+                       path = path,
+                       method = method,
+                       websocket = websocket )
 
   # Add the middleware
   beakr$router$addMiddleware(mw)
