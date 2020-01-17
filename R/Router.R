@@ -41,7 +41,7 @@
 #' }
 #'
 #' @seealso \code{\link{Response}} and \code{\link{TestRequest}}
-#' @keywords internal
+#'
 Router <-
   R6::R6Class(
     classname = "Router",

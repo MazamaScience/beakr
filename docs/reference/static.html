@@ -36,7 +36,7 @@
 
 
 <meta property="og:title" content="Serve static files — static" />
-<meta property="og:description" content="Binds to get requests that aren't handled by specified paths.
+<meta property="og:description" content="Binds to GET requests that aren't handled by specified paths.
 Should support all filetypes; returns image and octet-stream types as a raw
 string." />
 <meta name="twitter:card" content="summary" />
@@ -71,7 +71,7 @@ string." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -116,12 +116,12 @@ string." />
     </div>
 
     <div class="ref-description">
-    <p>Binds to get requests that aren't handled by specified paths.
+    <p>Binds to GET requests that aren't handled by specified paths.
 Should support all filetypes; returns image and octet-stream types as a raw
 string.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>static</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>static</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,18 +136,37 @@ string.</p>
 is invoked.</p></td>
     </tr>
     <tr>
-      <th>dir</th>
-      <td><p>a string representing a path for which to serve as the root
-directory.</p></td>
+      <th>file</th>
+      <td><p>a string representing the path to the file that is to be served.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A `beakr` App object with added middleware.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Serve static files from the host machine. Currently supports images,
+PDF, JSON, HTML, and raw text. The static file will be served on the `path`
+specified in addition to the file name and extension. For example, an image
+`example_dir/path_to_pictures/pic.png` will be served on the URL extension
+`/path/pic.png`.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>path_to_file</span> <span class='kw'>&lt;-</span> <span class='st'>"example_dir/path_to_pictures/pic.png"</span>
+<span class='fu'><a href='new_beakr.html'>new_beakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>static</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>'readme/'</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>path_to_file</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='listen.html'>listen</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

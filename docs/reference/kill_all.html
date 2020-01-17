@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Regex path query — .matchPath • beakr</title>
+<title>Stop all beakr instances — kill_all • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Regex path query — .matchPath" />
-<meta property="og:description" content="Regex path query" />
+<meta property="og:title" content="Stop all beakr instances — kill_all" />
+<meta property="og:description" content="Stops all instances that have been activated by
+listen in the session." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,40 +109,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Regex path query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
-    <div class="hidden name"><code>dot-matchPath.Rd</code></div>
+    <h1>Stop all beakr instances</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>kill_all.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Regex path query</p>
+    <p>Stops all instances that have been activated by
+<code><a href='listen.html'>listen</a></code> in the session.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>pattern</th>
-      <td><p>the string pattern to parse</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>the path to match to</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional parameters</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>kill_all</span>()</pre>
 
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>None</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='kill.html'>kill</a></code> and <code><a href='listen.html'>listen</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='new_beakr.html'>new_beakr</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='listen.html'>listen</a></span>(<span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'># Kill all instances</span>
+<span class='fu'>kill_all</span>()
+<span class='co'>## Stopped All Instances</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

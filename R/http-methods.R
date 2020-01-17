@@ -10,11 +10,11 @@
 #' @param ... additional middleware/functions.
 #'
 #' @usage http_get(beakr, path, ...)
-#' @value A `beakr` App object with added middleware.
+#' @return A `beakr` App object with added middleware.
 #'
 #' @examples
-#' \donttest{
-#' beakr() %>%
+#' \dontrun{
+#' new_beakr() %>%
 #'   http_get("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
@@ -29,16 +29,16 @@ http_get <- function(beakr, path = NULL, ...) {
   # If the beakr is NULL ->
   # create "bundle" beakr for inlcuding in other beakrs
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
   FUNS <- list(...)
   lapply(
     X   = FUNS,
     FUN = function(middleware_FUN) {
       .routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "GET" )
+                        FUN    = middleware_FUN,
+                        path   = path,
+                        method = "GET" )
     }
   )
   return(beakr)
@@ -56,11 +56,11 @@ http_get <- function(beakr, path = NULL, ...) {
 #' @param ... additional middleware/functions.
 #'
 #' @usage http_post(beakr, path, ...)
-#' @value A `beakr` App object with added middleware.
+#' @return A `beakr` App object with added middleware.
 #'
 #' @examples
-#' \donttest{
-#' beakr() %>%
+#' \dontrun{
+#' new_beakr() %>%
 #'   http_post("/", function(req, res, err) {
 #'     return("Successful POST request!\n")
 #'   }) %>%
@@ -72,16 +72,16 @@ http_get <- function(beakr, path = NULL, ...) {
 #' }
 http_post <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
   FUNS <- list(...)
   lapply(
     X = FUNS,
     FUN = function(middleware_FUN) {
       .routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "POST" )
+                        FUN    = middleware_FUN,
+                        path   = path,
+                        method = "POST" )
     }
   )
   return(beakr)
@@ -99,11 +99,11 @@ http_post <- function(beakr, path = NULL, ...) {
 #' @param ... additional middleware/functions.
 #'
 #' @usage http_put(beakr, path, ...)
-#' @value A `beakr` App object with added middleware.
+#' @return A `beakr` App object with added middleware.
 #'
 #' @examples
-#' \donttest{
-#' beakr() %>%
+#' \dontrun{
+#' new_beakr() %>%
 #'   http_put("/", function(req, res, err) {
 #'     return("Successful PUT request!\n")
 #'   }) %>%
@@ -116,15 +116,15 @@ http_post <- function(beakr, path = NULL, ...) {
 #'
 http_put <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
       .routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "PUT" )
+                        FUN    = middleware_FUN,
+                        path   = path,
+                        method = "PUT" )
     }
   )
   return(beakr)
@@ -142,18 +142,18 @@ http_put <- function(beakr, path = NULL, ...) {
 #' @param ... additional middleware/functions.
 #'
 #' @usage http_delete(beakr, path, ...)
-#' @value A `beakr` App object with added middleware.
+#' @return A `beakr` App object with added middleware.
 http_delete <- function(beakr, path = NULL, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
   lapply(
     X = list(...),
     FUN = function(middleware_FUN) {
       .routeMiddleware( beakr  = beakr,
-                       FUN    = middleware_FUN,
-                       path   = path,
-                       method = "DELETE" )
+                        FUN    = middleware_FUN,
+                        path   = path,
+                        method = "DELETE" )
     }
   )
   return(beakr)

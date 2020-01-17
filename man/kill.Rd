@@ -18,7 +18,7 @@ all open connections for the instance and unbinds the port.
 }
 \examples{
 \donttest{
-beakr <- beakr()
+beakr <- new_beakr()
 listen(beakr, daemon = TRUE)
 kill(beakr)
 }

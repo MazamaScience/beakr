@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -110,42 +110,53 @@
       <small>Source: <a href='https://github.com/MazamaScience/beakr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="beakr-022" class="section level1">
+    <div id="beakr-0-2-3" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-022" class="anchor"></a>beakr 0.2.2</h1>
+<a href="#beakr-0-2-3" class="anchor"></a>beakr 0.2.3</h1>
+<ul>
+<li>Prepare for CRAN x3</li>
+<li>renamed http-methods to <code><a href="../reference/http_get.html">http_get()</a></code>, <code><a href="../reference/http_post.html">http_post()</a></code>, <code><a href="../reference/http_put.html">http_put()</a></code>, <code><a href="../reference/http_delete.html">http_delete()</a></code>.</li>
+<li>renamed error-methods to <code>new_error()</code>, <code><a href="../reference/error_handler.html">error_handler()</a></code>
+</li>
+<li>renamed other utils and internal methods</li>
+<li>Fixed <code><a href="../reference/static.html">static()</a></code> function to serve static files.</li>
+</ul>
+</div>
+    <div id="beakr-0-2-2" class="section level1">
+<h1 class="page-header">
+<a href="#beakr-0-2-2" class="anchor"></a>beakr 0.2.2</h1>
 <ul>
 <li>Prepared for CRAN x2</li>
 <li>Updated README to avoid CRAN notes</li>
-<li>Updated http-methods functions to avoid CRAN suggestions: <code>GET()</code> -&gt; <code><a href="../reference/getr.html">getr()</a></code>, <code>POST()</code> -&gt; <code><a href="../reference/postr.html">postr()</a></code>, <code>PUT()</code> -&gt; <code><a href="../reference/putr.html">putr()</a></code>, <code>DELETE()</code> -&gt; <code><a href="../reference/deleter.html">deleter()</a></code>
-</li>
-<li>Updated <code>createBeakr()</code> -&gt; <code><a href="../reference/beakr.html">beakr()</a></code>
+<li>Updated http-methods functions to avoid CRAN suggestions</li>
+<li>Updated <code>createBeakr()</code> -&gt; <code>beakr()</code>
 </li>
 <li>Renamed <code>Beakr</code> class object to <code>App</code> to align with other popular webframeworks (Express.js, Flask)</li>
-<li>Renamed <code>handleErrors()</code> to <code><a href="../reference/handler.html">handler()</a></code>
+<li>Renamed <code>handleErrors()</code> to <code>handler()</code>
 </li>
 <li>Renamed <code>onEvent()</code> to <code><a href="../reference/on.html">on()</a></code>
 </li>
 </ul>
 </div>
-    <div id="beakr-021" class="section level1">
+    <div id="beakr-0-2-1" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-021" class="anchor"></a>beakr 0.2.1</h1>
+<a href="#beakr-0-2-1" class="anchor"></a>beakr 0.2.1</h1>
 <ul>
 <li>Prepare for CRAN</li>
 <li>Update the docs and export objects</li>
 <li>Fix deprecated local_examples/</li>
 </ul>
 </div>
-    <div id="beakr-016" class="section level1">
+    <div id="beakr-0-1-6" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-016" class="anchor"></a>beakr 0.1.6</h1>
+<a href="#beakr-0-1-6" class="anchor"></a>beakr 0.1.6</h1>
 <ul>
 <li>Minor documentation tweaks.</li>
 </ul>
 </div>
-    <div id="beakr-015" class="section level1">
+    <div id="beakr-0-1-5" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-015" class="anchor"></a>beakr 0.1.5</h1>
+<a href="#beakr-0-1-5" class="anchor"></a>beakr 0.1.5</h1>
 <ul>
 <li>Added <code>onEvent()</code> event listening</li>
 <li>Fixed beakr instance information view</li>
@@ -154,34 +165,34 @@
 <li>Added logging capability <code><a href="../reference/logger.html">logger()</a></code>.</li>
 </ul>
 </div>
-    <div id="beakr-014" class="section level1">
+    <div id="beakr-0-1-4" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-014" class="anchor"></a>beakr 0.1.4</h1>
+<a href="#beakr-0-1-4" class="anchor"></a>beakr 0.1.4</h1>
 <ul>
 <li>Renamed http methods to upper case: <code><a href="https://rdrr.io/r/base/get.html">get()</a></code> ==&gt; <code>GET()</code>, <em>etc.</em>.</li>
-<li>Renamed <code>killall()</code> to <code><a href="../reference/killAll.html">killAll()</a></code>.</li>
+<li>Renamed <code>killall()</code> to <code>killAll()</code>.</li>
 <li>Restored documentation <code>@examples</code>.</li>
 </ul>
 </div>
-    <div id="beakr-013" class="section level1">
+    <div id="beakr-0-1-3" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-013" class="anchor"></a>beakr 0.1.3</h1>
+<a href="#beakr-0-1-3" class="anchor"></a>beakr 0.1.3</h1>
 <ul>
 <li>Renamed <code><a href="../reference/listen.html">listen()</a></code> to <code>startBeakr()</code>.</li>
 <li>Internal refactoring and cleanup.</li>
 </ul>
 </div>
-    <div id="beakr-012" class="section level1">
+    <div id="beakr-0-1-2" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-012" class="anchor"></a>beakr 0.1.2</h1>
+<a href="#beakr-0-1-2" class="anchor"></a>beakr 0.1.2</h1>
 <ul>
 <li>Changed <code>request</code>, <code>response</code>, and <code>error</code> object names to <code>req</code>, <code>res</code>, <code>err</code>, as more consistent with popular frameworks</li>
 <li>Added fancy beakr prints</li>
 </ul>
 </div>
-    <div id="beakr-011" class="section level1">
+    <div id="beakr-0-1-1" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-011" class="anchor"></a>beakr 0.1.1</h1>
+<a href="#beakr-0-1-1" class="anchor"></a>beakr 0.1.1</h1>
 <ul>
 <li>CORS functionality</li>
 <li>Daemonized instances</li>
@@ -191,9 +202,9 @@
 <li>Massive bug fixes</li>
 </ul>
 </div>
-    <div id="beakr-01" class="section level1">
+    <div id="beakr-0-1" class="section level1">
 <h1 class="page-header">
-<a href="#beakr-01" class="anchor"></a>beakr 0.1</h1>
+<a href="#beakr-0-1" class="anchor"></a>beakr 0.1</h1>
 <ul>
 <li>Initial Release</li>
 </ul>
@@ -204,15 +215,16 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#beakr-022">0.2.2</a></li>
-        <li><a href="#beakr-021">0.2.1</a></li>
-        <li><a href="#beakr-016">0.1.6</a></li>
-        <li><a href="#beakr-015">0.1.5</a></li>
-        <li><a href="#beakr-014">0.1.4</a></li>
-        <li><a href="#beakr-013">0.1.3</a></li>
-        <li><a href="#beakr-012">0.1.2</a></li>
-        <li><a href="#beakr-011">0.1.1</a></li>
-        <li><a href="#beakr-01">0.1</a></li>
+        <li><a href="#beakr-0-2-3">0.2.3</a></li>
+        <li><a href="#beakr-0-2-2">0.2.2</a></li>
+        <li><a href="#beakr-0-2-1">0.2.1</a></li>
+        <li><a href="#beakr-0-1-6">0.1.6</a></li>
+        <li><a href="#beakr-0-1-5">0.1.5</a></li>
+        <li><a href="#beakr-0-1-4">0.1.4</a></li>
+        <li><a href="#beakr-0-1-3">0.1.3</a></li>
+        <li><a href="#beakr-0-1-2">0.1.2</a></li>
+        <li><a href="#beakr-0-1-1">0.1.1</a></li>
+        <li><a href="#beakr-0-1">0.1</a></li>
       </ul>
     </div>
   </div>

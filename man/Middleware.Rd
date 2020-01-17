@@ -38,7 +38,6 @@ objects in request-response cycle via the \code{Router}.
 \seealso{
 \code{\link{Router}} and \code{\link{Middleware}}
 }
-\keyword{internal}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{

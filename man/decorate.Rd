@@ -7,11 +7,14 @@
 decorate(FUN, content_type, strict = FALSE)
 }
 \arguments{
-\item{FUN}{the function to decorate.}
+\item{FUN}{The function to decorate.}
 
-\item{content_type}{the type of content to set response as.}
+\item{content_type}{The type of content to set response as.}
 
-\item{strict}{boolean, requiring strict parameter matching.}
+\item{strict}{Boolean, requiring strict parameter matching.}
+}
+\value{
+A `decorated` middleware function.
 }
 \description{
 Convenience function to decorate an existing function to interface with beakr

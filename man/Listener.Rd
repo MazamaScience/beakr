@@ -33,7 +33,6 @@ controlled HTTP protocol listener.
 \seealso{
 \code{\link{Router}} and \code{\link{Error}}
 }
-\keyword{internal}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{

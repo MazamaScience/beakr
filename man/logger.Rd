@@ -15,13 +15,16 @@ logger(beakr, level = "DEBUG", file = NULL, echo = TRUE)
 
 \item{echo}{if TRUE will print the log to console.}
 }
+\value{
+A `beakr` App object with added middleware.
+}
 \description{
 A wrapper for \emph{futile.logger} to log events.
 Currently supported logged events: \emph{'start', 'finish', error'}.
 }
 \examples{
-\donttest{
-beakr() \%>\%
+\dontrun{
+new_beakr() \%>\%
   http_get('/', function(req, res, err) 'LOG TEST') \%>\%
   logger() \%>\%
   listen()

@@ -93,7 +93,7 @@ NULL
 ) {
 
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
 
   if ( !is.null(method) ) {

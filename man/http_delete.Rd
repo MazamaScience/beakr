@@ -14,6 +14,9 @@ is invoked.}
 
 \item{...}{additional middleware/functions.}
 }
+\value{
+A `beakr` App object with added middleware.
+}
 \description{
 Routes HTTP DELETE requests to the specified path with the
 specified callback functions or middleware.

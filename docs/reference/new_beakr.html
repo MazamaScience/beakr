@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Regex path query — .matchPath • beakr</title>
+<title>Create a new Beakr instance — new_beakr • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="Regex path query — .matchPath" />
-<meta property="og:description" content="Regex path query" />
+<meta property="og:title" content="Create a new Beakr instance — new_beakr" />
+<meta property="og:description" content="Create a Beakr instance object by calling the top-level
+new_beakr() function. If name is not supplied, a random name
+will be assigned." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,40 +110,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Regex path query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
-    <div class="hidden name"><code>dot-matchPath.Rd</code></div>
+    <h1>Create a new Beakr instance</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>new_beakr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Regex path query</p>
+    <p>Create a <em>Beakr</em> instance object by calling the top-level
+<code>new_beakr()</code> function. If <code>name</code> is not supplied, a random name
+will be assigned.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>new_beakr</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pattern</th>
-      <td><p>the string pattern to parse</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>the path to match to</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional parameters</p></td>
+      <th>name</th>
+      <td><p>an optional name assigned to the <em>Beakr</em> object.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A new and empty `beakr` App.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Standard</span>
+<span class='no'>beakr</span> <span class='kw'>&lt;-</span> <span class='fu'>new_beakr</span>()
+<span class='fu'><a href='listen.html'>listen</a></span>(<span class='no'>beakr</span>)
+<span class='co'># Pipe</span>
+<span class='fu'>new_beakr</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='listen.html'>listen</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

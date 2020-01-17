@@ -63,7 +63,6 @@ object is always referred to as \code{res} (and the HTTP request is
 \seealso{
 \code{\link{Response}} and \code{\link{TestRequest}}
 }
-\keyword{internal}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{

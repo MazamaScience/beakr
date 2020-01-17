@@ -36,7 +36,7 @@
 #' }
 #'
 #' @seealso \code{\link{Router}} and \code{\link{Middleware}}
-#' @keywords internal
+#'
 Middleware <-
   R6::R6Class(
     classname = "Middleware",

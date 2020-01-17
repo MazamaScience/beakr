@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -142,6 +142,9 @@ is a port opened on 8080.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A `beakr` App object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>listen()</code> binds the port and listens for connections on a thread.
@@ -155,17 +158,26 @@ background.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='beakr.html'>beakr</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='getr.html'>getr</a></span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
-    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful getr request!\n"</span>)
+<span class='co'># Run in foreground</span>
+<span class='fu'><a href='new_beakr.html'>new_beakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http_get.html'>http_get</a></span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful GET request!\n"</span>)
   }) <span class='kw'>%&gt;%</span>
   <span class='fu'>listen</span>()
+
+<span class='co'># Run in background</span>
+<span class='co'>#' new_beakr() %&gt;%</span>
+  <span class='fu'><a href='http_get.html'>http_get</a></span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful GET request!\n"</span>)
+  }) <span class='kw'>%&gt;%</span>
+  <span class='fu'>listen</span>(<span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

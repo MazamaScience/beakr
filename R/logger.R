@@ -9,10 +9,10 @@
 #' @param echo if TRUE will print the log to console.
 #'
 #' @export
-#' @value A `beakr` App object with added middleware.
+#' @return A `beakr` App object with added middleware.
 #' @examples
-#' \donttest{
-#' beakr() %>%
+#' \dontrun{
+#' new_beakr() %>%
 #'   http_get('/', function(req, res, err) 'LOG TEST') %>%
 #'   logger() %>%
 #'   listen()
@@ -23,7 +23,7 @@
 logger <- function(beakr, level = 'DEBUG', file = NULL, echo = TRUE) {
 
   if ( is.null(beakr) ) {
-    beakr <- beakr(name = "NULL")
+    beakr <- new_beakr(name = "NULL")
   }
 
   if ( level == 'TRACE' ) {

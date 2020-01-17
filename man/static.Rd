@@ -30,8 +30,9 @@ specified in addition to the file name and extension. For example, an image
 `/path/pic.png`.
 }
 \examples{
-\donttest{
-beakr() \%>\%
+\dontrun{
+path_to_file <- "example_dir/path_to_pictures/pic.png"
+new_beakr() \%>\%
   static(path = 'readme/', file = path_to_file) \%>\%
   listen()
 }

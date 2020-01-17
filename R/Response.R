@@ -60,7 +60,7 @@
 #' }
 #'
 #' @seealso \code{\link{Response}} and \code{\link{TestRequest}}
-#' @keywords internal
+#'
 Response <-
   R6::R6Class(
     classname = "Response",

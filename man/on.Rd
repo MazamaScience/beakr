@@ -14,7 +14,7 @@ on(beakr, event, FUN)
 \item{FUN}{the response middleware function.}
 }
 \description{
-Add an event listener to a \emph{beakr} instance. Currently
+Add an event listener to a \emph{Beakr} instance. Currently
 supported events are \code{"start", "finish", "error"}. The events \code{"start"} and
 \code{"finish"} will pass the current state of the \code{req}, \code{res} and \code{err}
 objects to the Listener. The \code{"error"} event will pass string error message.

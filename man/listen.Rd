@@ -17,6 +17,9 @@ is a port opened on 8080.}
 
 \item{daemon}{run the instance in the background, the default is FALSE.}
 }
+\value{
+A `beakr` App object.
+}
 \description{
 Binds and listens for connections on the specified host and port.
 }
@@ -33,16 +36,16 @@ background.
 See the \code{httpuv} package for more information.
 }
 \examples{
-\donttest{
+\dontrun{
 # Run in foreground
-beakr() \%>\%
+new_beakr() \%>\%
   http_get("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
   listen()
 
 # Run in background
-#' beakr() \%>\%
+#' new_beakr() \%>\%
   http_get("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%

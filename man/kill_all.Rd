@@ -14,8 +14,8 @@ Stops all instances that have been activated by
 \code{\link{listen}} in the session.
 }
 \examples{
-\donttest{
-beakr() \%>\% listen(daemon = TRUE)
+\dontrun{
+new_beakr() \%>\% listen(daemon = TRUE)
 # Kill all instances
 kill_all()
 ## Stopped All Instances

@@ -33,7 +33,6 @@ or middleware errors.
 \seealso{
 \code{\link{error_handler}} and \code{\link{Middleware}}
 }
-\keyword{internal}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{

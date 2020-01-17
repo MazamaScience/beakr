@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Websocket Access — webSocket • beakr</title>
+<title>Websocket Access — websocket • beakr</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Websocket Access — webSocket" />
+<meta property="og:title" content="Websocket Access — websocket" />
 <meta property="og:description" content="Access the instance through websocket. Experimental." />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -110,14 +110,14 @@
     <div class="page-header">
     <h1>Websocket Access</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>webSocket.Rd</code></div>
+    <div class="hidden name"><code>websocket.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Access the instance through websocket. <strong>Experimental.</strong></p>
     </div>
 
-    <pre class="usage"><span class='fu'>webSocket</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>websocket</span>(<span class='no'>beakr</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,12 +137,23 @@ is invoked.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A `beakr` App object with added middleware.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='new_beakr.html'>new_beakr</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>websocket</span>(<span class='st'>'/ws_test'</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) <span class='st'>'Websocket Test'</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='listen.html'>listen</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

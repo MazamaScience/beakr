@@ -29,7 +29,7 @@
 #' }
 #'
 #' @seealso \code{\link{Router}} and \code{\link{Error}}
-#' @keywords internal
+#'
 Listener <-
   R6::R6Class(
     classname = "Listener",

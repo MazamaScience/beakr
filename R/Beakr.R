@@ -16,7 +16,7 @@
 #' \code{beakr} package is supported and maintained by
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
-#' @seealso \link{beakr}
+#' @seealso \link{new_beakr}
 #'
 #' @name beakr-package
 #' @aliases Beakr-Package
@@ -77,8 +77,8 @@ NULL
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
 #' @seealso \code{\link{Router}} and \code{\link{Middleware}}
-#' @keywords internal
-App <-
+#'
+Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(

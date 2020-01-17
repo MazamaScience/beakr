@@ -14,13 +14,16 @@ is invoked.}
 
 \item{...}{additional middleware/functions.}
 }
+\value{
+A `beakr` App object with added middleware.
+}
 \description{
 Routes HTTP POST requests to the specified path with the
 specified callback functions or middleware.
 }
 \examples{
-\donttest{
-beakr() \%>\%
+\dontrun{
+new_beakr() \%>\%
   http_post("/", function(req, res, err) {
     return("Successful POST request!\n")
   }) \%>\%

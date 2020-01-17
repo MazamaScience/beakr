@@ -19,7 +19,7 @@ A `beakr` App object with added middleware.
 An error handling middleware for beakr instances.
 }
 \details{
-\code{beakr} comes with a default error handler. This default error-handling
+\code{new_beakr} comes with a default error handler. This default error-handling
 middleware function is added at the end of the middleware function stack.
 The Errors are handled via JSON output.
 }

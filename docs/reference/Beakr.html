@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Response Class — Response • beakr</title>
+<title>Beakr Application class — Beakr • beakr</title>
 
 
 <!-- jquery -->
@@ -35,11 +35,10 @@
 
 
 
-<meta property="og:title" content="Response Class — Response" />
-<meta property="og:description" content="The Response object represents represents the HTTP response that a
-Beakr sends when it gets an HTTP request. It is by convention, the
-object is always referred to as res (and the HTTP request is
-req)." />
+<meta property="og:title" content="Beakr Application class — Beakr" />
+<meta property="og:description" content="The Beakr class defines the server instance utilizing the
+httpuv package. This class defines an interface for the rest of the
+beakr package and is therefore meant to be instantiated." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,129 +110,99 @@ req)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Response Class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Response.R'><code>R/Response.R</code></a></small>
-    <div class="hidden name"><code>Response.Rd</code></div>
+    <h1>Beakr Application class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/Beakr.R'><code>R/Beakr.R</code></a></small>
+    <div class="hidden name"><code>Beakr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>Response</code> object represents represents the HTTP response that a
-<code>Beakr</code> sends when it gets an HTTP request. It is by convention, the
-object is always referred to as <code>res</code> (and the HTTP request is
-<code>req</code>).</p>
+    <p>The <code>Beakr</code> class defines the server instance utilizing the
+<code>httpuv</code> package. This class defines an interface for the rest of the
+<code>beakr</code> package and is therefore meant to be instantiated.</p>
     </div>
 
 
-
-    <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
-
-    
-
-
-<dl class='dl-horizontal'>
-  <dt><code>headers</code></dt><dd><p>A list containing a key-value header list.</p></dd>
-  <dt><code>status</code></dt><dd><p>An integer HTTP status code.</p></dd>
-  <dt><code>body</code></dt><dd><p>Contains the response body.</p></dd>
-
-</dl>
 
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 
-
 <dl class='dl-horizontal'>
-<dt><code>setHeader(key, value)</code></dt><dd><p>Sets a key-value header, i.e. <code>"Content-Type" = "text/html"</code>.</p></dd>
-  <dt><code>setContentType(type)</code></dt><dd><p>Sets the response content-type.</p></dd>
-  <dt><code>setStatus(status)</code></dt><dd><p>Sets the HTTP status code.</p></dd>
-  <dt><code>redirect(url)</code></dt><dd><p>Sets the HTTP status to 302, "Found" and redirects to <code>url</code>.</p></dd>
-  <dt><code>setBody(body)</code></dt><dd><p>Sets the body response.</p></dd>
-  <dt><code>json(txt, auto_unbox = TRUE)</code></dt><dd><p>Applies a function to text convert to JSON and sets the content-type to
-  JSON.</p></dd>
-  <dt><code><a href='https://rdrr.io/r/graphics/text.html'>text(txt)</a></code></dt><dd><p>Sets the response body text.</p></dd>
-  <dt><code>structured(protocol)</code></dt><dd><p>Sets the response protocol, i.e. "http"</p></dd>
-  <dt><code><a href='https://rdrr.io/r/graphics/plot.html'>plot(plot_object, base64 = TRUE, ...)</a></code></dt><dd><p>Sets the response type to plot image output.</p></dd>
+  <dt><code>router()</code></dt><dd><p>An instantiated <code>Router</code> object.</p></dd>
+  <dt><code>server()</code></dt><dd><p>The instantiated <code>Server</code> object.</p></dd>
+  <dt><code>appDefinition()</code></dt><dd><p>A method to define the functions or middleware of users application.</p></dd>
+  <dt><code>addCollectedMiddleware(collector)</code></dt><dd><p>Adds the users "collected" middleware to the <code>Beakr</code> defined
+  middleware.</p></dd>
+  <dt><code>initialize()</code></dt><dd><p>Creates a new <code>Router</code> object for the <code>router</code>
+  method.</p></dd>
+  <dt><code><a href='https://rdrr.io/r/stats/start.html'>start(host, port, daemon)</a></code></dt><dd><p>Returns a running server. If <code>daemon = TRUE</code>, the server will run
+  in the background.</p></dd>
+  <dt><code><a href='https://rdrr.io/r/base/print.html'>print(...)</a></code></dt><dd><p>Returns a console output of the instance and its number of middleware
+  attached.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="package-details"><a class="anchor" href="#package-details"></a>Package details</h2>
+
+    
+
+
+<p>The <code>beakr</code> package provides a minimal web framework for for developing
+lightweight APIs in R. The package includes basic functionality for handling
+common <code>HTTP</code> requests. <code>beakr</code> is a ground-up rewrite and
+continuation of the <code>jug</code> package developed by Bart Smeets. The
+<code>beakr</code> package is supported and maintained by
+<a href='http://www.mazamascience.com/'>Mazama Science</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>Response</code> and <code><a href='TestRequest.html'>TestRequest</a></code></p></div>
+    <div class='dont-index'><p><code><a href='Router.html'>Router</a></code> and <code><a href='Middleware.html'>Middleware</a></code></p></div>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 <h3>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-setHeader'><code>Response$setHeader()</code></a></p></li>
-<li><p><a href='#method-setContentType'><code>Response$setContentType()</code></a></p></li>
-<li><p><a href='#method-setStatus'><code>Response$setStatus()</code></a></p></li>
-<li><p><a href='#method-setBody'><code>Response$setBody()</code></a></p></li>
-<li><p><a href='#method-redirect'><code>Response$redirect()</code></a></p></li>
-<li><p><a href='#method-json'><code>Response$json()</code></a></p></li>
-<li><p><a href='#method-text'><code>Response$text()</code></a></p></li>
-<li><p><a href='#method-structured'><code>Response$structured()</code></a></p></li>
-<li><p><a href='#method-plot'><code>Response$plot()</code></a></p></li>
-<li><p><a href='#method-clone'><code>Response$clone()</code></a></p></li>
+<li><p><a href='#method-appDefinition'><code>Beakr$appDefinition()</code></a></p></li>
+<li><p><a href='#method-include'><code>Beakr$include()</code></a></p></li>
+<li><p><a href='#method-new'><code>Beakr$new()</code></a></p></li>
+<li><p><a href='#method-start'><code>Beakr$start()</code></a></p></li>
+<li><p><a href='#method-print'><code>Beakr$print()</code></a></p></li>
+<li><p><a href='#method-clone'><code>Beakr$clone()</code></a></p></li>
 </ul>
 <p><hr>
-<a id="method-setHeader"></a></p><h3>Method <code>setHeader()</code></h3>
+<a id="method-appDefinition"></a></p><h3>Method <code>appDefinition()</code></h3>
 
 <h3>Usage</h3>
-<p><div class="r"></p><pre>Response$setHeader(key, value)</pre><p></div></p>
+<p><div class="r"></p><pre>Beakr$appDefinition()</pre><p></div></p>
 
 <p><hr>
-<a id="method-setContentType"></a></p><h3>Method <code>setContentType()</code></h3>
+<a id="method-include"></a></p><h3>Method <code><a href='include.html'>include()</a></code></h3>
 
 <h3>Usage</h3>
-<p><div class="r"></p><pre>Response$setContentType(type)</pre><p></div></p>
+<p><div class="r"></p><pre>Beakr$include(bundle)</pre><p></div></p>
 
 <p><hr>
-<a id="method-setStatus"></a></p><h3>Method <code>setStatus()</code></h3>
+<a id="method-new"></a></p><h3>Method <code>new()</code></h3>
 
 <h3>Usage</h3>
-<p><div class="r"></p><pre>Response$setStatus(status)</pre><p></div></p>
+<p><div class="r"></p><pre>Beakr$new()</pre><p></div></p>
 
 <p><hr>
-<a id="method-setBody"></a></p><h3>Method <code>setBody()</code></h3>
+<a id="method-start"></a></p><h3>Method <code><a href='https://rdrr.io/r/stats/start.html'>start()</a></code></h3>
 
 <h3>Usage</h3>
-<p><div class="r"></p><pre>Response$setBody(body)</pre><p></div></p>
+<p><div class="r"></p><pre>Beakr$start(host, port, daemon)</pre><p></div></p>
 
 <p><hr>
-<a id="method-redirect"></a></p><h3>Method <code>redirect()</code></h3>
+<a id="method-print"></a></p><h3>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
 
 <h3>Usage</h3>
-<p><div class="r"></p><pre>Response$redirect(url)</pre><p></div></p>
-
-<p><hr>
-<a id="method-json"></a></p><h3>Method <code>json()</code></h3>
-
-<h3>Usage</h3>
-<p><div class="r"></p><pre>Response$json(txt, auto_unbox = TRUE)</pre><p></div></p>
-
-<p><hr>
-<a id="method-text"></a></p><h3>Method <code><a href='https://rdrr.io/r/graphics/text.html'>text()</a></code></h3>
-
-<h3>Usage</h3>
-<p><div class="r"></p><pre>Response$text(txt)</pre><p></div></p>
-
-<p><hr>
-<a id="method-structured"></a></p><h3>Method <code>structured()</code></h3>
-
-<h3>Usage</h3>
-<p><div class="r"></p><pre>Response$structured(protocol)</pre><p></div></p>
-
-<p><hr>
-<a id="method-plot"></a></p><h3>Method <code><a href='https://rdrr.io/r/graphics/plot.html'>plot()</a></code></h3>
-
-<h3>Usage</h3>
-<p><div class="r"></p><pre>Response$plot(plot_object, base64 = TRUE, ...)</pre><p></div></p>
+<p><div class="r"></p><pre>Beakr$print()</pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h3>Usage</h3>
-<p><div class="r"></p><pre>Response$clone(deep = FALSE)</pre><p></div></p>
+<p><div class="r"></p><pre>Beakr$clone(deep = FALSE)</pre><p></div></p>
 
 <h3>Arguments</h3>
 <p><div class="arguments"></p><dl class='dl-horizontal'>
@@ -247,8 +216,8 @@ object is always referred to as <code>res</code> (and the HTTP request is
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#fields">Fields</a></li>
       <li><a href="#methods">Methods</a></li>
+      <li><a href="#package-details">Package details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#methods">Methods</a></li>
     </ul>

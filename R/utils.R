@@ -3,22 +3,22 @@
 #'
 #' @param name an optional name assigned to the \emph{Beakr} object.
 #'
-#' @description Create a \code{Beakr} instance object by calling the top-level
-#' \code{beakr()} function. If \code{name} is not supplied, a random name
+#' @description Create a \emph{Beakr} instance object by calling the top-level
+#' \code{new_beakr()} function. If \code{name} is not supplied, a random name
 #' will be assigned.
 #'
-#' @usage beakr(name = NULL)
+#' @usage new_beakr(name = NULL)
 #' @return A new and empty `beakr` App.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Standard
-#' app <- beakr()
-#' listen(app)
+#' beakr <- new_beakr()
+#' listen(beakr)
 #' # Pipe
-#' beakr() %>% listen()
+#' new_beakr() %>% listen()
 #' }
-beakr <- function(name = NULL) {
-  beakr <- App$new()
+new_beakr <- function(name = NULL) {
+  beakr <- Beakr$new()
   if ( !is.null(name) ) {
     beakr$name <- name
   }
@@ -50,24 +50,24 @@ beakr <- function(name = NULL) {
 #' @param daemon run the instance in the background, the default is FALSE.
 #'
 #' @usage listen(beakr, host, port, daemon)
-#' @raturn A `beakr` App object.
+#' @return A `beakr` App object.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Run in foreground
-#' beakr() %>%
+#' new_beakr() %>%
 #'   http_get("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # Run in background
-#' #' beakr() %>%
+#' #' new_beakr() %>%
 #'   http_get("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen(daemon = TRUE)
 #' }
-listen <-function(
+listen <- function(
   beakr,
   host = "127.0.0.1",
   port = 8080,
@@ -91,7 +91,7 @@ listen <-function(
 #'
 #' @examples
 #' \donttest{
-#' beakr <- beakr()
+#' beakr <- new_beakr()
 #' listen(beakr, daemon = TRUE)
 #' kill(beakr)
 #' }
@@ -111,8 +111,8 @@ kill <- function(beakr) {
 #' @return None
 #' @seealso \code{\link{kill}} and \code{\link{listen}}
 #' @examples
-#' \donttest{
-#' beakr() %>% listen(daemon = TRUE)
+#' \dontrun{
+#' new_beakr() %>% listen(daemon = TRUE)
 #' # Kill all instances
 #' kill_all()
 #' ## Stopped All Instances
@@ -132,9 +132,9 @@ kill_all <- function() {
 #' @usage list_active()
 #' @return A `list` of all active instances
 #' @examples
-#' \donttest{
-#' beakr('Test1') %>% listen(port = 1234, daemon = TRUE)
-#' beakr('Test2') %>% listen(port = 2234, daemon = TRUE)
+#' \dontrun{
+#' new_beakr('Test1') %>% listen(port = 1234, daemon = TRUE)
+#' new_beakr('Test2') %>% listen(port = 2234, daemon = TRUE)
 #' list_active()
 #' ## [[1]]
 #' ## [1] "Host: 127.0.0.1 | Port: 1234 | Active: TRUE"
@@ -161,7 +161,7 @@ list_active <- function() {
 #' @description An error handling middleware for beakr instances.
 #'
 #' @details
-#' \code{beakr} comes with a default error handler. This default error-handling
+#' \code{new_beakr} comes with a default error handler. This default error-handling
 #' middleware function is added at the end of the middleware function stack.
 #' The Errors are handled via JSON output.
 #'
@@ -219,14 +219,14 @@ test_request <- function(beakr, test_request) {
 #' @usage websocket(beakr, path, ...)
 #' @return A `beakr` App object with added middleware.
 #' @examples
-#' \donttest{
-#' beakr() %>%
+#' \dontrun{
+#' new_beakr() %>%
 #'   websocket('/ws_test', function(req, res, err) 'Websocket Test') %>%
 #'   listen()
 #' }
 websocket <- function(beakr, path, ...) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
   lapply(
     X = list(...),
@@ -262,19 +262,19 @@ websocket <- function(beakr, path, ...) {
 #' @examples
 #' \dontrun{
 #' path_to_file <- "example_dir/path_to_pictures/pic.png"
-#' beakr() %>%
+#' new_beakr() %>%
 #'   static(path = 'readme/', file = path_to_file) %>%
 #'   listen()
 #' }
 static <- function(beakr, path = NULL, file = NULL) {
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
   serve_file <- function(req, res, err) {
 
     if ( file.exists(file) ) {
 
-      url_path <- paste0('/', path, tail(unlist(strsplit(file, '/')), n = 1))
+      url_path <- paste0('/', path, utils::tail(unlist(strsplit(file, '/')), n = 1))
 
       if ( req$path == url_path ) {
         mime_type <- mime::guess_type(file)
@@ -318,7 +318,7 @@ static <- function(beakr, path = NULL, file = NULL) {
 use <- function(beakr, path, ..., method = NULL) {
 # TODO: FIX THIS.
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
   lapply(
     X = list(...),
@@ -383,7 +383,7 @@ cors <- function(
   }
 
   if ( is.null(beakr) ) {
-    beakr <- invisible(App$new())
+    beakr <- invisible(Beakr$new())
   }
 
   headers <- list( `Access-Control-Allow-Origin`      = with_origin,
@@ -449,7 +449,7 @@ include <- function(beakr, include, file = NULL) {
 
 #' @title Beakr Event Listener
 #'
-#' @description Add an event listener to a \emph{beakr} instance. Currently
+#' @description Add an event listener to a \emph{Beakr} instance. Currently
 #' supported events are \code{"start", "finish", "error"}. The events \code{"start"} and
 #' \code{"finish"} will pass the current state of the \code{req}, \code{res} and \code{err}
 #' objects to the Listener. The \code{"error"} event will pass string error message.

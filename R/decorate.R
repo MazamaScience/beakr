@@ -9,12 +9,12 @@
 #' content-type to the response object. This prepares a standard R function to
 #' affect beakr instances and accept requests.
 #'
-#' @param FUN the function to decorate.
-#' @param content_type the type of content to set response as.
-#' @param strict boolean, requiring strict parameter matching.
+#' @param FUN The function to decorate.
+#' @param content_type The type of content to set response as.
+#' @param strict Boolean, requiring strict parameter matching.
 #'
 #' @usage decorate(FUN, content_type, strict = FALSE)
-#' @value A `decorated` middleware function
+#' @return A `decorated` middleware function.
 #' @export
 decorate <-
   function(FUN, content_type = "text/html", strict = FALSE) {

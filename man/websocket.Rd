@@ -21,8 +21,8 @@ A `beakr` App object with added middleware.
 Access the instance through websocket. \strong{Experimental.}
 }
 \examples{
-\donttest{
-beakr() \%>\%
+\dontrun{
+new_beakr() \%>\%
   websocket('/ws_test', function(req, res, err) 'Websocket Test') \%>\%
   listen()
 }
