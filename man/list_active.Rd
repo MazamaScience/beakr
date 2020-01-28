@@ -16,8 +16,8 @@ A list containing the current sessions active instances.
 }
 \examples{
 \dontrun{
-new_beakr('Test1') \%>\% listen(port = 1234, daemon = TRUE)
-new_beakr('Test2') \%>\% listen(port = 2234, daemon = TRUE)
+newBeakr('Test1') \%>\% listen(port = 1234, daemon = TRUE)
+newBeakr('Test2') \%>\% listen(port = 2234, daemon = TRUE)
 list_active()
 ## [[1]]
 ## [1] "Host: 127.0.0.1 | Port: 1234 | Active: TRUE"

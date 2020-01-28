@@ -23,7 +23,7 @@ specified callback functions or middleware.
 }
 \examples{
 \dontrun{
-new_beakr() \%>\%
+newBeakr() \%>\%
   http_put("/", function(req, res, err) {
     return("Successful PUT request!\n")
   }) \%>\%

@@ -32,7 +32,7 @@ specified in addition to the file name and extension. For example, an image
 \examples{
 \dontrun{
 path_to_file <- "example_dir/path_to_pictures/pic.png"
-new_beakr() \%>\%
+newBeakr() \%>\%
   static(path = 'readme/', file = path_to_file) \%>\%
   listen()
 }

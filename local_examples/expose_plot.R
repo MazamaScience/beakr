@@ -20,7 +20,7 @@ states_plot <- function(res) {
 
 # Create and start a default beakr instance
 
-beakr <- new_beakr() # Assign it so we can kill it later
+beakr <- newBeakr() # Assign it so we can kill it later
 
 beakr %>%
   http_get(path = '/usa', decorate(states_plot)) %>%

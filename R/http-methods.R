@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' new_beakr() %>%
+#' newBeakr() %>%
 #'   http_get("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
@@ -60,7 +60,7 @@ http_get <- function(beakr, path = NULL, ...) {
 #'
 #' @examples
 #' \dontrun{
-#' new_beakr() %>%
+#' newBeakr() %>%
 #'   http_post("/", function(req, res, err) {
 #'     return("Successful POST request!\n")
 #'   }) %>%
@@ -103,7 +103,7 @@ http_post <- function(beakr, path = NULL, ...) {
 #'
 #' @examples
 #' \dontrun{
-#' new_beakr() %>%
+#' newBeakr() %>%
 #'   http_put("/", function(req, res, err) {
 #'     return("Successful PUT request!\n")
 #'   }) %>%

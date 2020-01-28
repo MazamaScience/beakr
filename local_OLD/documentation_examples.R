@@ -4,7 +4,7 @@
 #' @examples
 #' \dontrun{
 #' # Create an instance and add the error handler last.
-#' new_beakr() %>%
+#' newBeakr() %>%
 #'   use(path = "/", decorate(function(n) { paste("Hi, ", n) })) %>%
 #'   handler() %>%
 #'   listen()

@@ -2,27 +2,57 @@
 % Please edit documentation in R/decorate.R
 \name{decorate}
 \alias{decorate}
-\title{Decorate a function}
+\title{Decorate a function for use in a web service
+
+Convenience function to decorate an existing function for easy use in
+\code{Beakr} instances.}
 \usage{
-decorate(FUN, content_type, strict = FALSE)
+decorate(FUN, content_type = "text/html", strict = FALSE)
 }
 \arguments{
 \item{FUN}{The function to decorate.}
 
-\item{content_type}{The type of content to set response as.}
+\item{content_type}{The http "content-type" of the function output.
+(\emph{e.g.} "text/plain", "text/html" or other mime type)}
 
 \item{strict}{Boolean, requiring strict parameter matching.}
 }
 \value{
-A `decorated` middleware function.
+A \emph{decorated} middleware function.
 }
 \description{
-Convenience function to decorate an existing function to interface with beakr
-instances.
+Decorate a function for use in a web service
+
+Convenience function to decorate an existing function for easy use in
+\code{Beakr} instances.
 }
 \details{
 Decorating a function associates the specified function and its parameters
 with \code{req}, \code{res}, and \code{err} objects and assigns a
 content-type to the response object. This prepares a standard R function to
-affect beakr instances and accept requests.
+be used in \code{Beakr} instances and accept requests.
+}
+\examples{
+\donttest{
+# Create an new Beakr instance
+beakr <- newBeakr()
+
+# Create simple hello and goodbye function
+hello <- function(name) { paste0("Hello, ", name, "!") }
+goodbye <- function(text = "Adios") { paste0(text, ", dear friend.") }
+
+# Create a web service from these functions
+beakr \%>\%
+  http_get(path = "/hello", decorate(hello)) \%>\%
+  http_get(path = "/goodbye", decorate(goodbye)) \%>\%
+  error_handler() \%>\%
+  listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+
+# POINT YOUR BROWSER AT:
+# * http://127.0.0.1:12518/hello?name=Honeydew
+# * http://127.0.0.1:12518/goodbye
+
+# Kill the beakr instance
+kill(beakr)
+}
 }

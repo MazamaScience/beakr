@@ -26,7 +26,7 @@ predict_species <- function(sl, sw, pl, pw) {
 }
 
 # Create the beakr instance
-beakr <- new_beakr()
+beakr <- newBeakr()
 
 # Use beakr to expose the model in the '/predict-species' url path.
 #   See help('decorate') for more info about decorating functions.

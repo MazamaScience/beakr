@@ -3,7 +3,12 @@
 More refactoring with an eye toward consistent, predictable naming and more
 documentation and examples.
 
+* Renamed `App` object back to `Beakr` for internal consistency.
+* Renamed `beakr()` to `newBeakr()` to avoid confusion.
 * Removed `.addListener()` and added functionality inside of `on()` function.
+* Removed the following functions as superflous for an initial release:
+`cors()`, `on()`, `include()`, `logger()`, `use()`
+* Improved documentation and examples throughout.
 
 # beakr 0.2.3
 

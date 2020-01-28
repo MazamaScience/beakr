@@ -3,7 +3,7 @@
 
 library(beakr)
 
-beakr <- new_beakr()
+beakr <- newBeakr()
 
 beakr %>%
   http_get("/", function(req, res, err) {
@@ -20,7 +20,7 @@ beakr %>%
 
 library(beakr)
 
-new_beakr() %>%
+newBeakr() %>%
   http_post("/", function(req, res, err) {
     return("Successful POST request!\n")
   }) %>%
@@ -34,7 +34,7 @@ new_beakr() %>%
 
 library(beakr)
 
-new_beakr() %>%
+newBeakr() %>%
   http_put("/", function(req, res, err) {
     return("Successful PUT request!\n")
   }) %>%

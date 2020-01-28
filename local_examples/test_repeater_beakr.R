@@ -8,7 +8,7 @@
 library(beakr)
 library(MazamaCoreUtils)
 
-new_beakr() %>%
+newBeakr() %>%
 
   # ----- Welcome --------------------------------------------------------------
 

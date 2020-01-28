@@ -17,7 +17,7 @@
 #' # Pipe
 #' newBeakr() %>% listen()
 #' }
-newBeakr <- function(name = NULL) {
+newBeakr() <- function(name = NULL) {
   beakr <- Beakr$new()
   if ( !is.null(name) ) {
     beakr$name <- name
@@ -300,7 +300,6 @@ static <- function(beakr, path = NULL, file = NULL) {
 
 }
 
-
 #' @export
 #' @title Use request method-insensitive middleware
 #'
@@ -317,7 +316,7 @@ static <- function(beakr, path = NULL, file = NULL) {
 #'
 #' @usage use(beakr, path, ..., method)
 use <- function(beakr, path, ..., method = NULL) {
-  # TODO: FIX THIS.
+# TODO: FIX THIS.
   if ( is.null(beakr) ) {
     beakr <- invisible(Beakr$new())
   }
@@ -325,10 +324,145 @@ use <- function(beakr, path, ..., method = NULL) {
     X = list(...),
     FUN = function(middleware_FUN) {
       .routeMiddleware( beakr  = beakr,
-                        FUN    = middleware_FUN,
-                        path   = path,
-                        method = method )
+                       FUN    = middleware_FUN,
+                       path   = path,
+                       method = method )
     }
   )
+  return(beakr)
+}
+
+
+#' @export
+#' @title Add CORS-headers middleware
+#'
+#' @description Add Cross-Origin Resource Sharing (CORS) middleware to the
+#' instance.
+#'
+#' @details
+#' CORS is a mechanism that uses additional HTTP headers to tell browsers to
+#' give a web application running at one origin, access to selected resources
+#' from a different origin. A web application executes a cross-origin HTTP
+#' request when it requests a resource that has a different origin
+#' (domain, protocol, or port) from its own.
+#'
+#' Additional Info:
+#' https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+#'
+#' @param beakr a beakr instance.
+#' @param path a string path.
+#' @param with_methods set \code{Access-Control-Allow-Methods} response header
+#' that specifies the method or methods allowed when accessing the resource in
+#' response to a preflight request.
+#' @param with_origin set \code{Access-Control-Allow-Origin} response header
+#' indicating whether the response can be shared with requesting code from the
+#' given origin.
+#' @param with_headers set \code{Acess-Control-Allow-Headers} to indicate which HTTP
+#' headers can be used during the actual request.
+#' @param with_credentials set \code{Access-Control-Allow-Credentials} response header.
+#' @param max_age set \code{Access-Control-Max-Age} in seconds.
+#' @param expose_headers set \code{Access-Control-Expose-Headers}  indicate which
+#' headers can be exposed as part of the response.
+#'
+cors <- function(
+  beakr,
+  path = NULL,
+  with_methods = c("POST", "GET", "PUT", "OPTIONS", "DELETE", "PATCH"),
+  with_origin = "*",
+  with_headers = NULL,
+  with_credentials = NULL,
+  max_age = NULL,
+  expose_headers = NULL
+) {
+
+  if ( !is.null(with_headers) ) {
+    with_headers <- paste0(with_headers, collapse = ",")
+  }
+  if ( !is.null(with_methods) ) {
+    with_methods <- paste0(with_methods, collapse = ",")
+  }
+
+  if ( is.null(beakr) ) {
+    beakr <- invisible(Beakr$new())
+  }
+
+  headers <- list( `Access-Control-Allow-Origin`      = with_origin,
+                   `Access-Control-Expose-Headers`    = expose_headers,
+                   `Access-Control-Max-Age`           = max_age,
+                   `Access-Control-Allow-Credentials` = with_credentials,
+                   `Access-Control-Allow-Methods`     = with_methods,
+                   `Access-Control-Allow-Headers`     = with_headers )
+
+  headers <- Filter(f = function(x) { !is.null(x) }, x = headers)
+
+  FUN <- function(req, res, err) {
+
+    if ( req$method == "OPTIONS" ) {
+      res$setHeader("Access-Control-Allow-Methods", with_methods)
+      res$setHeader("Access-Control-Allow-Origin", with_origin)
+      res$setHeader("Access-Control-Allow-Headers", with_headers)
+      # Return empty string stops process
+      return("")
+    }
+
+    lapply(
+      X = names(headers),
+      FUN = function(header_name) {
+        res$setHeader(header_name, headers[[header_name]])
+      }
+    )
+
+    return(NULL)
+  }
+
+  .routeMiddleware(beakr = beakr, FUN = FUN, path = path, method = NULL)
+
+  return(beakr)
+}
+
+#' @export
+#' @title Construct an instance
+#'
+#' @description The \code{include} function is used to merge beakr middleware
+#' that has been constructed elsewhere.
+#'
+#' @details Hierarchy
+#'
+#' @param beakr primary beakr instance.
+#' @param include the external middleware to include.
+#' @param file the source file path, if external middleware in separate .R file.
+#'
+#' @usage include(beakr, include, file = NULL)
+include <- function(beakr, include, file = NULL) {
+  if ( is.null(file) ) {
+    bundle <- eval(quote(include))
+  } else {
+    tempenv <- new.env()
+    source(file, local = tempenv)
+    bundle <- eval(quote(include), envir = tempenv)
+  }
+
+  beakr$include(bundle)
+
+  return(beakr)
+}
+
+#' @export
+#' @title Beakr Event Listener
+#'
+#' @description Add an event listener to a \emph{Beakr} instance. Currently
+#' supported events are \code{"start", "finish", "error"}. The events
+#' \code{"start"} and \code{"finish"} will pass the current state of the
+#' \code{req}, \code{res} and \code{err} objects to the Listener. The
+#' \code{"error"} event will pass string error message.
+#'
+#' @param beakr a beakr instance.
+#' @param event the event to listen for, (\emph{"start", "finish", "error"}).
+#' @param FUN the response middleware function.
+#'
+on <- function(beakr, event, FUN) {
+  l <- Listener$new(event = event, FUN)
+  beakr$router$addListener(l)
+  # .addListener(beakr = beakr, event = event, FUN = FUN)
   return(beakr)
 }

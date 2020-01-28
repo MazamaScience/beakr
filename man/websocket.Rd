@@ -22,7 +22,7 @@ Access the instance through websocket. \strong{Experimental.}
 }
 \examples{
 \dontrun{
-new_beakr() \%>\%
+newBeakr() \%>\%
   websocket('/ws_test', function(req, res, err) 'Websocket Test') \%>\%
   listen()
 }

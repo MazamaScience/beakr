@@ -16,7 +16,7 @@
 #' \code{beakr} package is supported and maintained by
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
-#' @seealso \link{new_beakr}
+#' @seealso \code{\link{newBeakr}}
 #'
 #' @name beakr-package
 #' @aliases Beakr-Package
@@ -102,11 +102,14 @@ Beakr <-
           }
         )
       },
-      include = function(bundle) {
-        self$router$addMiddleware(
-          bundle$router$middleware
-        )
-      },
+      # NOTE:  This method is associated with the include() funciton in
+      # NOTE:  local_OLD/utils.R.  It will not be part of the initial release
+      # NOTE:  but we retain this placeholder.
+      # include = function(bundle) {
+      #   self$router$addMiddleware(
+      #     bundle$router$middleware
+      #   )
+      # },
       initialize = function() {
         self$router <- Router$new()
 

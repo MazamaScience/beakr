@@ -38,14 +38,14 @@ See the \code{httpuv} package for more information.
 \examples{
 \dontrun{
 # Run in foreground
-new_beakr() \%>\%
+newBeakr() \%>\%
   http_get("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
   listen()
 
 # Run in background
-#' new_beakr() \%>\%
+#' newBeakr() \%>\%
   http_get("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%

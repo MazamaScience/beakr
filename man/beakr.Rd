@@ -57,7 +57,6 @@ continuation of the \code{jug} package developed by Bart Smeets. The
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-appDefinition}{\code{Beakr$appDefinition()}}
-\item \href{#method-include}{\code{Beakr$include()}}
 \item \href{#method-new}{\code{Beakr$new()}}
 \item \href{#method-start}{\code{Beakr$start()}}
 \item \href{#method-print}{\code{Beakr$print()}}
@@ -69,14 +68,6 @@ continuation of the \code{jug} package developed by Bart Smeets. The
 \subsection{Method \code{appDefinition()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Beakr$appDefinition()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-include"></a>}}
-\subsection{Method \code{include()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Beakr$include(bundle)}\if{html}{\out{</div>}}
 }
 
 }

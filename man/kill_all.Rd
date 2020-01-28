@@ -15,7 +15,7 @@ Stops all instances that have been activated by
 }
 \examples{
 \dontrun{
-new_beakr() \%>\% listen(daemon = TRUE)
+newBeakr() \%>\% listen(daemon = TRUE)
 # Kill all instances
 kill_all()
 ## Stopped All Instances

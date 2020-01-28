@@ -7,7 +7,7 @@
 .randomName()
 }
 \value{
-An identifying text string..
+An identifying text string.
 }
 \description{
 Every instantiated \code{Beakr} object is assigned a name generated
