@@ -12,9 +12,10 @@ new_beakr() %>%
 
   # ----- Welcome --------------------------------------------------------------
 
-  getr("/", function(req, res, err) {
+  http_get("/", function(req, res, err) {
 
-    response <- "
+    response <-
+"
 <html>
 <body>
 <h1>Welcome to repeater!</h1>
@@ -33,7 +34,7 @@ new_beakr() %>%
 
   # ----- Repeater -------------------------------------------------------------
 
-  getr("/repeater", function(req, res, err) {
+  http_get("/repeater", function(req, res, err) {
 
     text <- setIfNull(req$parameters$text, "Howdy")
     times <- setIfNull(req$parameters$times, 8)
@@ -42,7 +43,7 @@ new_beakr() %>%
     if ( times > 10 )
       stop("Parameter 'times' must be < 10")
 
-    res$contentType(mime::mimemap[responseType])
+    res$setContentType(mime::mimemap[responseType])
 
     if ( responseType == "txt" ) {
 
@@ -64,11 +65,11 @@ new_beakr() %>%
 
     } else if ( responseType == "png" ) {
 
-      pngFile <- tempfile(pattern ="repeater", fileext = "png")
+      pngFile <- tempfile(pattern = "repeater", fileext = "png")
       png(pngFile)
-      plot(0:11,0:11, col = "transparent", axes=FALSE, xlab="", ylab="")
+      plot(0:11,0:11, col = "transparent", axes = FALSE, xlab = "", ylab = "")
       for ( i in 1:times ) {
-        text(1, 10-i, text)
+        text(1, 10 - i, text)
       }
       dev.off()
       response <- readr::read_file_raw(pngFile)
@@ -85,7 +86,7 @@ new_beakr() %>%
 
   # ----- Handle errors --------------------------------------------------------
 
-  handler() %>%
+  error_handler() %>%
 
   # ----- Start Beakr ----------------------------------------------------------
 

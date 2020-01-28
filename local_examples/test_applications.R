@@ -4,13 +4,13 @@
 library(beakr)
 
 new_beakr() %>%
-  getr("/", function(req, res, err) {
+  http_get("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) %>%
   listen()
 
-# In browser:
-#   http://127.0.0.1:8080
+# In terminal:
+#  curl http://127.0.0.1:8080
 # > Successful GET request!
 
 # ----- App #2:  Successful POST -----------------------------------------------
@@ -18,7 +18,7 @@ new_beakr() %>%
 library(beakr)
 
 new_beakr() %>%
-  postr("/", function(req, res, err) {
+  http_post("/", function(req, res, err) {
     return("Successful POST request!\n")
   }) %>%
   listen()
@@ -32,7 +32,7 @@ new_beakr() %>%
 library(beakr)
 
 new_beakr() %>%
-  putr("/", function(req, res, err) {
+  http_put("/", function(req, res, err) {
     return("Successful PUT request!\n")
   }) %>%
   listen()

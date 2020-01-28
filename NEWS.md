@@ -1,3 +1,9 @@
+# beakr 0.2.4
+
+More refactoring with an eye toward consistent, predictable naming.
+
+* Removed `.addListener()` and added functionality inside of `on()` function.
+
 # beakr 0.2.3
 
 * Prepare for CRAN x3

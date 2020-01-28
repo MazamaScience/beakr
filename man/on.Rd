@@ -9,13 +9,14 @@ on(beakr, event, FUN)
 \arguments{
 \item{beakr}{a beakr instance.}
 
-\item{event}{the event to listen for, (\emph{"start", "finish", "end"}).}
+\item{event}{the event to listen for, (\emph{"start", "finish", "error"}).}
 
 \item{FUN}{the response middleware function.}
 }
 \description{
 Add an event listener to a \emph{Beakr} instance. Currently
-supported events are \code{"start", "finish", "error"}. The events \code{"start"} and
-\code{"finish"} will pass the current state of the \code{req}, \code{res} and \code{err}
-objects to the Listener. The \code{"error"} event will pass string error message.
+supported events are \code{"start", "finish", "error"}. The events
+\code{"start"} and \code{"finish"} will pass the current state of the
+\code{req}, \code{res} and \code{err} objects to the Listener. The
+\code{"error"} event will pass string error message.
 }

@@ -7,6 +7,9 @@
 .randomName()
 }
 \description{
-Internal random name generator.
+Every instantiated 'beakr' object is assigned a name generated
+with this function. This makes it easy to keep track of multiple instances
+and stop/kill only certain ones. "Hollywood Diva" is unlikely to be confused
+with "Cajun Bachelor".
 }
 \keyword{internal}

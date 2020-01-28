@@ -282,7 +282,7 @@ static <- function(beakr, path = NULL, file = NULL) {
         data <- readBin( con  = file,
                          what = "raw",
                          n    = file.info(file)$size )
-        if( grepl("image|octect|pdf|json", mime_type) ) { # Assumptions...
+        if ( grepl("image|octect|pdf|json", mime_type) ) { # Assumptions...
           return(data)
         } else {
           return(rawToChar(data))
@@ -447,19 +447,22 @@ include <- function(beakr, include, file = NULL) {
   return(beakr)
 }
 
+#' @export
 #' @title Beakr Event Listener
 #'
 #' @description Add an event listener to a \emph{Beakr} instance. Currently
-#' supported events are \code{"start", "finish", "error"}. The events \code{"start"} and
-#' \code{"finish"} will pass the current state of the \code{req}, \code{res} and \code{err}
-#' objects to the Listener. The \code{"error"} event will pass string error message.
+#' supported events are \code{"start", "finish", "error"}. The events
+#' \code{"start"} and \code{"finish"} will pass the current state of the
+#' \code{req}, \code{res} and \code{err} objects to the Listener. The
+#' \code{"error"} event will pass string error message.
 #'
 #' @param beakr a beakr instance.
-#' @param event the event to listen for, (\emph{"start", "finish", "end"}).
+#' @param event the event to listen for, (\emph{"start", "finish", "error"}).
 #' @param FUN the response middleware function.
 #'
-#' @export
 on <- function(beakr, event, FUN) {
-  .addListener(beakr = beakr, event = event, FUN = FUN)
+  l <- Listener$new(event = event, FUN)
+  beakr$router$addListener(l)
+  # .addListener(beakr = beakr, event = event, FUN = FUN)
   return(beakr)
 }
