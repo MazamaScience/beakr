@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal function to add middleware — .routeMiddleware • beakr</title>
+<title>Internal function to add middleware to a Beakr object — .routeMiddleware • beakr</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,10 @@
 
 
 
-<meta property="og:title" content="Internal function to add middleware — .routeMiddleware" />
-<meta property="og:description" content="Internal function to add middleware" />
+<meta property="og:title" content="Internal function to add middleware to a Beakr object — .routeMiddleware" />
+<meta property="og:description" content="This function is used in each of the http_~() methods
+as well as the cors(), websocket() and use() utility
+functions." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -108,13 +110,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal function to add middleware</h1>
+    <h1>Internal function to add middleware to a Beakr object</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
     <div class="hidden name"><code>dot-routeMiddleware.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Internal function to add middleware</p>
+    <p>This function is used in each of the <code>http_~()</code> methods
+as well as the <code><a href='cors.html'>cors()</a></code>, <code><a href='websocket.html'>websocket()</a></code> and <code><a href='use.html'>use()</a></code> utility
+functions.</p>
     </div>
 
     <pre class="usage"><span class='fu'>.routeMiddleware</span>(<span class='no'>beakr</span>, <span class='no'>FUN</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>websocket</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -124,32 +128,36 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>beakr</th>
-      <td><p>a beakr instance.</p></td>
+      <td><p>Beakr instance.</p></td>
     </tr>
     <tr>
       <th>FUN</th>
-      <td><p>the function to route middleware</p></td>
+      <td><p>Function to route middleware.</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>the path to route the middleware</p></td>
+      <td><p>Path to route the middleware.</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p>the HTTP method to employ</p></td>
+      <td><p>HTTP method to employ.</p></td>
     </tr>
     <tr>
       <th>websocket</th>
-      <td><p>boolean, TRUE if websocket.</p></td>
+      <td><p>Boolean, TRUE if websocket.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code>Beakr</code> object with added middleware.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

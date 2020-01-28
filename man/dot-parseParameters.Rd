@@ -2,21 +2,24 @@
 % Please edit documentation in R/utils-internal.R
 \name{.parseParameters}
 \alias{.parseParameters}
-\title{Parse the parameters passed by the req}
+\title{Parse the parameters passed by in the request}
 \usage{
 .parseParameters(req, body, query, type)
 }
 \arguments{
-\item{req}{an HTTP req}
+\item{req}{HTTP request object.}
 
-\item{body}{a body text string}
+\item{body}{Body text string.}
 
-\item{query}{a url-encoded query string}
+\item{query}{Url-encoded query string.}
 
-\item{type}{a media mime type (a.k.a. Multipurpose Internet Mail Extensions
-or MIME type).}
+\item{type}{Media mime type.}
+}
+\value{
+A list of parameters and values.
 }
 \description{
-Parse the parameters passed by the req
+Internal function used in the \code{Request$initialize()}
+method to extract URL parameters from the request path.
 }
 \keyword{internal}

@@ -3,11 +3,14 @@
 
 library(beakr)
 
-new_beakr() %>%
+beakr <- new_beakr()
+
+beakr %>%
   http_get("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) %>%
-  listen()
+  listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+
 
 # In terminal:
 #  curl http://127.0.0.1:8080

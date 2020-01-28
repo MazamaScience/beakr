@@ -36,7 +36,8 @@
 
 
 <meta property="og:title" content="Regex path query — .matchPath" />
-<meta property="og:description" content="Regex path query" />
+<meta property="og:description" content="This function is used in the Router$invoke()
+method to match middleware paths to request paths." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,7 +115,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Regex path query</p>
+    <p>This function is used in the <code>Router$invoke()</code>
+method to match middleware paths to request paths.</p>
     </div>
 
     <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
@@ -124,24 +126,28 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pattern</th>
-      <td><p>the string pattern to parse</p></td>
+      <td><p>String pattern to parse. (A middleware path.)</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>the path to match to</p></td>
+      <td><p>Path to match to. (A request path.)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional parameters</p></td>
+      <td><p>Additional parameters passed to <code><a href='https://rdrr.io/r/base/grep.html'>regexpr()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A List with information on matching paths and URL parameters.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

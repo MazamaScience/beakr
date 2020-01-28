@@ -1,89 +1,22 @@
-#' Pipe operator
-#'
-#' See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
-#'
-#' @name %>%
-#' @rdname pipe
-#' @keywords internal
-#' @export
-#' @importFrom magrittr %>%
-#' @usage lhs \%>\% rhs
-NULL
+# Internal, unexported functions
+
+# ----- Beakr object modifiers -------------------------------------------------
 
 #' @keywords internal
-#' @title Regex path query
+#' @title Internal function to add middleware to a Beakr object
 #'
-#' @param pattern the string pattern to parse
-#' @param path the path to match to
-#' @param ... additional parameters
-.matchPath <- function(pattern, path, ...) {
-  # Result init
-  result <- list(match = FALSE, src = path, parameters = list())
-
-  if ( !is.null(pattern) ) {
-    if ( !(grepl("^\\^", pattern) ||
-           grepl("\\$$", pattern)) ) {
-      pattern <- paste0("^", pattern, "$")
-    }
-
-    rex <- regexpr(pattern, path, perl = TRUE, ...)
-
-    for ( n in attr(x = rex, which = "capture.name") ) {
-      result$parameters[[n]] <- substr( x     = result$src,
-                                        start = attr(rex, "capture.start")[,n],
-                                        stop  = (attr(rex, "capture.start")[,n] +
-                                                   attr(rex, "capture.length")[,n] - 1) )
-
-    }
-    result$match <- ifelse(rex[[1]] > -1, TRUE, FALSE)
-  } else {
-    result$match <- TRUE
-  }
-
-  return(result)
-}
-
-#' @keywords internal
-#' @title Parse the parameters passed by the req
+#' @description This function is used in each of the \code{http_~()} methods
+#' as well as the \code{cors()}, \code{websocket()} and \code{use()} utility
+#' functions.
 #'
-#' @param req an HTTP req
-#' @param body a body text string
-#' @param query a url-encoded query string
-#' @param type a media mime type (a.k.a. Multipurpose Internet Mail Extensions
-#' or MIME type).
-.parseParameters <- function(req, body, query, type) {
-  parameters <- list()
-  parameters <- c(parameters, webutils::parse_query(query))
-
-  if ( is.null(type) ) {
-    return(parameters)
-  }
-
-  if ( grepl("json", type) && nchar(body) > 0 ) {
-    parameters <- c( parameters,
-                     jsonlite::fromJSON(body, simplifyDataFrame = FALSE) )
-  }
-
-  if ( grepl("multipart", type) ) {
-    parameters <- c( parameters,
-                     mime::parse_multipart(req) )
-  }
-
-  if ( grepl("form-urlencoded", type) ) {
-    parameters <- c( parameters,
-                     webutils::parse_query(body) )
-  }
-  return(parameters)
-}
-
-#' @keywords internal
-#' @title Internal function to add middleware
+#' @param beakr Beakr instance.
+#' @param FUN Function to route middleware.
+#' @param path Path to route the middleware.
+#' @param method HTTP method to employ.
+#' @param websocket Boolean, TRUE if websocket.
 #'
-#' @param beakr a beakr instance.
-#' @param FUN the function to route middleware
-#' @param path the path to route the middleware
-#' @param method the HTTP method to employ
-#' @param websocket boolean, TRUE if websocket.
+#' @return A \code{Beakr} object with added middleware.
+
 .routeMiddleware <- function(
   beakr,
   FUN,
@@ -114,13 +47,100 @@ NULL
 
 }
 
+# ----- Request object internals -----------------------------------------------
+
 #' @keywords internal
-#' @title Internal random name generator.
+#' @title Parse the parameters passed by in the request
 #'
-#' @description Every instantiated 'beakr' object is assigned a name generated
+#' @description Internal function used in the \code{Request$initialize()}
+#' method to extract URL parameters from the request path.
+#'
+#' @param req HTTP request object.
+#' @param body Body text string.
+#' @param query Url-encoded query string.
+#' @param type Media mime type.
+#'
+#' @return A list of parameters and values.
+
+.parseParameters <- function(req, body, query, type) {
+  # Initialize result
+  parameters <- list()
+  parameters <- c(parameters, webutils::parse_query(query))
+
+  if ( is.null(type) ) {
+    return(parameters)
+  }
+
+  if ( grepl("json", type) && nchar(body) > 0 ) {
+    parameters <- c( parameters,
+                     jsonlite::fromJSON(body, simplifyDataFrame = FALSE) )
+  }
+
+  if ( grepl("multipart", type) ) {
+    parameters <- c( parameters,
+                     mime::parse_multipart(req) )
+  }
+
+  if ( grepl("form-urlencoded", type) ) {
+    parameters <- c( parameters,
+                     webutils::parse_query(body) )
+  }
+  return(parameters)
+}
+
+# ----- Router object internals ------------------------------------------------
+
+#' @keywords internal
+#' @title Regex path query
+#'
+#' @description This function is used in the \code{Router$invoke()}
+#' method to match middleware paths to request paths.
+#'
+#' @param pattern String pattern to parse. (A middleware path.)
+#' @param path Path to match to. (A request path.)
+#' @param ... Additional parameters passed to \code{regexpr()}.
+#'
+#' @return A List with information on matching paths and URL parameters.
+
+.matchPath <- function(pattern, path, ...) {
+  # Initialize result
+  result <- list(match = FALSE, src = path, parameters = list())
+
+  if ( !is.null(pattern) ) {
+    if ( !(grepl("^\\^", pattern) ||
+           grepl("\\$$", pattern)) ) {
+      pattern <- paste0("^", pattern, "$")
+    }
+
+    rex <- base::regexpr(pattern, path, perl = TRUE, ...)
+
+    for ( n in attr(x = rex, which = "capture.name") ) {
+      result$parameters[[n]] <- substr( x     = result$src,
+                                        start = attr(rex, "capture.start")[,n],
+                                        stop  = (attr(rex, "capture.start")[,n] +
+                                                   attr(rex, "capture.length")[,n] - 1) )
+
+    }
+    result$match <- ifelse(rex[[1]] > -1, TRUE, FALSE)
+  } else {
+    result$match <- TRUE
+  }
+
+  return(result)
+}
+
+# ----- Helper functions -------------------------------------------------------
+
+#' @keywords internal
+#' @title Internal random name generator
+#'
+#' @description Every instantiated \code{Beakr} object is assigned a name generated
 #' with this function. This makes it easy to keep track of multiple instances
 #' and stop/kill only certain ones. "Hollywood Diva" is unlikely to be confused
 #' with "Cajun Bachelor".
+#'
+#' @return An identifying text string.
+
 .randomName <- function() {
   # f U n  n a M e S!
   dictionary <- c(

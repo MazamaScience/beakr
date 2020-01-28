@@ -2,22 +2,27 @@
 % Please edit documentation in R/utils-internal.R
 \name{.routeMiddleware}
 \alias{.routeMiddleware}
-\title{Internal function to add middleware}
+\title{Internal function to add middleware to a Beakr object}
 \usage{
 .routeMiddleware(beakr, FUN, path = NULL, method = NULL, websocket = FALSE)
 }
 \arguments{
-\item{beakr}{a beakr instance.}
+\item{beakr}{Beakr instance.}
 
-\item{FUN}{the function to route middleware}
+\item{FUN}{Function to route middleware.}
 
-\item{path}{the path to route the middleware}
+\item{path}{Path to route the middleware.}
 
-\item{method}{the HTTP method to employ}
+\item{method}{HTTP method to employ.}
 
-\item{websocket}{boolean, TRUE if websocket.}
+\item{websocket}{Boolean, TRUE if websocket.}
+}
+\value{
+A \code{Beakr} object with added middleware.
 }
 \description{
-Internal function to add middleware
+This function is used in each of the \code{http_~()} methods
+as well as the \code{cors()}, \code{websocket()} and \code{use()} utility
+functions.
 }
 \keyword{internal}

@@ -1,6 +1,7 @@
 # beakr 0.2.4
 
-More refactoring with an eye toward consistent, predictable naming.
+More refactoring with an eye toward consistent, predictable naming and more
+documentation and examples.
 
 * Removed `.addListener()` and added functionality inside of `on()` function.
 

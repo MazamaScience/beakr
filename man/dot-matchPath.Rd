@@ -7,13 +7,17 @@
 .matchPath(pattern, path, ...)
 }
 \arguments{
-\item{pattern}{the string pattern to parse}
+\item{pattern}{String pattern to parse. (A middleware path.)}
 
-\item{path}{the path to match to}
+\item{path}{Path to match to. (A request path.)}
 
-\item{...}{additional parameters}
+\item{...}{Additional parameters passed to \code{regexpr()}.}
+}
+\value{
+A List with information on matching paths and URL parameters.
 }
 \description{
-Regex path query
+This function is used in the \code{Router$invoke()}
+method to match middleware paths to request paths.
 }
 \keyword{internal}

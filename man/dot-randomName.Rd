@@ -2,12 +2,15 @@
 % Please edit documentation in R/utils-internal.R
 \name{.randomName}
 \alias{.randomName}
-\title{Internal random name generator.}
+\title{Internal random name generator}
 \usage{
 .randomName()
 }
+\value{
+An identifying text string..
+}
 \description{
-Every instantiated 'beakr' object is assigned a name generated
+Every instantiated \code{Beakr} object is assigned a name generated
 with this function. This makes it easy to keep track of multiple instances
 and stop/kill only certain ones. "Hollywood Diva" is unlikely to be confused
 with "Cajun Bachelor".
