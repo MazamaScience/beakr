@@ -8,6 +8,8 @@ Lots of refactoring with an eye toward:
 * Renamed `App` object back to `Beakr` for internal consistency.
 * Renamed `beakr()` to `newBeakr()` to avoid confusion.
 * Renamed `http_get()`, _et al_ to  to `httpGET()` _et al_.
+* Renamed `kill()` to `startServer().
+* Added `httpuv_kstopAllServers()`.
 * Removed `.addListener()` and added functionality inside of `on()` function.
 * Removed the following functions as superflous for an initial release:
 `cors()`, `on()`, `include()`, `kill_all()`, `list_active()`, `logger()`, 

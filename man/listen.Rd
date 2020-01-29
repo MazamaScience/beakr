@@ -4,24 +4,31 @@
 \alias{listen}
 \title{Listen for connections on a Beakr instance}
 \usage{
-listen(beakr, host = "127.0.0.1", port = 25118, daemon = FALSE, verbose = TRUE)
+listen(
+  beakr = NULL,
+  host = "127.0.0.1",
+  port = 25118,
+  daemon = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{beakr}{a beakr instance.}
+\item{beakr}{\code{Beakr} instance.}
 
-\item{host}{a string that is a valid IPv4 or IPv6 address to listen on.
+\item{host}{String that is a valid IPv4 or IPv6 address to listen on.
 Defaults to the local host ("127.0.0.1").}
 
-\item{port}{a number or integer that indicates the port to listen on. Default
+\item{port}{Number or integer that indicates the port to listen on. Default
 is a port opened on 25118.}
 
-\item{daemon}{run the instance in the background, the default is FALSE.}
+\item{daemon}{Logical specifying whether the server should be run in the
+background.}
 
 \item{verbose}{Logical specifying whether to print out details of the
-\code{Beakr} object now running.}
+\code{Beakr} instance now running.}
 }
 \value{
-A \code{Beakr} object.
+A \code{Beakr} instance with an active server.
 }
 \description{
 Binds and listens for connections at the specified host and port.
@@ -38,26 +45,21 @@ for connections on a thread running in the background.
 See the \code{httpuv} package for more details.
 }
 \note{
-The default port number 25118 was arrived at using:
+The default port number 25118 was generated using:
 \preformatted{
 > match(c("b","e","a","k","r"), letters) %% 10
 [1] 2 5 1 1 8
 }
 }
 \examples{
-\dontrun{
-# Run in foreground
-newBeakr() \%>\%
-  httpGET("/", function(req, res, err) {
-    return("Successful GET request!\n")
-  }) \%>\%
-  listen()
-
-# Run in background
-#' newBeakr() \%>\%
+# Run in the background
+beakr <- newBeakr()
+beakr \%>\%
   httpGET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
   listen(daemon = TRUE)
-}
+
+# Stop the server
+stopServer(beakr)
 }

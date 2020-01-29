@@ -9,7 +9,7 @@
 #' function is invoked.
 #' @param FUN Middleware function to be invoked.
 #'
-#' @return A \code{Beakr} object with added middleware.
+#' @return A \code{Beakr} instance with added middleware.
 #'
 #' @examples
 #' \dontrun{
@@ -29,8 +29,8 @@
 #' # > Successful GET request!
 #' # ------------------------------------------------------------
 #'
-#' # Kill the beakr instance
-#' kill(beakr)
+#' # Stop the beakr instance server
+#' stopServer(beakr)
 #' }
 
 httpGET <- function(beakr, path = NULL, FUN = NULL) {
@@ -65,7 +65,7 @@ httpGET <- function(beakr, path = NULL, FUN = NULL) {
 #' function is invoked.
 #' @param FUN Middleware function to be invoked.
 #'
-#' @return A \code{Beakr} object with added middleware.
+#' @return A \code{Beakr} instance with added middleware.
 #'
 #' @examples
 #' \dontrun{
@@ -85,8 +85,8 @@ httpGET <- function(beakr, path = NULL, FUN = NULL) {
 #' # > Successful POST request!
 #' # ------------------------------------------------------------
 #'
-#' # Kill the beakr instance
-#' kill(beakr)
+#' # Stop the beakr instance server
+#' stopServer(beakr)
 #' }
 
 httpPOST <- function(beakr, path = NULL, FUN = NULL) {
@@ -121,7 +121,7 @@ httpPOST <- function(beakr, path = NULL, FUN = NULL) {
 #' function is invoked.
 #' @param FUN Middleware function to be invoked.
 #'
-#' @return A \code{Beakr} object with added middleware.
+#' @return A \code{Beakr} instance with added middleware.
 #'
 #' @examples
 #' \dontrun{
@@ -141,8 +141,8 @@ httpPOST <- function(beakr, path = NULL, FUN = NULL) {
 #' # > Successful PUT request!
 #' # ------------------------------------------------------------
 #'
-#' # Kill the beakr instance
-#' kill(beakr)
+#' # Stop the beakr instance server
+#' stopServer(beakr)
 #' }
 
 httpPUT <- function(beakr, path = NULL, FUN = NULL) {
@@ -177,7 +177,7 @@ httpPUT <- function(beakr, path = NULL, FUN = NULL) {
 #' function is invoked.
 #' @param FUN Middleware function to be invoked.
 #'
-#' @return A \code{Beakr} object with added middleware.
+#' @return A \code{Beakr} instance with added middleware.
 #'
 #' @examples
 #' \dontrun{
@@ -197,8 +197,8 @@ httpPUT <- function(beakr, path = NULL, FUN = NULL) {
 #' # > Successful DELETE request!
 #' # ------------------------------------------------------------
 #'
-#' # Kill the beakr instance
-#' kill(beakr)
+#' # Stop the beakr instance server
+#' stopServer(beakr)
 #' }
 
 httpDELETE <- function(beakr, path = NULL, FUN = NULL) {

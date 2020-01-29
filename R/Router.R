@@ -3,9 +3,10 @@
 #'
 #' @description
 #' The \code{Router} object represents the handling of routing and middleware
-#' (such as httpGET(), httpPUT(), httpPOST(), and so on). Once a \code{Router} object is
-#' instantiated, middleware and HTTP method routes can be added. The top level
-#' \code{Beakr} object initializes with the creation of a \code{Router} object.
+#' (such as httpGET(), httpPUT(), httpPOST(), and so on). Once a \code{Router}
+#' object is instantiated, middleware and HTTP method routes can be added. The
+#' top level \code{Beakr} object initializes with the creation of a
+#' \code{Router} object.
 #'
 #' @usage NULL
 #'
@@ -41,7 +42,7 @@
 #' }
 #'
 #' @seealso \code{\link{Response}} and \code{\link{TestRequest}}
-#'
+
 Router <-
   R6::R6Class(
     classname = "Router",
@@ -63,9 +64,9 @@ Router <-
         # handle the listener defined function for the event
         lapply(listeners, function(l) { l$FUN(event, ...) })
       },
-      invoke = function( req,
-                         websocket_msg = NULL,
-                         websocket_binary = NULL ) {
+      invoke = function(req,
+                        websocket_msg = NULL,
+                        websocket_binary = NULL ) {
         # Define new req and res objects
         res <- Response$new()
         req <- Request$new(req)

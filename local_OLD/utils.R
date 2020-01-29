@@ -86,16 +86,16 @@ listen <- function(
 #'
 #' @param beakr a beakr instance.
 #'
-#' @usage kill(beakr)
+#' @usage stopServer(beakr)
 #' @return None
 #'
 #' @examples
 #' \donttest{
 #' beakr <- newBeakr()
 #' listen(beakr, daemon = TRUE)
-#' kill(beakr)
+#' stopServer(beakr)
 #' }
-kill <- function(beakr) {
+stopServer <- function(beakr) {
   httpuv::stopServer(beakr$server)
   cat("Stopped ")
   beakr$print()
@@ -107,17 +107,17 @@ kill <- function(beakr) {
 #' @description Stops all instances that have been activated by
 #' \code{\link{listen}} in the session.
 #'
-#' @usage kill_all()
+#' @usage stopServer_all()
 #' @return None
-#' @seealso \code{\link{kill}} and \code{\link{listen}}
+#' @seealso \code{\link{stopServer}} and \code{\link{listen}}
 #' @examples
 #' \dontrun{
 #' newBeakr() %>% listen(daemon = TRUE)
 #' # Kill all instances
-#' kill_all()
+#' stopServer_all()
 #' ## Stopped All Instances
 #' }
-kill_all <- function() {
+stopServer_all <- function() {
   httpuv::stopAllServers()
   cat("Stopped All Instances\n")
 }

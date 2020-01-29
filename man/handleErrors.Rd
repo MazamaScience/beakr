@@ -4,18 +4,90 @@
 \alias{handleErrors}
 \title{Error handling middleware for a beakr instance}
 \usage{
-handleErrors(beakr, path = NULL)
+handleErrors(beakr = NULL)
 }
 \arguments{
 \item{beakr}{Beakr instance}
-
-\item{path}{Path for which the middleware is invoked, typically \code{NULL}.}
 }
 \value{
-A \code{Beakr} object with added middleware.
+A \code{Beakr} instance with added middleware.
 }
 \description{
 This default error-handling middleware function should be added
 at the end of the middleware function pipeline. Any errors will be returned
 within a JSON wrapper.
+
+The general structure for a stand-alone executable script with a
+\code{Beakr} webservice typically looks like this:
+
+\preformatted{
+newBeakr() %>%
+
+  httpGET(<route_A>, function(req, res, err) {
+    ...
+  }) %>%
+
+  httpGET(<route_B>, function(req, res, err) {
+    ...
+  }) %>%
+
+  handleErrors() %>%
+
+  listen()
+}
+}
+\details{
+#' Middleware to serve static files
+#'
+#' Binds to get requests that aren't handled by specified paths. Should support
+#' all filetypes; returns image and octet-stream types as a raw string. \cr\cr
+#' Note: the \code{path} argument is not related to the file being served. If
+#' \code{path} is given, the static file middleware will bind to \code{path},
+#' however for finding the files on the local filesystem it will strip
+#' \code{path} from the file location. For example, let's assume
+#' \code{path='my_path'}, the following url \code{/my_path/file/to/serve.html}
+#' will serve the file \code{file/to/serve.html} from the \code{root_path} folder.
+#'
+#' @param jug the jug instance
+#' @param path the path to bind to, default = NULL (all paths)
+#' @param root_path the file path to set as root for the file server
+#'
+#' @export
+serve_static_files<-function(jug, path=NULL, root_path=getwd()){
+  get(jug, path = NULL, function(req, res, err){
+
+    if(substring(req$path, nchar(req$path)) == "/"){
+      req$path <- paste0(req$path, "index.html")
+    }
+
+    if(is.null(path)){
+      file_path <- paste0(root_path, '/', req$path)
+    } else {
+      partial_file_path <- gsub(paste0('.*', path, '(.*)'), '\\1', req$path)
+      file_path <- paste0(root_path, '/', partial_file_path)
+    }
+
+    bound <- ifelse(is.null(path), TRUE, substr(req$path, 2, nchar(path) + 1) == path)
+
+    if(file.exists(file_path) & bound){
+      mime_type <- mime::guess_type(file_path)
+      res$content_type(mime_type)
+
+      data <- readBin(file_path, 'raw', n=file.info(file_path)$size)
+
+      if(grepl("image|octet|pdf", mime_type)){ # making a lot of assumptions here
+        return(data)
+
+      } else {
+        return(rawToChar(data))
+
+      }
+
+    } else {
+      res$set_status(404)
+      return(NULL)
+    }
+
+  })
+}
 }

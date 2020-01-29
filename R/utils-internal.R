@@ -135,48 +135,14 @@
 
 }
 
-# ----- Response functions -----------------------------------------------------
-
-#' @keywords internal
-#' @title JSON error function
-#'
-#' @description This function is used to add a JSON error response to the
-#' \code{res} object. It is called by the \code{handleErrors()} utility
-#' function.
-#'
-#' @return The incoming \code{res} object is modified.
-
-.jsonError <- function(req, res, err) {
-
-  res$setContentType("application/json")
-
-  if ( err$occurred ) {
-    res$status <- 500L
-    error_str <- paste(err$errors, collapse = "\n")
-
-    cat("ERROR:\n", error_str, "\n")
-
-    res$json(list( status = "error",
-                   status_code = 500L,
-                   errors = error_str ))
-
-  } else {
-    res$status = 404L
-    res$json(list( status = "Page not found.",
-                   status_code = 404L ))
-  }
-
-}
-
 # ----- Helper functions -------------------------------------------------------
 
 #' @keywords internal
 #' @title Internal random name generator
 #'
 #' @description Every instantiated \code{Beakr} object is assigned a name generated
-#' with this function. This makes it easy to keep track of multiple instances
-#' and stop/kill only certain ones. "Hollywood Diva" is unlikely to be confused
-#' with "Cajun Bachelor".
+#' with this function. This makes it easy to keep track of multiple instances.
+#' "Hollywood Diva" is unlikely to be confused with "Cajun Bachelor".
 #'
 #' @return An identifying text string.
 

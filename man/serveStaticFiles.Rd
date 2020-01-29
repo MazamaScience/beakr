@@ -4,18 +4,19 @@
 \alias{serveStaticFiles}
 \title{Serve static files}
 \usage{
-serveStaticFiles(beakr, path = NULL, file = NULL)
+serveStaticFiles(beakr = NULL, route = NULL, filePath = NULL)
 }
 \arguments{
 \item{beakr}{\code{Beakr} instance or \code{NULL}.}
 
-\item{path}{String representing a path to a directory from which static
-files are served.}
+\item{route}{String representing a \emph{route}, a virtual directory path
+where the static file will appear in a URL.}
 
-\item{file}{a string representing the path to the file that is to be served.}
+\item{filePath}{String representing path and name of the file to be served
+relative to the directory in which the beakr script is running.}
 }
 \value{
-A `beakr` App object with added middleware.
+A \code{Beakr} with added middleware.
 }
 \description{
 Binds to GET requests that aren't handled by specified paths.
@@ -24,16 +25,18 @@ string.
 }
 \details{
 Serve static files from the host machine. Currently supports images,
-PDF, JSON, HTML, and raw text. The static file will be served on the \code{path}
-specified in addition to the file name and extension. For example, an image
-\code{example_dir/path_to_pictures/pic.png} will be served on the URL extension
-\code{/path/pic.png}.
-}
-\examples{
-\dontrun{
-path_to_file <- "example_dir/path_to_pictures/pic.png"
-newBeakr() \%>\%
-  static(path = 'readme/', file = path_to_file) \%>\%
+PDF, JSON, HTML, and raw text. The static file appear at a URL composed of
+the \code{route} and the file name and extension which will be extracted
+from \code{filePath}.
+
+For example, specifying:
+\preformatted{
+beakr %>%
+  ...
+  serverStaticFiles(/)
+  ...
   listen()
 }
+
+TODO
 }

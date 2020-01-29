@@ -13,7 +13,7 @@
 #' # > "status":"Page not found.","status_code":404
 #' # An error was thrown because the parameter "n" is not provided and
 #' # required by the middleware.
-#' killAll()
+#' stopServerAll()
 #' }
 
 # ------ utils.R include() -----------------------------------------------------

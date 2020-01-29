@@ -54,7 +54,7 @@ beakr \%>\%
 # * http://127.0.0.1:25118/goodbye
 # ------------------------------------------------------------
 
-# Kill the beakr instance
-kill(beakr)
+# Stop the beakr instance server
+stopServer(beakr)
 }
 }

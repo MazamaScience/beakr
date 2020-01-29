@@ -11,7 +11,7 @@ None
 }
 \description{
 Stops all \code{Beakr} instances (and any other servers created
-with the \code{httpuv} package. This convenience function is a wrapper for
+with the \code{httpuv} package). This convenience function is a wrapper for
 \code{httpuv::stopAllServers()} and is included to encourage experimentation
 so that users who create multiple \code{Beakr} instances can quickly stop
 them all.

@@ -7,7 +7,7 @@
 newBeakr(name = NULL)
 }
 \arguments{
-\item{name}{Optional name assigned to the \code{Beakr} object.}
+\item{name}{Optional name assigned to the \code{Beakr} instance.}
 }
 \value{
 A new and empty \code{Beakr} instance.
@@ -28,8 +28,12 @@ beakr <- newBeakr()
 
 # Create a pipeline of hanldlers
 beakr \%>\%
-  httpGET(path = "/route_A", middleware_A) \%>\%
-  httpGET(path = "/route_B", middleware_B) \%>\%
+  httpGET(path = "/route_A", function(res, req, err) {
+    print("This is route 'A'.")
+  }) \%>\%
+  httpGET(path = "/route_B", function(res, req, err) {
+    print("This is route 'B'.")
+  }) \%>\%
   handleErrors() \%>\%
   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 
@@ -39,7 +43,7 @@ beakr \%>\%
 # * http://127.0.0.1:25118/route_B
 # ------------------------------------------------------------
 
-# Kill the beakr instance
-kill(beakr)
+# Stop the beakr instance server
+stopServer(beakr)
 }
 }
