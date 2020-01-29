@@ -13,10 +13,10 @@
 #' @examples
 #' \dontrun{
 #' newBeakr() %>%
-#'   http_get('/', function(req, res, err) 'LOG TEST') %>%
+#'   httpGET('/', function(req, res, err) 'LOG TEST') %>%
 #'   logger() %>%
 #'   listen()
-#' ## In browser at 127.0.0.1:8080
+#' ## In browser at 127.0.0.1:12518
 #' # DEBUG -datestamp- HTTP | / - GET - REQUEST RECEIVED
 #' # INFO -datestamp- HTTP | / - GET - 200
 #' }

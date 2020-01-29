@@ -23,7 +23,7 @@ states_plot <- function(res) {
 beakr <- newBeakr() # Assign it so we can kill it later
 
 beakr %>%
-  http_get(path = '/usa', decorate(states_plot)) %>%
+  httpGET(path = '/usa', decorate(states_plot)) %>%
   listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
 
 

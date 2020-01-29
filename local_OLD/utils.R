@@ -55,14 +55,14 @@ newBeakr() <- function(name = NULL) {
 #' \dontrun{
 #' # Run in foreground
 #' newBeakr() %>%
-#'   http_get("/", function(req, res, err) {
+#'   httpGET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # Run in background
 #' #' newBeakr() %>%
-#'   http_get("/", function(req, res, err) {
+#'   httpGET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen(daemon = TRUE)
@@ -169,9 +169,9 @@ list_active <- function() {
 #' @param path string representing a relative path for which the middleware
 #' is invoked.
 #'
-#' @usage error_handler(beakr, path)
+#' @usage handleErrors(beakr, path)
 #' @return A `beakr` App object with added middleware.
-error_handler <- function(beakr, path = NULL) {
+handleErrors <- function(beakr, path = NULL) {
   use(
     beakr = beakr,
     path = NULL,
@@ -296,7 +296,7 @@ static <- function(beakr, path = NULL, file = NULL) {
 
   }
 
-  return(http_get(beakr = beakr, path = NULL, serve_file))
+  return(httpGET(beakr = beakr, path = NULL, serve_file))
 
 }
 

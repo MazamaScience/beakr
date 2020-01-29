@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Serve static files — static • beakr</title>
+<title>DELETE-binding middleware — httpDELETE • beakr</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,9 @@
 
 
 
-<meta property="og:title" content="Serve static files — static" />
-<meta property="og:description" content="Binds to GET requests that aren't handled by specified paths.
-Should support all filetypes; returns image and octet-stream types as a raw
-string." />
+<meta property="og:title" content="DELETE-binding middleware — httpDELETE" />
+<meta property="og:description" content="Routes HTTP DELETE requests to the specified path with the
+specified callback functions or middleware." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,54 +109,60 @@ string." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Serve static files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>static.Rd</code></div>
+    <h1>DELETE-binding middleware</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/http-methods.R'><code>R/http-methods.R</code></a></small>
+    <div class="hidden name"><code>httpDELETE.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Binds to GET requests that aren't handled by specified paths.
-Should support all filetypes; returns image and octet-stream types as a raw
-string.</p>
+    <p>Routes HTTP DELETE requests to the specified path with the
+specified callback functions or middleware.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>static</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>httpDELETE</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>beakr</th>
-      <td><p>a beakr instance</p></td>
+      <td><p><code>Beakr</code> instance or <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>a string representing a relative path for which the middleware
+      <td><p>String representing a relative path for which the middleware
 is invoked.</p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>a string representing the path to the file that is to be served.</p></td>
+      <th>...</th>
+      <td><p>Additional middleware/functions.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A `beakr` App object with added middleware.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Serve static files from the host machine. Currently supports images,
-PDF, JSON, HTML, and raw text. The static file will be served on the `path`
-specified in addition to the file name and extension. For example, an image
-`example_dir/path_to_pictures/pic.png` will be served on the URL extension
-`/path/pic.png`.</p>
+    <p>A <code>Beakr</code> object with added middleware.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>path_to_file</span> <span class='kw'>&lt;-</span> <span class='st'>"example_dir/path_to_pictures/pic.png"</span>
-<span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>static</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>'readme/'</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>path_to_file</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='listen.html'>listen</a></span>()
+<span class='co'># Create an new Beakr instance</span>
+<span class='no'>beakr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>()
+
+<span class='co'># Create a simple beakr pipeline</span>
+<span class='no'>beakr</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>httpDELETE</span>(<span class='st'>"/"</span>, <span class='kw'>function</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>) {
+    <span class='fu'><a href='https://rdrr.io/r/base/function.html'>return</a></span>(<span class='st'>"Successful DELETE request!\n"</span>)
+  }) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='listen.html'>listen</a></span>(<span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>'127.0.0.1'</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>12518</span>, <span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'># ------------------------------------------------------------</span>
+<span class='co'># IN A TERMINAL:</span>
+<span class='co'>#  curl -X DELETE http://127.0.0.1:12518/</span>
+<span class='co'># &gt; Successful DELETE request!</span>
+<span class='co'># ------------------------------------------------------------</span>
+
+<span class='co'># Kill the beakr instance</span>
+<span class='fu'><a href='kill.html'>kill</a></span>(<span class='no'>beakr</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -165,7 +170,6 @@ specified in addition to the file name and extension. For example, an image
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -28,7 +28,7 @@
 #'   }
 #' }
 #'
-#' @seealso \code{\link{error_handler}} and \code{\link{Middleware}}
+#' @seealso \code{\link{handleErrors}} and \code{\link{Middleware}}
 #'
 Error <-
   R6::R6Class(

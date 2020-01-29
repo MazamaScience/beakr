@@ -28,14 +28,16 @@
 #'
 #' # Create a web service from these functions
 #' beakr %>%
-#'   http_get(path = "/hello", decorate(hello)) %>%
-#'   http_get(path = "/goodbye", decorate(goodbye)) %>%
-#'   error_handler() %>%
+#'   httpGET(path = "/hello", decorate(hello)) %>%
+#'   httpGET(path = "/goodbye", decorate(goodbye)) %>%
+#'   handleErrors() %>%
 #'   listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
 #'
+#' # ------------------------------------------------------------
 #' # POINT YOUR BROWSER AT:
 #' # * http://127.0.0.1:12518/hello?name=Honeydew
 #' # * http://127.0.0.1:12518/goodbye
+#' # ------------------------------------------------------------
 #'
 #' # Kill the beakr instance
 #' kill(beakr)

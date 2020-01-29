@@ -6,7 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Decorate a function — decorate • beakr</title>
+<title>Decorate a function for use in a web service
+
+Convenience function to decorate an existing function for easy use in
+<code>Beakr</code> instances. — decorate • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +38,13 @@
 
 
 
-<meta property="og:title" content="Decorate a function — decorate" />
-<meta property="og:description" content="Convenience function to decorate an existing function to interface with beakr
-instances." />
+<meta property="og:title" content="Decorate a function for use in a web service
+
+Convenience function to decorate an existing function for easy use in
+<code>Beakr</code> instances. — decorate" />
+<meta property="og:description" content="Decorate a function for use in a web service
+Convenience function to decorate an existing function for easy use in
+Beakr instances." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +77,7 @@ instances." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -109,17 +116,21 @@ instances." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Decorate a function</h1>
+    <h1>Decorate a function for use in a web service
+
+Convenience function to decorate an existing function for easy use in
+<code>Beakr</code> instances.</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/decorate.R'><code>R/decorate.R</code></a></small>
     <div class="hidden name"><code>decorate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Convenience function to decorate an existing function to interface with beakr
-instances.</p>
+    <p>Decorate a function for use in a web service</p>
+<p>Convenience function to decorate an existing function for easy use in
+<code>Beakr</code> instances.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>decorate</span>(<span class='no'>FUN</span>, <span class='no'>content_type</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>decorate</span>(<span class='no'>FUN</span>, <span class='kw'>content_type</span> <span class='kw'>=</span> <span class='st'>"text/html"</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,7 +141,8 @@ instances.</p>
     </tr>
     <tr>
       <th>content_type</th>
-      <td><p>The type of content to set response as.</p></td>
+      <td><p>The http "content-type" of the function output.
+(<em>e.g.</em> "text/plain", "text/html" or other mime type)</p></td>
     </tr>
     <tr>
       <th>strict</th>
@@ -140,14 +152,40 @@ instances.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A `decorated` middleware function.</p>
+    <p>A <em>decorated</em> middleware function.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Decorating a function associates the specified function and its parameters
 with <code>req</code>, <code>res</code>, and <code>err</code> objects and assigns a
 content-type to the response object. This prepares a standard R function to
-affect beakr instances and accept requests.</p>
+be used in <code>Beakr</code> instances and accept requests.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'># Create an new Beakr instance</span>
+<span class='no'>beakr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>()
+
+<span class='co'># Create simple hello and goodbye function</span>
+<span class='no'>hello</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>name</span>) { <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"Hello, "</span>, <span class='no'>name</span>, <span class='st'>"!"</span>) }
+<span class='no'>goodbye</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>text</span> <span class='kw'>=</span> <span class='st'>"Adios"</span>) { <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>text</span>, <span class='st'>", dear friend."</span>) }
+
+<span class='co'># Create a web service from these functions</span>
+<span class='no'>beakr</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='httpGET.html'>httpGET</a></span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"/hello"</span>, <span class='fu'>decorate</span>(<span class='no'>hello</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='httpGET.html'>httpGET</a></span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"/goodbye"</span>, <span class='fu'>decorate</span>(<span class='no'>goodbye</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='handleErrors.html'>handleErrors</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='listen.html'>listen</a></span>(<span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>'127.0.0.1'</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>12518</span>, <span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Serving beakr instance at http://127.0.0.1:12518</span></div><div class='output co'>#&gt; Beakr Instance:  Backyard Fighter 
+#&gt;  State: Active | Host: 127.0.0.1 | Port: 12518 | Middlewares: 3 </div><div class='input'>
+<span class='co'># ------------------------------------------------------------</span>
+<span class='co'># POINT YOUR BROWSER AT:</span>
+<span class='co'># * http://127.0.0.1:12518/hello?name=Honeydew</span>
+<span class='co'># * http://127.0.0.1:12518/goodbye</span>
+<span class='co'># ------------------------------------------------------------</span>
+
+<span class='co'># Kill the beakr instance</span>
+<span class='fu'><a href='kill.html'>kill</a></span>(<span class='no'>beakr</span>)</div><div class='output co'>#&gt; Stopped Beakr Instance:  Backyard Fighter 
+#&gt;  State: Inactive | Host: 127.0.0.1 | Port: 12518 | Middlewares: 3 </div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -155,6 +193,7 @@ affect beakr instances and accept requests.</p>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

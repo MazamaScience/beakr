@@ -43,6 +43,7 @@
 
   # Add the middleware
   beakr$router$addMiddleware(mw)
+
   return(beakr)
 
 }
@@ -63,6 +64,7 @@
 #' @return A list of parameters and values.
 
 .parseParameters <- function(req, body, query, type) {
+
   # Initialize result
   parameters <- list()
   parameters <- c(parameters, webutils::parse_query(query))
@@ -85,7 +87,9 @@
     parameters <- c( parameters,
                      webutils::parse_query(body) )
   }
+
   return(parameters)
+
 }
 
 # ----- Router object internals ------------------------------------------------
@@ -103,6 +107,7 @@
 #' @return A List with information on matching paths and URL parameters.
 
 .matchPath <- function(pattern, path, ...) {
+
   # Initialize result
   result <- list(match = FALSE, src = path, parameters = list())
 
@@ -127,6 +132,39 @@
   }
 
   return(result)
+
+}
+
+# ----- Error functions --------------------------------------------------------
+
+#' @keywords internal
+#' @title JSON error function
+#'
+#' @description This function is used to add a JSON error response to the
+#' \code{res} object. It is called by the \code{handleErrors()} utility
+#' function.
+#'
+#' @return The incoming \code{res} object is modified.
+
+.jsonError <- function(req, res, err) {
+
+  res$setContentType("application/json")
+  if ( err$occurred ) {
+    res$status <- 500L
+    error_str <- paste(err$errors, collapse = "\n")
+
+    cat("ERROR:\n", error_str, "\n")
+
+    res$json(list( status = "error",
+                   status_code = 500L,
+                   errors = error_str ))
+
+  } else {
+    res$status = 404L
+    res$json(list( status = "Page not found.",
+                   status_code = 404L ))
+  }
+
 }
 
 # ----- Helper functions -------------------------------------------------------
@@ -142,6 +180,7 @@
 #' @return An identifying text string.
 
 .randomName <- function() {
+
   # f U n  n a M e S!
   dictionary <- c(
     "Fear", "Frontier", "Nanny", "Job", "Yard", "Airport", "Pint",
@@ -187,5 +226,6 @@
   )
 
   return(paste(sample(dictionary, 2, replace = FALSE), collapse = " "))
+
 }
 

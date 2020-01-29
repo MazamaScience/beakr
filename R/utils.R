@@ -55,14 +55,14 @@ newBeakr <- function(name = NULL) {
 #' \dontrun{
 #' # Run in foreground
 #' newBeakr() %>%
-#'   http_get("/", function(req, res, err) {
+#'   httpGET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen()
 #'
 #' # Run in background
 #' #' newBeakr() %>%
-#'   http_get("/", function(req, res, err) {
+#'   httpGET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
 #'   listen(daemon = TRUE)
@@ -156,44 +156,27 @@ list_active <- function() {
 }
 
 #' @export
-#' @title Instance Error Handling
+#' @title Error handling middleware for a beakr instance
 #'
-#' @description An error handling middleware for beakr instances.
+#' @description This default error-handling middleware function should be added
+#' at the end of the middleware function pipeline. Any errors will be returned
+#' within a JSON wrapper.
 #'
-#' @details
-#' \code{newBeakr()} comes with a default error handler. This default error-handling
-#' middleware function is added at the end of the middleware function stack.
-#' The Errors are handled via JSON output.
+#' @param beakr Beakr instance
+#' @param path Path for which the middleware is invoked, typically \code{NULL}.
 #'
-#' @param beakr a beakr instance
-#' @param path string representing a relative path for which the middleware
-#' is invoked.
-#'
-#' @usage error_handler(beakr, path)
 #' @return A `beakr` App object with added middleware.
-error_handler <- function(beakr, path = NULL) {
-  use(
-    beakr = beakr,
-    path = NULL,
-    function(req, res, err) {
-      res$setContentType("application/json")
-      if ( err$occurred ) {
-        res$status <- 500L
-        error_str <- paste(err$errors, collapse = "\n")
 
-        cat("ERROR:\n", error_str, "\n")
+handleErrors <- function(beakr, path = NULL) {
 
-        res$json(list( status = "error",
-                       status_code = 500L,
-                       errors = error_str ))
+  beakr <- .routeMiddleware( beakr  = beakr,
+                             FUN    = .jsonError,
+                             path   = path,
+                             method = NULL )
 
-      } else {
-        res$status = 404L
-        res$json(list( status = "Page not found.",
-                       status_code = 404L ))
-      }
-    }
-  )
+
+  return(beakr)
+
 }
 
 #' @export
@@ -296,39 +279,6 @@ static <- function(beakr, path = NULL, file = NULL) {
 
   }
 
-  return(http_get(beakr = beakr, path = NULL, serve_file))
+  return(httpGET(beakr = beakr, path = NULL, serve_file))
 
-}
-
-
-#' @export
-#' @title Use request method-insensitive middleware
-#'
-#' @description Mounts the specified middleware function or functions at the
-#' specified path: the middleware function is executed when the base of the
-#' requested path matches the specified path with the specified
-#' callback functions or middleware.
-#'
-#' @param beakr a beakr instance.
-#' @param path string representing a relative path for which the middleware
-#' is invoked.
-#' @param ... additional middleware/functions.
-#' @param method an optional HTTP request method.
-#'
-#' @usage use(beakr, path, ..., method)
-use <- function(beakr, path, ..., method = NULL) {
-  # TODO: FIX THIS.
-  if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
-  }
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      .routeMiddleware( beakr  = beakr,
-                        FUN    = middleware_FUN,
-                        path   = path,
-                        method = method )
-    }
-  )
-  return(beakr)
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Serve static files — static • beakr</title>
+<title>JSON error function — .jsonError • beakr</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,10 @@
 
 
 
-<meta property="og:title" content="Serve static files — static" />
-<meta property="og:description" content="Binds to GET requests that aren't handled by specified paths.
-Should support all filetypes; returns image and octet-stream types as a raw
-string." />
+<meta property="og:title" content="JSON error function — .jsonError" />
+<meta property="og:description" content="This function is used to add a JSON error response to the
+res object. It is called by the handleErrors() utility
+function." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,63 +110,29 @@ string." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Serve static files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>static.Rd</code></div>
+    <h1>JSON error function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
+    <div class="hidden name"><code>dot-jsonError.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Binds to GET requests that aren't handled by specified paths.
-Should support all filetypes; returns image and octet-stream types as a raw
-string.</p>
+    <p>This function is used to add a JSON error response to the
+<code>res</code> object. It is called by the <code><a href='handleErrors.html'>handleErrors()</a></code> utility
+function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>static</span>(<span class='no'>beakr</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>.jsonError</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>beakr</th>
-      <td><p>a beakr instance</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>a string representing a relative path for which the middleware
-is invoked.</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p>a string representing the path to the file that is to be served.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A `beakr` App object with added middleware.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>The incoming <code>res</code> object is modified.</p>
 
-    <p>Serve static files from the host machine. Currently supports images,
-PDF, JSON, HTML, and raw text. The static file will be served on the `path`
-specified in addition to the file name and extension. For example, an image
-`example_dir/path_to_pictures/pic.png` will be served on the URL extension
-`/path/pic.png`.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>path_to_file</span> <span class='kw'>&lt;-</span> <span class='st'>"example_dir/path_to_pictures/pic.png"</span>
-<span class='fu'><a href='newBeakr.html'>newBeakr</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>static</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>'readme/'</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='no'>path_to_file</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='listen.html'>listen</a></span>()
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

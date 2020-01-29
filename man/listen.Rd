@@ -39,14 +39,14 @@ See the \code{httpuv} package for more information.
 \dontrun{
 # Run in foreground
 newBeakr() \%>\%
-  http_get("/", function(req, res, err) {
+  httpGET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
   listen()
 
 # Run in background
 #' newBeakr() \%>\%
-  http_get("/", function(req, res, err) {
+  httpGET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
   listen(daemon = TRUE)

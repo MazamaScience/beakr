@@ -162,7 +162,7 @@ TestRequest <-
         HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36
                           (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
         HTTP_TREADS = "5",
-        HTTP_HOST = "127.0.0.1:8080"
+        HTTP_HOST = "127.0.0.1:12518"
       ),
       path = function(path) {
         self$req$PATH_INFO <- path

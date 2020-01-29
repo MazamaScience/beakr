@@ -1,10 +1,13 @@
-# beakr 0.2.4
+# beakr 0.3.0
 
-More refactoring with an eye toward consistent, predictable naming and more
-documentation and examples.
+Lots of refactoring with an eye toward:
+ * core functionality only for an initial release
+ * consistent, predictable naming
+ * more documentation and examples
 
 * Renamed `App` object back to `Beakr` for internal consistency.
 * Renamed `beakr()` to `newBeakr()` to avoid confusion.
+* Renamed `http_get()`, _et al_ to  to `httpGET()` _et al_.
 * Removed `.addListener()` and added functionality inside of `on()` function.
 * Removed the following functions as superflous for an initial release:
 `cors()`, `on()`, `include()`, `logger()`, `use()`

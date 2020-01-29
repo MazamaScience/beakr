@@ -2,7 +2,7 @@
 # A more thorough test of beakr to see if it can be used by someone with basic
 # R skills who wants their entire function written as a verbose, single script.
 #
-# Output will be available at http://127.0.0.1:8080 or http://localhost:8080
+# Output will be available at http://127.0.0.1:12518 or http://localhost:12518
 #
 
 library(beakr)
@@ -12,7 +12,7 @@ newBeakr() %>%
 
   # ----- Welcome --------------------------------------------------------------
 
-  http_get("/", function(req, res, err) {
+  httpGET("/", function(req, res, err) {
 
     response <-
 "
@@ -34,7 +34,7 @@ newBeakr() %>%
 
   # ----- Repeater -------------------------------------------------------------
 
-  http_get("/repeater", function(req, res, err) {
+  httpGET("/repeater", function(req, res, err) {
 
     text <- setIfNull(req$parameters$text, "Howdy")
     times <- setIfNull(req$parameters$times, 8)
@@ -86,7 +86,7 @@ newBeakr() %>%
 
   # ----- Handle errors --------------------------------------------------------
 
-  error_handler() %>%
+  handleErrors() %>%
 
   # ----- Start Beakr ----------------------------------------------------------
 

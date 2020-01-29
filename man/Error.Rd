@@ -31,7 +31,7 @@ or middleware errors.
 }
 
 \seealso{
-\code{\link{error_handler}} and \code{\link{Middleware}}
+\code{\link{handleErrors}} and \code{\link{Middleware}}
 }
 \section{Methods}{
 \subsection{Public methods}{
