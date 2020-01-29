@@ -10,9 +10,9 @@ Convenience function to decorate an existing function for easy use in
 decorate(FUN, content_type = "text/html", strict = FALSE)
 }
 \arguments{
-\item{FUN}{The function to decorate.}
+\item{FUN}{Function to decorate.}
 
-\item{content_type}{The http "content-type" of the function output.
+\item{content_type}{HTTP "content-type" of the function output.
 (\emph{e.g.} "text/plain", "text/html" or other mime type)}
 
 \item{strict}{Boolean, requiring strict parameter matching.}
@@ -46,12 +46,12 @@ beakr \%>\%
   httpGET(path = "/hello", decorate(hello)) \%>\%
   httpGET(path = "/goodbye", decorate(goodbye)) \%>\%
   handleErrors() \%>\%
-  listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+  listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 
 # ------------------------------------------------------------
 # POINT YOUR BROWSER AT:
-# * http://127.0.0.1:12518/hello?name=Honeydew
-# * http://127.0.0.1:12518/goodbye
+# * http://127.0.0.1:25118/hello?name=Honeydew
+# * http://127.0.0.1:25118/goodbye
 # ------------------------------------------------------------
 
 # Kill the beakr instance

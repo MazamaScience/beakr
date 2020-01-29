@@ -5,9 +5,9 @@
 #' specified callback functions or middleware.
 #'
 #' @param beakr \code{Beakr} instance or \code{NULL}.
-#' @param path String representing a relative path for which the middleware
-#' is invoked.
-#' @param ... Additional middleware/functions.
+#' @param path String representing a path for which the middleware
+#' function is invoked.
+#' @param FUN Middleware function to be invoked.
 #'
 #' @return A \code{Beakr} object with added middleware.
 #'
@@ -21,11 +21,11 @@
 #'   httpGET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
-#'   listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+#'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 #'
 #' # ------------------------------------------------------------
 #' # IN A TERMINAL:
-#' #  curl -X GET http://127.0.0.1:12518/
+#' #  curl -X GET http://127.0.0.1:25118/
 #' # > Successful GET request!
 #' # ------------------------------------------------------------
 #'
@@ -33,24 +33,22 @@
 #' kill(beakr)
 #' }
 
-httpGET <- function(beakr, path = NULL, ...) {
+httpGET <- function(beakr, path = NULL, FUN = NULL) {
 
-  # If the beakr is NULL ->
-  # create "bundle" beakr for inlcuding in other beakrs
-  if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
-  }
+  if ( is.null(beakr) )
+    stop("'beakr' is not defined")
 
-  FUNS <- list(...)
-  lapply(
-    X   = FUNS,
-    FUN = function(middleware_FUN) {
-      .routeMiddleware( beakr  = beakr,
-                        FUN    = middleware_FUN,
-                        path   = path,
-                        method = "GET" )
-    }
-  )
+  if ( is.null(FUN) )
+    stop("'FUN' is not defined")
+
+  beakr <-
+    .routeMiddleware(
+      beakr = beakr,
+      FUN = FUN,
+      path = path,
+      method = "GET",
+      websocket = FALSE
+    )
 
   return(beakr)
 
@@ -63,9 +61,9 @@ httpGET <- function(beakr, path = NULL, ...) {
 #' specified callback functions or middleware.
 #'
 #' @param beakr \code{Beakr} instance or \code{NULL}.
-#' @param path String representing a relative path for which the middleware
-#' is invoked.
-#' @param ... Additional middleware/functions.
+#' @param path String representing a path for which the middleware
+#' function is invoked.
+#' @param FUN Middleware function to be invoked.
 #'
 #' @return A \code{Beakr} object with added middleware.
 #'
@@ -79,11 +77,11 @@ httpGET <- function(beakr, path = NULL, ...) {
 #'   httpPOST("/", function(req, res, err) {
 #'     return("Successful POST request!\n")
 #'   }) %>%
-#'   listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+#'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 #'
 #' # ------------------------------------------------------------
 #' # IN A TERMINAL:
-#' #  curl -X POST http://127.0.0.1:12518/
+#' #  curl -X POST http://127.0.0.1:25118/
 #' # > Successful POST request!
 #' # ------------------------------------------------------------
 #'
@@ -91,22 +89,22 @@ httpGET <- function(beakr, path = NULL, ...) {
 #' kill(beakr)
 #' }
 
-httpPOST <- function(beakr, path = NULL, ...) {
+httpPOST <- function(beakr, path = NULL, FUN = NULL) {
 
-  if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
-  }
+  if ( is.null(beakr) )
+    stop("'beakr' is not defined")
 
-  FUNS <- list(...)
-  lapply(
-    X = FUNS,
-    FUN = function(middleware_FUN) {
-      .routeMiddleware( beakr  = beakr,
-                        FUN    = middleware_FUN,
-                        path   = path,
-                        method = "POST" )
-    }
-  )
+  if ( is.null(FUN) )
+    stop("'FUN' is not defined")
+
+  beakr <-
+    .routeMiddleware(
+      beakr = beakr,
+      FUN = FUN,
+      path = path,
+      method = "POST",
+      websocket = FALSE
+    )
 
   return(beakr)
 
@@ -119,9 +117,9 @@ httpPOST <- function(beakr, path = NULL, ...) {
 #' specified callback functions or middleware.
 #'
 #' @param beakr \code{Beakr} instance or \code{NULL}.
-#' @param path String representing a relative path for which the middleware
-#' is invoked.
-#' @param ... Additional middleware/functions.
+#' @param path String representing a path for which the middleware
+#' function is invoked.
+#' @param FUN Middleware function to be invoked.
 #'
 #' @return A \code{Beakr} object with added middleware.
 #'
@@ -135,11 +133,11 @@ httpPOST <- function(beakr, path = NULL, ...) {
 #'   httpPUT("/", function(req, res, err) {
 #'     return("Successful PUT request!\n")
 #'   }) %>%
-#'   listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+#'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 #'
 #' # ------------------------------------------------------------
 #' # IN A TERMINAL:
-#' #  curl -X PUT http://127.0.0.1:12518/
+#' #  curl -X PUT http://127.0.0.1:25118/
 #' # > Successful PUT request!
 #' # ------------------------------------------------------------
 #'
@@ -147,21 +145,22 @@ httpPOST <- function(beakr, path = NULL, ...) {
 #' kill(beakr)
 #' }
 
-httpPUT <- function(beakr, path = NULL, ...) {
+httpPUT <- function(beakr, path = NULL, FUN = NULL) {
 
-  if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
-  }
+  if ( is.null(beakr) )
+    stop("'beakr' is not defined")
 
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      .routeMiddleware( beakr  = beakr,
-                        FUN    = middleware_FUN,
-                        path   = path,
-                        method = "PUT" )
-    }
-  )
+  if ( is.null(FUN) )
+    stop("'FUN' is not defined")
+
+  beakr <-
+    .routeMiddleware(
+      beakr = beakr,
+      FUN = FUN,
+      path = path,
+      method = "PUT",
+      websocket = FALSE
+    )
 
   return(beakr)
 
@@ -174,9 +173,9 @@ httpPUT <- function(beakr, path = NULL, ...) {
 #' specified callback functions or middleware.
 #'
 #' @param beakr \code{Beakr} instance or \code{NULL}.
-#' @param path String representing a relative path for which the middleware
-#' is invoked.
-#' @param ... Additional middleware/functions.
+#' @param path String representing a path for which the middleware
+#' function is invoked.
+#' @param FUN Middleware function to be invoked.
 #'
 #' @return A \code{Beakr} object with added middleware.
 #'
@@ -190,11 +189,11 @@ httpPUT <- function(beakr, path = NULL, ...) {
 #'   httpDELETE("/", function(req, res, err) {
 #'     return("Successful DELETE request!\n")
 #'   }) %>%
-#'   listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+#'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 #'
 #' # ------------------------------------------------------------
 #' # IN A TERMINAL:
-#' #  curl -X DELETE http://127.0.0.1:12518/
+#' #  curl -X DELETE http://127.0.0.1:25118/
 #' # > Successful DELETE request!
 #' # ------------------------------------------------------------
 #'
@@ -202,21 +201,22 @@ httpPUT <- function(beakr, path = NULL, ...) {
 #' kill(beakr)
 #' }
 
-httpDELETE <- function(beakr, path = NULL, ...) {
+httpDELETE <- function(beakr, path = NULL, FUN = NULL) {
 
-  if ( is.null(beakr) ) {
-    beakr <- invisible(Beakr$new())
-  }
+  if ( is.null(beakr) )
+    stop("'beakr' is not defined")
 
-  lapply(
-    X = list(...),
-    FUN = function(middleware_FUN) {
-      .routeMiddleware( beakr  = beakr,
-                        FUN    = middleware_FUN,
-                        path   = path,
-                        method = "DELETE" )
-    }
-  )
+  if ( is.null(FUN) )
+    stop("'FUN' is not defined")
+
+  beakr <-
+    .routeMiddleware(
+      beakr = beakr,
+      FUN = FUN,
+      path = path,
+      method = "DELETE",
+      websocket = FALSE
+    )
 
   return(beakr)
 

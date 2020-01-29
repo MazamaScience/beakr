@@ -4,15 +4,15 @@
 \alias{httpGET}
 \title{GET-binding middleware}
 \usage{
-httpGET(beakr, path = NULL, ...)
+httpGET(beakr, path = NULL, FUN = NULL)
 }
 \arguments{
 \item{beakr}{\code{Beakr} instance or \code{NULL}.}
 
-\item{path}{String representing a relative path for which the middleware
-is invoked.}
+\item{path}{String representing a path for which the middleware
+function is invoked.}
 
-\item{...}{Additional middleware/functions.}
+\item{FUN}{Middleware function to be invoked.}
 }
 \value{
 A \code{Beakr} object with added middleware.
@@ -31,11 +31,11 @@ beakr \%>\%
   httpGET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
-  listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+  listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 
 # ------------------------------------------------------------
 # IN A TERMINAL:
-#  curl -X GET http://127.0.0.1:12518/
+#  curl -X GET http://127.0.0.1:25118/
 # > Successful GET request!
 # ------------------------------------------------------------
 

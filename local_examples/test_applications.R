@@ -9,11 +9,11 @@ beakr %>%
   httpGET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) %>%
-  listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+  listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 
 
 # In terminal:
-#  curl http://127.0.0.1:12518
+#  curl http://127.0.0.1:25118
 # > Successful GET request!
 
 # ----- App #2:  Successful POST -----------------------------------------------
@@ -27,7 +27,7 @@ newBeakr() %>%
   listen()
 
 # In terminal:
-#  curl -X POST http://127.0.0.1:12518/
+#  curl -X POST http://127.0.0.1:25118/
 # > Successful POST request!
 
 # ----- App #3:  Successful PUT ------------------------------------------------
@@ -41,5 +41,5 @@ newBeakr() %>%
   listen()
 
 # In terminal:
-#  curl -X PUT http://127.0.0.1:12518/
+#  curl -X PUT http://127.0.0.1:25118/
 # > Successful PUT request!

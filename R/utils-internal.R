@@ -135,7 +135,7 @@
 
 }
 
-# ----- Error functions --------------------------------------------------------
+# ----- Response functions -----------------------------------------------------
 
 #' @keywords internal
 #' @title JSON error function
@@ -149,6 +149,7 @@
 .jsonError <- function(req, res, err) {
 
   res$setContentType("application/json")
+
   if ( err$occurred ) {
     res$status <- 500L
     error_str <- paste(err$errors, collapse = "\n")

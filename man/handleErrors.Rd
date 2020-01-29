@@ -12,7 +12,7 @@ handleErrors(beakr, path = NULL)
 \item{path}{Path for which the middleware is invoked, typically \code{NULL}.}
 }
 \value{
-A `beakr` App object with added middleware.
+A \code{Beakr} object with added middleware.
 }
 \description{
 This default error-handling middleware function should be added

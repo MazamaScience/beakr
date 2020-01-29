@@ -10,8 +10,8 @@
 #' content-type to the response object. This prepares a standard R function to
 #' be used in \code{Beakr} instances and accept requests.
 #'
-#' @param FUN The function to decorate.
-#' @param content_type The http "content-type" of the function output.
+#' @param FUN Function to decorate.
+#' @param content_type HTTP "content-type" of the function output.
 #' (\emph{e.g.} "text/plain", "text/html" or other mime type)
 #' @param strict Boolean, requiring strict parameter matching.
 #'
@@ -31,12 +31,12 @@
 #'   httpGET(path = "/hello", decorate(hello)) %>%
 #'   httpGET(path = "/goodbye", decorate(goodbye)) %>%
 #'   handleErrors() %>%
-#'   listen(host = '127.0.0.1', port = 12518, daemon = TRUE)
+#'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 #'
 #' # ------------------------------------------------------------
 #' # POINT YOUR BROWSER AT:
-#' # * http://127.0.0.1:12518/hello?name=Honeydew
-#' # * http://127.0.0.1:12518/goodbye
+#' # * http://127.0.0.1:25118/hello?name=Honeydew
+#' # * http://127.0.0.1:25118/goodbye
 #' # ------------------------------------------------------------
 #'
 #' # Kill the beakr instance

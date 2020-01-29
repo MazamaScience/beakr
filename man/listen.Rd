@@ -2,9 +2,9 @@
 % Please edit documentation in R/utils.R
 \name{listen}
 \alias{listen}
-\title{Listen for connections on a beakr instance}
+\title{Listen for connections on a Beakr instance}
 \usage{
-listen(beakr, host, port, daemon)
+listen(beakr, host = "127.0.0.1", port = 25118, daemon = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{beakr}{a beakr instance.}
@@ -13,27 +13,36 @@ listen(beakr, host, port, daemon)
 Defaults to the local host ("127.0.0.1").}
 
 \item{port}{a number or integer that indicates the port to listen on. Default
-is a port opened on 8080.}
+is a port opened on 25118.}
 
 \item{daemon}{run the instance in the background, the default is FALSE.}
+
+\item{verbose}{Logical specifying whether to print out details of the
+\code{Beakr} object now running.}
 }
 \value{
-A `beakr` App object.
+A \code{Beakr} object.
 }
 \description{
-Binds and listens for connections on the specified host and port.
+Binds and listens for connections at the specified host and port.
 }
 \details{
-\code{listen()} binds the port and listens for connections on a thread.
-The thread handles the I/O, and when it receives a HTTP request, it
-will schedule a call to the user-defined middleware and handle the
+\code{listen()} binds the specified host and port and listens for connections
+on a thread. The thread handles incoming requests. when it receives an HTTP
+request, it will schedule a call to the user-defined middleware and handle the
 request.
 
-If the daemon boolean value is set to \code{TRUE}, \code{listen()} binds
-the specified port and listens for connections on a thread running in the
-background.
+If \code{daemon = TRUE}, \code{listen()} binds the specified port and listens
+for connections on a thread running in the background.
 
-See the \code{httpuv} package for more information.
+See the \code{httpuv} package for more details.
+}
+\note{
+The default port number 25118 was arrived at using:
+\preformatted{
+> match(c("b","e","a","k","r"), letters) %% 10
+[1] 2 5 1 1 8
+}
 }
 \examples{
 \dontrun{

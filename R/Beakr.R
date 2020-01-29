@@ -102,14 +102,6 @@ Beakr <-
           }
         )
       },
-      # NOTE:  This method is associated with the include() funciton in
-      # NOTE:  local_OLD/utils.R.  It will not be part of the initial release
-      # NOTE:  but we retain this placeholder.
-      # include = function(bundle) {
-      #   self$router$addMiddleware(
-      #     bundle$router$middleware
-      #   )
-      # },
       initialize = function() {
         self$router <- Router$new()
 

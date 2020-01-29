@@ -10,7 +10,8 @@ Lots of refactoring with an eye toward:
 * Renamed `http_get()`, _et al_ to  to `httpGET()` _et al_.
 * Removed `.addListener()` and added functionality inside of `on()` function.
 * Removed the following functions as superflous for an initial release:
-`cors()`, `on()`, `include()`, `logger()`, `use()`
+`cors()`, `on()`, `include()`, `kill_all()`, `list_active()`, `logger()`, 
+`use()`, `websocket()`
 * Improved documentation and examples throughout.
 
 # beakr 0.2.3

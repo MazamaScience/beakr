@@ -2,7 +2,7 @@
 # A more thorough test of beakr to see if it can be used by someone with basic
 # R skills who wants their entire function written as a verbose, single script.
 #
-# Output will be available at http://127.0.0.1:12518 or http://localhost:12518
+# Output will be available at http://127.0.0.1:25118 or http://localhost:25118
 #
 
 library(beakr)

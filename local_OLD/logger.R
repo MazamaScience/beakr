@@ -16,7 +16,7 @@
 #'   httpGET('/', function(req, res, err) 'LOG TEST') %>%
 #'   logger() %>%
 #'   listen()
-#' ## In browser at 127.0.0.1:12518
+#' ## In browser at 127.0.0.1:25118
 #' # DEBUG -datestamp- HTTP | / - GET - REQUEST RECEIVED
 #' # INFO -datestamp- HTTP | / - GET - 200
 #' }
@@ -115,7 +115,7 @@ logger <- function(
 #' @export
 #' @title Beakr Event Listener
 #'
-#' @description Add an event listener to a \emph{Beakr} instance. Currently
+#' @description Add an event listener to a \code{Beakr} instance. Currently
 #' supported events are \code{"start", "finish", "error"}. The events
 #' \code{"start"} and \code{"finish"} will pass the current state of the
 #' \code{req}, \code{res} and \code{err} objects to the Listener. The

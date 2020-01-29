@@ -7,22 +7,39 @@
 newBeakr(name = NULL)
 }
 \arguments{
-\item{name}{an optional name assigned to the \emph{Beakr} object.}
+\item{name}{Optional name assigned to the \code{Beakr} object.}
 }
 \value{
-A new and empty `beakr` App.
+A new and empty \code{Beakr} instance.
 }
 \description{
-Create a \emph{Beakr} instance object by calling the top-level
+Create a \code{Beakr} instance by calling the top-level
 \code{newBeakr()} function. If \code{name} is not supplied, a random name
 will be assigned.
+
+This \code{Beakr} instance will then begin a pipeline of separate middleware
+steps for routing, serving files and handling errors. The pipeline will
+end with the \code{listen()} function.
 }
 \examples{
-\dontrun{
-# Standard
+\donttest{
+# Create an new Beakr instance
 beakr <- newBeakr()
-listen(beakr)
-# Pipe
-newBeakr() \%>\% listen()
+
+# Create a pipeline of hanldlers
+beakr \%>\%
+  httpGET(path = "/route_A", middleware_A) \%>\%
+  httpGET(path = "/route_B", middleware_B) \%>\%
+  handleErrors() \%>\%
+  listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
+
+# ------------------------------------------------------------
+# POINT YOUR BROWSER AT:
+# * http://127.0.0.1:25118/route_A
+# * http://127.0.0.1:25118/route_B
+# ------------------------------------------------------------
+
+# Kill the beakr instance
+kill(beakr)
 }
 }

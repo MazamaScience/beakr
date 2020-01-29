@@ -1,9 +1,9 @@
 #' @export
 #' @title Create a new Beakr instance
 #'
-#' @param name an optional name assigned to the \emph{Beakr} object.
+#' @param name an optional name assigned to the \code{Beakr} object.
 #'
-#' @description Create a \emph{Beakr} instance object by calling the top-level
+#' @description Create a \code{Beakr} instance object by calling the top-level
 #' \code{newBeakr()} function. If \code{name} is not supplied, a random name
 #' will be assigned.
 #'
@@ -46,7 +46,7 @@ newBeakr() <- function(name = NULL) {
 #' @param host a string that is a valid IPv4 or IPv6 address to listen on.
 #' Defaults to the local host ("127.0.0.1").
 #' @param port a number or integer that indicates the port to listen on. Default
-#' is a port opened on 8080.
+#' is a port opened on 25118.
 #' @param daemon run the instance in the background, the default is FALSE.
 #'
 #' @usage listen(beakr, host, port, daemon)
@@ -70,7 +70,7 @@ newBeakr() <- function(name = NULL) {
 listen <- function(
   beakr,
   host = "127.0.0.1",
-  port = 8080,
+  port = 25118,
   daemon = FALSE
 ) {
   message(paste0("Serving beakr instance at http://", host, ":", port))
@@ -450,7 +450,7 @@ include <- function(beakr, include, file = NULL) {
 #' @export
 #' @title Beakr Event Listener
 #'
-#' @description Add an event listener to a \emph{Beakr} instance. Currently
+#' @description Add an event listener to a \code{Beakr} instance. Currently
 #' supported events are \code{"start", "finish", "error"}. The events
 #' \code{"start"} and \code{"finish"} will pass the current state of the
 #' \code{req}, \code{res} and \code{err} objects to the Listener. The

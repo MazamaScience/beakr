@@ -126,16 +126,18 @@ Request <-
     )
   )
 
-#' TestRequest Class
+
+#' @keywords internal
+#' @title TestRequest Class
 #'
-#' The \code{TestRequest} object is for internal testing only.
+#' @description The \code{TestRequest} object is for internal testing only.
 #'
 #' @usage NULL
 #'
 #' @format NULL
 #'
 #' @seealso \code{\link{Response}} and \code{\link{Request}}
-#' @keywords internal
+
 TestRequest <-
   R6::R6Class(
     classname = "TestRequest",
@@ -149,7 +151,7 @@ TestRequest <-
         httpuv.version = list(c(1L, 3L, 3L)),
         SERVER_NAME = "127.0.0.1",
         SCRIPT_NAME = "",
-        SERVER_PORT = "8080",
+        SERVER_PORT = "25118",
         REMOTE_PORT = "60144",
         PATH_INFO = "/",
         REMOTE_ADDR = "127.0.0.1",
@@ -162,7 +164,7 @@ TestRequest <-
         HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36
                           (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
         HTTP_TREADS = "5",
-        HTTP_HOST = "127.0.0.1:12518"
+        HTTP_HOST = "127.0.0.1:25118"
       ),
       path = function(path) {
         self$req$PATH_INFO <- path
