@@ -15,7 +15,7 @@
 #' @param method HTTP method to employ.
 #' @param websocket Boolean, TRUE if websocket.
 #'
-#' @return A \code{Beakr} object with added middleware.
+#' @return A \code{Beakr} instance with added middleware.
 
 .routeMiddleware <- function(
   beakr,

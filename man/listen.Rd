@@ -42,7 +42,7 @@ request.
 If \code{daemon = TRUE}, \code{listen()} binds the specified port and listens
 for connections on a thread running in the background.
 
-See the \code{httpuv} package for more details.
+See the \pkg{httpuv} package for more details.
 }
 \note{
 The default port number 25118 was generated using:

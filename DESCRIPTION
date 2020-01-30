@@ -1,14 +1,14 @@
 Package: beakr
 Type: Package
 Title: A Minimalist Web Framework for R
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut","cre")),
     person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut"))
     )
 Author: Hans Martin [aut, cre],
     Jonathan Callahan [aut]
-Maintainer: Hans Martin <hans@mazamascience.com>
+Maintainer: Jonathan Callahan <jonathan.s.callahan@gmail.com>
 Description: A minimalist web framework for developing application programming 
     interfaces in R that provides a flexible framework for handling common 
     HTTP-requests, errors, logging, and an ability to integrate any R code as 
@@ -22,15 +22,16 @@ Depends:
     R (>= 3.1.0)
 Imports:
     R6,
-    webutils,
-    httpuv,
-    mime,
-    jsonlite,
     base64enc,
-    magrittr
+    httpuv,
+    jsonlite,
+    magrittr,
+    mime,
+    stringr,
+    webutils
 Suggests:
-    testthat,
     knitr,
+    testthat,
     rmarkdown
 Encoding: UTF-8
 RoxygenNote: 7.0.2

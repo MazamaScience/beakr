@@ -18,7 +18,7 @@
 \item{websocket}{Boolean, TRUE if websocket.}
 }
 \value{
-A \code{Beakr} object with added middleware.
+A \code{Beakr} instance with added middleware.
 }
 \description{
 This function is used in each of the \code{http_~()} methods

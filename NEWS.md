@@ -1,3 +1,9 @@
+# beakr 0.3.1
+
+* Removed `httpuv_~()` function wrappers in favor of importing the functions 
+directly from *httpuv*.
+* `serveStaticFiles()` now works.
+
 # beakr 0.3.0
 
 Lots of refactoring with an eye toward:

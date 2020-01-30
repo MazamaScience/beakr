@@ -2,18 +2,18 @@
 #' @title A minimalist web framework.
 #'
 #' @description
-#' The \code{beakr} package provides a minimalist web framework for for
+#' The \pkg{beakr} package provides a minimalist web framework for for
 #' developing application programming interfaces in R. The package includes
 #' basic functionality for handling common \code{HTTP} requests.
 #'
-#' beakr allows R code to listen for and interact with HTTP and WebSocket clients, so
-#' you can serve web traffic directly out of your R process. beakr relies heavily
+#' \pkg{beakr} allows R code to listen for and respond to HTTP requests, so
+#' you can serve web traffic directly from an R process. \pkg{beakr} relies heavily
 #' on the \href{https://github.com/rstudio/httpuv}{httpuv} package, and therefore
 #' the lower level \href{https://github.com/joyent/libuv}{libuv} and
 #' \href{https://github.com/joyent/http-parser}{http-parser} C libraries.
-#' \code{beakr} is a ground-up rewrite and
-#' continuation of the \code{jug} package developed by Bart Smeets. The
-#' \code{beakr} package is supported and maintained by
+#' \pkg{beakr} is a ground-up rewrite and
+#' continuation of the \pkg{jug} package developed by Bart Smeets. The
+#' \pkg{beakr} package is supported and maintained by
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
 #' @seealso \code{\link{newBeakr}}
@@ -31,8 +31,8 @@ NULL
 #' @title Beakr Application class
 #'
 #' @description The \code{Beakr} class defines the server instance utilizing the
-#' \code{httpuv} package. This class defines an interface for the rest of the
-#' \code{beakr} package and is therefore meant to be instantiated.
+#' \pkg{httpuv} package. This class defines an interface for the rest of the
+#' \pkg{beakr} package and is therefore meant to be instantiated.
 #'
 #' @usage NULL
 #'
@@ -65,11 +65,11 @@ NULL
 #'
 #' @section Package details:
 #'
-#' The \code{beakr} package provides a minimal web framework for for developing
+#' The \pkg{beakr} package provides a minimal web framework for for developing
 #' lightweight APIs in R. The package includes basic functionality for handling
-#' common \code{HTTP} requests. \code{beakr} is a ground-up rewrite and
-#' continuation of the \code{jug} package developed by Bart Smeets. The
-#' \code{beakr} package is supported and maintained by
+#' common \code{HTTP} requests. \pkg{beakr} is a ground-up rewrite and
+#' continuation of the \pkg{jug} package developed by Bart Smeets. The
+#' \pkg{beakr} package is supported and maintained by
 #' \href{http://www.mazamascience.com/}{Mazama Science}.
 #'
 #' @seealso \code{\link{Router}} and \code{\link{Middleware}}

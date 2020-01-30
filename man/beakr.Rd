@@ -5,8 +5,8 @@
 \title{Beakr Application class}
 \description{
 The \code{Beakr} class defines the server instance utilizing the
-\code{httpuv} package. This class defines an interface for the rest of the
-\code{beakr} package and is therefore meant to be instantiated.
+\pkg{httpuv} package. This class defines an interface for the rest of the
+\pkg{beakr} package and is therefore meant to be instantiated.
 }
 \section{Methods}{
 
@@ -38,11 +38,11 @@ The \code{Beakr} class defines the server instance utilizing the
 \section{Package details}{
 
 
-The \code{beakr} package provides a minimal web framework for for developing
+The \pkg{beakr} package provides a minimal web framework for for developing
 lightweight APIs in R. The package includes basic functionality for handling
-common \code{HTTP} requests. \code{beakr} is a ground-up rewrite and
-continuation of the \code{jug} package developed by Bart Smeets. The
-\code{beakr} package is supported and maintained by
+common \code{HTTP} requests. \pkg{beakr} is a ground-up rewrite and
+continuation of the \pkg{jug} package developed by Bart Smeets. The
+\pkg{beakr} package is supported and maintained by
 \href{http://www.mazamascience.com/}{Mazama Science}.
 }
 

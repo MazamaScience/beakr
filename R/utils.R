@@ -54,223 +54,6 @@ newBeakr <- function(
 }
 
 
-################################################################################
-################################################################################
-################################################################################
-#' @export
-#' @title Serve static files
-#'
-#' @description Binds to GET requests that aren't handled by specified paths.
-#' Should support all filetypes; returns image and octet-stream types as a raw
-#' string.
-#'
-#' @details Serve static files from the host machine. Currently supports images,
-#' PDF, JSON, HTML, and raw text. The static file appear at a URL composed of
-#' the \code{route} and the file name and extension which will be extracted
-#' from \code{filePath}.
-#'
-#' For example, specifying:
-#' \preformatted{
-#' beakr %>%
-#'   ...
-#'   serverStaticFiles(/)
-#'   ...
-#'   listen()
-#' }
-#'
-#' TODO
-#'
-#' @param beakr \code{Beakr} instance or \code{NULL}.
-#' @param route String representing a \emph{route}, a virtual directory path
-#' where the static file will appear in a URL.
-#' @param filePath String representing path and name of the file to be served
-#' relative to the directory in which the beakr script is running.
-#'
-#' @return A \code{Beakr} with added middleware.
-
-serveStaticFiles <- function(
-  beakr = NULL,
-  route = NULL,
-  filePath = NULL
-) {
-
-  if ( is.null(beakr) )
-    stop("'beakr' is not defined")
-
-  # serve_file <- function(req, res, err) {
-  #
-  #   if ( file.exists(file) ) {
-  #
-  #     url_path <- paste0('/', path, utils::tail(unlist(strsplit(file, '/')), n = 1))
-  #
-  #     if ( req$path == url_path ) {
-  #       mime_type <- mime::guess_type(file)
-  #       res$setContentType(mime_type)
-  #       data <- readBin( con  = file,
-  #                        what = "raw",
-  #                        n    = file.info(file)$size )
-  #       if ( grepl("image|octect|pdf|json", mime_type) ) { # Assumptions...
-  #         return(data)
-  #       } else {
-  #         return(rawToChar(data))
-  #       }
-  #     } else {
-  #       res$setStatus(404L)
-  #       return(NULL)
-  #     }
-  #
-  #   }
-  #
-  # }
-
-  beakr <-
-    httpGET(
-      beakr = beakr,
-      path = NULL,
-      FUN = function(req, res, err) {
-
-        if ( file.exists(filePath) ) {
-
-          url_path <- paste0('/', route, utils::tail(unlist(strsplit(filePath, '/')), n = 1))
-
-          if ( req$path == url_path ) {
-            mime_type <- mime::guess_type(filePath)
-            res$setContentType(mime_type)
-            data <- readBin( con  = filePath,
-                             what = "raw",
-                             n    = file.info(filePath)$size )
-            if ( grepl("image|octect|pdf|json", mime_type) ) { # Assumptions...
-              return(data)
-            } else {
-              return(rawToChar(data))
-            }
-          } else {
-            res$setStatus(404L)
-            return(NULL)
-          }
-
-        } # END if ( file.exists(file) )
-
-      } # END FUN
-    )
-
-  return(beakr)
-
-}
-
-#' #' Middleware to serve static files
-#' #'
-#' #' Binds to get requests that aren't handled by specified paths. Should support
-#' #' all filetypes; returns image and octet-stream types as a raw string. \cr\cr
-#' #' Note: the \code{path} argument is not related to the file being served. If
-#' #' \code{path} is given, the static file middleware will bind to \code{path},
-#' #' however for finding the files on the local filesystem it will strip
-#' #' \code{path} from the file location. For example, let's assume
-#' #' \code{path='my_path'}, the following url \code{/my_path/file/to/serve.html}
-#' #' will serve the file \code{file/to/serve.html} from the \code{root_path} folder.
-#' #'
-#' #' @param jug the jug instance
-#' #' @param path the path to bind to, default = NULL (all paths)
-#' #' @param root_path the file path to set as root for the file server
-#' #'
-#' #' @export
-#' serve_static_files<-function(jug, path=NULL, root_path=getwd()){
-#'   get(jug, path = NULL, function(req, res, err){
-#'
-#'     if(substring(req$path, nchar(req$path)) == "/"){
-#'       req$path <- paste0(req$path, "index.html")
-#'     }
-#'
-#'     if(is.null(path)){
-#'       file_path <- paste0(root_path, '/', req$path)
-#'     } else {
-#'       partial_file_path <- gsub(paste0('.*', path, '(.*)'), '\\1', req$path)
-#'       file_path <- paste0(root_path, '/', partial_file_path)
-#'     }
-#'
-#'     bound <- ifelse(is.null(path), TRUE, substr(req$path, 2, nchar(path) + 1) == path)
-#'
-#'     if(file.exists(file_path) & bound){
-#'       mime_type <- mime::guess_type(file_path)
-#'       res$content_type(mime_type)
-#'
-#'       data <- readBin(file_path, 'raw', n=file.info(file_path)$size)
-#'
-#'       if(grepl("image|octet|pdf", mime_type)){ # making a lot of assumptions here
-#'         return(data)
-#'
-#'       } else {
-#'         return(rawToChar(data))
-#'
-#'       }
-#'
-#'     } else {
-#'       res$set_status(404)
-#'       return(NULL)
-#'     }
-#'
-#'   })
-#' }
-################################################################################
-################################################################################
-################################################################################
-
-
-
-#' @export
-#' @title Error handling middleware for a beakr instance
-#'
-#' @description This default error-handling middleware function should be added
-#' at the end of the middleware function pipeline. Any errors will be returned
-#' within a JSON wrapper.
-#'
-#' The general structure for a stand-alone executable script with a
-#' \code{Beakr} webservice typically looks like this:
-#'
-#' \preformatted{
-#' newBeakr() %>%
-#'
-#'   httpGET(<route_A>, function(req, res, err) {
-#'     ...
-#'   }) %>%
-#'
-#'   httpGET(<route_B>, function(req, res, err) {
-#'     ...
-#'   }) %>%
-#'
-#'   handleErrors() %>%
-#'
-#'   listen()
-#' }
-#'
-#' @param beakr Beakr instance
-#'
-#' @return A \code{Beakr} instance with added middleware.
-#'
-
-handleErrors <- function(
-  beakr = NULL
-) {
-
-  # TODO:  Could support FUN = NULL in function signature so other error
-  # TODO:  functions could be supplied.
-
-  if ( is.null(beakr) )
-    stop("'beakr' is not defined")
-
-  beakr <-
-    .routeMiddleware(
-      beakr = beakr,
-      FUN = jsonError,
-      path = NULL,
-      method = NULL,
-      websocket = FALSE
-    )
-
-  return(beakr)
-
-}
-
 #' @export
 #' @title Listen for connections on a Beakr instance
 #'
@@ -285,7 +68,7 @@ handleErrors <- function(
 #' If \code{daemon = TRUE}, \code{listen()} binds the specified port and listens
 #' for connections on a thread running in the background.
 #'
-#' See the \code{httpuv} package for more details.
+#' See the \pkg{httpuv} package for more details.
 #'
 #' @note The default port number 25118 was generated using:
 #' \preformatted{
@@ -342,10 +125,9 @@ listen <- function(
 #' @export
 #' @title Decorate a function for use in a web service
 #'
-#' Convenience function to decorate an existing function for easy use in
-#' \code{Beakr} instances.
+#' @description The \code{decorate()} function can be used to prepare a function
+#' for easy use in a beakr pipeline.
 #'
-#' @details
 #' Decorating a function associates the specified function and its parameters
 #' with \code{req}, \code{res}, and \code{err} objects and assigns a
 #' content-type to the response object. This prepares a standard R function to
@@ -406,7 +188,7 @@ decorate <- function(
       present <- sapply( X = args,
                          FUN = function(x) x %in% names(parameters) )
       # Throw an err if missing requested params
-      if( !all(present) ) {
+      if ( !all(present) ) {
         err$set(paste0( "Need requested arguments:\n",
                         paste(args[!present], collapse = ", ") ))
         return(NULL)
@@ -463,15 +245,23 @@ stopServer <- function(
 
 }
 
+
+# ----- Imports from other packages --------------------------------------------
+
 #' @export
-#' @title Lists all servers
+#' @importFrom httpuv listServers
+#' @name listServers
+#'
+#' @title List all servers
 #'
 #' @description Lists all \code{Beakr} servers currently running (and any other
-#' servers created with the \code{httpuv} package). This convenience function is
-#' a wrapper for
-#' \code{httpuv::listServers()} and is included to encourage experimentation
-#' so that users who create multiple \code{Beakr} instances can quickly find
-#' and stop them all.
+#' servers created with the \pkg{httpuv} package). This function is included to
+#' encourage experimentation so that users who create multiple \code{Beakr}
+#' instances can quickly find and stop them all.
+#'
+#' See \code{httpuv::\link[httpuv:listServers]{listServers}} for details.
+#'
+#' @usage listServers()
 #'
 #' @return None
 #'
@@ -480,22 +270,26 @@ stopServer <- function(
 #' beakr2 <- newBeakr()
 #' beakr1 %>% listen(daemon = TRUE, port = 1234, verbose = TRUE)
 #' beakr2 %>% listen(daemon = TRUE, port = 4321, verbose = TRUE)
-#' length(httpuv_listServers())
-#' httpuv_stopAllServers()
-#' length(httpuv_listServers())
+#' length(listServers())
+#' stopAllServers()
+#' length(listServers())
+NULL
 
-httpuv_listServers <- function() {
-  httpuv::listServers()
-}
 
 #' @export
+#' @importFrom httpuv stopAllServers
+#' @name stopAllServers
+#'
 #' @title Stop all servers
 #'
-#' @description Stops all \code{Beakr} instances (and any other servers created
-#' with the \code{httpuv} package). This convenience function is a wrapper for
-#' \code{httpuv::stopAllServers()} and is included to encourage experimentation
-#' so that users who create multiple \code{Beakr} instances can quickly stop
-#' them all.
+#' @description Stops all \code{Beakr} servers currently running (and any other
+#' servers created with the \pkg{httpuv} package). This function is included to
+#' encourage experimentation so that users who create multiple \code{Beakr}
+#' instances can quickly find and stop them all.
+#'
+#' See \code{httpuv::\link[httpuv:stopAllServers]{stopAllServers}} for details.
+#'
+#' @usage stopAllServers()
 #'
 #' @return None
 #'
@@ -504,10 +298,7 @@ httpuv_listServers <- function() {
 #' beakr2 <- newBeakr()
 #' beakr1 %>% listen(daemon = TRUE, port = 1234, verbose = TRUE)
 #' beakr2 %>% listen(daemon = TRUE, port = 4321, verbose = TRUE)
-#' length(httpuv_listServers())
-#' httpuv_stopAllServers()
-#' length(httpuv_listServers())
-
-httpuv_stopAllServers <- function() {
-  httpuv::stopAllServers()
-}
+#' length(listServers())
+#' stopAllServers()
+#' length(listServers())
+NULL

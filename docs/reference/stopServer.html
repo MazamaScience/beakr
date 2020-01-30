@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Regex path query — .matchPath • beakr</title>
+<title>Stop a beakr instance server — stopServer • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="Regex path query — .matchPath" />
-<meta property="og:description" content="This function is used in the Router$invoke()
-method to match middleware paths to request paths." />
+<meta property="og:title" content="Stop a beakr instance server — stopServer" />
+<meta property="og:description" content="Stops the server associated with a Beakr instance,
+closing all open connections and unbinding the port." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,45 +109,49 @@ method to match middleware paths to request paths." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Regex path query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
-    <div class="hidden name"><code>dot-matchPath.Rd</code></div>
+    <h1>Stop a beakr instance server</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>stopServer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function is used in the <code>Router$invoke()</code>
-method to match middleware paths to request paths.</p>
+    <p>Stops the server associated with a <code>Beakr</code> instance,
+closing all open connections and unbinding the port.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>stopServer</span>(<span class='kw'>beakr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pattern</th>
-      <td><p>String pattern to parse. (A middleware path.)</p></td>
+      <th>beakr</th>
+      <td><p><code>Beakr</code> instance.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Path to match to. (A request path.)</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional parameters passed to <code><a href='https://rdrr.io/r/base/grep.html'>regexpr()</a></code>.</p></td>
+      <th>verbose</th>
+      <td><p>Logical specifying whether to print out details of the
+<code>Beakr</code> instance just stopped.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A List with information on matching paths and URL parameters.</p>
+    <p>None</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>beakr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span>()
+<span class='no'>beakr</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='listen.html'>listen</a></span>(<span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Beakr Instance:  Turf Tank 
+#&gt;  State: Active | Host: 127.0.0.1 | Port: 25118 | Middlewares: 0 </div><div class='input'><span class='fu'>stopServer</span>(<span class='no'>beakr</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Stopped Beakr Instance:  Turf Tank 
+#&gt;  State: Inactive | Host: 127.0.0.1 | Port: 25118 | Middlewares: 0 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

@@ -2,10 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{decorate}
 \alias{decorate}
-\title{Decorate a function for use in a web service
-
-Convenience function to decorate an existing function for easy use in
-\code{Beakr} instances.}
+\title{Decorate a function for use in a web service}
 \usage{
 decorate(FUN, content_type = "text/html", strict = FALSE)
 }
@@ -21,12 +18,9 @@ decorate(FUN, content_type = "text/html", strict = FALSE)
 A \emph{decorated} middleware function.
 }
 \description{
-Decorate a function for use in a web service
+The \code{decorate()} function can be used to prepare a function
+for easy use in a beakr pipeline.
 
-Convenience function to decorate an existing function for easy use in
-\code{Beakr} instances.
-}
-\details{
 Decorating a function associates the specified function and its parameters
 with \code{req}, \code{res}, and \code{err} objects and assigns a
 content-type to the response object. This prepares a standard R function to

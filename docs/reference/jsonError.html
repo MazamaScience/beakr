@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Regex path query — .matchPath • beakr</title>
+<title>JSON error function — jsonError • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,10 @@
 
 
 
-<meta property="og:title" content="Regex path query — .matchPath" />
-<meta property="og:description" content="This function is used in the Router$invoke()
-method to match middleware paths to request paths." />
+<meta property="og:title" content="JSON error function — jsonError" />
+<meta property="og:description" content="This function is used to add a JSON error response to the
+res object. It is called by the handleErrors() utility
+function." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,38 +110,42 @@ method to match middleware paths to request paths." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Regex path query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
-    <div class="hidden name"><code>dot-matchPath.Rd</code></div>
+    <h1>JSON error function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-middleware.R'><code>R/utils-middleware.R</code></a></small>
+    <div class="hidden name"><code>jsonError.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function is used in the <code>Router$invoke()</code>
-method to match middleware paths to request paths.</p>
+    <p>This function is used to add a JSON error response to the
+<code>res</code> object. It is called by the <code><a href='handleErrors.html'>handleErrors()</a></code> utility
+function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>jsonError</span>(<span class='no'>req</span>, <span class='no'>res</span>, <span class='no'>err</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pattern</th>
-      <td><p>String pattern to parse. (A middleware path.)</p></td>
+      <th>req</th>
+      <td><p><code>Request</code> object.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Path to match to. (A request path.)</p></td>
+      <th>res</th>
+      <td><p><code>Response</code> object.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional parameters passed to <code><a href='https://rdrr.io/r/base/grep.html'>regexpr()</a></code>.</p></td>
+      <th>err</th>
+      <td><p><code>Error</code> Error object.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A List with information on matching paths and URL parameters.</p>
+    <p>The incoming <code>res</code> object is modified.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='Request.html'>Request</a>, <a href='Response.html'>Response</a>, <a href='Error.html'>Error</a></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -148,6 +153,7 @@ method to match middleware paths to request paths.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
 
   </div>

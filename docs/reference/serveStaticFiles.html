@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Regex path query — .matchPath • beakr</title>
+<title>File-serving middleware — serveStaticFiles • beakr</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,13 @@
 
 
 
-<meta property="og:title" content="Regex path query — .matchPath" />
-<meta property="og:description" content="This function is used in the Router$invoke()
-method to match middleware paths to request paths." />
+<meta property="og:title" content="File-serving middleware — serveStaticFiles" />
+<meta property="og:description" content="Binds to GET requests that aren't handled by specified paths.
+The result is to return files that are found on the host machine at the
+requested path. Binary file types like .png, .gif or
+.pdf are returned as raw bytes. All others are returned as characters.
+Mime types are guessed using the mime package. The rawTypesPattern
+parameter is used to match mime types that should be returned as raw bytes." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,38 +113,76 @@ method to match middleware paths to request paths." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Regex path query</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-internal.R'><code>R/utils-internal.R</code></a></small>
-    <div class="hidden name"><code>dot-matchPath.Rd</code></div>
+    <h1>File-serving middleware</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/beakr/blob/master/R/utils-middleware.R'><code>R/utils-middleware.R</code></a></small>
+    <div class="hidden name"><code>serveStaticFiles.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function is used in the <code>Router$invoke()</code>
-method to match middleware paths to request paths.</p>
+    <p>Binds to GET requests that aren't handled by specified paths.
+The result is to return files that are found on the host machine at the
+requested path. Binary file types like <code>.png</code>, <code>.gif</code> or
+<code>.pdf</code> are returned as raw bytes. All others are returned as characters.</p>
+<p>Mime types are guessed using the <span class="pkg">mime</span> package. The <code>rawTypesPattern</code>
+parameter is used to match mime types that should be returned as raw bytes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>.matchPath</span>(<span class='no'>pattern</span>, <span class='no'>path</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>serveStaticFiles</span>(
+  <span class='kw'>beakr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>urlPath</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>rootPath</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>rawTypesPattern</span> <span class='kw'>=</span> <span class='st'>"image|json|octet|pdf|video"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pattern</th>
-      <td><p>String pattern to parse. (A middleware path.)</p></td>
+      <th>beakr</th>
+      <td><p><code>Beakr</code> instance or <code>NULL</code>.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Path to match to. (A request path.)</p></td>
+      <th>urlPath</th>
+      <td><p>String representing the URL directory undnerneath which static
+file paths will appear.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional parameters passed to <code><a href='https://rdrr.io/r/base/grep.html'>regexpr()</a></code>.</p></td>
+      <th>rootPath</th>
+      <td><p>String representing the absolute path used as the root
+directory when searching for files on host machine. Defaults to the directory
+in which the script is running.</p></td>
+    </tr>
+    <tr>
+      <th>rawTypesPattern</th>
+      <td><p>String pattern identifying mime types to be returned
+as raw bytes.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A List with information on matching paths and URL parameters.</p>
+    <p>A <code>Beakr</code> instance with added middleware.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>All files to be served in this manner must exist underneath the
+directory specified with <code>rootPath</code>. The directory structure underneath
+<code>rootPath</code> will be mapped onto URLs underneath <code>urlPath</code>. This
+helps when deploying web services at specific URLs on the host machine.</p>
+<p>For example, specifying:</p>
+<pre>
+beakr <!-- %&gt;% -->
+  ...
+  serverStaticFiles("/data-A/v1", "/data/project_A/public")
+  ...
+  listen()
+</pre>
+
+<p>will allow a file found on the host machine at:</p><pre>
+  /data/project_A/public/2019/averages.csv"
+</pre><p>to be downloaded from:</p><pre>
+  http://&lt;ip-address&gt;:&lt;port&gt;/data-A/v1/2019/averages.csv"
+</pre>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -148,6 +190,7 @@ method to match middleware paths to request paths.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>
