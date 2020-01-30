@@ -65,7 +65,7 @@ In this documentation and by convention, the object is always referred to as
 }
 
 \seealso{
-\code{\link{Response}} and \code{\link{TestRequest}}
+\code{\link{Response}}
 }
 \section{Methods}{
 \subsection{Public methods}{

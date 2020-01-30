@@ -22,5 +22,5 @@ This function is used to add a JSON error response to the
 function.
 }
 \seealso{
-\link{Request}, \link{Response}, \link{ERROR}
+\link{Request}, \link{Response}, \link{Error}
 }

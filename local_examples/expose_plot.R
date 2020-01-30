@@ -1,11 +1,16 @@
 library(beakr)
 library(ggplot2)
 
-# Create a plot of the US States
-states_plot <- function(res) {
+# Create a plot of a US state
+states_plot <- function(state = NULL, res) {
   states <- ggplot2::map_data('state')
 
-  plot <- ggplot(data = states) +
+  if ( !is.null(state) ) {
+    states <- subset(states, region == tolower(state))
+  }
+
+  plot <-
+    ggplot(data = states) +
     geom_polygon(aes(x = long, y = lat, fill = region, group = group), color = "white") +
     coord_fixed(1.3) +
     guides(fill = FALSE)

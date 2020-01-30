@@ -20,10 +20,6 @@ The \code{Beakr} class defines the server instance utilizing the
   \item{\code{appDefinition()}}{
   A method to define the functions or middleware of users application.
   }
-  \item{\code{addCollectedMiddleware(collector)}}{
-  Adds the users "collected" middleware to the \code{Beakr} defined
-  middleware.
-  }
   \item{\code{initialize()}}{
   Creates a new \code{Router} object for the \code{router}
   method.

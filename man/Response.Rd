@@ -38,11 +38,11 @@ object is always referred to as \code{res} (and the HTTP request is
   \item{\code{setStatus(status)}}{
   Sets the HTTP status code.
   }
-  \item{\code{redirect(url)}}{
-  Sets the HTTP status to 302, "Found" and redirects to \code{url}.
-  }
   \item{\code{setBody(body)}}{
   Sets the body response.
+  }
+  \item{\code{redirect(url)}}{
+  Sets the HTTP status to 302, "Found" and redirects to \code{url}.
   }
   \item{\code{json(txt, auto_unbox = TRUE)}}{
   Applies a function to text convert to JSON and sets the content-type to
@@ -61,7 +61,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 
 \seealso{
-\code{\link{Response}} and \code{\link{TestRequest}}
+\code{\link{Response}}
 }
 \section{Methods}{
 \subsection{Public methods}{

@@ -4,7 +4,7 @@
 \alias{Listener}
 \title{Listener class}
 \description{
-The \code{Listener} class listens provides a simple, programmatically
+The \code{Listener} class provides a simple, programmatically
 controlled HTTP protocol listener.
 }
 \section{Fields}{

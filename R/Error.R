@@ -29,7 +29,7 @@
 #' }
 #'
 #' @seealso \code{\link{handleErrors}} and \code{\link{Middleware}}
-#'
+
 Error <-
   R6::R6Class(
     classname = "Error",

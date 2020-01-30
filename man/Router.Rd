@@ -37,14 +37,14 @@ top level \code{Beakr} object initializes with the creation of a
   Processes the event heard by the \code{Listener}.
   }
   \item{\code{invoke(req, websocket_msg, websocket_binary)}}{
-  This method is used to create the a request-response cycle objects of the
+  This method is used to create the request-response cycle objects of the
   provided middleware.
   }
 }
 }
 
 \seealso{
-\code{\link{Response}} and \code{\link{TestRequest}}
+\code{\link{Response}}
 }
 \section{Methods}{
 \subsection{Public methods}{

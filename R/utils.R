@@ -129,7 +129,7 @@ serveStaticFiles <- function(
       path = NULL,
       FUN = function(req, res, err) {
 
-        if ( file.exists(file) ) {
+        if ( file.exists(filePath) ) {
 
           url_path <- paste0('/', route, utils::tail(unlist(strsplit(filePath, '/')), n = 1))
 
@@ -138,7 +138,7 @@ serveStaticFiles <- function(
             res$setContentType(mime_type)
             data <- readBin( con  = filePath,
                              what = "raw",
-                             n    = file.info(file)$size )
+                             n    = file.info(filePath)$size )
             if ( grepl("image|octect|pdf|json", mime_type) ) { # Assumptions...
               return(data)
             } else {
@@ -340,6 +340,95 @@ listen <- function(
 # ----- Other functions --------------------------------------------------------
 
 #' @export
+#' @title Decorate a function for use in a web service
+#'
+#' Convenience function to decorate an existing function for easy use in
+#' \code{Beakr} instances.
+#'
+#' @details
+#' Decorating a function associates the specified function and its parameters
+#' with \code{req}, \code{res}, and \code{err} objects and assigns a
+#' content-type to the response object. This prepares a standard R function to
+#' be used in \code{Beakr} instances and accept requests.
+#'
+#' @param FUN Function to decorate.
+#' @param content_type HTTP "content-type" of the function output.
+#' (\emph{e.g.} "text/plain", "text/html" or other mime type)
+#' @param strict Boolean, requiring strict parameter matching.
+#'
+#' @return A \emph{decorated} middleware function.
+#'
+#' @examples
+#' \donttest{
+#' # Create an new Beakr instance
+#' beakr <- newBeakr()
+#' # Create simple hello and goodbye function
+#' hello <- function(name) { paste0("Hello, ", name, "!") }
+#' goodbye <- function(text = "Adios") { paste0(text, ", dear friend.") }
+#'
+#' # Create a web service from these functions
+#' beakr %>%
+#'   httpGET(path = "/hello", decorate(hello)) %>%
+#'   httpGET(path = "/goodbye", decorate(goodbye)) %>%
+#'   handleErrors() %>%
+#'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
+#'
+#' # ------------------------------------------------------------
+#' # POINT YOUR BROWSER AT:
+#' # * http://127.0.0.1:25118/hello?name=Honeydew
+#' # * http://127.0.0.1:25118/goodbye
+#' # ------------------------------------------------------------
+#'
+#' # Stop the beakr instance server
+#' stopServer(beakr)
+#' }
+
+decorate <- function(
+  FUN,
+  content_type = "text/html",
+  strict = FALSE
+) {
+
+  # Get the parameters the function allows
+  args <- names(formals(FUN))
+
+  # Create a decorated function
+  decoratedFUN <- function(req, res, err) {
+    res$setContentType(content_type)
+    #Inspect passed in parameters
+    parameters <- utils::modifyList(req$parameters, req$headers)
+    parameters$req <- req
+    parameters$res <- res
+    parameters$err <- err
+
+    # Check that all arguments are present
+    if ( strict ) {
+      present <- sapply( X = args,
+                         FUN = function(x) x %in% names(parameters) )
+      # Throw an err if missing requested params
+      if( !all(present) ) {
+        err$set(paste0( "Need requested arguments:\n",
+                        paste(args[!present], collapse = ", ") ))
+        return(NULL)
+      }
+    }
+
+    # Drop unrequested params from query params
+    if ( !("..." %in% args) ) {
+      parameters <- parameters[names(parameters) %in% args]
+    }
+
+    # Execute the passed in function with the param
+    return(do.call(what = FUN, args = parameters))
+  }
+
+  # Return decorated function
+  return(decoratedFUN)
+
+}
+
+
+#' @export
 #' @title Stop a beakr instance server
 #'
 #' @description Stops the server associated with a \code{Beakr} instance,
@@ -375,6 +464,31 @@ stopServer <- function(
 }
 
 #' @export
+#' @title Lists all servers
+#'
+#' @description Lists all \code{Beakr} servers currently running (and any other
+#' servers created with the \code{httpuv} package). This convenience function is
+#' a wrapper for
+#' \code{httpuv::listServers()} and is included to encourage experimentation
+#' so that users who create multiple \code{Beakr} instances can quickly find
+#' and stop them all.
+#'
+#' @return None
+#'
+#' @examples
+#' beakr1 <- newBeakr()
+#' beakr2 <- newBeakr()
+#' beakr1 %>% listen(daemon = TRUE, port = 1234, verbose = TRUE)
+#' beakr2 %>% listen(daemon = TRUE, port = 4321, verbose = TRUE)
+#' length(httpuv_listServers())
+#' httpuv_stopAllServers()
+#' length(httpuv_listServers())
+
+httpuv_listServers <- function() {
+  httpuv::listServers()
+}
+
+#' @export
 #' @title Stop all servers
 #'
 #' @description Stops all \code{Beakr} instances (and any other servers created
@@ -390,12 +504,10 @@ stopServer <- function(
 #' beakr2 <- newBeakr()
 #' beakr1 %>% listen(daemon = TRUE, port = 1234, verbose = TRUE)
 #' beakr2 %>% listen(daemon = TRUE, port = 4321, verbose = TRUE)
-#' length(httpuv::listServers())
+#' length(httpuv_listServers())
 #' httpuv_stopAllServers()
-#' length(httpuv::listServers())
+#' length(httpuv_listServers())
 
 httpuv_stopAllServers <- function() {
-
   httpuv::stopAllServers()
-
 }

@@ -16,7 +16,7 @@
 #'
 #' @return The incoming \code{res} object is modified.
 #'
-#' @seealso \link{Request}, \link{Response}, \link{ERROR}
+#' @seealso \link{Request}, \link{Response}, \link{Error}
 
 jsonError <- function(req, res, err) {
 

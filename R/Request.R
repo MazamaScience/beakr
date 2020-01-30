@@ -62,7 +62,7 @@
 #'   }
 #' }
 #'
-#' @seealso \code{\link{Response}} and \code{\link{TestRequest}}
+#' @seealso \code{\link{Response}}
 #'
 Request <-
   R6::R6Class(
@@ -123,70 +123,5 @@ Request <-
         }
       }
 
-    )
-  )
-
-
-#' @keywords internal
-#' @title TestRequest Class
-#'
-#' @description The \code{TestRequest} object is for internal testing only.
-#'
-#' @usage NULL
-#'
-#' @format NULL
-#'
-#' @seealso \code{\link{Response}} and \code{\link{Request}}
-
-TestRequest <-
-  R6::R6Class(
-    classname = "TestRequest",
-    public = list(
-      req = list(
-        HTTP_CACHE_CONTROL = "no-cache",
-        HTTP_CONNECTION = "keep-alive",
-        HTTP_ACCEPT = "*/*",
-        HTTP_ACCEPT_LANGUAGE = "nl-NL,nl;q=0.8,en-US;q=0.6,en;q=0.4,de;q=0.2",
-        QUERY_STRING = "",
-        httpuv.version = list(c(1L, 3L, 3L)),
-        SERVER_NAME = "127.0.0.1",
-        SCRIPT_NAME = "",
-        SERVER_PORT = "25118",
-        REMOTE_PORT = "60144",
-        PATH_INFO = "/",
-        REMOTE_ADDR = "127.0.0.1",
-        CONTENT_TYPE = "application/x-www-form-urlencoded",
-        rook.url_scheme = "http",
-        rook.input = list(read_lines = function() { return("") }),
-        HTTP_ACCEPT_ENCODING = "gzip, deflate, sdch",
-        HTTP_COOKIE = "",
-        REQUEST_METHOD = "GET",
-        HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36
-                          (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36",
-        HTTP_TREADS = "5",
-        HTTP_HOST = "127.0.0.1:25118"
-      ),
-      path = function(path) {
-        self$req$PATH_INFO <- path
-      },
-      method = function(method) {
-        self$req$REQUEST_METHOD <- method
-      },
-      query_string = function(qstring) {
-        self$req$QUERY_STRING <- qstring
-      },
-      body = function(body) {
-        self$req$rook.input$read_lines = function() { return(body) }
-      },
-      set_header = function(key, value, prefix = "HTTP_") {
-        self$req[[paste0(prefix, toupper(key))]] <- value
-      },
-      get_header = function(key, prefix = "HTTP_"){
-        self$req[[paste0(prefix, toupper(key))]]
-      },
-      print = function(...){
-        cat("A TestRequest instance\n")
-        invisible(self$req)
-      }
     )
   )
