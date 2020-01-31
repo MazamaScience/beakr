@@ -38,16 +38,16 @@ parameter is used to match mime types that should be returned as raw bytes.
 }
 \details{
 All files to be served in this manner must exist underneath the
-directory specified with \code{rootPath}. The directory structure underneath
-\code{rootPath} will be mapped onto URLs underneath \code{urlPath}. This
-helps when deploying web services at specific URLs on the host machine.
+host machine directory specified with \code{rootPath}. The directory
+structure underneath \code{rootPath} will be mapped onto URLs underneath
+\code{urlPath}. This helps when deploying web services at preordained URLs.
 
 For example, specifying:
 
 \preformatted{
 beakr %>%
   ...
-  serverStaticFiles("/data-A/v1", "/data/project_A/public")
+  serverStaticFiles("/data-service/A", "/data/project_A/public")
   ...
   listen()
 }
@@ -58,6 +58,6 @@ will allow a file found on the host machine at:
 }
 to be downloaded from:
 \preformatted{
-  http://<ip-address>:<port>/data-A/v1/2019/averages.csv"
+  http://<ip-address>:<port>/data-service/A/2019/averages.csv"
 }
 }

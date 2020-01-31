@@ -4,7 +4,7 @@
 \alias{Response}
 \title{Response Class}
 \description{
-The \code{Response} object represents represents the HTTP response that a
+A \code{Response} object represents represents the HTTP response that a
 \code{Beakr} sends when it gets an HTTP request. It is by convention, the
 object is always referred to as \code{res} (and the HTTP request is
 \code{req}).

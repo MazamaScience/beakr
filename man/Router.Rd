@@ -4,7 +4,7 @@
 \alias{Router}
 \title{Router Class}
 \description{
-The \code{Router} object represents the handling of routing and middleware
+A \code{Router} object represents the handling of routing and middleware
 (such as httpGET(), httpPUT(), httpPOST(), and so on). Once a \code{Router}
 object is instantiated, middleware and HTTP method routes can be added. The
 top level \code{Beakr} object initializes with the creation of a

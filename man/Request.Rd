@@ -4,7 +4,7 @@
 \alias{Request}
 \title{Request Class}
 \description{
-The \code{Request} object represents the HTTP request and has properties for
+A \code{Request} object represents the HTTP request and has properties for
 the request query string, parameters, body, HTTP headers, and so on.
 In this documentation and by convention, the object is always referred to as
 \code{req} (and the HTTP response is \code{res}).

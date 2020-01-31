@@ -7,6 +7,7 @@ library(caret)
 
 # Load the Iris data set
 data("iris")
+
 # Train using KNN
 knn_model <- train(
   Species ~ .,

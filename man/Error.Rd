@@ -4,7 +4,7 @@
 \alias{Error}
 \title{Error class}
 \description{
-A \code{Error} class object represents the state and handling of instance
+An \code{Error} object represents the state and handling of instance
 or middleware errors.
 }
 \section{Fields}{

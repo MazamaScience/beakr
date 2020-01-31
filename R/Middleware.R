@@ -2,7 +2,7 @@
 #' @title Middleware class
 #'
 #' @description
-#' The \code{Middleware} object represents middleware functions that have access
+#' A \code{Middleware} object represents middleware functions that have access
 #' to the request (\code{req}), response (\code{res}) and error (\code{err})
 #' objects in request-response cycle via the \code{Router}.
 #'

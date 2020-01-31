@@ -72,7 +72,7 @@ newBeakr <- function(
 #'
 #' @note The default port number 25118 was generated using:
 #' \preformatted{
-#' > match(c("b","e","a","k","r"), letters) %% 10
+#' > match(c("b","e","a","k","r"), letters) \%\% 10
 #' [1] 2 5 1 1 8
 #' }
 #'
@@ -302,3 +302,4 @@ NULL
 #' stopAllServers()
 #' length(listServers())
 NULL
+

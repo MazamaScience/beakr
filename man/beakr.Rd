@@ -4,7 +4,7 @@
 \alias{Beakr}
 \title{Beakr Application class}
 \description{
-The \code{Beakr} class defines the server instance utilizing the
+A \code{Beakr} object defines the server instance utilizing the
 \pkg{httpuv} package. This class defines an interface for the rest of the
 \pkg{beakr} package and is therefore meant to be instantiated.
 }

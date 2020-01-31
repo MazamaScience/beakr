@@ -3,11 +3,11 @@ Type: Package
 Title: A Minimalist Web Framework for R
 Version: 0.3.1
 Authors@R: c(
-    person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut","cre")),
-    person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut"))
+    person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut")),
+    person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut","cre"))
     )
-Author: Hans Martin [aut, cre],
-    Jonathan Callahan [aut]
+Author: Hans Martin [aut],
+    Jonathan Callahan [aut, cre]
 Maintainer: Jonathan Callahan <jonathan.s.callahan@gmail.com>
 Description: A minimalist web framework for developing application programming 
     interfaces in R that provides a flexible framework for handling common 

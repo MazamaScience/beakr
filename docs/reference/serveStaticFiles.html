@@ -165,14 +165,14 @@ as raw bytes.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>All files to be served in this manner must exist underneath the
-directory specified with <code>rootPath</code>. The directory structure underneath
-<code>rootPath</code> will be mapped onto URLs underneath <code>urlPath</code>. This
-helps when deploying web services at specific URLs on the host machine.</p>
+host machine directory specified with <code>rootPath</code>. The directory
+structure underneath <code>rootPath</code> will be mapped onto URLs underneath
+<code>urlPath</code>. This helps when deploying web services at preordained URLs.</p>
 <p>For example, specifying:</p>
 <pre>
 beakr <!-- %&gt;% -->
   ...
-  serverStaticFiles("/data-A/v1", "/data/project_A/public")
+  serverStaticFiles("/data-service/A", "/data/project_A/public")
   ...
   listen()
 </pre>
@@ -180,7 +180,7 @@ beakr <!-- %&gt;% -->
 <p>will allow a file found on the host machine at:</p><pre>
   /data/project_A/public/2019/averages.csv"
 </pre><p>to be downloaded from:</p><pre>
-  http://&lt;ip-address&gt;:&lt;port&gt;/data-A/v1/2019/averages.csv"
+  http://&lt;ip-address&gt;:&lt;port&gt;/data-service/A/2019/averages.csv"
 </pre>
 
 
