@@ -4,7 +4,7 @@
 \alias{stopServer}
 \title{Stop a beakr instance server}
 \usage{
-stopServer(beakr = NULL, verbose = TRUE)
+stopServer(beakr = NULL, verbose = FALSE)
 }
 \arguments{
 \item{beakr}{\code{Beakr} instance.}

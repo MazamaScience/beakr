@@ -84,7 +84,8 @@ newBeakr <- function(
 #' @param daemon Logical specifying whether the server should be run in the
 #' background.
 #' @param verbose Logical specifying whether to print out details of the
-#' \code{Beakr} instance now running.
+#' \code{Beakr} instance now running. This should only be used when running
+#' a beaker app interactively, not in production.
 #'
 #' @return A \code{Beakr} instance with an active server.
 #'
@@ -105,7 +106,7 @@ listen <- function(
   host = "127.0.0.1",
   port = 25118,
   daemon = FALSE,
-  verbose = TRUE
+  verbose = FALSE
 ) {
 
   if ( is.null(beakr) )
@@ -230,7 +231,7 @@ decorate <- function(
 
 stopServer <- function(
   beakr = NULL,
-  verbose = TRUE
+  verbose = FALSE
 ) {
 
   if ( is.null(beakr) )

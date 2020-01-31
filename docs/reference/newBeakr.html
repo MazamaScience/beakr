@@ -156,8 +156,8 @@ end with the <code><a href='listen.html'>listen()</a></code> function.</p>
     <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='st'>"This is route 'B'."</span>)
   }) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='handleErrors.html'>handleErrors</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='listen.html'>listen</a></span>(<span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>'127.0.0.1'</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>25118</span>, <span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Beakr Instance:  House Supermodel 
-#&gt;  State: Active | Host: 127.0.0.1 | Port: 25118 | Middlewares: 3 </div><div class='input'>
+  <span class='fu'><a href='listen.html'>listen</a></span>(<span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>'127.0.0.1'</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>25118</span>, <span class='kw'>daemon</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
 <span class='co'># ------------------------------------------------------------</span>
 <span class='co'># POINT YOUR BROWSER AT:</span>
 <span class='co'># * http://127.0.0.1:25118/route_A</span>
@@ -165,9 +165,8 @@ end with the <code><a href='listen.html'>listen()</a></code> function.</p>
 <span class='co'># ------------------------------------------------------------</span>
 
 <span class='co'># Stop the beakr instance server</span>
-<span class='fu'><a href='stopServer.html'>stopServer</a></span>(<span class='no'>beakr</span>)</div><div class='output co'>#&gt; Stopped Beakr Instance:  House Supermodel 
-#&gt;  State: Inactive | Host: 127.0.0.1 | Port: 25118 | Middlewares: 3 </div><div class='input'># }
-</div></pre>
+<span class='fu'><a href='stopServer.html'>stopServer</a></span>(<span class='no'>beakr</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
