@@ -88,7 +88,7 @@ species of iris associated with incoming data. The _Beakr_ instance
 exposes this API and, when given JSON input with the required arguments, 
 identifies and returns the species.
 
-_Note_ that `httpPOST` attaches the URL path `/predict-specis` only to http POST
+_Note_ that `httpPOST` attaches the URL path `/predict-species` only to http POST
 requests. Pointing a browser at this URL path will issue a File Not found error
 because the browser is issuing an http GET request. Like other frameworks,
 **beakr** allows for method-specific URL routing.
