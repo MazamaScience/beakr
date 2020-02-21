@@ -1,8 +1,8 @@
 [![sm-beakr.png](https://i.postimg.cc/7YBB0Hnp/sm-beakr.png)](https://postimg.cc/bstHjjMT)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/AirSensor)](https://cran.r-project.org/package=beakr)
-[![Downloads](http://cranlogs.r-pkg.org/badges/AirSensor)](https://cran.r-project.org/package=beakr)
-[![Build Status](https://travis-ci.org/MazamaScience/AirSensor.svg?branch=master)](https://travis-ci.org/MazamaScience/beakr)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/beakr)](https://cran.r-project.org/package=beakr)
+[![Downloads](http://cranlogs.r-pkg.org/badges/beakr)](https://cran.r-project.org/package=beakr)
+[![Build Status](https://travis-ci.org/MazamaScience/beakr.svg?branch=master)](https://travis-ci.org/MazamaScience/beakr)
 
 
 ## A Minimalist Web Framework for R
