@@ -169,11 +169,9 @@ serveStaticFiles <- function(
 #'
 
 handleErrors <- function(
-  beakr = NULL
+  beakr = NULL,
+  FUN = jsonError
 ) {
-
-  # TODO:  Could support FUN = NULL in function signature so other error
-  # TODO:  functions could be supplied.
 
   if ( is.null(beakr) )
     stop("'beakr' is not defined")
@@ -181,7 +179,7 @@ handleErrors <- function(
   beakr <-
     .routeMiddleware(
       beakr = beakr,
-      FUN = jsonError,
+      FUN = FUN,
       path = NULL,
       method = NULL,
       websocket = FALSE
