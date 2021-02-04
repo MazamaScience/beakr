@@ -42,6 +42,7 @@ or middleware errors.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set"></a>}}
+\if{latex}{\out{\hypertarget{method-set}{}}}
 \subsection{Method \code{set()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Error$set(err)}\if{html}{\out{</div>}}
@@ -50,6 +51,7 @@ or middleware errors.
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

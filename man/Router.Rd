@@ -58,6 +58,7 @@ top level \code{Beakr} object initializes with the creation of a
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addMiddleware"></a>}}
+\if{latex}{\out{\hypertarget{method-addMiddleware}{}}}
 \subsection{Method \code{addMiddleware()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Router$addMiddleware(middleware)}\if{html}{\out{</div>}}
@@ -66,6 +67,7 @@ top level \code{Beakr} object initializes with the creation of a
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addListener"></a>}}
+\if{latex}{\out{\hypertarget{method-addListener}{}}}
 \subsection{Method \code{addListener()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Router$addListener(listener)}\if{html}{\out{</div>}}
@@ -74,6 +76,7 @@ top level \code{Beakr} object initializes with the creation of a
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-processEvent"></a>}}
+\if{latex}{\out{\hypertarget{method-processEvent}{}}}
 \subsection{Method \code{processEvent()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Router$processEvent(event, ...)}\if{html}{\out{</div>}}
@@ -82,6 +85,7 @@ top level \code{Beakr} object initializes with the creation of a
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-invoke"></a>}}
+\if{latex}{\out{\hypertarget{method-invoke}{}}}
 \subsection{Method \code{invoke()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Router$invoke(req, websocket_msg = NULL, websocket_binary = NULL)}\if{html}{\out{</div>}}
@@ -90,6 +94,7 @@ top level \code{Beakr} object initializes with the creation of a
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

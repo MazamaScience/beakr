@@ -61,6 +61,7 @@ continuation of the \pkg{jug} package developed by Bart Smeets. The
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-appDefinition"></a>}}
+\if{latex}{\out{\hypertarget{method-appDefinition}{}}}
 \subsection{Method \code{appDefinition()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Beakr$appDefinition()}\if{html}{\out{</div>}}
@@ -69,6 +70,7 @@ continuation of the \pkg{jug} package developed by Bart Smeets. The
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Beakr$new()}\if{html}{\out{</div>}}
@@ -77,6 +79,7 @@ continuation of the \pkg{jug} package developed by Bart Smeets. The
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-start"></a>}}
+\if{latex}{\out{\hypertarget{method-start}{}}}
 \subsection{Method \code{start()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Beakr$start(host, port, daemon)}\if{html}{\out{</div>}}
@@ -85,6 +88,7 @@ continuation of the \pkg{jug} package developed by Bart Smeets. The
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Beakr$print()}\if{html}{\out{</div>}}
@@ -93,6 +97,7 @@ continuation of the \pkg{jug} package developed by Bart Smeets. The
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

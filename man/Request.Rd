@@ -80,6 +80,7 @@ In this documentation and by convention, the object is always referred to as
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-attach"></a>}}
+\if{latex}{\out{\hypertarget{method-attach}{}}}
 \subsection{Method \code{attach()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Request$attach(key, value)}\if{html}{\out{</div>}}
@@ -88,6 +89,7 @@ In this documentation and by convention, the object is always referred to as
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getHeader"></a>}}
+\if{latex}{\out{\hypertarget{method-getHeader}{}}}
 \subsection{Method \code{getHeader()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Request$getHeader(key)}\if{html}{\out{</div>}}
@@ -96,6 +98,7 @@ In this documentation and by convention, the object is always referred to as
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setHeader"></a>}}
+\if{latex}{\out{\hypertarget{method-setHeader}{}}}
 \subsection{Method \code{setHeader()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Request$setHeader(key, value)}\if{html}{\out{</div>}}
@@ -104,6 +107,7 @@ In this documentation and by convention, the object is always referred to as
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addParameters"></a>}}
+\if{latex}{\out{\hypertarget{method-addParameters}{}}}
 \subsection{Method \code{addParameters()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Request$addParameters(named_list)}\if{html}{\out{</div>}}
@@ -112,6 +116,7 @@ In this documentation and by convention, the object is always referred to as
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Request$new(req)}\if{html}{\out{</div>}}
@@ -120,6 +125,7 @@ In this documentation and by convention, the object is always referred to as
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

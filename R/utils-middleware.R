@@ -164,6 +164,7 @@ serveStaticFiles <- function(
 #' }
 #'
 #' @param beakr Beakr instance
+#' @param FUN a function to handle the error response
 #'
 #' @return A \code{Beakr} instance with added middleware.
 #'

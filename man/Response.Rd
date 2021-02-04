@@ -80,6 +80,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setHeader"></a>}}
+\if{latex}{\out{\hypertarget{method-setHeader}{}}}
 \subsection{Method \code{setHeader()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$setHeader(key, value)}\if{html}{\out{</div>}}
@@ -88,6 +89,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setContentType"></a>}}
+\if{latex}{\out{\hypertarget{method-setContentType}{}}}
 \subsection{Method \code{setContentType()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$setContentType(type)}\if{html}{\out{</div>}}
@@ -96,6 +98,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setStatus"></a>}}
+\if{latex}{\out{\hypertarget{method-setStatus}{}}}
 \subsection{Method \code{setStatus()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$setStatus(status)}\if{html}{\out{</div>}}
@@ -104,6 +107,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setBody"></a>}}
+\if{latex}{\out{\hypertarget{method-setBody}{}}}
 \subsection{Method \code{setBody()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$setBody(body)}\if{html}{\out{</div>}}
@@ -112,6 +116,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-redirect"></a>}}
+\if{latex}{\out{\hypertarget{method-redirect}{}}}
 \subsection{Method \code{redirect()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$redirect(url)}\if{html}{\out{</div>}}
@@ -120,6 +125,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-json"></a>}}
+\if{latex}{\out{\hypertarget{method-json}{}}}
 \subsection{Method \code{json()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$json(txt, auto_unbox = TRUE)}\if{html}{\out{</div>}}
@@ -128,6 +134,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-text"></a>}}
+\if{latex}{\out{\hypertarget{method-text}{}}}
 \subsection{Method \code{text()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$text(txt)}\if{html}{\out{</div>}}
@@ -136,6 +143,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-structured"></a>}}
+\if{latex}{\out{\hypertarget{method-structured}{}}}
 \subsection{Method \code{structured()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$structured(protocol)}\if{html}{\out{</div>}}
@@ -144,6 +152,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-plot}{}}}
 \subsection{Method \code{plot()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Response$plot(plot_object, base64 = TRUE, ...)}\if{html}{\out{</div>}}
@@ -152,6 +161,7 @@ object is always referred to as \code{res} (and the HTTP request is
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

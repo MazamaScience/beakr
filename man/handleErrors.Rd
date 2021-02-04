@@ -4,10 +4,12 @@
 \alias{handleErrors}
 \title{Error-handling middleware}
 \usage{
-handleErrors(beakr = NULL)
+handleErrors(beakr = NULL, FUN = jsonError)
 }
 \arguments{
 \item{beakr}{Beakr instance}
+
+\item{FUN}{a function to handle the error response}
 }
 \value{
 A \code{Beakr} instance with added middleware.
