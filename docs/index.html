@@ -6,22 +6,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A Minimalist Web Framework for R • beakr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A Minimalist Web Framework for R">
 <meta property="og:description" content="A minimalist web framework for developing application programming 
     interfaces in R that provides a flexible framework for handling common 
     HTTP-requests, errors, logging, and an ability to integrate any R code as 
     server middle-ware.">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/MazamaScience/beakr">
+  <a href="https://github.com/MazamaScience/beakr/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -74,7 +74,7 @@
   <div class="contents col-md-9">
 
 
-<p><a href="https://cran.r-project.org/package=beakr"><img src="http://www.r-pkg.org/badges/version/AirSensor" alt="CRAN_Status_Badge"></a> <a href="https://cran.r-project.org/package=beakr"><img src="http://cranlogs.r-pkg.org/badges/AirSensor" alt="Downloads"></a> <a href="https://travis-ci.org/MazamaScience/beakr"><img src="https://travis-ci.org/MazamaScience/AirSensor.svg?branch=master" alt="Build Status"></a></p>
+<p><a href="https://cran.r-project.org/package=beakr"><img src="http://www.r-pkg.org/badges/version/beakr" alt="CRAN_Status_Badge"></a> <a href="https://cran.r-project.org/package=beakr"><img src="http://cranlogs.r-pkg.org/badges/beakr" alt="Downloads"></a> <a href="https://travis-ci.org/MazamaScience/beakr"><img src="https://travis-ci.org/MazamaScience/beakr.svg?branch=master" alt="Build Status"></a></p>
 <div id="a-minimalist-web-framework-for-r" class="section level2">
 <h2 class="hasAnchor">
 <a href="#a-minimalist-web-framework-for-r" class="anchor"></a>A Minimalist Web Framework for R</h2>
@@ -82,7 +82,7 @@
 <div id="hello-world---the-beakr-way" class="section level3">
 <h3 class="hasAnchor">
 <a href="#hello-world---the-beakr-way" class="anchor"></a>Hello, world! - The beakr way</h3>
-<pre><code><a href="https://rdrr.io/r/base/library.html">library(beakr)
+<pre><code><a href="https://github.com/MazamaScience/beakr">library(beakr)
 
 newBeakr() %&gt;% 
   httpGET(path = "/hi", function(req, res, err) {
@@ -123,8 +123,8 @@ devtools::install_github("MazamaScience/beakr")</a></code></pre>
 <h3 class="hasAnchor">
 <a href="#a-knn-model-webservice" class="anchor"></a>A KNN model webservice</h3>
 <p>A <em>Beakr</em> instance can easily expose R function signatures as webservice APIs. As an example, let’s expose a simple machine learning model using the <a href="https://github.com/topepo/caret">caret</a> package and the Iris data set. The <code>predict_species()</code> function accepts four arguments which it uses to predict the species of iris associated with incoming data. The <em>Beakr</em> instance exposes this API and, when given JSON input with the required arguments, identifies and returns the species.</p>
-<p><em>Note</em> that <code>httpPOST</code> attaches the URL path <code>/predict-specis</code> only to http POST requests. Pointing a browser at this URL path will issue a File Not found error because the browser is issuing an http GET request. Like other frameworks, <strong>beakr</strong> allows for method-specific URL routing.</p>
-<pre><code><a href="https://rdrr.io/r/base/library.html"># Import libraries 
+<p><em>Note</em> that <code>httpPOST</code> attaches the URL path <code>/predict-species</code> only to http POST requests. Pointing a browser at this URL path will issue a File Not found error because the browser is issuing an http GET request. Like other frameworks, <strong>beakr</strong> allows for method-specific URL routing.</p>
+<pre><code><a href="https://github.com/MazamaScience/beakr"># Import libraries 
 library(beakr)
 library(caret)
 
@@ -169,7 +169,7 @@ newBeakr() %&gt;%
 <h3 class="hasAnchor">
 <a href="#a-state-plotting-webservice" class="anchor"></a>A state plotting webservice</h3>
 <p>We can use a built-in convenience function of a <strong>beakr</strong>’s <em>Response</em> object to print and return a <em>ggplot</em> object. Use <code>help("Response"")</code> to view other <em>Response</em> object methods and documentation. In this example we’ll wrap some map generation code and serve it with a <em>Beakr</em> instance. Instead of decorating an existing package function, we will create a <strong>beakr</strong>-oriented function that uses a response object method to send back raw image bytes. Parameters in the URL request will be converted into arguments to the function.</p>
-<pre><code><a href="https://rdrr.io/r/base/library.html">library(beakr)
+<pre><code><a href="https://github.com/MazamaScience/beakr">library(beakr)
 library(ggplot2)
 
 # Create a plot of a US state
@@ -200,7 +200,7 @@ newBeakr() %&gt;%
 <h3 class="hasAnchor">
 <a href="#a-custom-webservice" class="anchor"></a>A custom webservice</h3>
 <p>Users can create custom functions that will be run when specific URLs are accessed using specific HTTP methods. The following example provides a basic outline for creating more complex webservices:</p>
-<pre><code><a href="https://rdrr.io/r/base/library.html">library(beakr)
+<pre><code><a href="https://github.com/MazamaScience/beakr">library(beakr)
 library(MazamaCoreUtils)
 
 newBeakr() %&gt;%
@@ -298,11 +298,13 @@ newBeakr() %&gt;%
 
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/MazamaScience/beakr">https://​github.com/​MazamaScience/​beakr</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=beakr">https://​cloud.r-project.org/​package=beakr</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/MazamaScience/beakr/">https://​github.com/​MazamaScience/​beakr/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/MazamaScience/beakr/issues">https://​github.com/​MazamaScience/​beakr/​issues</a>
 </li>
@@ -337,7 +339,7 @@ newBeakr() %&gt;%
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
