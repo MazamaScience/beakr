@@ -1,3 +1,7 @@
+# beakr 0.3.3 
+
+* Added native CORS functionality.
+
 # beakr 0.3.2
 
 * Added a `FUN` parameter to `handleErrors()` so users can define their own 

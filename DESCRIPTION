@@ -1,7 +1,7 @@
 Package: beakr
 Type: Package
 Title: A Minimalist Web Framework for R
-Version: 0.3.2
+Version: 0.3.3
 Authors@R: c(
     person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut")),
     person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut","cre"))
