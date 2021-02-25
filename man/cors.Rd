@@ -8,9 +8,49 @@ cors(
   beakr,
   path = NULL,
   methods = c("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"),
-  origin = "*"
+  origin = "*",
+  credentials = NULL,
+  headers = NULL,
+  maxAge = NULL,
+  expose = NULL
 )
 }
+\arguments{
+\item{beakr}{\code{Beakr} instance object.}
+
+\item{path}{The path to bind CORS to.}
+
+\item{methods}{The request methods to allow e.g \code{GET, POST}.}
+
+\item{origin}{The allowed origin to enable resource sharing.}
+
+\item{credentials}{Boolean to enable credentialed requests.}
+
+\item{headers}{The allowed headers.}
+
+\item{maxAge}{The max age, in seconds.}
+
+\item{expose}{The headers to expose.}
+}
+\value{
+A \code{Beakr} instance with CORS enabled
+}
 \description{
-Allow CORS-headers.
+Allow CORS-headers as described in
+\href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN Web Docs}.
+A minimal example of CORS usage that allows wild-card origin and default methods:
+\preformatted{
+newBeakr() \%>\%
+
+  cors() %>%
+
+  httpGET(<route_A>, function(req, res, err) {
+    ...
+  }) %>%
+
+  listen()
+}
+}
+\seealso{
+\link{Request}, \link{Response}, \link{Error}
 }
