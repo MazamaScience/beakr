@@ -227,3 +227,59 @@ jsonError <- function(req, res, err) {
   }
 
 }
+
+#' @export
+#' @title Allow Cross-Origin-Requests
+#'
+#' @description Allow CORS-headers.
+
+cors <- function(
+  beakr,
+  path = NULL,
+  methods = c('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'),
+  origin = "*",
+  credentials = NULL,
+  headers = NULL,
+  maxAge = NULL,
+  expose = NULL
+) {
+
+  if(!is.null(headers)) headers <- paste0(headers, collapse = ",")
+  if(!is.null(methods)) methods <- paste0(methods, collapse = ",")
+
+  headers <- Filter(
+    function(i) { !is.null(i) },
+    list(
+      "Access-Control-Allow-Origin" = origin,
+      "Access-Control-Expose-Headers" = expose,
+      "Access-Control-Max-Age" = maxAge,
+      "Access-Control-Allow-Credentials" = credentials,
+      "Access-Control-Allow-Methods" = methods,
+      "Access-Control-Allow-Headers" = headers
+    )
+  )
+
+  .routeMiddleware(
+    beakr,
+    path = path,
+    method = NULL,
+    FUN = function(req, res, err) {
+
+      if ( req$method == "OPTIONS" ) {
+        res$setHeader("Access-Control-Allow-Methods", methods)
+        res$setHeader("Access-Control-Allow-Origin", origin)
+        res$setHeader("Access-Control-Allow-Headers", headers)
+      }
+
+      lapply(
+        names(headers),
+        function(header) { res$setHeader(header, headers[[header]]) }
+      )
+
+      return(NULL)
+  })
+
+
+  return(beakr)
+
+}
