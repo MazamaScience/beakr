@@ -231,7 +231,33 @@ jsonError <- function(req, res, err) {
 #' @export
 #' @title Allow Cross-Origin-Requests
 #'
-#' @description Allow CORS-headers.
+#' @description Allow CORS-headers as described in
+#' \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN Web Docs}.
+#' A minimal example of CORS usage that allows wild-card origin and default methods:
+#' \preformatted{
+#' newBeakr() \%>\%
+#'
+#'   cors() \%>\%
+#'
+#'   httpGET(<route_A>, function(req, res, err) {
+#'     ...
+#'   }) \%>\%
+#'
+#'   listen()
+#' }
+#'
+#' @param beakr \code{Beakr} instance object.
+#' @param path The path to bind CORS to.
+#' @param methods The request methods to allow e.g \code{GET, POST}.
+#' @param origin The allowed origin to enable resource sharing.
+#' @param credentials Boolean to enable credentialed requests.
+#' @param headers The allowed headers.
+#' @param maxAge The max age, in seconds.
+#' @param expose The headers to expose.
+#'
+#' @return A \code{Beakr} instance with CORS enabled
+#'
+#' @seealso \link{Request}, \link{Response}, \link{Error}
 
 cors <- function(
   beakr,
@@ -253,7 +279,11 @@ cors <- function(
       "Access-Control-Allow-Origin" = origin,
       "Access-Control-Expose-Headers" = expose,
       "Access-Control-Max-Age" = maxAge,
-      "Access-Control-Allow-Credentials" = credentials,
+      "Access-Control-Allow-Credentials" = ifelse(
+        is.null(credentials),
+        NULL,
+        tolower(as.character(credentials))
+      ),
       "Access-Control-Allow-Methods" = methods,
       "Access-Control-Allow-Headers" = headers
     )
