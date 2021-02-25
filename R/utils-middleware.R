@@ -19,7 +19,7 @@
 #' For example, specifying:
 #'
 #' \preformatted{
-#' beakr %>%
+#' beakr \%>\%
 #'   ...
 #'   serverStaticFiles("/data-service/A", "/data/project_A/public")
 #'   ...
@@ -146,19 +146,19 @@ serveStaticFiles <- function(
 #' \pkg{beakr} webservice typically looks like this:
 #'
 #' \preformatted{
-#' newBeakr() %>%
+#' newBeakr() \%>\%
 #'
 #'   httpGET(<route_A>, function(req, res, err) {
 #'     ...
-#'   }) %>%
+#'   }) \%>\%
 #'
 #'   httpGET(<route_B>, function(req, res, err) {
 #'     ...
-#'   }) %>%
+#'   }) \%>\%
 #'
-#'   serveStaticFiles(...) %>%
+#'   serveStaticFiles(...) \%>\%
 #'
-#'   handleErrors() %>%
+#'   handleErrors() \%>\%
 #'
 #'   listen()
 #' }
