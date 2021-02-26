@@ -23,19 +23,19 @@ The general structure for a stand-alone executable script with a
 \pkg{beakr} webservice typically looks like this:
 
 \preformatted{
-newBeakr() %>%
+newBeakr() \%>\%
 
   httpGET(<route_A>, function(req, res, err) {
     ...
-  }) %>%
+  }) \%>\%
 
   httpGET(<route_B>, function(req, res, err) {
     ...
-  }) %>%
+  }) \%>\%
 
-  serveStaticFiles(...) %>%
+  serveStaticFiles(...) \%>\%
 
-  handleErrors() %>%
+  handleErrors() \%>\%
 
   listen()
 }
