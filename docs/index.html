@@ -84,18 +84,28 @@
 <a href="#hello-world---the-beakr-way" class="anchor"></a>Hello, world! - The beakr way</h3>
 <pre><code><a href="https://github.com/MazamaScience/beakr">library(beakr)
 
+# Create a new beakr server
 newBeakr() %&gt;% 
+
+  # Respond to GET requests at the "/hi" route
   httpGET(path = "/hi", function(req, res, err) {
     print("Hello, World!")
   }) %&gt;% 
+  
+  # Respond to GET requests at the "/bye" route
   httpGET(path = "/bye", function(req, res, err) {
     print("Farewell, my friends.")
   }) %&gt;% 
+  
+  # Handle any errors with a JSON response
+  handleErrors() %&gt;%
+  
+  # Start the server on port 25118
   listen(host = "127.0.0.1", port = 25118) </a></code></pre>
 <p>A new web service is now available on the local host that responds to two URLs:</p>
 <ul>
-<li><a href="http://127.0.0.1.25118/hi" class="uri">http://127.0.0.1.25118/hi</a></li>
-<li><a href="http://127.0.0.1.25118/bye" class="uri">http://127.0.0.1.25118/bye</a></li>
+<li><a href="http://127.0.0.1:25118/hi" class="uri">http://127.0.0.1:25118/hi</a></li>
+<li><a href="http://127.0.0.1:25118/bye" class="uri">http://127.0.0.1:25118/bye</a></li>
 </ul>
 </div>
 </div>

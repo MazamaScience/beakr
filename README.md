@@ -30,6 +30,9 @@ newBeakr() %>%
     print("Farewell, my friends.")
   }) %>% 
   
+  # Handle any errors with a JSON response
+  handleErrors() %>%
+  
   # Start the server on port 25118
   listen(host = "127.0.0.1", port = 25118) 
 ```
@@ -37,8 +40,8 @@ newBeakr() %>%
 A new web service is now available on the local host that responds to two
 URLs:
 
-* http://127.0.0.1.25118/hi
-* http://127.0.0.1.25118/bye
+* http://127.0.0.1:25118/hi
+* http://127.0.0.1:25118/bye
 
 ## Overview
 
