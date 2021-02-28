@@ -279,11 +279,7 @@ cors <- function(
       "Access-Control-Allow-Origin" = origin,
       "Access-Control-Expose-Headers" = expose,
       "Access-Control-Max-Age" = maxAge,
-      "Access-Control-Allow-Credentials" = ifelse(
-        is.null(credentials),
-        NULL,
-        tolower(as.character(credentials))
-      ),
+      "Access-Control-Allow-Credentials" = credentials,
       "Access-Control-Allow-Methods" = methods,
       "Access-Control-Allow-Headers" = headers
     )
