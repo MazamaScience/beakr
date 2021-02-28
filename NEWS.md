@@ -1,4 +1,4 @@
-# beakr 0.3.3 
+# beakr 0.4.0 
 
 * Added native CORS functionality.
 
