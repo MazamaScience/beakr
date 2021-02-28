@@ -17,13 +17,20 @@ package APIs — without obscuring R's data processing capability and ease of us
 ```
 library(beakr)
 
+# Create a new beakr server
 newBeakr() %>% 
+
+  # Respond to GET requests at the "/hi" route
   httpGET(path = "/hi", function(req, res, err) {
     print("Hello, World!")
   }) %>% 
+  
+  # Respond to GET requests at the "/bye" route
   httpGET(path = "/bye", function(req, res, err) {
     print("Farewell, my friends.")
   }) %>% 
+  
+  # Start the server on port 25118
   listen(host = "127.0.0.1", port = 25118) 
 ```
 
