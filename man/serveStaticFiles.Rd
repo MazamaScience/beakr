@@ -45,7 +45,7 @@ structure underneath \code{rootPath} will be mapped onto URLs underneath
 For example, specifying:
 
 \preformatted{
-beakr %>%
+beakr \%>\%
   ...
   serverStaticFiles("/data-service/A", "/data/project_A/public")
   ...

@@ -42,11 +42,11 @@ A minimal example of CORS usage that allows wild-card origin and default methods
 \preformatted{
 newBeakr() \%>\%
 
-  cors() %>%
+  cors() \%>\%
 
   httpGET(<route_A>, function(req, res, err) {
     ...
-  }) %>%
+  }) \%>\%
 
   listen()
 }
