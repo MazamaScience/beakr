@@ -8,13 +8,14 @@ serveStaticFiles(
   beakr = NULL,
   urlPath = NULL,
   rootPath = getwd(),
-  rawTypesPattern = "image|json|octet|pdf|video"
+  rawTypesPattern = "text|image|json|octet|pdf|video",
+  verbose = TRUE
 )
 }
 \arguments{
 \item{beakr}{\code{Beakr} instance or \code{NULL}.}
 
-\item{urlPath}{String representing the URL directory undnerneath which static
+\item{urlPath}{String representing the URL directory underneath which static
 file paths will appear.}
 
 \item{rootPath}{String representing the absolute path used as the root
@@ -23,6 +24,8 @@ in which the script is running.}
 
 \item{rawTypesPattern}{String pattern identifying mime types to be returned
 as raw bytes.}
+
+\item{verbose}{Boolean to show a verbose static file information.}
 }
 \value{
 A \code{Beakr} instance with added middleware.
@@ -43,21 +46,34 @@ structure underneath \code{rootPath} will be mapped onto URLs underneath
 \code{urlPath}. This helps when deploying web services at preordained URLs.
 
 For example, specifying:
+\preformatted{
+library(beakr)
 
-\preformatted{
-beakr \%>\%
-  ...
-  serverStaticFiles("/data-service/A", "/data/project_A/public")
-  ...
-  listen()
-}
+# Create temp csv in temp directory
+dir <- tempdir()
+file <- paste0(dir, "/data.csv")
+write.csv(mtcars, file = file)
 
-will allow a file found on the host machine at:
-\preformatted{
-  /data/project_A/public/2019/averages.csv"
+# Create a new beakr server
+newBeakr() \%>\%
+
+ # Respond to GET requests at the "/hi" route
+ httpGET(path = "/hi", function(req, res, err) {
+   print("Hello, World!")
+ }) \%>\%
+
+ # Respond to GET requests at the "/bye" route
+ httpGET(path = "/bye", function(req, res, err) {
+   print("Farewell, my friends.")
+ }) \%>\%
+
+ # Host the static directory
+ serveStaticFiles("/test", dir, verbose = TRUE) \%>\%
+
+ # Start the server on port 25118
+ listen(host = "127.0.0.1", port = 25118)
 }
-to be downloaded from:
-\preformatted{
-  http://<ip-address>:<port>/data-service/A/2019/averages.csv"
-}
+will allow files within the host machines directory \code{dir} to be accessed.
+We created a CSV file called \code{data.csv} that is now available at
+\code{/test/data.csv}.
 }

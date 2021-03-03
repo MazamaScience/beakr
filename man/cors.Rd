@@ -18,37 +18,58 @@ cors(
 \arguments{
 \item{beakr}{\code{Beakr} instance object.}
 
-\item{path}{The path to bind CORS to.}
+\item{path}{The path to allow cross-origin resource sharing requests of.}
 
-\item{methods}{The request methods to allow e.g \code{GET, POST}.}
+\item{methods}{A vector of the request methods to allow. i.e
+\code{Access-Control-Allow-Methods} parameter, e.g \code{GET, POST}.}
 
-\item{origin}{The allowed origin to enable resource sharing.}
+\item{origin}{A vector of the allowed origin(s) to enable cross resource
+sharing from. i.e \code{Access-Control-Allow-Origin} response header parameter.}
 
-\item{credentials}{Boolean to enable credentialed requests.}
+\item{credentials}{A boolean to enable/disable credentialed requests. i.e
+\code{Access-Control-Allow-Credentials} response header parameter.}
 
-\item{headers}{The allowed headers.}
+\item{headers}{A vector of the allowed headers. i.e
+\code{Access-Control-Allow-Headers} response header parameter.}
 
-\item{maxAge}{The max age, in seconds.}
+\item{maxAge}{The max age, in seconds. i.e \code{Access-Control-Max-Age}
+response header parameter.}
 
-\item{expose}{The headers to expose.}
+\item{expose}{The headers to expose. i.e \code{Access-Control-Expose-Headers}
+response header parameter.}
 }
 \value{
 A \code{Beakr} instance with CORS enabled
 }
 \description{
-Allow CORS-headers as described in
+Allow Cross-Origin Resource Sharing headers as described in
 \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN Web Docs}.
-A minimal example of CORS usage that allows wild-card origin and default methods:
+Cross-origin resource sharing is a mechanism that allows restricted resources
+on a web page to be requested from another domain(origin) outside the domain
+from which the first resource was served.
+A minimal example of CORS usage that allows wild-card origin and default
+methods:
 \preformatted{
+library(beakr)
+
+# Create a new beakr server
 newBeakr() \%>\%
 
+  # Enable CORS
   cors() \%>\%
 
-  httpGET(<route_A>, function(req, res, err) {
-    ...
+  # Respond to GET requests at the "/hi" route
+  httpGET(path = "/hi", function(req, res, err) {
+   print("Hello, World!")
   }) \%>\%
 
-  listen()
+  # Respond to GET requests at the "/bye" route
+  httpGET(path = "/bye", function(req, res, err) {
+    print("Farewell, my friends.")
+  }) \%>\%
+
+  # Start the server on port 25118
+  listen(host = "127.0.0.1", port = 25118)
 }
 }
 \seealso{
