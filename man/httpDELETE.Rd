@@ -23,6 +23,8 @@ specified callback functions or middleware.
 }
 \examples{
 \dontrun{
+library(beakr)
+
 # Create an new Beakr instance
 beakr <- newBeakr()
 

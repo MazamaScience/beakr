@@ -40,20 +40,11 @@
 
 
 <meta property="og:title" content="Allow Cross-Origin-Requests — cors" />
-<meta property="og:description" content="Allow CORS-headers as described in
+<meta property="og:description" content="Allow Cross-Origin Resource Sharing headers as described in
 MDN Web Docs.
-A minimal example of CORS usage that allows wild-card origin and default methods:
-newBeakr() %&amp;gt;%
-
-  cors() %&amp;gt;%
-
-  httpGET(&amp;lt;route_A&amp;gt;, function(req, res, err) {
-    ...
-  }) %&amp;gt;%
-
-  listen()
-
-" />
+Cross-origin resource sharing is a mechanism that allows restricted resources
+on a web page to be requested from another domain(origin) outside the domain
+from which the first resource was served." />
 
 
 
@@ -85,7 +76,7 @@ newBeakr() %&amp;gt;%
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -130,20 +121,11 @@ newBeakr() %&amp;gt;%
     </div>
 
     <div class="ref-description">
-    <p>Allow CORS-headers as described in
+    <p>Allow Cross-Origin Resource Sharing headers as described in
 <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS'>MDN Web Docs</a>.
-A minimal example of CORS usage that allows wild-card origin and default methods:</p><pre>
-newBeakr() %&gt;%
-
-  cors() %&gt;%
-
-  httpGET(&lt;route_A&gt;, function(req, res, err) {
-    ...
-  }) %&gt;%
-
-  listen()
-</pre>
-
+Cross-origin resource sharing is a mechanism that allows restricted resources
+on a web page to be requested from another domain(origin) outside the domain
+from which the first resource was served.</p>
     </div>
 
     <pre class="usage"><span class='fu'>cors</span><span class='op'>(</span>
@@ -166,41 +148,93 @@ newBeakr() %&gt;%
     </tr>
     <tr>
       <th>path</th>
-      <td><p>The path to bind CORS to.</p></td>
+      <td><p>String representing a path for which to specify a CORS policy.
+Default <code>NULL</code> applies a single policy for all URL routes.</p></td>
     </tr>
     <tr>
       <th>methods</th>
-      <td><p>The request methods to allow e.g <code>GET, POST</code>.</p></td>
+      <td><p>A vector of the request methods to allow. i.e
+<code>Access-Control-Allow-Methods</code> parameter, e.g <code>GET, POST</code>.</p></td>
     </tr>
     <tr>
       <th>origin</th>
-      <td><p>The allowed origin to enable resource sharing.</p></td>
+      <td><p>A vector of the request origin(s) for which resource sharing
+is enabled. i.e <code>Access-Control-Allow-Origin</code> response header parameter.</p></td>
     </tr>
     <tr>
       <th>credentials</th>
-      <td><p>Boolean to enable credentialed requests.</p></td>
+      <td><p>A boolean to enable/disable credentialed requests. i.e
+<code>Access-Control-Allow-Credentials</code> response header parameter.</p></td>
     </tr>
     <tr>
       <th>headers</th>
-      <td><p>The allowed headers.</p></td>
+      <td><p>A vector of the allowed headers. i.e
+<code>Access-Control-Allow-Headers</code> response header parameter.</p></td>
     </tr>
     <tr>
       <th>maxAge</th>
-      <td><p>The max age, in seconds.</p></td>
+      <td><p>The max age, in seconds. i.e <code>Access-Control-Max-Age</code>
+response header parameter.</p></td>
     </tr>
     <tr>
       <th>expose</th>
-      <td><p>The headers to expose.</p></td>
+      <td><p>The headers to expose. i.e <code>Access-Control-Expose-Headers</code>
+response header parameter.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>Beakr</code> instance with CORS enabled</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>You can verify that CORS is enabled by using the Chrome browser and
+opening up the Developer Tools. The "Network" tab allows you to inspect
+response headers and see where the <code>Cross-Origin</code> policy is specified.</p>
+<p>If you run the example in the console, be sure to
+<code><a href='stopServer.html'>stopServer(bekar)</a></code> when you are done.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='Request.html'>Request</a>, <a href='Response.html'>Response</a>, <a href='Error.html'>Error</a></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/MazamaScience/beakr'>beakr</a></span><span class='op'>)</span>
+
+<span class='co'># Create an new beakr instance</span>
+<span class='va'>beakr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># beakr pipeline</span>
+<span class='va'>beakr</span> <span class='op'>%&gt;%</span>
+
+  <span class='co'># Enable CORS</span>
+  <span class='fu'>cors</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+
+  <span class='co'># Respond to GET requests at the "/hi" route</span>
+  <span class='fu'><a href='httpGET.html'>httpGET</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"/hi"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>req</span>, <span class='va'>res</span>, <span class='va'>err</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Hello, World!"</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+
+  <span class='co'># Respond to GET requests at the "/bye" route</span>
+  <span class='fu'><a href='httpGET.html'>httpGET</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"/bye"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>req</span>, <span class='va'>res</span>, <span class='va'>err</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Farewell, my friends."</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+
+  <span class='co'># Start the server on port 25118</span>
+  <span class='fu'><a href='listen.html'>listen</a></span><span class='op'>(</span>host <span class='op'>=</span> <span class='st'>"127.0.0.1"</span>, port <span class='op'>=</span> <span class='fl'>25118</span>, daemon <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='co'># ------------------------------------------------------------</span>
+<span class='co'># POINT YOUR BROWSER AT:</span>
+<span class='co'># * http://127.0.0.1:25118/hi</span>
+<span class='co'># * http://127.0.0.1:25118/bye</span>
+<span class='co'>#</span>
+<span class='co'># THEN, STOP THE SERVER WITH stopServer(beakr)</span>
+<span class='co'># ------------------------------------------------------------</span>
+
+<span class='co'># Stop the beakr instance server</span>
+<span class='fu'><a href='stopServer.html'>stopServer</a></span><span class='op'>(</span><span class='va'>beakr</span><span class='op'>)</span>
+<span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

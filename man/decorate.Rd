@@ -28,23 +28,32 @@ be used in \code{Beakr} instances and accept requests.
 }
 \examples{
 \donttest{
+library(beakr)
+
 # Create an new Beakr instance
 beakr <- newBeakr()
+
 # Create simple hello and goodbye function
 hello <- function(name) { paste0("Hello, ", name, "!") }
 goodbye <- function(text = "Adios") { paste0(text, ", dear friend.") }
 
 # Create a web service from these functions
 beakr \%>\%
+
   httpGET(path = "/hello", decorate(hello)) \%>\%
+
   httpGET(path = "/goodbye", decorate(goodbye)) \%>\%
+
   handleErrors() \%>\%
+
   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 
 # ------------------------------------------------------------
 # POINT YOUR BROWSER AT:
 # * http://127.0.0.1:25118/hello?name=Honeydew
-# * http://127.0.0.1:25118/goodbye
+# * http://127.0.0.1:25118/goodbye?text=Sionara
+#
+# THEN, STOP THE SERVER WITH stopServer(beakr)
 # ------------------------------------------------------------
 
 # Stop the beakr instance server

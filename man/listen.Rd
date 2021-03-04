@@ -53,13 +53,19 @@ The default port number 25118 was generated using:
 }
 }
 \examples{
-# Run in the background
+library(beakr)
+
+# Create an new Beakr instance
 beakr <- newBeakr()
+
+# beakr pipeline
 beakr \%>\%
+
   httpGET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
-  listen(daemon = TRUE)
+
+  listen(daemon = TRUE)     # run in the background
 
 # Stop the server
 stopServer(beakr)

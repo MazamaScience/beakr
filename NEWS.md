@@ -1,3 +1,7 @@
+# beakr 0.4.1
+
+* Improved examples in function documentation.
+
 # beakr 0.4.0 
 
 * Added native CORS functionality.

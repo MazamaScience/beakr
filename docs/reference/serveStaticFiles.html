@@ -77,7 +77,7 @@ parameter is used to match mime types that should be returned as raw bytes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">beakr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -134,7 +134,8 @@ parameter is used to match mime types that should be returned as raw bytes.</p>
   beakr <span class='op'>=</span> <span class='cn'>NULL</span>,
   urlPath <span class='op'>=</span> <span class='cn'>NULL</span>,
   rootPath <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
-  rawTypesPattern <span class='op'>=</span> <span class='st'>"image|json|octet|pdf|video"</span>
+  rawTypesPattern <span class='op'>=</span> <span class='st'>"text|image|json|octet|pdf|video"</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -146,7 +147,7 @@ parameter is used to match mime types that should be returned as raw bytes.</p>
     </tr>
     <tr>
       <th>urlPath</th>
-      <td><p>String representing the URL directory undnerneath which static
+      <td><p>String representing the URL directory underneath which static
 file paths will appear.</p></td>
     </tr>
     <tr>
@@ -160,6 +161,10 @@ in which the script is running.</p></td>
       <td><p>String pattern identifying mime types to be returned
 as raw bytes.</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Boolean to show a verbose static file information.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -171,22 +176,55 @@ as raw bytes.</p></td>
 host machine directory specified with <code>rootPath</code>. The directory
 structure underneath <code>rootPath</code> will be mapped onto URLs underneath
 <code>urlPath</code>. This helps when deploying web services at preordained URLs.</p>
-<p>For example, specifying:</p>
-<pre>
+<p>The example below presents files underneath host machine directory
+<code>hostDir/</code> to be accessed at URLS under <code>test/</code>.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>If you run the example in the console, be sure to
+<code><a href='stopServer.html'>stopServer(bekar)</a></code> when you are done.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/MazamaScience/beakr'>beakr</a></span><span class='op'>)</span>
+
+<span class='co'># Create a .txt file in temp directory</span>
+<span class='va'>hostDir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>hostDir</span>, <span class='st'>"/my_file.txt"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"I am a text file."</span>, file <span class='op'>=</span> <span class='va'>file</span><span class='op'>)</span>
+
+<span class='co'># Create an new beakr instance</span>
+<span class='va'>beakr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='newBeakr.html'>newBeakr</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># beakr pipeline</span>
 <span class='va'>beakr</span> <span class='op'>%&gt;%</span>
-  <span class='va'>...</span>
-  <span class='fu'>serverStaticFiles</span><span class='op'>(</span><span class='st'>"/data-service/A"</span>, <span class='st'>"/data/project_A/public"</span><span class='op'>)</span>
-  <span class='va'>...</span>
-  <span class='fu'><a href='listen.html'>listen</a></span><span class='op'>(</span><span class='op'>)</span>
-</pre>
 
-<p>will allow a file found on the host machine at:</p><pre>
-  /data/project_A/public/2019/averages.csv"
-</pre><p>to be downloaded from:</p><pre>
-  http://&lt;ip-address&gt;:&lt;port&gt;/data-service/A/2019/averages.csv"
-</pre>
+  <span class='co'># Respond to GET requests at the "/hi" route</span>
+  <span class='fu'><a href='httpGET.html'>httpGET</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"/hi"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>req</span>, <span class='va'>res</span>, <span class='va'>err</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Hello, World!"</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
 
+  <span class='co'># Respond to GET requests at the "/bye" route</span>
+  <span class='fu'><a href='httpGET.html'>httpGET</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"/bye"</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>req</span>, <span class='va'>res</span>, <span class='va'>err</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='st'>"Farewell, my friends."</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
 
+ <span class='co'># Host the directory of static files</span>
+ <span class='fu'>serveStaticFiles</span><span class='op'>(</span><span class='st'>"/test"</span>, <span class='va'>hostDir</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+
+ <span class='co'># Start the server on port 25118</span>
+ <span class='fu'><a href='listen.html'>listen</a></span><span class='op'>(</span>host <span class='op'>=</span> <span class='st'>"127.0.0.1"</span>, port <span class='op'>=</span> <span class='fl'>25118</span>, daemon <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Hosting static directory /var/folders/84/y311lppx4519st7n8_gfkd1w0000gn/T//RtmpQB1Nc8 @ /test</div><div class='input'>
+<span class='co'># ------------------------------------------------------------</span>
+<span class='co'># POINT YOUR BROWSER AT:</span>
+<span class='co'># * http://127.0.0.1:25118/test/my_file.txt</span>
+<span class='co'>#</span>
+<span class='co'># THEN, STOP THE SERVER WITH stopServer(beakr)</span>
+<span class='co'># ------------------------------------------------------------</span>
+
+<span class='co'># Stop the beakr instance server</span>
+<span class='fu'><a href='stopServer.html'>stopServer</a></span><span class='op'>(</span><span class='va'>beakr</span><span class='op'>)</span>
+<span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

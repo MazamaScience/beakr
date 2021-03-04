@@ -23,24 +23,32 @@ end with the \code{listen()} function.
 }
 \examples{
 \donttest{
-# Create an new Beakr instance
+library(beakr)
+
+# Create an new beakr instance
 beakr <- newBeakr()
 
-# Create a pipeline of hanldlers
+# beakr pipeline of hanldlers
 beakr \%>\%
+
   httpGET(path = "/route_A", function(res, req, err) {
     print("This is route 'A'.")
   }) \%>\%
+
   httpGET(path = "/route_B", function(res, req, err) {
     print("This is route 'B'.")
   }) \%>\%
+
   handleErrors() \%>\%
+
   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 
 # ------------------------------------------------------------
 # POINT YOUR BROWSER AT:
 # * http://127.0.0.1:25118/route_A
 # * http://127.0.0.1:25118/route_B
+#
+# THEN, STOP THE SERVER WITH stopServer(beakr)
 # ------------------------------------------------------------
 
 # Stop the beakr instance server

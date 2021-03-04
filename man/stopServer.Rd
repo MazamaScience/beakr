@@ -20,8 +20,16 @@ Stops the server associated with a \code{Beakr} instance,
 closing all open connections and unbinding the port.
 }
 \examples{
+library(beakr)
+
 beakr <- newBeakr()
+
+# beakr pipeline
 beakr \%>\%
+
+  handleErrors() \%>\%
+
   listen(daemon = TRUE, verbose = TRUE)
+
 stopServer(beakr, verbose = TRUE)
 }

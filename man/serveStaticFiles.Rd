@@ -9,7 +9,7 @@ serveStaticFiles(
   urlPath = NULL,
   rootPath = getwd(),
   rawTypesPattern = "text|image|json|octet|pdf|video",
-  verbose = TRUE
+  verbose = FALSE
 )
 }
 \arguments{
@@ -45,35 +45,52 @@ host machine directory specified with \code{rootPath}. The directory
 structure underneath \code{rootPath} will be mapped onto URLs underneath
 \code{urlPath}. This helps when deploying web services at preordained URLs.
 
-For example, specifying:
-\preformatted{
+The example below presents files underneath host machine directory
+\code{hostDir/} to be accessed at URLS under \code{test/}.
+}
+\note{
+If you run the example in the console, be sure to
+\code{stopServer(bekar)} when you are done.
+}
+\examples{
+\donttest{
 library(beakr)
 
-# Create temp csv in temp directory
-dir <- tempdir()
-file <- paste0(dir, "/data.csv")
-write.csv(mtcars, file = file)
+# Create a .txt file in temp directory
+hostDir <- tempdir()
+file <- paste0(hostDir, "/my_file.txt")
+cat("I am a text file.", file = file)
 
-# Create a new beakr server
-newBeakr() \%>\%
+# Create an new beakr instance
+beakr <- newBeakr()
 
- # Respond to GET requests at the "/hi" route
- httpGET(path = "/hi", function(req, res, err) {
-   print("Hello, World!")
- }) \%>\%
+# beakr pipeline
+beakr \%>\%
 
- # Respond to GET requests at the "/bye" route
- httpGET(path = "/bye", function(req, res, err) {
-   print("Farewell, my friends.")
- }) \%>\%
+  # Respond to GET requests at the "/hi" route
+  httpGET(path = "/hi", function(req, res, err) {
+    print("Hello, World!")
+  }) \%>\%
 
- # Host the static directory
- serveStaticFiles("/test", dir, verbose = TRUE) \%>\%
+  # Respond to GET requests at the "/bye" route
+  httpGET(path = "/bye", function(req, res, err) {
+    print("Farewell, my friends.")
+  }) \%>\%
+
+ # Host the directory of static files
+ serveStaticFiles("/test", hostDir, verbose = TRUE) \%>\%
 
  # Start the server on port 25118
- listen(host = "127.0.0.1", port = 25118)
+ listen(host = "127.0.0.1", port = 25118, daemon = TRUE)
+
+# ------------------------------------------------------------
+# POINT YOUR BROWSER AT:
+# * http://127.0.0.1:25118/test/my_file.txt
+#
+# THEN, STOP THE SERVER WITH stopServer(beakr)
+# ------------------------------------------------------------
+
+# Stop the beakr instance server
+stopServer(beakr)
 }
-will allow files within the host machines directory \code{dir} to be accessed.
-We created a CSV file called \code{data.csv} that is now available at
-\code{/test/data.csv}.
 }

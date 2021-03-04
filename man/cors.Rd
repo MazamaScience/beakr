@@ -18,13 +18,14 @@ cors(
 \arguments{
 \item{beakr}{\code{Beakr} instance object.}
 
-\item{path}{The path to allow cross-origin resource sharing requests of.}
+\item{path}{String representing a path for which to specify a CORS policy.
+Default \code{NULL} applies a single policy for all URL routes.}
 
 \item{methods}{A vector of the request methods to allow. i.e
 \code{Access-Control-Allow-Methods} parameter, e.g \code{GET, POST}.}
 
-\item{origin}{A vector of the allowed origin(s) to enable cross resource
-sharing from. i.e \code{Access-Control-Allow-Origin} response header parameter.}
+\item{origin}{A vector of the request origin(s) for which resource sharing
+is enabled. i.e \code{Access-Control-Allow-Origin} response header parameter.}
 
 \item{credentials}{A boolean to enable/disable credentialed requests. i.e
 \code{Access-Control-Allow-Credentials} response header parameter.}
@@ -47,20 +48,31 @@ Allow Cross-Origin Resource Sharing headers as described in
 Cross-origin resource sharing is a mechanism that allows restricted resources
 on a web page to be requested from another domain(origin) outside the domain
 from which the first resource was served.
-A minimal example of CORS usage that allows wild-card origin and default
-methods:
-\preformatted{
+}
+\note{
+You can verify that CORS is enabled by using the Chrome browser and
+opening up the Developer Tools. The "Network" tab allows you to inspect
+response headers and see where the \code{Cross-Origin} policy is specified.
+
+If you run the example in the console, be sure to
+\code{stopServer(bekar)} when you are done.
+}
+\examples{
+\donttest{
 library(beakr)
 
-# Create a new beakr server
-newBeakr() \%>\%
+# Create an new beakr instance
+beakr <- newBeakr()
+
+# beakr pipeline
+beakr \%>\%
 
   # Enable CORS
   cors() \%>\%
 
   # Respond to GET requests at the "/hi" route
   httpGET(path = "/hi", function(req, res, err) {
-   print("Hello, World!")
+    print("Hello, World!")
   }) \%>\%
 
   # Respond to GET requests at the "/bye" route
@@ -69,7 +81,18 @@ newBeakr() \%>\%
   }) \%>\%
 
   # Start the server on port 25118
-  listen(host = "127.0.0.1", port = 25118)
+  listen(host = "127.0.0.1", port = 25118, daemon = TRUE)
+
+# ------------------------------------------------------------
+# POINT YOUR BROWSER AT:
+# * http://127.0.0.1:25118/hi
+# * http://127.0.0.1:25118/bye
+#
+# THEN, STOP THE SERVER WITH stopServer(beakr)
+# ------------------------------------------------------------
+
+# Stop the beakr instance server
+stopServer(beakr)
 }
 }
 \seealso{

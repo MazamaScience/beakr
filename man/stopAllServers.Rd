@@ -18,6 +18,8 @@ instances can quickly find and stop them all.
 See \code{httpuv::\link[httpuv:stopAllServers]{stopAllServers}} for details.
 }
 \examples{
+library(beakr)
+
 beakr1 <- newBeakr()
 beakr2 <- newBeakr()
 beakr1 \%>\% listen(daemon = TRUE, port = 1234, verbose = TRUE)

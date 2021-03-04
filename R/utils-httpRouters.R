@@ -13,6 +13,8 @@
 #'
 #' @examples
 #' \dontrun{
+#' library(beakr)
+#'
 #' # Create an new Beakr instance
 #' beakr <- newBeakr()
 #'
@@ -69,6 +71,8 @@ httpGET <- function(beakr, path = NULL, FUN = NULL) {
 #'
 #' @examples
 #' \dontrun{
+#' library(beakr)
+#'
 #' # Create an new Beakr instance
 #' beakr <- newBeakr()
 #'
@@ -125,6 +129,8 @@ httpPOST <- function(beakr, path = NULL, FUN = NULL) {
 #'
 #' @examples
 #' \dontrun{
+#' library(beakr)
+#'
 #' # Create an new Beakr instance
 #' beakr <- newBeakr()
 #'
@@ -181,6 +187,8 @@ httpPUT <- function(beakr, path = NULL, FUN = NULL) {
 #'
 #' @examples
 #' \dontrun{
+#' library(beakr)
+#'
 #' # Create an new Beakr instance
 #' beakr <- newBeakr()
 #'
