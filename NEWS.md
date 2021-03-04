@@ -1,3 +1,7 @@
+# beakr 0.4.2
+
+* URL fix for CRAN submission.
+
 # beakr 0.4.1
 
 * Improved examples in function documentation.

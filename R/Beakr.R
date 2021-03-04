@@ -10,7 +10,7 @@
 #' you can serve web traffic directly from an R process. \pkg{beakr} relies heavily
 #' on the \href{https://github.com/rstudio/httpuv}{httpuv} package, and therefore
 #' the lower level \href{https://github.com/joyent/libuv}{libuv} and
-#' \href{https://github.com/joyent/http-parser}{http-parser} C libraries.
+#' \href{https://github.com/nodejs/http-parser}{http-parser} C libraries.
 #' \pkg{beakr} is a ground-up rewrite and
 #' continuation of the \pkg{jug} package developed by Bart Smeets. The
 #' \pkg{beakr} package is supported and maintained by
