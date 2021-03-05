@@ -8,7 +8,7 @@ serveStaticFiles(
   beakr = NULL,
   urlPath = NULL,
   rootPath = getwd(),
-  rawTypesPattern = "text|image|json|octet|pdf|video",
+  rawTypesPattern = "image|json|octet|pdf|video",
   verbose = FALSE
 )
 }

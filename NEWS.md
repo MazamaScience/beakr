@@ -1,3 +1,8 @@
+# beakr 0.4.3
+
+* Fixed default `rawTypesPattern` in `serveStaticFiles()` to remove "text". That
+should never have gotten in there.
+
 # beakr 0.4.2
 
 * URL fix for CRAN submission.
