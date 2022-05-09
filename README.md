@@ -14,7 +14,7 @@ package APIs — without obscuring R's data processing capability and ease of us
 
 ### Hello, world! - The beakr way
 
-```
+```r
 library(beakr)
 
 # Create a new beakr server
@@ -103,7 +103,7 @@ requests. Pointing a browser at this URL path will issue a File Not found error
 because the browser is issuing an http GET request. Like other frameworks,
 **beakr** allows for method-specific URL routing.
 
-```
+```r
 # Import libraries 
 library(beakr)
 library(caret)
@@ -145,7 +145,7 @@ You can interact with this webservice by sending an HTTP POST request to
 string containing sepal length and width (`sl`, `sw`) and petal length and width 
 (`pl`, `pw`). The _Beakr_ instance responds with the predicted species of iris. 
 
-```
+```bash
 $ curl -X POST http://127.0.0.1:25118/predict-species \
   -H 'content-type: application/json' \
   -d '{ "sl": 5.3, "sw": 4, "pl": 1.6, "pw": 0.2 }'
@@ -163,7 +163,7 @@ existing package function, we will create a **beakr**-oriented function
 that uses a response object method to send back raw image bytes. Parameters in 
 the URL request will be converted into arguments to the function.
 
-```
+```r
 library(beakr)
 library(ggplot2)
 
@@ -199,7 +199,7 @@ Users can create custom functions that will be run when specific URLs are
 accessed using specific HTTP methods. The following example provides a basic
 outline for creating more complex webservices:
 
-```
+```r
 library(beakr)
 library(MazamaCoreUtils)
 
