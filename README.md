@@ -10,6 +10,9 @@ Language. **beakr** offers a robust set of fundamental web application features
 and is intended to simplify the development of web services that reflect R 
 package APIs — without obscuring R's data processing capability and ease of use.
 
+A dedicated Slack channel has been created for announcements, support and to help build a community of 
+practice around this open source package. You may request an invitation to join from jonathan.callahan@dri.com.
+
 ### Hello, world! - The beakr way
 
 ```r
