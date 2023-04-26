@@ -2,8 +2,6 @@
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/beakr)](https://cran.r-project.org/package=beakr)
 [![Downloads](http://cranlogs.r-pkg.org/badges/beakr)](https://cran.r-project.org/package=beakr)
-[![Build Status](https://travis-ci.org/MazamaScience/beakr.svg?branch=master)](https://travis-ci.org/MazamaScience/beakr)
-
 
 ## A Minimalist Web Framework for R
 
