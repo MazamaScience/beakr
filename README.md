@@ -157,7 +157,7 @@ $ curl -X POST http://127.0.0.1:25118/predict-species \
 ### A state plotting webservice
 
 We can use a built-in convenience function of a **beakr**'s _Response_ object to 
-print and return a _ggplot_ object. Use `help("Response"")` to view other 
+print and return a _ggplot_ object. Use `help("Response")` to view other 
 _Response_ object methods and documentation.  In this example we'll wrap some map 
 generation code and serve it with a _Beakr_ instance.  Instead of decorating an 
 existing package function, we will create a **beakr**-oriented function 
@@ -189,7 +189,7 @@ state_plot <- function(state = NULL, res) {
 # Create and start a default beakr instance
 newBeakr() %>%
   httpGET(path = '/usa', decorate(state_plot)) %>%
-  listen()
+  listen(host = "127.0.0.1", port = 8080)
 ```
 
 View a map of Washington state by visiting: http://127.0.0.1:8080/usa?state=washington.
@@ -286,8 +286,10 @@ newBeakr() %>%
 
   # ----- Start Beakr ----------------------------------------------------------
 
-  listen()
+  listen(host = "127.0.0.1", port = 8080)
 ```
+
+View the repeater API by visiting: http://127.0.0.1:8080.
 
 ## Notes
 

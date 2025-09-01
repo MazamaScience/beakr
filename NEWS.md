@@ -1,3 +1,7 @@
+# beakr 0.4.4
+
+Documentation tweaks for CRAN.
+
 # beakr 0.4.3
 
 * Fixed default `rawTypesPattern` in `serveStaticFiles()` to remove "text". That
