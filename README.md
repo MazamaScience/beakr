@@ -1,7 +1,7 @@
 [![sm-beakr.png](https://i.postimg.cc/7YBB0Hnp/sm-beakr.png)](https://postimg.cc/bstHjjMT)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/beakr)](https://cran.r-project.org/package=beakr)
-[![Downloads](http://cranlogs.r-pkg.org/badges/beakr)](https://cran.r-project.org/package=beakr)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/beakr)](https://cran.r-project.org/package=beakr)
+[![Downloads](https://cranlogs.r-pkg.org/badges/beakr)](https://cran.r-project.org/package=beakr)
 
 ## A Minimalist Web Framework for R
 
@@ -55,10 +55,10 @@ the flexibility of the package are (potentially) up to the task. Keep in mind
 that **beakr** was not designed to be an especially performant web framework and 
 the  _"batteries are certainly not included"_. If you're looking for full 
 featured  web frameworks, there are better tools and languages for that 
-(see [Shiny](https://shiny.rstudio.com), [django](https://www.djangoproject.com), etc.). 
+(see [Shiny](https://shiny.posit.co), [django](https://www.djangoproject.com), etc.). 
 **beakr** is inspired by the minimalist and massively-expandable frameworks 
 offered by [Express.js](https://expressjs.com) and 
-[Flask](https://palletsprojects.com/p/flask/). 
+[Flask](https://palletsprojects.com/p/flask). 
 
 One of the reasons to use **beakr** is that it is incredibly flexible. It allows 
 you to integrate your R code as _Middleware_ in a _Beakr_ instance. Middleware 
