@@ -1,82 +1,59 @@
-#' @export
-#' @importFrom base64enc base64encode
-#' @title Response Class
+#' Response Class
 #'
 #' @description
-#' A \code{Response} object represents represents the HTTP response that a
-#' \code{Beakr} sends when it gets an HTTP request. It is by convention, the
-#' object is always referred to as \code{res} (and the HTTP request is
-#' \code{req}).
+#' A `Response` object represents the HTTP response that a `Beakr` app sends
+#' when handling a request. By convention, the response object is named
+#' `res` (with the corresponding request named `req`).
 #'
-#' @usage NULL
+#' @docType class
+#' @name Response
+#' @export
+#' @importFrom base64enc base64encode
 #'
-#' @format NULL
+#' @format An [`R6::R6Class`] generator for `Response` objects.
 #'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{\code{headers}}{
-#'   A list containing a key-value header list.
-#'   }
-#'   \item{\code{status}}{
-#'   An integer HTTP status code.
-#'   }
-#'   \item{\code{body}}{
-#'   Contains the response body.
-#'   }
-#' }
-#'
-#' @section Methods:
-#'
-#' \describe{
-#' \item{\code{setHeader(key, value)}}{
-#'   Sets a key-value header, i.e. \code{"Content-Type" = "text/html"}.
-#'   }
-#'   \item{\code{setContentType(type)}}{
-#'   Sets the response content-type.
-#'   }
-#'   \item{\code{setStatus(status)}}{
-#'   Sets the HTTP status code.
-#'   }
-#'   \item{\code{setBody(body)}}{
-#'   Sets the body response.
-#'   }
-#'   \item{\code{redirect(url)}}{
-#'   Sets the HTTP status to 302, "Found" and redirects to \code{url}.
-#'   }
-#'   \item{\code{json(txt, auto_unbox = TRUE)}}{
-#'   Applies a function to text convert to JSON and sets the content-type to
-#'   JSON.
-#'   }
-#'   \item{\code{text(txt)}}{
-#'   Sets the response body text.
-#'   }
-#'   \item{\code{structured(protocol)}}{
-#'   Sets the response protocol, i.e. "http"
-#'   }
-#'   \item{\code{plot(plot_object, base64 = TRUE, ...)}}{
-#'   Sets the response type to plot image output.
-#'   }
-#' }
-#'
-#' @seealso \code{\link{Response}}
-#'
+#' @seealso [Router], [Request], [Error]
+NULL
+
 Response <-
   R6::R6Class(
     classname = "Response",
     public = list(
+      #' @field headers A named list of HTTP response headers.
+      #'   Defaults to `list("Content-Type" = "text/html")`.
       headers = list("Content-Type" = "text/html"),
+
+      #' @field status An integer HTTP status code. Defaults to `200L`.
       status = 200L,
+
+      #' @field body The response body. May be `NULL`, character, raw, JSON, or base64.
       body = NULL,
+
+      #' @description
+      #' Set a header key-value pair (e.g., `"Content-Type" = "text/html"`).
+      #' @param key Header name.
+      #' @param value Header value.
       setHeader = function(key, value) {
         self$headers[[key]] <- value
       },
+
+      #' @description
+      #' Set the response `Content-Type`.
+      #' @param type MIME type string.
       setContentType = function(type) {
         self$headers[["Content-Type"]] <- type
       },
+
+      #' @description
+      #' Set the HTTP status code.
+      #' @param status Integer HTTP status code.
       setStatus = function(status) {
         self$status <- status
       },
+
+      #' @description
+      #' Set the response body, respecting the current `Content-Type`.
+      #' @param body Body content, type depends on `Content-Type`.
       setBody = function(body) {
         # Hack to avoid numeric res failure
         if ( self$headers[["Content-Type"]] == "text/html" ) {
@@ -85,28 +62,52 @@ Response <-
           self$body <- body
         }
       },
+
+      #' @description
+      #' Redirect the client by setting status 302 and `Location` header.
+      #' @param url The URL to redirect to.
       redirect = function(url) {
-        # Set status to 'Found'
         self$status <- 302L
         self$setHeader("Location", url)
       },
+
+      #' @description
+      #' Convert `txt` to JSON and set content type to `"application/json"`.
+      #' @param txt Content to convert to JSON.
+      #' @param auto_unbox Logical; whether to simplify length-1 vectors.
       json = function(txt, auto_unbox = TRUE) {
         self$body <- jsonlite::toJSON(txt, auto_unbox = auto_unbox)
         self$setContentType("application/json")
       },
+
+      #' @description
+      #' Set the response body as plain text and content type `"text/html"`.
+      #' @param txt Content to include as plain text.
       text = function(txt) {
         self$body <- as.character(txt)
         self$setContentType("text/html")
       },
+
+      #' @description
+      #' Return a structured response depending on `protocol`.
+      #' @param protocol `"http"` or `"websocket"`.
       structured = function(protocol) {
         switch(
           EXPR = protocol,
-          "http" = list( status  = self$status,
-                         headers = self$headers,
-                         body    = self$body ),
+          "http" = list(
+            status  = self$status,
+            headers = self$headers,
+            body    = self$body
+          ),
           "websocket" = self$body
         )
       },
+
+      #' @description
+      #' Render a plot to PNG (optionally base64-encode) and set as response body.
+      #' @param plot_object A plot object to render.
+      #' @param base64 Logical; if `TRUE`, encode image as base64.
+      #' @param ... Passed to [graphics::png()].
       plot = function(plot_object, base64 = TRUE, ...) {
         # Create the plot
         plot_file <- tempfile(pattern = "beakr")
@@ -114,25 +115,18 @@ Response <-
         print(plot_object)
         dev.off()
 
-        # Open file connection reading in binary mode
+        # Read plot image
         file_connection <- file(description = plot_file, open = "rb")
         binary_image <- readBin(con = file_connection, what = "raw", n = 1e6)
 
-        # if base 64 colors, encode binary image, otherwise dont
         if ( base64 ) {
-          # Set content type to base64 image render
           self$setContentType("application/base64")
-          # Display plot
           self$body <- base64enc::base64encode(binary_image)
         } else {
-          # Set content type to image
           self$setContentType("image/png")
-          # Display plot
           self$body <- binary_image
         }
-        # Close the file connection
         close(con = file_connection)
       }
-
     )
   )

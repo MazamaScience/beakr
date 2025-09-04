@@ -1,94 +1,73 @@
-#' @export
-#' @title Request Class
+#' Request Class
 #'
 #' @description
-#' A \code{Request} object represents the HTTP request and has properties for
-#' the request query string, parameters, body, HTTP headers, and so on.
-#' In this documentation and by convention, the object is always referred to as
-#' \code{req} (and the HTTP response is \code{res}).
+#' A `Request` object represents an incoming HTTP request. It stores query
+#' string, parameters, body, headers, method, and protocol information.
+#' By convention, the request object is named `req` (with the corresponding
+#' response named `res`).
 #'
-#' @usage NULL
+#' @docType class
+#' @name Request
+#' @export
 #'
-#' @format NULL
+#' @format An [`R6::R6Class`] generator for `Request` objects.
 #'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{\code{parameters}}{
-#'   A list containing properties mapped to the named router parameters.
-#'   }
-#'   \item{\code{headers}}{
-#'   A list of response headers.
-#'   }
-#'   \item{\code{path}}{
-#'   Contains the path part of the request URL.
-#'   }
-#'   \item{\code{method}}{
-#'   Contains a string corresponding to the HTTP method of the request:
-#'   GET, POST, PUT, and so on.
-#'   }
-#'   \item{\code{raw}}{
-#'   Returns the raw request (\code{req}) object.
-#'   }
-#'   \item{\code{type}}{
-#'   Contains the body content-type, i.e. "text/html" or "application/json".
-#'   }
-#'   \item{\code{body}}{
-#'   Contains the data submitted in the request body.
-#'   }
-#'   \item{\code{protocol}}{
-#'   Contains the request protocol string.
-#'   }
-#' }
-#'
-#' @section Methods:
-#'
-#' \describe{
-#' \item{\code{attach(key, value)}}{
-#'   Returns a key-value.
-#'   }
-#'   \item{\code{getHeader(key)}}{
-#'   Returns the key element of the \code{headers} list.
-#'   }
-#'   \item{\code{setHeader(key, value)}}{
-#'   Attaches a header to \code{headers} list.
-#'   }
-#'   \item{\code{addParameters(named_list)}}{
-#'   Adds parameters to the named key-value \code{parameters} list.
-#'   }
-#'   \item{\code{intialize(req)}}{
-#'   Creates a new \code{Request} object by parsing and extracting features of
-#'   \code{req} input and populating the object fields.
-#'   }
-#' }
-#'
-#' @seealso \code{\link{Response}}
-#'
+#' @seealso [Response]
+
 Request <-
   R6::R6Class(
     classname = "Request",
     public = list(
+      #' @field parameters Named list of route parameters.
       parameters = list(),
+      #' @field headers Named list of request headers.
       headers = list(),
+      #' @field path The request path.
       path = NULL,
+      #' @field method HTTP method (e.g., `"GET"`, `"POST"`).
       method = NULL,
+      #' @field raw The raw request object as received.
       raw = NULL,
+      #' @field type Content type (e.g., `"text/html"`, `"application/json"`).
       type = NULL,
+      #' @field body Raw request body as a single string.
       body = NULL,
+      #' @field protocol Protocol string (`"http"` or `"websocket"`).
       protocol = "http",
-      # Necessary? - YES.
+
+      #' @description
+      #' Attach a parameter key-value to `parameters`.
+      #' @param key Parameter name.
+      #' @param value Parameter value.
       attach = function(key, value) {
         self$parameters[[key]] <- value
       },
+
+      #' @description
+      #' Get the value of a request header.
+      #' @param key Header name (case-insensitive).
       getHeader = function(key) {
         self$headers[[key]]
       },
+
+      #' @description
+      #' Set or overwrite a request header.
+      #' @param key Header name.
+      #' @param value Header value.
       setHeader = function(key, value) {
         self$headers[[key]] <- value
       },
+
+      #' @description
+      #' Merge a named list of parameters into `parameters`.
+      #' @param named_list Named list of key-value pairs.
       addParameters = function(named_list) {
         self$parameters <- c(self$parameters, named_list)
       },
+
+      #' @description
+      #' Parse fields from the raw request and populate the object.
+      #' @param req Raw request object.
       initialize = function(req) {
         self$raw <- req
         self$path <- req$PATH_INFO
@@ -101,27 +80,21 @@ Request <-
         # rook.input from test _request.R
         self$body <- paste0(req$rook.input$read_lines(), collapse = "")
 
-        # Parse the parameters passed, helper func in 'utils.R'
-        self$parameters <- .parseParameters( req     = req,
-                                             body    = self$body,
-                                             query   = req$QUERY_STRING,
-                                             type    = self$type )
-
-        header_keys <- Filter(
-          f = function(x) { grepl("^HTTP", x) },
-          x = names(req)
+        self$parameters <- .parseParameters(
+          req   = req,
+          body  = self$body,
+          query = req$QUERY_STRING,
+          type  = self$type
         )
 
+        header_keys <- Filter(function(x) grepl("^HTTP", x), names(req))
         self$headers <- as.list(req)[header_keys]
-        names(self$headers) <- Map(
-          f = function(x) { tolower(gsub("^HTTP_", "", x)) },
-          names(self$headers)
-        )
+        names(self$headers) <- Map(function(x) tolower(gsub("^HTTP_", "", x)),
+                                   names(self$headers))
 
         if ( any(tolower(self$getHeader("upgrade")) == "websocket") ) {
           self$protocol <- "websocket"
         }
       }
-
     )
   )

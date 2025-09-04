@@ -1,3 +1,5 @@
+#' @keywords internal
+"_PACKAGE"
 #'
 #' @title A minimalist web framework.
 #'
@@ -20,70 +22,42 @@
 #'
 #' @name beakr-package
 #' @aliases Beakr-Package
-#' @docType package
 #' @title A minimalist web framework
 #' @author Hans Martin \email{hans@mazamascience.com}
 #' @keywords package
 NULL
 
+#' Beakr Application Class
+#'
+#' @description
+#' A `Beakr` object defines a web server instance using the [`httpuv`] package.
+#' It provides the main entry point for creating and starting a Beakr
+#' application, wrapping a [`Router`] and exposing lifecycle methods.
+#'
+#' @docType class
+#' @name Beakr
 #' @export
 #' @importFrom R6 R6Class
-#' @title Beakr Application class
 #'
-#' @description A \code{Beakr} object defines the server instance utilizing the
-#' \pkg{httpuv} package. This class defines an interface for the rest of the
-#' \pkg{beakr} package and is therefore meant to be instantiated.
+#' @format An [`R6::R6Class`] generator for `Beakr` objects.
 #'
-#' @usage NULL
-#'
-#' @format NULL
-#'
-#' @section Methods:
-#' \describe{
-#'   \item{\code{router()}}{
-#'   An instantiated \code{Router} object.
-#'   }
-#'   \item{\code{server()}}{
-#'   The instantiated \code{Server} object.
-#'   }
-#'   \item{\code{appDefinition()}}{
-#'   A method to define the functions or middleware of users application.
-#'   }
-#'   \item{\code{initialize()}}{
-#'   Creates a new \code{Router} object for the \code{router}
-#'   method.
-#'   }
-#'   \item{\code{start(host, port, daemon)}}{
-#'   Returns a running server. If \code{daemon = TRUE}, the server will run
-#'   in the background.
-#'   }
-#'   \item{\code{print(...)}}{
-#'   Returns a console output of the instance and its number of middleware
-#'   attached.
-#'   }
-#' }
-#'
-#' @section Package details:
-#'
-#' The \pkg{beakr} package provides a minimal web framework for for developing
-#' lightweight APIs in R. The package includes basic functionality for handling
-#' common \code{HTTP} requests. \pkg{beakr} is a ground-up rewrite and
-#' continuation of the \pkg{jug} package developed by Bart Smeets. The
-#' \pkg{beakr} package is supported and maintained by
-#' \href{http://www.mazamascience.com/}{Mazama Science}.
-#'
-#' @seealso \code{\link{Router}} and \code{\link{Middleware}}
-#'
+#' @seealso [Router], [Middleware], [httpuv::startServer], [httpuv::runServer]
+
 Beakr <-
   R6::R6Class(
     classname = "Beakr",
     public = list(
+      #' @field name Application name. If `NULL`, a random name is set in `$initialize()`.
       name = NULL,
+      #' @field router The `Router` instance used to handle requests.
       router = NULL,
+      #' @field server The underlying `httpuv` server object (once started).
       server = NULL,
-      appDefinition = function() { # Look into renaming
+
+      #' @description
+      #' Build the application definition passed to **httpuv** (request & WS handlers).
+      appDefinition = function() {
         list(
-          # Call a req invoke
           call = function(req) {
             self$router$invoke(req)
           },
@@ -98,28 +72,32 @@ Beakr <-
           }
         )
       },
+
+      #' @description
+      #' Initialize the app: create a `Router` and assign a random `name` if missing.
       initialize = function() {
         self$router <- Router$new()
-
         if ( is.null(self$name) ) {
           self$name <- .randomName()
         }
       },
+
+      #' @description
+      #' Start the HTTP server via **httpuv**.
+      #' @param host Hostname or IP to bind.
+      #' @param port Integer port to listen on.
+      #' @param daemon If `TRUE`, run in background with `httpuv::startServer()`;
+      #'   otherwise run foreground with `httpuv::runServer()`.
       start = function(host, port, daemon) {
-        # Run in background
         if ( daemon ) {
-          self$server <-
-            httpuv::startServer( host = host,
-                                 port = port,
-                                 app  = self$appDefinition() )
-        # Run in foreground
+          self$server <- httpuv::startServer(host = host, port = port, app = self$appDefinition())
         } else {
-          self$server <-
-            httpuv::runServer( host = host,
-                               port = port,
-                               app  = self$appDefinition() )
+          self$server <- httpuv::runServer(host = host, port = port, app = self$appDefinition())
         }
       },
+
+      #' @description
+      #' Print a one-line summary (name, state, host, port, #middlewares).
       print = function() {
         if ( !is.null(self$server) ) {
           name <- self$name
@@ -134,13 +112,11 @@ Beakr <-
           prt <- "..."
           mws <- length(self$router$middleware)
         }
-
-        cat( "Beakr Instance: ", self$name, "\n",
-             "State:",st,"|","Host:",hst,"|","Port:",prt,"|","Middlewares:",mws,
-             "\n",
-             sep = " " )
+        cat("Beakr Instance:", name, "\n",
+            "State:", st, "|", "Host:", hst, "|", "Port:", prt, "|", "Middlewares:", mws, "\n")
         invisible(self)
       }
     )
   )
+
 

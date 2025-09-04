@@ -2,10 +2,13 @@
 % Please edit documentation in R/Beakr.R
 \docType{package}
 \name{beakr-package}
+\alias{beakr}
 \alias{beakr-package}
 \alias{Beakr-Package}
-\title{A minimalist web framework.}
+\title{beakr: A Minimalist Web Framework for R}
 \description{
+A minimalist web framework for developing application programming interfaces in R that provides a flexible framework for handling common HTTP-requests, errors, logging, and an ability to integrate any R code as server middle-ware.
+
 The \pkg{beakr} package provides a minimalist web framework for for
 developing application programming interfaces in R. The package includes
 basic functionality for handling common \code{HTTP} requests.
@@ -21,9 +24,25 @@ continuation of the \pkg{jug} package developed by Bart Smeets. The
 \href{http://www.mazamascience.com/}{Mazama Science}.
 }
 \seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/MazamaScience/beakr}
+  \item Report bugs at \url{https://github.com/MazamaScience/beakr/issues}
+}
+
+
 \code{\link{newBeakr}}
 }
 \author{
+\strong{Maintainer}: Jonathan Callahan \email{jonathan.s.callahan@gmail.com}
+
+Authors:
+\itemize{
+  \item Hans Martin \email{hans@mazamascience.com}
+}
+
+
 Hans Martin \email{hans@mazamascience.com}
 }
+\keyword{internal}
 \keyword{package}

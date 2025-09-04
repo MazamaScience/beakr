@@ -1,117 +1,92 @@
-#' @export
-#' @title Router Class
+#' Router Class
 #'
 #' @description
-#' A \code{Router} object represents the handling of routing and middleware
-#' (such as httpGET(), httpPUT(), httpPOST(), and so on). Once a \code{Router}
-#' object is instantiated, middleware and HTTP method routes can be added. The
-#' top level \code{Beakr} object initializes with the creation of a
-#' \code{Router} object.
+#' `Router` coordinates HTTP/WebSocket routing and middleware execution.
+#' After instantiation, you can register middleware and event listeners; then
+#' call `$invoke()` to run the request/response cycle.
 #'
-#' @usage NULL
+#' @docType class
+#' @name Router
+#' @export
 #'
-#' @format NULL
+#' @format An [`R6::R6Class`] generator for `Router` objects.
 #'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{\code{middleware}}{
-#'   A list of specified middleware function or functions.
-#'   }
-#'   \item{\code{listeners}}{
-#'   A list of specified listeners.
-#'   }
-#' }
-#'
-#' @section Methods:
-#'
-#' \describe{
-#' \item{\code{addMiddleware(middlware)}}{
-#'   A method to add middleware function(s) to \code{middleware}.
-#'   }
-#'   \item{\code{addListener(listener)}}{
-#'   A method to add listeners to \code{listeners}.
-#'   }
-#'   \item{\code{processEvent(event, ...)}}{
-#'   Processes the event heard by the \code{Listener}.
-#'   }
-#'   \item{\code{invoke(req, websocket_msg, websocket_binary)}}{
-#'   This method is used to create the request-response cycle objects of the
-#'   provided middleware.
-#'   }
-#' }
-#'
-#' @seealso \code{\link{Response}}
+#' @seealso [Response], [Request], [Error]
 
 Router <-
   R6::R6Class(
     classname = "Router",
     public = list(
+      #' @field middleware List of middleware entries.
       middleware = c(),
+      #' @field listeners List of listeners (event handlers).
       listeners = c(),
+
+      #' @description
+      #' Append middleware entry/entries to `middleware`.
+      #' @param middleware A middleware object/function or list of them.
       addMiddleware = function(middleware) {
         self$middleware <- c(self$middleware, middleware)
-        return(self$middleware)
+        self$middleware
       },
+
+      #' @description
+      #' Append a listener to `listeners`.
+      #' @param listener A listener object with fields like `event` and `FUN`.
       addListener = function(listener) {
         self$listeners <- c(self$listeners, listener)
-        return(self$listeners)
+        self$listeners
       },
+
+      #' @description
+      #' Dispatch an event to all matching listeners.
+      #' @param event Event name (e.g., `"start"`, `"error"`, `"finish"`).
+      #' @param ... Additional arguments forwarded to each listener `FUN`.
       processEvent = function(event, ...) {
-        # Filter the listeners
-        listeners <- Filter( f = function(l) { l$event == event },
-                             x = self$listeners )
-        # handle the listener defined function for the event
+        listeners <- Filter(function(l) { l$event == event }, self$listeners)
         lapply(listeners, function(l) { l$FUN(event, ...) })
       },
-      invoke = function(req,
-                        websocket_msg = NULL,
-                        websocket_binary = NULL ) {
-        # Define new req and res objects
+
+      #' @description
+      #' Run the routing/middleware pipeline and return a structured response.
+      #' @param req Raw request object or `Request` instance.
+      #' @param websocket_msg Optional WebSocket text message.
+      #' @param websocket_binary Optional WebSocket binary payload (raw).
+      invoke = function(req, websocket_msg = NULL, websocket_binary = NULL) {
         res <- Response$new()
         req <- Request$new(req)
         err <- Error$new()
-
         body <- NULL
 
-        self$processEvent(event = 'start', req, res, err)
+        self$processEvent(event = "start", req, res, err)
 
         for ( mw in self$middleware ) {
           path <- .matchPath(mw$path, req$path)
           req$addParameters(path$parameters)
 
-          # Handle http protocol logic
-          httpLogic <- any( path$match && (mw$method == req$method),
-                            path$match && is.null(mw$method),
-                            is.null(mw$path) && (mw$method == req$method),
-                            is.null(mw$path) && is.null(mw$method) )
-          # Handle websocket logic
-          wsLogic <- any( path$match,
-                          is.null(mw$path) )
+          httpLogic <- any(
+            path$match && (mw$method == req$method),
+            path$match && is.null(mw$method),
+            is.null(mw$path) && (mw$method == req$method),
+            is.null(mw$path) && is.null(mw$method)
+          )
+          wsLogic <- any(path$match, is.null(mw$path))
+          desired <- any(
+            (req$protocol == "http" && httpLogic),
+            (req$protocol == "websocket" && wsLogic)
+          )
 
-          # Check capture group logic
-          desired <- any( (req$protocol == 'http' && httpLogic),
-                         (req$protocol == 'websocket' && wsLogic) )
-
-          # Check websocket/http logic and return proper res
           if ( desired ) {
+            body <- try({
+              switch(req$protocol,
+                     "http" = mw$FUN(req = req, res = res, err = err),
+                     "websocket" = mw$FUN(binary = websocket_binary,
+                                          message = websocket_msg,
+                                          res = res, err = err))
+            })
 
-            body <-
-              try({
-                switch( req$protocol,
-                        'http' = mw$FUN(req = req, res = res, err = err),
-                        'websocket' = mw$FUN( binary = websocket_binary,
-                                              message = websocket_msg,
-                                              res = res,
-                                              err = err ))
-              })
-
-            if ( 'try-error' %in% class(body) ) {
-              self$processEvent( event = 'error',
-                                 req,
-                                 res,
-                                 err,
-                                 as.character(body) )
+            if ( "try-error" %in% class(body) ) {
+              self$processEvent("error", req, res, err, as.character(body))
               err$set(as.character(body))
               body <- NULL
             }
@@ -120,23 +95,18 @@ Router <-
               res$setBody(body)
             }
 
-            if ( !is.null(res$body) ) {
-              break
-            }
+            if ( !is.null(res$body) ) break
           }
         }
 
-        # Show failure
         if ( is.null(res$body) ) {
           msg <- "Request not handled: No body set by middleware"
-          self$processEvent(event = "error", req, res, err, msg)
+          self$processEvent("error", req, res, err, msg)
           stop(msg)
         }
 
-        self$processEvent(event = "finish", req, res, err)
+        self$processEvent("finish", req, res, err)
         res$structured(protocol = req$protocol)
       }
-
     )
   )
-
